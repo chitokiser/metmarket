@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
+  <link rel="shortcut icon" href="https://i.ibb.co/3YqKwff/bg.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+</head>
+
+<main class="container">
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"></main>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="https://i.ibb.co/FXZnR5D/cyalogo2.png" alt="" width="88" height="32">
+        </a>
+        <a href="pratner.html"><img src="https://i.ibb.co/3fMStfs/partnerpng.png" alt="" width="120" height="22"><a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" href="cyadex.html">CYA교환소</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cyasevice.html">CYA 디파이</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cutlist.html">CUT리스트</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cyalist.html">CYA가맹점</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="community.html">커뮤니티</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./mypage/mypage.html">마이페이지</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+    </head>
+    <!-- 여기까지 헤드 -->
+
+    <body>
+     
+      <div class="alert alert-secondary" role="alert">
+        <!-- 바디 감싸기 -->
+        <div class="container">
+          <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+            <div class="col">
+              <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CYA = $1000</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1회 배당 = <span id="allocation">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">BNB TVL : <span id="tvl">-</span> BNB</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
+            </div>
+          </div>
+        </div>
+        <p></p>
+        <!--여기까지 대쉬보드 -->
+        
+        <main class="container">
+          <div class="bg-light p-5 rounded">
+            <h3>CYA Allowcatoin Token</h3>
+            <p>현재가 : 1CAT = <span id="catprice">-</span>CYA</p>
+            <p>토큰심볼 : CAT</p>
+            <p>수익모델 : 다른 CUT으로 부터 세금</p>
+          </div>
+          <link href="dashboard.css" rel="stylesheet">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h3 class="h3">CAT가격 변화</h3>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                <span id="calD">-</span>
+              </button>
+            </div>
+          </div>
+          <div class="my-4 w-100" id="myChart" style="width: 900px; height: 380px;"></div>
+          <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+          <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+          <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+            integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+            crossorigin="anonymous"></script>
+          <script src="dashboard.js"></script>
+
+      </div>
+      <div class="panel panel-default">
+        <ul class="list-group">
+          <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+            CAT 기본정보
+          </button>
+          <ul class="list-group">
+            <li class="list-group-item">발행가능총량 = 1,000,000,000CAT</li>
+            <button class="btn btn-outline-success" type="submit" onclick="addcat()">
+              CAT 메타마스크에 자동추가
+              </button>
+            <li class="list-group-item">CAT 주소 : 0xE9f81b32E6cEca07819806B827AEA1C71C53d257</li>
+            <li class="list-group-item">유통 총량 = <span id="outstandingCoin">-</span>CAT</li>
+            <li class="list-group-item">시가 총액 = <span id="marketCap">-</span>CYA</li><!-- 시가총액-->
+            <li class="list-group-item">계약 잔고 = <span id="contractBalance">-</span>CYA </li>
+          </ul>
+
+          <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+            CAT 보유 특별혜택
+          </button>
+          <li class="list-group-item">1000만개이상:임원 출마자격</li>
+          <li class="list-group-item">100만개이상:대의원 출마자격</li>
+          <li class="list-group-item">50만개이상:CYA Sweg1(정식출자 과정을 거친 조합원만 인정,P2P거래 불인정)</li>
+          <li class="list-group-item">25만개이상:CYA Sweg2 (정식출자 과정을 거친 조합원만 인정,P2P거래 불인정) </li>
+          <li class="list-group-item">레벨1 이상만 CAT거래를 할 수 있습니다<a class="btn btn-light" href="./mypage/mypage.html"
+              role="button">레벨1되기 &raquo;</a> </li>
+
+          <!-- List group -->
+          <button class="btn btn-outline-success" type="submit" onclick="catmemberLogin()">
+          메타마스크 연결
+          </button>
+          <ul class="list-group">
+            <li class="list-group-item">메타 마스크를 연결 하면 아래정보 활성화 됩니다</li>
+            <li class="list-group-item">나의 CAT : <span id="myCat">-</span>CAT</li>
+            <li class="list-group-item">나의 CAT 가치: <span id="myCatValue"></span>CYA</li>
+            <li class="list-group-item">다음 배당 예상금액 : <span id="eps"></span>CYA</li>
+            <!--geteps-->
+            <li class="list-group-item">다음 배당까지 남은 시간 <span id="epsLeftTime">-</span></li>
+            <li class="list-group-item">CAT매도까지 남은 시간 <span id="sellLeftTime">-</span></li>
+          </ul>
+
+          
+            <button class="btn btn-outline-success" type="submit" onclick="withdraw()">CYA Token 배당받기</button>
+          
+
+          <h3>CAT 거래</h3>
+          <div class="input-group mb-3">
+            <input type="text" id="buyAmount" class="form-control" placeholder="구매할  CAT입력개수=결과값" aria-label="CYA"
+              aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="buyCat()">CAT Token
+              사기</span>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="sellAmount" placeholder="판매할  CAT 입력개수=결과값" aria-label="CYA"
+              aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="sellCat()">CAT Token
+              팔기</span>
+          </div>
+
+
+      </div>
+      <h3>.</h3>
+      <div class="card mb-3">
+        <img src="https://static1.bigstockphoto.com/6/7/3/large2/376728016.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">이곳에 광고 등록하세요 최대100개</h5>
+          <p class="card-text"><small class="text-muted">현재 광고비 1개월 0.1cya </small></p>
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+          <p>&copy; 2022 CYA COOP, Inc. All rights reserved.</p>
+          <p>사업제안 daguri75@gmail.com</p>
+          <p>개인정보보호 담당 daguri75@gmail.com</p>
+        </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript"></script>
+<script src="cat.js"></script>
+<script type=module src="module/topinfo.js"></script>
+<script type="module">
+  import topDataSync from 'module/topinfo.js'
+</script>
+<!--topinfo export 없는데 어떻게 작동하는지?-->
+</body>
+
+</html>

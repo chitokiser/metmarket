@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
+  <link rel="shortcut icon" href="https://i.ibb.co/3YqKwff/bg.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+</head>
+
+<main class="container">
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"></main>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="https://i.ibb.co/FXZnR5D/cyalogo2.png" alt="" width="88" height="32">
+        </a>
+        <a href="pratner.html"><img src="https://i.ibb.co/3fMStfs/partnerpng.png" alt="" width="120" height="22"><a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" href="cyadex.html">CYA교환소</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cyasevice.html">CYA 디파이</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cutlist.html">CUT리스트</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cyalist.html">CYA가맹점</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="community.html">커뮤니티</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./mypage/mypage.html">마이페이지</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+    </head>
+    <!-- 여기까지 헤드 -->
+
+    <body>
+     
+      <div class="alert alert-secondary" role="alert">
+        <!-- 바디 감싸기 -->
+        <div class="container">
+          <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+            <div class="col">
+              <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CYA = $1000</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1회 배당 = <span id="allocation">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">BNB TVL : <span id="tvl">-</span> BNB</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
+            </div>
+          </div>
+        </div>
+        <p></p>
+        <!--여기까지 대쉬보드 -->
+
+    
+        <div class="bg-light p-5 rounded">
+          <h2>CYA Token 교환소</h2>  
+          <p>CYA Toknen은 바이낸스 코인(네트워크ID:56)을 기반으로  발행되어 가치가 보장됩니다</p>
+          <p>1CYA는 항상 $1000을 수렴 하지만 중간에 슬리피지가 발생 될 수 있습니다</p>
+          <p>CUT을 가지고 있으면 매주 CYA Token을 분배 받을 수 있습니다.</p>
+          <p>바이낸스 코인으로 CYA Token을  교환할 수 있습니다.</p>
+          <p>CYA Token은 가맹점에서 쓸 수 있습니다. </p>
+          <p>바이낸스 코인등의  직접구매가 어려우신 분은 <a a class="btn btn-light" href="community.html">"커뮤니티"</a>를  이용하시기 바랍니다</p>
+
+          <a class="btn btn-light" href="https://youtu.be/dHANMtxLXt0" role="button">메타 마스크 설치 방법 &raquo;</a>
+        </div>
+        <div class="bg-light p-5 rounded">
+        <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()">"메타마스크 연결과 동시에 CYA토큰이 자동추가 
+        </button>
+        </div>
+        
+        <div class="alert alert-danger" role="alert">
+         CYA Token 자동추가가 안되는 분은 메타마스크에서 토큰가져오기를 하여 수동으로 토큰주소를 넣어 주세요 
+        </div>
+        <div class="alert alert-info" role="alert">
+          CYA Token address : 0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9
+          <a class="btn btn-light" href="https://youtu.be/zizIrCmjfWY?t=222" role="button">토큰가져오기 설명 &raquo;</a>
+        </div>
+
+        <div class="alert alert-secondary" role="alert">
+          CYA:BNB  교환할 만큼의 BNB(소수점허용)를 입력하고 교환하기 버튼을 클릭한 후 메타마스트에서 승인해 주세요.
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">BNB input</span>
+          <input id="bnbInput" type="text" class="form-control" placeholder="여기에 BNB를 입력하면...." aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        
+        <div class="input-group mb-3">
+          <input id="bnbOutput" type="text" class="form-control" placeholder="여기에 교환되는 CYA양이 출력 됩니다" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <span onclick="buyCya()" style="cursor: pointer;" class="input-group-text" id="basic-addon2">exchange</span>
+        </div>
+        <div class="alert alert-secondary" role="alert">
+          BNB:CYA  교환할 만큼의 CYA(소수점허용)를 입력하고 교환하기 버튼을 클릭한 후 메타마스트에서 승인해 주세요.인증된 판매자조합원만 교환 가능합니다.
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">CYA input</span>
+          <input id="cyaInput" type="text" class="form-control" placeholder="여기에 CYA를 입력하면...." aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        
+        <div class="input-group mb-3">
+          <input id="cyaOutput" type="text" class="form-control" placeholder="여기에 교환되는 BNB양이 출력 됩니다" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <span onclick="sellCya()" style="cursor: pointer;" class="input-group-text" id="basic-addon2">exchange</span>
+        </div>
+           
+      <!-- 하단 캐러셀 시작 -->
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="dSlide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="dSlide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="dSlide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://i.ibb.co/wwXFW2M/20221002-142556.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>흥미로운 방식의 독특한  CYA Defi 서비스 </h5>
+              <h5>지급불능 사태가 발생하지 않는 탈중화 블록체인 서비스에 CYA Token을 스테이킹 하세요 </h5>
+             <a class="nav-link" href="cyasevice.html">4st 미션:Defi이용하기 </a>
+              
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://i.ibb.co/VYx6JHR/20221002-142036.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>CYA Token으로 가맹점을 이용해 보세요</h5>
+              <h5>CYA Token을 이용하면 경험치와 포인트를 지급 받습니다</h5>
+              <h5>포인트는 1/6~ 10배까지 CYA Token으로 교환 됩니다</h5>
+              <a class="nav-link" href="cyalist.html">5st 미션 : 가맹점 이용하기 </a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://i.ibb.co/ccyDPsV/20221002-142226.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>"쌓여진 경험치를 이용하여 레벨업을 해보세요"</h5>
+              <h5>레벨이 높아지면 DAO 생태계에서의 존경과 함께 더 많은 보상을 받습니다</h5>
+              <a class="nav-link" href="./mypage/mypage.html">6st 미션 : 레벨업하기 </a>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+        <!-- 캐러셀 끝 -->
+
+          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>&copy; 2022 CYA DAO, Inc. All rights reserved.</p>
+            <p>사업제안 및 제휴 문의는 개발자 커뮤니티를 이용해 주세요</p>
+            <p>개인정보 수집은 하지 않습니다</p>
+          </div>
+       <!-- 푸터 끝 -->
+   
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript"></script>  
+    <script src = "cyadex.js"></script>  
+    <script type=module src="module/topinfo.js"></script>
+    <script type = "module">
+      import topDataSync from 'module/topinfo.js'
+    </script> 
+  </body>
+</html>
