@@ -21,10 +21,10 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
-        <a class="navbar-brand" href="../index.html">
-        <img src="https://i.ibb.co/FXZnR5D/cyalogo2.png" alt="" width="88" height="32">
+        <a class="navbar-brand" href="index.html">
+          <img src="https://i.ibb.co/FXZnR5D/cyalogo2.png" alt="" width="88" height="32">
         </a>
-        <a href="../pratner.html"><img src="https://i.ibb.co/3fMStfs/partnerpng.png" alt="" width="120" height="22"><a>
+        <a href="pratner.html"><img src="https://i.ibb.co/3fMStfs/partnerpng.png" alt="" width="120" height="22"><a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -58,12 +58,53 @@
     </head>
     <!-- 여기까지 헤드 -->
 
+    <body>
+     
+      <div class="alert alert-secondary" role="alert">
+        <!-- 바디 감싸기 -->
+        <div class="container">
+          <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+            <div class="col">
+              <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CYA = $1000</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">1회 배당 = <span id="allocation">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">BNB TVL : <span id="tvl">-</span> BNB</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
+            </div>
+          </div>
+        </div>
+        <p></p>
+        <!--여기까지 대쉬보드 -->
+
         
 <main class="container">
   
   <div class="bg-light p-5 rounded">
     <h5>블럭체인 트레인</h5>
-    <p>승객보상 = 승차비용 * 기차호수 * (전체승객-승차순서) /(50-레벨)</p>
+    <p>승객보상 = 승차비용 * 기차호수 * (현재승객-나의승차번호) /(50-나의레벨)</p>
     <p>승차비용 계약잔고의 1/100~1/1000 자유선택하여 탑승 가능합니다</p>
     <p>수익 현황을 모니터링한 후 아무때나 자유롭게 하차 가능합니다</p>
   </div>
@@ -73,42 +114,40 @@
       <div class="card mb-3">
         <img src="https://i.ibb.co/tsWjGB7/20221002-191441.png" class="card-img-top" alt="...">
         <div class="card-body">
-          <h6>1st 보너스<span class="badge bg-secondary"><span id="tbalan">-</span>CYA</h6>
-          <h6>12객차 중에 객차번호가 1번이 되면 보너스를 받습니다</h6>
+          <h4>보너스<span class="badge bg-danger"><span id="tbones">-</span>CYA</h4>
+          <h6>12객차 중에 객차번호가 1번이 되면 탑승비에 비례하여 보너스가 적립됩니다</h6>
         </div>
       </div>
       
       <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-        블럭체인 트레인 기본 정보 
+        블럭체인 트레인 기본정보
       </button>
       <li class="list-group-item">계약 잔고 :<span id="tbalan">-</span>CYA</li>
       <li class="list-group-item">객차 수량 :12</li>
-      <li class="list-group-item">누적 탑승객 수:<span id="sumpt">-</span>명</li>
-      <li class="list-group-item">현재 탑승객 수:<span id="pt">-</span>명</li>
-      <li class="list-group-item">1st 보너스:<span id="1stb">-</span>CYA</li>
-      <li class="list-group-item">최고가 탑승권 가격:<span id="hitiket">-</span>CYA</li>
-      <li class="list-group-item">최저가 탑승권 가격:<span id="lowtiket">-</span>CYA</li>
+      <li class="list-group-item">누적 탑승객 수:<span id="getstp">-</span>명</li>
+      <li class="list-group-item">현재 탑승객 수:<span id="gettp">-</span>명</li>
+      <li class="list-group-item">최고가 탑승권 가격:<span id="hi">-</span>CYA</li>
+      <li class="list-group-item">최저가 탑승권 가격:<span id="low">-</span>CYA</li>
     
     <div class="panel-body">
    
 
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="여기에 탑승금액(최저가~최고가)을 입력  " aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <span class="input-group-text" id="basic-addon2">탑승하기</span>
+        <input type="text" id="tiketprice" class="form-control" placeholder="최저가 탑승권~최고가 탑승권 가격을 입력 하세요"
+          aria-label="CYA" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Geton()">기차탑승하기</span>
       </div>
           </div>
 
-        
-    <!-- myinfo group -->
-     
-      
+        <!-- my info -->
        <li class="list-group-item">메타마스크를 연결하면 아래 정보를 볼 수 있습니다</li> 
-       <button class="badge bg-warning text-dark rounded-pill style" cursor: pointer; onclick="TmemberLogin()">메타마스크연결</button> 
-       <li class="list-group-item">나의승차번호:<span id="mynum">-</span>번</li>
-       <li class="list-group-item">나의객차번호:<span id="mytn">-</span> 번</li>  
-       <li class="list-group-item">수익률:<span id="mygain">-</span>%</li> 
-        <li class="list-group-item">인출가능토큰: CYA</li>  
-      <button class="badge bg-warning text-dark rounded-pill style" cursor: pointer; onclick="Tcheck()">하차하기</button>
+       <button class="btn btn-outline-success" cursor: pointer; onclick="TmemberLogin()">메타마스크연결</button> 
+       <li class="list-group-item">나의 입금액:<span id="getmydepo">-</span>CYA</li>
+       <li class="list-group-item">나의승차번호:<span id="getmynum">-</span>번</li>
+       <li class="list-group-item">나의객차번호:<span id="getmytn">-</span> 번</li> 
+       <li class="list-group-item">보너스:<span id="getmyjack">-</span> CYA</li> 
+        <li class="list-group-item">인출가능토큰:<span id="mygain">-</span> CYA</li>  
+      <button class="bbtn btn-outline-success" cursor: pointer; onclick="Getoff()">하차하기</button>
       <li class="list-group-item">하차 하시면 인출가능토큰이 모두 인출됩니다</li>  
        </div>
    
@@ -172,7 +211,12 @@
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>  
-<script src="./topinfo.js"></script> 
+<script src="cyatrain.js"></script>
+<script type=module src="../module/topinfo.js"></script>
+<script type="module">
+  import topDataSync from '../module/topinfo.js'
+</script>
+
 </body>
 </html>
 
