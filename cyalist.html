@@ -98,46 +98,6 @@
         </div>
         <p></p>
         <!--여기까지 대쉬보드 -->
-
-    <body>
-      <div class="alert alert-secondary" role="alert">
-        <!-- 바디 감싸기 -->
-        <div class="container">
-          <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-            <div class="col">
-              <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CYA = $1000</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1회 배당 = <span id="allocation">-</span>CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">BNB TVL : <span id="tvl">-</span> BNB</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
-            </div>
-          </div>
-        </div>
-        <a>.</a>
-        <!--여기까지 대쉬보드 -->
       
         <main class="container">
           <div class="bg-light p-6 rounded">
@@ -215,9 +175,11 @@
           <li class="list-group-item">가맹점수 = <span id="sumalli">-</span>개</li>
         </ul>
       <ul class="list-group">
-        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-          가맹점 상세 정보 보기
-        </button>
+        <div class="input-group mb-3">
+          <input type="text" id="ainfo" class="form-control" placeholder="농장 최저액~농장 최고액까지 입금가능합니다"
+            aria-label="CYA" aria-describedby="basic-addon2">
+          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="buyfarm()">농장구매하기</span>
+        </div>
         <div class="input-group mb-3">
           <input type="number" class="form-control" id="ainpo" placeholder="여기에 가맹정ID를 입력하세요 " aria-label="Recipient's username" aria-describedby="basic-addon2">
           <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Getinfo()">가맹점정보 가져오기</span>
@@ -228,10 +190,10 @@
           <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="signupGuild()">멘토번호 넣고 레벨1되기</span>
         </div> -->
 
-        <li class="list-group-item">인출가능 매출금액 <span id="smycya">-</span>CYA</li>
-        <li class="list-group-item">가맹점ID: <span id="sid">-</span>CYA</li>
+        <li class="list-group-item">인출가능 매출금액 <span id="Depo">-</span>CYA</li>
+        <li class="list-group-item">가맹점ID: <span id="Sid">-</span>CYA</li>
         <li class="list-group-item">owner : <span id="Owner">-</span>CYA</li>
-        <li class="list-group-item">CUT ID = <span id="cid">-</span>CYA</li></li>
+        <li class="list-group-item">CUT ID = <span id="Cid">-</span>CYA</li></li>
         <li class="list-group-item">Point 비율 = <span id="prate">-</span>CYA</li>
         <li class="list-group-item">가맹점이름 = <span id="sname">-</span>CYA</li>
         <li class="list-group-item">홈페이지 = <span id="home">-</span>CYA</li>

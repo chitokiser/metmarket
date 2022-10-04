@@ -40,7 +40,7 @@ let contractAddress = {
       "function mypointex( )public returns(bool)",
       "function shopex(uint256 _sid)public returns(bool)",
       "function g1() public view virtual returns(uint256)",
-      "function g2(uint256 _sid) public view returns(uint256 depo,uint256 sid,address owner,uint256 mycid,uint8 cr,string memory name,string memory web, string memory metainfo)",
+      "function g2(uint256 _sid) public view returns(uint256 depo,uint256 sid,address owner,uint256 mycid, uint8 cr,string memory name,string memory web, string memory metainfo)",
       "function g3(uint256 _cid) public view returns(uint256 cid,address owner,string memory name,address cutallow)",
       "function getmyshoplength(uint _cid)",
       "function getmyshop(uint _cid,uint _num) public view virtual returns",
@@ -66,12 +66,16 @@ let contractAddress = {
   
     let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
     let allianceContract = new ethers.Contract(contractAddress.alliance, contractAbi.alliance, provider);
-    let Ainfo = document.getElementById('ainfo');
-    let get2 = await allianceContract.g2(Ainfo);
+    let shopid= document.getElementById('ainfo');
+    let get2 = await allianceContract.g2(shopid);
   
   document.getElementById("Depo").innerHTML = (get2.depo);  
-  document.getElementById("Owner").innerHTML = (get2.owner);
   document.getElementById("Sid").innerHTML = (get2.sid);
+  document.getElementById("Owner").innerHTML = (get2.owner);
+  document.getElementById("Cid").innerHTML = (get2.mycid);
+  ocument.getElementById("Cr").innerHTML = (get2.cr);
+  ocument.getElementById("sname").innerHTML = (get2.name);
+  ocument.getElementById("home").innerHTML = (get2.web;
   };
   
 
