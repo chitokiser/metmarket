@@ -9,6 +9,7 @@
             "function getprice() public view returns(uint256)",
             "function balance() public view returns(uint256)",
             "function buy() payable public",
+            "function getshoper() public view returns(uint256)",
             "function sell(uint256 num) public"
           ],
           cyacoop: [
@@ -127,6 +128,32 @@
         const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
         await cyadexContract.sell(quantity);
       };
+
+      let DmemberLogin = async () => {
+        let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [{
+              chainId: "0x38",
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                  name: "BNB",
+                  symbol: "BNB",
+                  decimals: 18
+              },
+              blockExplorerUrls: ["https://bscscan.com/"]
+          }]
+        });
+        await userProvider.send("eth_requestAccounts", []);
+        
+        let signer = userProvider.getSigner();
+        let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
+        let mybnbpoint = await cyadexContract.getshoper();
+  
+        document.getElementById("Getmypoint").innerHTML = (mybnbpoint/1e18).toFixed(6);
+      };
+
 
       (async () => {
         topDataSync();

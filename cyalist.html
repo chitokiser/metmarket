@@ -104,7 +104,8 @@
             <h3>시아 가맹점 </h3>
             <p>CYA Token을 사용할 수 있는 온/오프 가맹점</p>
             <p>가맹점에서 CYA Token을 사용하면 포인트 및 경험치를 확보할 수 있습니다</p>
-            <p>포인트 CYA Token으로 교환시 1/6 ~10배 까지 랜덤하게 교환 됩니다</p>
+            <p>적립된 포인를 CYA Token으로 교환시 1/6 ~10배 까지 랜덤하게 교환 됩니다</p>
+            <p>포인트 교환 시 경험치도 추가로 얻게 됩니다</p>
           </div>
           
           <div class="alert alert-primary" role="alert">
@@ -165,49 +166,60 @@
                 </div>
             </div>
       </div>
-      <ul class="list-group">
-        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-          전체 현황
-        </button>
+
+      <div class="alert alert-primary" role="alert">
         <ul class="list-group">
           <li class="list-group-item">계약잔고 = <span id="allibal">-</span>CYA </li>
           <li class="list-group-item">종목수 = <span id="sumcut">-</span>종목</li>
           <li class="list-group-item">가맹점수 = <span id="sumalli">-</span>개</li>
         </ul>
+      </div>
+      <div class="alert alert-primary" role="alert">
       <ul class="list-group">
         <div class="input-group mb-3">
-          <input type="text" id="ainfo" class="form-control" placeholder="농장 최저액~농장 최고액까지 입금가능합니다"
+          <input type="text" id="ainfo" class="form-control" placeholder="여기에 결제할 가맹정ID를 입력하세요"
             aria-label="CYA" aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="buyfarm()">농장구매하기</span>
-        </div>
-        <div class="input-group mb-3">
-          <input type="number" class="form-control" id="ainpo" placeholder="여기에 가맹정ID를 입력하세요 " aria-label="Recipient's username" aria-describedby="basic-addon2">
           <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Getinfo()">가맹점정보 가져오기</span>
         </div>
-
-        <!-- <div class="input-group mb-3">
-          <input type="number" class="form-control" id="mentorNumInput" placeholder="여기에 멘토번호(주소 아님) 넣고 클릭하면 0.05CYA가 자동기부되면서 레벨1 멤버가 됩니다 " aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="signupGuild()">멘토번호 넣고 레벨1되기</span>
-        </div> -->
-
-        <li class="list-group-item">인출가능 매출금액 <span id="Depo">-</span>CYA</li>
-        <li class="list-group-item">가맹점ID: <span id="Sid">-</span>CYA</li>
-        <li class="list-group-item">owner : <span id="Owner">-</span>CYA</li>
-        <li class="list-group-item">CUT ID = <span id="Cid">-</span>CYA</li></li>
-        <li class="list-group-item">Point 비율 = <span id="prate">-</span>CYA</li>
-        <li class="list-group-item">가맹점이름 = <span id="sname">-</span>CYA</li>
-        <li class="list-group-item">홈페이지 = <span id="home">-</span>CYA</li>
-        <li class="list-group-item">바이낸스 교환 포인트 <span id="bp">-</span>BP</li>
-      </ul>
-      <div>
+     
+        <li class="list-group-item">가맹점이름 = <span id="sname">-</span></li>
+        <li class="list-group-item">가맹점ID: <span id="Sid">-</span></li>      
+        <li class="list-group-item">Point 비율 = <span id="prate">-</span>%</li>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="결제할 CYA Token을 입력하세요" aria-label="Recipient's username"
-            aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2">해당가맹점에 결제하기</span>
+          <input type="text" id="shopid" class="form-control" placeholder="가맹점ID다시 입력"
+          aria-label="SID" aria-describedby="basic-addon2">
+          <input type="text" id="input" class="form-control" placeholder="금액을 입력(소수점 허용)"
+          aria-label="CYA" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buyshop()">해당가맹점 결제</span>
         </div>
-        <button class="btn btn-primary" type="submit">가맹점 매출금 인출</button>
-        <p></p>
-
+      </div>
+      <div class="alert alert-primary" role="alert">
+        <li class="list-group-item">
+        <button class="btn btn-outline-success" cursor: pointer; onclick="AmemberLogin()">적립된 포인트를 확인하려면 [메타마스크연결] 하세요</button> </li>
+        <li class="list-group-item">나의 적립 포인트 = <span id="Getmypoint">-</span>CYA</li>
+        <li class="list-group-item">
+        <button class="btn btn-outline-success" cursor: pointer; onclick="Mypointex()">포인트 교환하기 CYA Token+경험치</button> 
+        </li>
+        </div>
+        
+        <div class="alert alert-primary" role="alert">
+          <div class="input-group mb-3">
+            <input type="text" id="sinfo" class="form-control" placeholder="본인의 가맹점ID를 입력하세요"
+              aria-label="SID2" aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Getshopinfo()">매출정보 가져오기</span>
+          </div>
+        <li class="list-group-item">owner : <span id="Owner">-</span></li>
+        <li class="list-group-item">가맹점ID : <span id="shopid2">-</span></li>
+        <li class="list-group-item">인출가능 매출금액 <span id="Depo">-</span>CYA</li>
+        <li class="list-group-item">
+          <div class="input-group mb-3">
+            <input type="text" id="sid" class="form-control" placeholder="가맹점ID다시 입력"
+            aria-label="SID2" aria-describedby="basic-addon2">
+          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Shopex()">매출금 인출하기</span>
+          </div>
+      </div>
+    </ul>
+  </div>
   <!-- 하단 캐러셀 시작 -->
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">

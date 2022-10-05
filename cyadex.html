@@ -107,38 +107,38 @@
           <p>CUT을 가지고 있으면 매주 CYA Token을 분배 받을 수 있습니다.</p>
           <p>바이낸스 코인으로 CYA Token을  교환할 수 있습니다.</p>
           <p>CYA Token은 가맹점에서 쓸 수 있습니다. </p>
-          <p>바이낸스 코인등의  직접구매가 어려우신 분은 <a a class="btn btn-light" href="community.html">"커뮤니티"</a>를  이용하시기 바랍니다</p>
-
+     
           <a class="btn btn-light" href="https://youtu.be/dHANMtxLXt0" role="button">메타 마스크 설치 방법 &raquo;</a>
         </div>
         <div class="bg-light p-5 rounded">
-        <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()">"메타마스크 연결과 동시에 CYA토큰이 자동추가 
+        
         </button>
         </div>
         
         <div class="alert alert-danger" role="alert">
-         CYA Token 자동추가가 안되는 분은 메타마스크에서 토큰가져오기를 하여 수동으로 토큰주소를 넣어 주세요 
+          <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()">"메타마스크 연결과 동시에 CYA토큰이 자동추가 
         </div>
         <div class="alert alert-info" role="alert">
           CYA Token address : 0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9
-          <a class="btn btn-light" href="https://youtu.be/zizIrCmjfWY?t=222" role="button">토큰가져오기 설명 &raquo;</a>
-        </div>
 
         <div class="alert alert-secondary" role="alert">
-          CYA:BNB  교환할 만큼의 BNB(소수점허용)를 입력하고 교환하기 버튼을 클릭한 후 메타마스트에서 승인해 주세요.
+          교환비율: 1BNB USD시세/ 1000
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">BNB input</span>
-          <input id="bnbInput" type="text" class="form-control" placeholder="여기에 BNB를 입력하면...." aria-label="Username" aria-describedby="basic-addon1">
+          <input id="bnbInput" type="text" class="form-control" placeholder="여기에 BNB를 입력(소수점허용)하면...." aria-label="Username" aria-describedby="basic-addon1">
         </div>
         
         <div class="input-group mb-3">
           <input id="bnbOutput" type="text" class="form-control" placeholder="여기에 교환되는 CYA양이 출력 됩니다" aria-label="Recipient's username" aria-describedby="basic-addon2">
           <span onclick="buyCya()" style="cursor: pointer;" class="input-group-text" id="basic-addon2">exchange</span>
         </div>
-        <div class="alert alert-secondary" role="alert">
-          BNB:CYA  교환할 만큼의 CYA(소수점허용)를 입력하고 교환하기 버튼을 클릭한 후 메타마스트에서 승인해 주세요.인증된 판매자조합원만 교환 가능합니다.
-        </div>
+      </div>
+      <div class="alert alert-info" role="alert">
+        <li class="list-group-item">교환하려는 BNB만큼 교환포인트가 있어야 합니다.</li>
+        <li class="list-group-item">교환포인트는 가맹점 매출과 동시에 1:1 비율로 가맹점주에게 적립됩니다.</li>
+        <button class="btn btn-outline-success" cursor: pointer; onclick="DmemberLogin()">나의 BNB교환포인트 가져오기</button> 
+          <li class="list-group-item">나의 BNB교환포인트 = <span id="Getmypoint">-</span>EP</li>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">CYA input</span>
           <input id="cyaInput" type="text" class="form-control" placeholder="여기에 CYA를 입력하면...." aria-label="Username" aria-describedby="basic-addon1">
@@ -148,7 +148,7 @@
           <input id="cyaOutput" type="text" class="form-control" placeholder="여기에 교환되는 BNB양이 출력 됩니다" aria-label="Recipient's username" aria-describedby="basic-addon2">
           <span onclick="sellCya()" style="cursor: pointer;" class="input-group-text" id="basic-addon2">exchange</span>
         </div>
-           
+      </div> 
       <!-- 하단 캐러셀 시작 -->
       <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">

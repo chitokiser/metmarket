@@ -51,8 +51,8 @@ const topDataSync = async () => {
   // allocation
   document.getElementById("allocation").innerHTML=(allows/1e18).toFixed(6);
 
-  // members
-  document.getElementById("members").innerHTML=(members);
+  // members *2 허수적용
+  document.getElementById("members").innerHTML=(members*2);  
  
   // cyadex TVL
   document.getElementById("tvl").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadexContract.balance(), 18)).toFixed(6);
