@@ -105,14 +105,11 @@
     document.getElementById("farmwin").innerHTML = (mywin/1e18).toFixed(6); //인출 총액
     document.getElementById("farmseed").innerHTML = (myseed/1e18).toFixed(6); //남아있는 예치금
     document.getElementById("farmjack").innerHTML = (myjack/1e18).toFixed(6); //찾을 돈
-    document.getElementById("myfarms").innerHTML = (item);
-    
-    let farmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
-    let  item= await farmContract.getmyfarm(6); 
-  
+   
+
   };
   
-  let myLogin = async () => {
+  let myfarm = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -132,44 +129,20 @@
     
    
     let signer = userProvider.getSigner();
-    let myfarmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
-    
-
-    let  item= await myfarmContract.getmyfarm(6); 
-    let farms = [];
-    if(item ===6){farms.push(item)};
-    
-    let newstring = farms.join(",")
-    document.getElementById("myfarms").innerHTML = (newstring);
-
-    //for(i=1; i<13; i++){
-    //  if (myfarmContract.getmyfarm(6) === 6 )
-    //   {farms.push(6)}
-    //    // }
-    // if(myfarmContract.getmyfarm(6) ===6) {
-    //     return (6);
+    let farmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
+    let myf= parseInt(await farmContract.getmyfarm(i));
+    let farms = [] ;
+    console. log(myf);
   
-    // let newstring = farms.join(",")
-   
-    // document.getElementById("myfarms").innerHTML = (newstring)
-    
-   
-    // //else if(cyafarmContract.getmyfarm(2) === 2 ){farms.push(2)}
-   
-    // let newstring = farms.join(",");
-  
-    // document.getElementById("myfarms").innerHTML = (item);
-    
-    // let farmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
-    // let  item= await farmContract.getmyfarm(6); 
-   
-    // for(i=1; i<13; i++){
-    // if (cyafarmContract.getmyfarm(i) === i ){farms.push(i)}
-    // }
-    // //else if(cyafarmContract.getmyfarm(2) === 2 ){farms.push(2)}
-    
+    // let farms = [];
+    // for(let i=1; i<13; i++){
+    // if (farmContract.getmyfarm(6) === 6 )
+    // {farms.push(i)}};
+    // console. log('farms')
     // let newstring = farms.join(",");
    
+    // document.getElementById("getfarms").innerHTML = (newstring);
+    
   };
   
   

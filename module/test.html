@@ -18,83 +18,6 @@
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"></main>
 
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img src="https://i.ibb.co/3YqKwff/bg.png" alt="" width="32" height="32">
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link" href="cyadex.html">CYA교환소</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="cyasevice.html">CYA 서비스</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="cutlist.html">CUT리스트</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="cyalist.html">CYA가맹점</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="community.html">커뮤니티</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./mypage/mypage.html">마이페이지</a>
-            </li>
-          </ul>
-          
-        </div>
-      </div>
-    </nav>
-    </head>
-<!-- 여기까지 헤드 -->
-    <body>
-      <div class="alert alert-secondary" role="alert"> 
-        <!-- 바디 감싸기 -->
-        <div class="container">
-          <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-            <div class="col">
-              <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CYA = $1000</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1회 배당 = <span id="allocation">-</span>CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">BNB TVL : <span id="tvl">-</span> BNB</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
-            </div>
-          </div>
-        </div>
-        <a>.</a>
-        <!--여기까지 대쉬보드 -->
 
         <div class="bg-light p-5 rounded">
           <h1>테스트 페이지 입니다</h1>
@@ -128,8 +51,8 @@
             <li class="list-group-item">나의 남아있는 예치금: <span id="farmseed">-</span>CYA</li>
             
             <li class="list-group-item">현재 인출 가능CYA Token : <span id="farmjack">-</span>CYA</li>
-            <button class="btn btn-warning text-dark" type="submit" onclick="myLogin()">나의농장가져오기</button>
-            <li class="list-group-item">내가 보유중인 농장번호  <span id="myfarms"></span></li>
+            <button class="btn btn-warning text-dark" type="submit" onclick="myfarm()">나의농장가져오기</button>
+            <li class="list-group-item">내가 보유중인 농장번호  <span id="getfarms"></span></li>
           <div>
             <button class="btn btn-warning text-dark" type="submit" onclick="fwithdraw()">CYA Token 인출하기</button>
           </div>
