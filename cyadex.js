@@ -28,7 +28,7 @@
           // BNB Price
           const responseBinanceTicker = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT');
           const bnbPrice = parseFloat(responseBinanceTicker.data.price);
-          document.getElementById("bnbPrice").innerHTML=bnbPrice.toFixed(4);
+          document.getElementById("bPrice").innerHTML=bnbPrice.toFixed(4);
           document.getElementById("cyaPrice").innerHTML=(bnbPrice/1000).toFixed(4);
   
           // ethers setup
@@ -154,10 +154,9 @@
         document.getElementById("Getmypoint").innerHTML = (mybnbpoint/1e18).toFixed(6);
       };
 
-
       (async () => {
         topDataSync();
-        const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
         await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [{
@@ -173,12 +172,11 @@
             }]
         });
         await userProvider.send("eth_requestAccounts", []);
-
-        const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, userProvider);
         
-        const selectElement = document.getElementById('bnbInput');
-        const selectElement2 = document.getElementById('cyaInput');
-
+        let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, userProvider);
+        let selectElement = document.getElementById('bnbInput');
+        let selectElement2 = document.getElementById('cyaInput');
+        
         selectElement.addEventListener('change', async (event) => {
           if (event.target.value < 0.001) {
             alert("now enough value");
@@ -189,4 +187,6 @@
         selectElement2.addEventListener('change', async (event) => {
           document.getElementById('cyaOutput').value=event.target.value/parseFloat(await cyadexContract.getprice())*980
         })
-      })();
+        })();
+        
+        
