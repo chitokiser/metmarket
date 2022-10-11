@@ -31,11 +31,11 @@ let contractAddress = {
      document.getElementById("Owner2").innerHTML = (a2.owner);
      document.getElementById("Home2").innerHTML = String(a2.home);
      document.getElementById("Metainfo2").innerHTML = String(a2.metainfo);
-  
+     document.getElementById("Metainfo").src="Metainfo2";
+      
    
   };
 
-  
 
  
  
