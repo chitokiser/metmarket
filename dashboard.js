@@ -56,7 +56,7 @@
     chart: {
       type: 'candlestick',
       height: 380,
-      width: 900
+      width: '100%'
     },
     xaxis: {
       type: 'number'
