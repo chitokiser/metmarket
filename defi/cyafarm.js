@@ -117,13 +117,18 @@ let memberLogin = async () => {
   let mywin = await cyafarmContract.getmywin();
   let myseed = await cyafarmContract.getmyseedmoney();
   let myjack = await cyafarmContract.getmyjack(); 
- 
-  // let farms = [];
-  // for(i=1; i<13; i++){
-  // if (cyafarmContract.getmyfarm(i) === i ){farms.push(i)}
-  // }
-  // //else if(cyafarmContract.getmyfarm(2) === 2 ){farms.push(2)} 
-  // let newstring = farms.join(",");
+  
+  var tmp_val="";
+  for(i=1; i<13; i++){
+   if (cyafarmContract.getmyfarm(i) != null  && cyafarmContract.getmyfarm(i) != "" ){
+   if(tmp_val!=""){
+      tmp_val = tmp_val+",";
+   }
+   tmp_val = tmp_val+i;
+   }
+   }
+  
+  document.getElementById("myfarms").innerHTML = tmp_val;
   document.getElementById("farmdepo").innerHTML=(mydepo/1e18).toFixed(6);  //예치금 총액
   document.getElementById("farmgain").innerHTML = (mygain/1e18).toFixed(6); //순이익 총액
   document.getElementById("farmwin").innerHTML = (mywin/1e18).toFixed(6); //인출 총액

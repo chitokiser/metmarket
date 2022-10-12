@@ -132,16 +132,16 @@
     let farmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
     let myf= parseInt(await farmContract.getmyfarm(i));
     let farms = [] ;
-    console. log(myf);
+   
   
     // let farms = [];
     // for(let i=1; i<13; i++){
-    // if (farmContract.getmyfarm(6) === 6 )
+    // if (farmContract.getmyfarm(i) === i )
     // {farms.push(i)}};
     // console. log('farms')
     // let newstring = farms.join(",");
    
-    // document.getElementById("getfarms").innerHTML = (newstring);
+    // document.getElementById("myfarms").innerHTML = (newstring);
     
   };
   
