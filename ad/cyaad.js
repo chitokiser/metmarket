@@ -10,7 +10,7 @@ let contractAddress = {
       "function g1() public view virtual returns(uint256)",
       "function g2() public view virtual returns(uint256)",
       "function g3() public view virtual returns(uint256)",
-      "function g1() public view virtual returns(uint256)",
+      "function g4() public view virtual returns(uint256)",
       "function remain() public view virtual returns(uint256)",
       "function tax() public view virtual returns(uint256)",
     ]
@@ -32,7 +32,7 @@ let contractAddress = {
 
   
 
-  let catmemberLogin = async () => {
+  let AmemberLogin = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -51,11 +51,9 @@ let contractAddress = {
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
     let cyaadContract = new ethers.Contract(contractAddress.cyaadAddr, contractAbi.cyaad, signer);
-    
-  
+    let myjack =  await cyaadContract.g4();
 
-    document.getElementById("Myjack").innerHTML = parseFloat(ethers.utils.formatUnits(await cyaadContract.g3(await signer.getAddress()), 18)).toFixed(6);
-
+    document.getElementById("Myjack").innerHTML = ((myjack)/1e18).toFixed(6);
  
   };
 
@@ -88,7 +86,33 @@ let contractAddress = {
     }
   };
 
- 
+  let Abuyad = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+
+    let cyaadContract = new ethers.Contract(contractAddress.cyaadAddr, contractAbi.cyaad, signer);
+
+    try {
+      await cyaadContract.buyad();
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
 
   (async () => {
     topDataSync();

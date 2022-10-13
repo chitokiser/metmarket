@@ -98,12 +98,12 @@
         <!--여기까지 대쉬보드 -->
 
         <div class="bg-light p-5 rounded">
-          <h5>시아 광고비는</h5>
-          <p>광고등록 슬롯번호는 랜덤으로 결정 됩니다 </p>
+          <h5>시아 광고는</h5>
+          <p>배너 게재자리는  1~6까지 광고등록시에 랜덤으로 결정 됩니다 </p>
           <p>광고등록 시 현재광고 비용이 지불 됩니다 </p>
           <p>광고비는 참여자수에 비례하여 변경됩니다</p>
-          <p>다른 사람 광고등록을 할 때 나와 같은 슬롯번호가 나오면 새로운 광고주한테 내 광고자리를 내줍니다.</p>
-          <p>내 광고가 없어지는 대신에 새로운 광고주가 등록당시 가격으로  지불한 비용을 내가 받습니다</p>
+          <p>다른 사람 광고등록을 할 때 나와 같은 광고게재자래가 결정되면 새로운 광고주한테 내 광고자리를 내줍니다.</p>
+          <p>내 광고 자리를 내어주는  대신에 새로운 광고주가 등록당시 가격으로  지불한 비용을 내가 받습니다</p>
 
         </div>
         <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
@@ -117,20 +117,22 @@
         <li class="list-group-item">경고 :성인물등 부적절한 광고는 다오에서 삭제합니다 </li>
         <div class="list-group">
           <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-            광고등록하기
+            광고등록하기 (홈페이지&이미지 URL삽입 후 광고등록하기를 누르세요)
           </button>
           <div class="input-group mb-3">
-            <input type="text" id="seed" class="form-control" placeholder=""
+            <input type="text" id="seed" class="form-control" placeholder="이곳에 링크할 홈페이지 url을 정확하게 넣으세요"
+              aria-label="CYA" aria-describedby="basic-addon2">
+              
+              <input type="text" id="seed" class="form-control" placeholder="이곳에 가져올 이미지 url을 정확하게 넣으세요"
               aria-label="CYA" aria-describedby="basic-addon2">
             <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="buyad()">광고등록하기</span>
           </div>
             <div>
-            <button class="btn btn-outline-success" type="submit" onclick="memberLogin()">메타마스크연결</button>
-            메타마스크를 연결 하면 아래 정보가 보입니다
+            <button class="btn btn-outline-success" type="submit" onclick="AmemberLogin()">메타마스크연결</button>
+            메타마스크를 연결 하면 인출가능한 CYA Token 정보가 보입니다
             </button>
           
-            <li class="list-group-item">내가보유중인 광고슬롯 : <span id="Myad">-</span>CYA</li>
-            <li class="list-group-item">인출가능CYA Token : <span id="Myfarms"></span></li>
+            <li class="list-group-item">인출가능CYA Token : <span id="Myjack"></span></li>
             
           <div>
             <button class="btn btn-outline-success" type="submit" onclick="withdraw()">CYA Token 인출하기</button>
@@ -159,7 +161,7 @@
                 <img src= "Metainfo3"
                 class="card-img-top" alt="..." id="tmp_img3">  </a>
               <div class="card-body">
-                <h5 class="card-title">광고슬롯번호 3</h5>
+                <h5 class="card-title">NO3 게시장소:CYA디파이</h5>
                 </div>
             
 
@@ -168,7 +170,7 @@
                   <img src= "Metainfo4"
                   class="card-img-top" alt="..." id="tmp_img4">  </a>
                 <div class="card-body">
-                  <h5 class="card-title">광고슬롯번호 4</h5>
+                  <h5 class="card-title">NO4 게시장소:CUT리스트</h5>
                  
                   </div>  
                 </div> 
@@ -178,7 +180,7 @@
                   <img src= "Metainfo5"
                   class="card-img-top" alt="..." id="tmp_img5">  </a>
                 <div class="card-body">
-                  <h5 class="card-title">광고슬롯번호 5</h5>
+                  <h5 class="card-title">NO5 게시장소:커뮤니티</h5>
             
                   </div>
               
@@ -188,7 +190,7 @@
                     <img src= "Metainfo6"
                     class="card-img-top" alt="..." id="tmp_img6">  </a>
                   <div class="card-body">
-                    <h5 class="card-title">광고슬롯번호6</h5>
+                    <h5 class="card-title">NO6 게시장소:마이페이지</h5>
           
                     </div>  
                   </div> 
