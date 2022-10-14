@@ -142,7 +142,33 @@ let contractAddress = {
     }
   };
 
- 
+  let Buycat = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+
+    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
+
+    try {
+      await cyacoopContract.buycat(document.getElementById('buyAmount').value);
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
 
   let sellCat = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
