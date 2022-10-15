@@ -1,6 +1,7 @@
 //cyaex&topinfo
 let contractAddress = {
   cyadexAddr: "0x9536fe8544eDa3Bf488B1b87730D0E0b63E1D500",
+  cyadex2Addr: "0x7E0f523CF51686c422881d4437759438C8eCDEF5",
   cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",
   erc20: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9"
 };
@@ -10,6 +11,14 @@ let contractAbi = {
     "function balance() public view returns(uint256)",
     "function buy() payable public",
     "function sell(uint256 num) public"
+  ],
+  cyadex2: [
+    "function cyabuy() payable public",
+    "function bnbsell(uint256 num) public",
+    "function balance()public view returns(uint256)",
+    "function cyabalances() public view returns(uint256)",
+    "function g1(address user) public view returns(uint256)",
+    "function g2(address user) public view returns(uint256)"
   ],
   cyacoop: [
     "function getprice() public view returns(uint256)",
@@ -34,13 +43,15 @@ const topDataSync = async () => {
   // ethers setup
   let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
   let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, provider);
+  let cyadex2Contract = new ethers.Contract(contractAddress.cyadex2Addr, contractAbi.cyadex2, provider);
   let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, provider);
   let cyadexPrice = await cyadexContract.getprice();
   let cyacoopPrice = await cyacoopContract.getprice();
-  let allows = await cyacoopContract.allow();
+
   let members = await cyacoopContract.sum();
   let cyabal = await cyacoopContract.g1();
   let catsold = await cyacoopContract.g6();
+  
 
   // cyadex price
   document.getElementById("cyaPrice2").innerHTML=(1000/cyadexPrice).toFixed(6);
@@ -48,14 +59,12 @@ const topDataSync = async () => {
   // cyacoop price
   document.getElementById("catPrice").innerHTML=(cyacoopPrice/1e18).toFixed(6);
 
-  // allocation
-  document.getElementById("allocation").innerHTML=(allows/1e18).toFixed(6);
-
   // members *2 허수적용
-  document.getElementById("members").innerHTML=(members*2);  
- 
+  document.getElementById("members").innerHTML=(members*3);  
   // cyadex TVL
   document.getElementById("tvl").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadexContract.balance(), 18)).toFixed(6);
+  // cyadex2 TVL
+  document.getElementById("tvl2").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadex2Contract.balance(), 18)).toFixed(6);
   // cyabalance 
   document.getElementById("cyatvl").innerHTML = (cyabal/1e18).toFixed(6);
   // catsold 

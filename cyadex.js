@@ -1,5 +1,6 @@
 
         const contractAddress = {
+          cyadex2Addr: "0x7E0f523CF51686c422881d4437759438C8eCDEF5",
           cyadexAddr: "0x9536fe8544eDa3Bf488B1b87730D0E0b63E1D500",
           cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",
           erc20: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9"
@@ -11,6 +12,14 @@
             "function buy() payable public",
             "function getshoper() public view returns(uint256)",
             "function sell(uint256 num) public"
+          ],
+          cyadex2: [
+            "function cyabuy() payable public",
+            "function bnbsell(uint256 num) public",
+            "function balance()public view returns(uint256)",
+            "function cyabalances() public view returns(uint256)",
+            "function g1(address user) public view returns(uint256)",
+            "function g2(address user) public view returns(uint256)"
           ],
           cyacoop: [
             "function getprice() public view returns(uint256)",
@@ -93,9 +102,14 @@
         });
         await userProvider.send("eth_requestAccounts", []);
         const signer = userProvider.getSigner();
-
         const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
-        await cyadexContract.buy({ value: ethers.utils.parseUnits(document.getElementById('bnbInput').value, 'ether') });
+        try {
+          await cyadexContract.buy({ value: ethers.utils.parseUnits(document.getElementById('bnbInput').value, 'ether') });
+        } catch(e) {
+          alert(e.data.message.replace('execution reverted: ',''))
+        }
+       
+       
       };
 
       const sellCya = async () => {
@@ -126,7 +140,13 @@
         }
         // Sell
         const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
-        await cyadexContract.sell(quantity);
+        try {
+          await cyadexContract.sell(quantity);
+        } catch(e) {
+          alert(e.data.message.replace('execution reverted: ',''))
+        }
+        
+        
       };
 
       let DmemberLogin = async () => {
@@ -154,6 +174,42 @@
         document.getElementById("Getmypoint").innerHTML = (mybnbpoint/1e18).toFixed(6);
       };
 
+      let Bnbsell = async () => {
+        let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [{
+                chainId: "0x38",
+                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                chainName: "Binance Smart Chain",
+                nativeCurrency: {
+                    name: "BNB",
+                    symbol: "BNB",
+                    decimals: 18
+                },
+                blockExplorerUrls: ["https://bscscan.com/"]
+            }]
+        });
+        await userProvider.send("eth_requestAccounts", []);
+        let signer = userProvider.getSigner();
+
+        let amount = ethers.utils.parseUnits(document.getElementById('cyaInput2').value, 18);
+
+        // Approve
+        let erc20 = new ethers.Contract(contractAddress.erc20, contractAbi.erc20, signer);
+        if (await erc20.allowance(await signer.getAddress(), contractAddress.cyadex2Addr) < amount) {
+          await erc20.approve(contractAddress.cyadex2Addr, 2^256-1);
+        }
+        // Sell
+        let cyadex2Contract = new ethers.Contract(contractAddress.cyadex2Addr, contractAbi.cyadex2, signer);
+       
+        try {
+          await cyadex2Contract.bnbsell(amount);
+        } catch(e) {
+          alert(e.data.message.replace('execution reverted: ',''))
+        }
+      };
+
       (async () => {
         topDataSync();
         let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -176,7 +232,8 @@
         let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, userProvider);
         let selectElement = document.getElementById('bnbInput');
         let selectElement2 = document.getElementById('cyaInput');
-        
+        let selectElement3 = document.getElementById('cyaInput2');
+
         selectElement.addEventListener('change', async (event) => {
           if (event.target.value < 0.001) {
             alert("now enough value");
@@ -187,6 +244,11 @@
         selectElement2.addEventListener('change', async (event) => {
           document.getElementById('cyaOutput').value=event.target.value/parseFloat(await cyadexContract.getprice())*980
         })
+        selectElement3.addEventListener('change', async (event) => {
+          document.getElementById('cyaOutput2').value=event.target.value/parseFloat(await cyadexContract.getprice())*980
+        })
         })();
+
+        
         
         
