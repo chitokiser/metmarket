@@ -104,9 +104,8 @@ let contractAddress = {
     });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-
     let cyaadContract = new ethers.Contract(contractAddress.cyaadAddr, contractAbi.cyaad, signer);
-
+    
     try {
       await cyaadContract.buyad();
     } catch(e) {

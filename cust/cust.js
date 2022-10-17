@@ -104,6 +104,22 @@ let contractAbi = {
 
   };
 
+
+  const addTokenCust = async () => {
+    await window.ethereum.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: {
+          address: "0xB96fefF9a0D1B13738b432dCC7F5Ced0109f4D73",
+          symbol: "CUST",
+          decimals: 18, 
+          // image: tokenImage,
+        },
+      },
+    });
+  }
+
   let Cwithdraw = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
