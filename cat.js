@@ -102,15 +102,15 @@ let contractAddress = {
     let day = parseInt(left/60/60/24);
     let hour = parseInt(left/3600)%24;
     let min = parseInt((left/60)%60);
-    let sec = seconds%60;
+    let sec = left%60;
     let g3 =  parseInt(await catContract.getdepot(await signer.getAddress()));
     let left2 = parseInt((g3 + 31536000 ) - nowt);  
     let days = parseInt(left2/60/60/24);
     let hours = parseInt(left2/3600)%24;
     let mins = parseInt((left2/60)%60);
-    let secs = left2%60;;
-    document.getElementById("epsLeftTime").innerHTML = left > 0 ? `${day}:${hour}:${min}:${sec}` : '0일0시0분0초';
-    document.getElementById("sellLeftTime").innerHTML = left2 > 0 ? `${days}:${hours}:${mins}:${secs}` : '0일0시0분0초'; 
+    let secs = left2%60;
+    document.getElementById("epsLeftTime").innerHTML = left > 0 ? `${day}일${hour}시간${min}분${sec}초` : '';
+    document.getElementById("sellLeftTime").innerHTML = left2 > 0 ? `${days}일${hours}시간${mins}분${secs}초` : ''; 
   };
 
 

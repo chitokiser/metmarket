@@ -81,26 +81,23 @@ let contractAbi = {
     document.getElementById("Ceps").innerHTML = (await myeps/1e18).toFixed(6); 
    
  
-   let g2 = await custallowContract.allowt(await signer.getAddress());
- 
-   
-    // let nowt = Math.floor(new Date().getTime() / 1000);
-    // let left = parseInt((at + 604800 ) - nowt); 
-    // let day = parseInt(left/60/60/24);
-    // let hour = parseInt(left/3600)%24;
-    // let min = parseInt((left/60)%60);
-    // let sec = seconds%60;
-    // let g3 =  parseInt(await catContract.getdepot(await signer.getAddress()));
-    // let left2 = parseInt((g3 + 31536000 ) - nowt);  
-    // let days = parseInt(left2/60/60/24);
-    // let hours = parseInt(left2/3600)%24;
-    // let mins = parseInt((left2/60)%60);
-    // let secs = left2%60;;
+    let at = parseInt(await custallowContract.allowt(await signer.getAddress()));
+    let nowt = Math.floor(new Date().getTime() / 1000);
+    let left = parseInt((at + 604800 ) - nowt); 
+    let day = parseInt(left/60/60/24);
+    let hour = parseInt(left/3600)%24;
+    let min = parseInt((left/60)%60);
+    let sec = left%60;
+    let custContract =  new ethers.Contract(contractAddress.custAddr, contractAbi.cust, signer);
+    let g3 =  parseInt(await custContract.getdepot(await signer.getAddress()));
+    let left2 = parseInt((g3 + 31536000 ) - nowt);  
+    let days = parseInt(left2/60/60/24);
+    let hours = parseInt(left2/3600)%24;
+    let mins = parseInt((left2/60)%60);
+    let secs = left2%60;
     
-    document.getElementById("epsLeftTime").innerHTML = (g2);
-    
-    // document.getElementById("epsLeftTime").innerHTML = left > 0 ? `${day}:${hour}:${min}:${sec}` : '0일0시0분0초';
-    // document.getElementById("sellLeftTime").innerHTML = left2 > 0 ? `${days}:${hours}:${mins}:${secs}` : '0일0시0분0초'; 
+    document.getElementById("custallowTime").innerHTML = left > 0 ? `${day}일${hour}시간${min}분${sec}초` :'';
+    document.getElementById("custsellTime").innerHTML = left2 > 0 ? `${days}일${hours}시간${mins}분${secs}초` : ''; 
 
   };
 
