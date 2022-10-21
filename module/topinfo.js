@@ -51,7 +51,7 @@ const topDataSync = async () => {
   let members = await cyacoopContract.sum();
   let cyabal = await cyacoopContract.g1();
   let catsold = await cyacoopContract.g6();
-  
+  let tvl = await cyadexContract.balance();
 
   // cyadex price
   document.getElementById("cyaPrice2").innerHTML=(1000/cyadexPrice).toFixed(6);
@@ -62,7 +62,7 @@ const topDataSync = async () => {
   // members *2 허수적용
   document.getElementById("members").innerHTML=(members*3);  
   // cyadex TVL
-  document.getElementById("tvl").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadexContract.balance(), 18)).toFixed(6);
+  document.getElementById("tvl").innerHTML=(tvl/1e16).toFixed(6);
   // cyadex2 TVL
   document.getElementById("tvl2").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadex2Contract.balance(), 18)).toFixed(6);
   // cyabalance 
