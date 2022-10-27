@@ -55,50 +55,7 @@
     </head>
     <!-- 여기까지 헤드 -->
 
-     
-      <div class="alert alert-secondary" role="alert">
-        
-           
-            <!-- 바디 감싸기 -->
-            <div class="container">
-              <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                <div class="col">
-                  <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1CYA = $1000</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
-                </div>
-              
-                <div class="col">
-                  <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">BNB TVL = <span id="tvl">-</span>BNB</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">BNB TVL2 : <span id="tvl2">-</span> BNB</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
-                </div>
-              </div>
-            </div>
-        </div>
-            <p></p>
-            <!--여기까지 대쉬보드 -->
-            
+
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                   <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -155,6 +112,7 @@
                 <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="memberLogin()">
                 메타 마스크 연결하기
                 </li>
+                <li class="list-group-item">전투메세지: <span id="Winner"></span></li>
                 <div class="alert alert-secondary" role="alert">
                 <li class="list-group-item">포인트 충전안내: 추가 충전을 이용 하려면 먼저 전투참가하기 부터 해야 합니다</li>
                 <li class="list-group-item">나의 전투 포인트: <span id="Boxprice"></span>P</li>
@@ -178,12 +136,13 @@
                 </div>
                 <li class="list-group-item">도발 반응까지 상대의 남은 시간: <span id="Boxprice">-</span></li>
                 <li class="list-group-item">상대가 24시간 동안 반응하지 않으면 전투강제종료를 클릭 하세요 제출했던 파이트머니의 20%를 확보합니다 </li>
-                <li class="list-group-item">파이트머니: <span id="Boxprice"></span>P</li>
-                <li class="list-group-item">내가 도전한 상대: <span id="Boxprice">아직 도전장을 제출하지 않았습니다</span></li>
-                <li class="list-group-item">내가 도전한 상대의 방어력: <span id="Boxprice">-</span></li>      
                 <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="memberLogin()">
                     전투강제종료
                     </li>
+                <li class="list-group-item">파이트머니: <span id="Boxprice"></span>P</li>
+                <li class="list-group-item">내가 도전한 상대: <span id="Boxprice">아직 도전장을 제출하지 않았습니다</span></li>
+                <li class="list-group-item">내가 도전한 상대의 방어력: <span id="Boxprice">-</span></li>      
+               
                     
             </div>
 
