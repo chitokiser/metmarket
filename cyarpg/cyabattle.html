@@ -99,12 +99,18 @@
             <div class="alert alert-secondary" role="alert"> 
             <ul class="list-group">
 
-                <li class="list-group-item">전투참여대기인원: <span id="Boxprice"></span>명</li>
-                <li class="list-group-item">계약잔고(총상금): <span id="Boxprice"></span>CYA</li>  
-                <li class="list-group-item">전투참여대기자 등록비: <span id="Winner">CYA</span></li>
-                <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="memberLogin()">
-                    전투참가하기(포인트가 충전되면서 대기명단에 올라갑니다)
+                <li class="list-group-item">전투참여인원: <span id="Bts"></span>명</li>
+                <li class="list-group-item">계약잔고(총상금): <span id="Btvl"></span>CYA</li>  
+                <li class="list-group-item">전투참여등록비: 0.05CYA</li>
+                <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Inbattle()">
+                    전투참가명단등록(전투 포인트가 충전되면서 전투참여인원이 됩니다)
                   </li>
+                  <div class="input-group mb-3">
+                    <input id="Cyainfut" type="text" class="form-control" placeholder="충전할 금액을 입력하세요 0.1CYA = 0.1P " aria-label="Recipient's username"
+                      aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2" style="cursor: pointer;"
+                      onclick="Charge()">전투 포인트 충전</span>
+                  </div>
                 
             </div>
 
@@ -223,11 +229,8 @@
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>  
-<script src="mypage.js"></script> 
-<script type=module src="../module/topinfo.js"></script>
-<script type = "module">
-  import topDataSync from '../module/topinfo.js'
-</script> 
+<script src="battle.js"></script> 
+
 <script type=module src="ad/adget6.js"></script>
 <script type="module">
   import topDataSync from 'ad/adget6.js'
