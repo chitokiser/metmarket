@@ -1,6 +1,5 @@
 let contractAddress = {  
     cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",  
-    huntAddr: "0x85e8a930767B2ea47D5642E3B15aC2e32ADeeAf6",
     battleAddr: "0x7dDe57bfe9aBC5aA9E7Ef3A9e42E2b9400B608F4"
   };
   let contractAbi = {
@@ -31,53 +30,11 @@ let contractAddress = {
         "function tp() public view returns(uint256)",
         "function g13() public view virtual returns(uint256)",
         "function g14(address user) public view virtual returns(uint256)",
-        "function getmy() public view virtual returns(uint,uint,uint,uint,address,uint,uint,uint,string memory)"
-   
-   ],
+        "function getmy() public view returns(uint,uint,uint,uint,address,uint,uint,uint,string memory)",
+        "function myinfo(address user) public view returns(uint,uint,uint,uint,address,uint,uint,uint,string memory)"
+   ]
   
-    hunt: [
-        "function creat(string memory _answer,uint _level)public",
-        "function hunting(uint _tid,string memory _answer)public",
-        "function buybox(uint num)public",
-        "function sellbox(uint num)public",
-        "function huntregi( )public",
-        "function powerup( )public",
-        "function attup( )public",
-        "function defup( )public",
-        "function weaponup( )public",
-        "function armoup( )public",
-        "function unbox(uint num)public",
-        "function g1() public view virtual returns(uint256)",
-        "function g2(uint256 _id) public view returns(uint,uint256,address[]memory winner,uint box)",
-        "function g4()public view returns(uint depo,uint sapp,uint ruby,uint eme,uint wes,uint ars)",
-        "function getatt(address user) public view returns(uint)",
-        "function getdef(address user) public view returns(uint)",
-        "function getweapon(address user) public view returns(uint)",
-        "function getarmo(address user) public view returns(uint)",
-        "function getpower(address user) public view returns(uint)",
-        "function getbox(address user) public view returns(uint)",
-        "function boxprice() public view returns(uint256)",
-        "function winners() public view returns(uint256)"
-      ],
-      
-      cyacoop: [
-        "function getprice() public view returns(uint256)",
-        "function allow() public view returns(uint256)",
-        "function g1() public view returns(uint256)",
-        "function g2() public view returns(uint256 allowt, uint256 exp, uint8 level, uint256 booster)",
-        "function g6() public view returns(uint256)",
-        "function g7(address user) public view returns(uint256)",
-        "function memberjoin(uint256 _num) public",
-        "function automemberjoin() public",
-        "function levelup() public returns(bool)",
-        "function geteps(address user) external view returns (uint256)",
-        "function withdraw() public returns(bool)",
-        "function mentolength() public view returns(uint256)",
-        "function addmento() public",
-        "function buybooster() public",
-        "function buycat(uint _num) public returns(bool)",
-        "function sellcat(uint num) public returns(bool)"
-      ]
+
 
   };
 
@@ -90,7 +47,7 @@ let contractAddress = {
     let btvl = await battleContract.g13();
     document.getElementById("Bts").innerHTML = (btp);
     document.getElementById("Btvl").innerHTML = (btvl/1e18).toFixed(6);
-
+   
   };
 
   let Inbattle = async () => {
@@ -122,7 +79,53 @@ let contractAddress = {
     }
   };
 
+  let Blogin = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
 
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
+    let g5 = await battleContract.getmy();
+    let bmessage = g5.message;
+    let benemy= g5.enemy;
+    let bdepo = g5.depo;
+    // let att = g5.at;
+    // let bdt = g5.dt;
+    // let baib = g5.aib;
+    let bfm = g5.fm;
+    let bbuff = g5.buff;
+    
+    
+  
+    document.getElementById("Bmessage").innerHTML = (bmessage);
+    document.getElementById("Benemy").innerHTML = (benemy);
+    document.getElementById("Bdepo").innerHTML = parseInt(bdepo/1e18).toFixed(6);
+    // document.getElementById("Baib").innerHTML = (baib);
+    document.getElementById("Bfm").innerHTML =  parseInt(bfm/1e18).toFixed(6);
+    document.getElementById("Bbuff").innerHTML = parseInt(bbuff);
+    
+    // document.getElementById("Att").innerHTML = (att);
+    // document.getElementById("Bdt").innerHTML = (bdt);
+    let batt =  await battleContract.g7(await signer.getAddress());
+    let bdef =  await battleContract.g8(await signer.getAddress());
+    document.getElementById("Batt").innerHTML = (batt);
+    document.getElementById("Bdef").innerHTML = (bdef);
+ 
+  };
 
   let Charge = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -154,6 +157,188 @@ let contractAddress = {
     }
   };
 
+  let Withdraw = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    
+    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
+    let amount = ethers.utils.parseUnits(document.getElementById('Winput').value, 18);
+    
+    try {
+      await battleContract.withdraw(amount);
+      
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+  
+  let Taunt= async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    
+    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
+    let quantity = ethers.utils.parseUnits(document.getElementById('Tinput').value, 18);
+    
+    try {
+      await battleContract.taunt(quantity);
+      
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+
+  let Endwar= async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    
+    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
+   
+    try {
+      await battleContract.endwar();
+      
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+
+  let Battle = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    
+    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
+   
+    try {
+      await battleContract.battle();
+      
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+
+
+  let Surrender = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    
+    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
+   
+    try {
+      await battleContract.surrender();
+      
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+
+
+  let BAIbattle = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    
+    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
+   
+    try {
+      await battleContract.AIbattle();
+      
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
   
   (async () => {
     BtopDataSync();
