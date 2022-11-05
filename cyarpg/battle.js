@@ -30,7 +30,7 @@ let contractAddress = {
         "function tp() public view returns(uint256)",
         "function g13() public view virtual returns(uint256)",
         "function g14(address user) public view virtual returns(uint256)",
-        "function getmy() public view returns(uint,uint,uint,uint,address,uint,uint,uint,string memory)",
+        "function getmy() public view virtual returns(uint,uint,uint,uint,address,uint,uint,uint,string memory)",
         "function myinfo(address user) public view returns(uint,uint,uint,uint,address,uint,uint,uint,string memory)"
    ]
   
@@ -98,33 +98,33 @@ let contractAddress = {
 
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
-    let g5 = await battleContract.getmy();
-    let bmessage = g5.message;
-    let benemy= g5.enemy;
-    let bdepo = g5.depo;
-    // let att = g5.at;
-    // let bdt = g5.dt;
-    // let baib = g5.aib;
-    let bfm = g5.fm;
-    let bbuff = g5.buff;
+    let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle,signer);
+    let gm = await battleContract.getmy();
+    let bmessage = gm.message;
+    let benemy= gm.enemy;
+    let bdepo = gm.depo;
+    let att = gm.at;
+    let bdt = gm.dt;
+    let baib = gm.aib;
+    let bfm = gm.fm;
+    let bbuff = gm.buff;
+    console.log(parseInt(bdepo));
     
     
-  
-    document.getElementById("Bmessage").innerHTML = (bmessage);
     document.getElementById("Benemy").innerHTML = (benemy);
-    document.getElementById("Bdepo").innerHTML = parseInt(bdepo/1e18).toFixed(6);
-    // document.getElementById("Baib").innerHTML = (baib);
-    document.getElementById("Bfm").innerHTML =  parseInt(bfm/1e18).toFixed(6);
-    document.getElementById("Bbuff").innerHTML = parseInt(bbuff);
-    
-    // document.getElementById("Att").innerHTML = (att);
-    // document.getElementById("Bdt").innerHTML = (bdt);
+    document.getElementById("Bdepo").innerHTML =  (bdepo/1e18).toFixed(6);
+    document.getElementById("Baib").innerHTML =  (baib);
+    document.getElementById("Bfm").innerHTML =  (bfm/1e18).toFixed(6);
+    document.getElementById("Bbuff").innerHTML = (bbuff);  
+    document.getElementById("Att").innerHTML = (att);
+    document.getElementById("Bdt").innerHTML = (bdt);
+    document.getElementById("Bmessage").innerHTML = (bmessage);
+
     let batt =  await battleContract.g7(await signer.getAddress());
     let bdef =  await battleContract.g8(await signer.getAddress());
     document.getElementById("Batt").innerHTML = (batt);
     document.getElementById("Bdef").innerHTML = (bdef);
- 
+   
   };
 
   let Charge = async () => {

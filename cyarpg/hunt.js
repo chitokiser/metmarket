@@ -65,6 +65,48 @@ let contractAddress = {
 
   };
 
+
+  let Mytresure = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
+    let g4 = await huntContract.g4();
+    let hhsapp = g4.sapp;
+    let hhruby = g4.ruby;
+    let hheme = g4.eme;
+    let hhwes = g4.wes;
+    let hhars = g4.ars;
+    let hhgetbox =  await huntContract.getbox(await signer.getAddress());
+   
+    document.getElementById("Getbox").innerHTML = (hhgetbox);
+    document.getElementById("Sapp").innnerHTML = (parseInt(hhsapp)); 
+    document.getElementById("Ruby").innnerHTML =(hhruby); 
+    document.getElementById("Eme").innnerHTML =  (hheme); 
+    document.getElementById("Wes").innnerHTML =  (hhwes); 
+    document.getElementById("Ars").innnerHTML =  (hhars); 
+    console.log( parseInt(hhsapp));
+      
+   
+  };
+
+
+
+
   let Login = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
@@ -91,8 +133,8 @@ let contractAddress = {
     let hwes = g4.wes;
     let hars = g4.ars;
     
-    let hgetbox =  await huntContract.getbox(await signer.getAddress());
-    let hgetpower =  await huntContract.getpower(await signer.getAddress());
+   
+    let hgetpower = await huntContract.getpower(await signer.getAddress());
     let hgetatt =  await huntContract.getatt(await signer.getAddress());
     let hgetdef =  await huntContract.getdef(await signer.getAddress());
     let hgetweapon =  await huntContract.getweapon(await signer.getAddress());
@@ -104,14 +146,14 @@ let contractAddress = {
     let wesexp = (2**hgetweapon);
     let arsexp = (2**hgetarmo);
 
-    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
+    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop,signer);
     let g2 = await cyacoopContract.g2();
     let mylevel = g2.level;
     let myexp = g2.exp;
     let levelexp = (2**g2.level)*10000;
     let mybooster = g2.booster;
   
-    document.getElementById("Getbox").innerHTML = (hgetbox);
+  
     document.getElementById("Getpower").innerHTML = (hgetpower);
     document.getElementById("Getatt").innerHTML =(hgetatt);
     document.getElementById("Getdef").innerHTML = (hgetdef);
@@ -122,12 +164,13 @@ let contractAddress = {
     document.getElementById("Defbar").style.width = `${heme/defexp*100}%`;
     document.getElementById("Weaponbar").style.width = `${hwes/wesexp*100}%`;
     document.getElementById("Armobar").style.width = `${hars/arsexp*100}%`;
-    document.getElementById("Sapp").innnerHTML =  (hsapp); 
-    document.getElementById("Ruby").innnerHTML = (hruby); 
+    document.getElementById("Sapp").innnerHTML = parseInt(0x38); 
+    document.getElementById("Ruby").innnerHTML =(hruby); 
     document.getElementById("Eme").innnerHTML =  (heme); 
     document.getElementById("Wes").innnerHTML =  (hwes); 
     document.getElementById("Ars").innnerHTML =  (hars); 
-    //jewel  
+    console.log( parseInt(hsapp));
+      
    
 
     // level

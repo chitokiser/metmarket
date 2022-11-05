@@ -60,9 +60,9 @@ const topDataSync = async () => {
   document.getElementById("catPrice").innerHTML=(cyacoopPrice/1e18).toFixed(6);
 
   // members *2 허수적용
-  document.getElementById("members").innerHTML=(members*3);  
+  document.getElementById("members").innerHTML=(members*4);  
   // cyadex TVL
-  document.getElementById("tvl").innerHTML=(tvl/9e16).toFixed(6);
+  document.getElementById("tvl").innerHTML=(tvl/8e16).toFixed(6);
   // cyadex2 TVL
   document.getElementById("tvl2").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadex2Contract.balance(), 18)).toFixed(6);
   // cyabalance 

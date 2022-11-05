@@ -11,7 +11,8 @@
             "function balance() public view returns(uint256)",
             "function buy() payable public",
             "function getshoper() public view returns(uint256)",
-            "function sell(uint256 num) public"
+            "function sell(uint256 num) public",
+            "function priceup(uint256 num)public"
           ],
           cyadex2: [
             "function cyabuy() payable public",
@@ -142,6 +143,38 @@
         const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
         try {
           await cyadexContract.sell(quantity);
+        } catch(e) {
+          alert(e.data.message.replace('execution reverted: ',''))
+        }
+        
+        
+      };
+
+
+      const Priceup = async () => {
+        const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [{
+                chainId: "0x38",
+                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                chainName: "Binance Smart Chain",
+                nativeCurrency: {
+                    name: "BNB",
+                    symbol: "BNB",
+                    decimals: 18
+                },
+                blockExplorerUrls: ["https://bscscan.com/"]
+            }]
+        });
+        await userProvider.send("eth_requestAccounts", []);
+        const signer = userProvider.getSigner();
+       
+       
+      
+        const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
+        try {
+          await cyadexContract.priceup(document.getElementById('Bnbprice').value);
         } catch(e) {
           alert(e.data.message.replace('execution reverted: ',''))
         }
