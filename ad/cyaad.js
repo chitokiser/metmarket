@@ -105,9 +105,11 @@ let contractAddress = {
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
     let cyaadContract = new ethers.Contract(contractAddress.cyaadAddr, contractAbi.cyaad, signer);
-    
+    let url = document.getElementById('Url').value;
+    let imgurl =  document.getElementById('Imgurl').value;
+
     try {
-      await cyaadContract.buyad();
+      await cyaadContract.creatad(url,imgurl);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
