@@ -1,15 +1,37 @@
 let contractAddress = {
-    cyadexAddr: "0x9536fe8544eDa3Bf488B1b87730D0E0b63E1D500",
+
     cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",
-    erc20: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9",
-    catAddr: "0xE9f81b32E6cEca07819806B827AEA1C71C53d257"
+    huntAddr: "0x85e8a930767B2ea47D5642E3B15aC2e32ADeeAf6"
+    
   };
   let contractAbi = {
-    cyadex: [
-      "function getprice() public view returns(uint256)",
-      "function balance() public view returns(uint256)",
-      "function buy() payable public",
-      "function sell(uint256 num) public"
+    hunt: [
+      "function creat(string memory _answer,uint _level)public",
+      "function hunting(uint _tid,string memory _answer)public",
+      "function withdraw( )public",
+      "function buybox(uint num)public",
+      "function sellbox(uint num)public",
+      "function boxdown(address user,uint num)public returns(bool)",
+      "function powerup( )public",
+      "function attup( )public",
+      "function defup( )public",
+      "function weaponup( )public",
+      "function armoup( )public",
+      "function depoup(address user,uint num)public",
+      "function faup(address _family )public",
+      "function unbox(uint num)public",
+      "function g1() public view virtual returns(uint256)",
+      "function g2(uint256 _id) public view returns(uint,uint256,address[]memory winner,uint box)",
+      "function g3(address user) public view virtual returns(uint256)",
+      "function g4()public view returns(uint depo,uint sapp,uint ruby,uint eme,uint wes,uint ars)",
+      "function g5(address user) public view returns(uint)",
+      "function g6(uint tid) public view returns(uint)",
+      "function getatt(address user) public view returns(uint)",
+      "function getdef(address user) public view returns(uint)",
+      "function getweapon(address user) public view returns(uint)",
+      "function getarmo(address user) public view returns(uint)",
+      "function getpower(address user) public view returns(uint)",
+      "function getbox(address user) public view returns(uint)"
     ],
     cyacoop: [
       "function getprice() public view returns(uint256)",
@@ -29,13 +51,7 @@ let contractAddress = {
       "function buycat(uint _num) public returns(bool)",
       "function sellcat(uint num) public returns(bool)"
     ],
-    erc20: [
-      "function approve(address spender, uint256 amount) external returns (bool)",
-      "function allowance(address owner, address spender) external view returns (uint256)"
-    ],
-    cat: [
-      "function getdepot(address user) external view returns (uint256)"
-    ]
+ 
   };
 
   let topDataSync = async () => {
@@ -43,12 +59,13 @@ let contractAddress = {
     let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
     let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, provider);
 
-  
     // total mentor
     document.getElementById("totalMentor").innerHTML = await cyacoopContract.mentolength();
   };
 
-  let signupGuild = async () => {
+
+
+  let AGuild = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -66,85 +83,259 @@ let contractAddress = {
     });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-
     let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
 
-    // Approve
-    let erc20 = new ethers.Contract(contractAddress.erc20, contractAbi.erc20, signer);
-    if (await erc20.allowance(await signer.getAddress(), contractAddress.cyadexAddr) < ethers.utils.parseUnits("0.05", 18)) {
-      await erc20.approve(contractAddress.cyadexAddr, 2^256-1);
+    try {
+      await cyacoopContract.automemberjoin();
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
     }
-
-    await cyacoopContract.memberjoin(document.getElementById('mentorNumInput').value);
-  }
-
-  let autoSignupGuild = async () => {
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0x38",
-            rpcUrls: ["https://bsc-dataseed.binance.org/"],
-            chainName: "Binance Smart Chain",
-            nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://bscscan.com/"]
-        }]
-    });
-    await userProvider.send("eth_requestAccounts", []);
-    let signer = userProvider.getSigner();
-
-    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
-
-    // Approve
-    let erc20 = new ethers.Contract(contractAddress.erc20, contractAbi.erc20, signer);
-    if (await erc20.allowance(await signer.getAddress(), contractAddress.cyadexAddr) < ethers.utils.parseUnits("0.05", 18)) {
-      await erc20.approve(contractAddress.cyadexAddr, 2^256-1);
-    }
-
-    await cyacoopContract.automemberjoin();
-  }
-
-  let memberLogin = async () => {
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0x38",
-            rpcUrls: ["https://bsc-dataseed.binance.org/"],
-            chainName: "Binance Smart Chain",
-            nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://bscscan.com/"]
-        }]
-    });
-    await userProvider.send("eth_requestAccounts", []);
-    let signer = userProvider.getSigner();
-
-    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
-    let catContract = new ethers.Contract(contractAddress.catAddr, contractAbi.cat, signer);
+  };
     
-    // g2
+
+
+  let Powerup = async () => {
+    if (document.getElementById("Getpower").value !== '-') {
+      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+              chainId: "0x38",
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                  name: "BNB",
+                  symbol: "BNB",
+                  decimals: 18
+              },
+              blockExplorerUrls: ["https://bscscan.com/"]
+          }]
+      });
+      await userProvider.send("eth_requestAccounts", []);
+      let signer = userProvider.getSigner();
+
+      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
+      
+      try {
+        await huntContract.powerup();
+      } catch(e) {
+        alert(e.data.message.replace('execution reverted: ',''))
+      }
+    }
+  };
+
+  let Attup = async () => {
+    if (document.getElementById("Getatt").value !== '-') {
+      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+              chainId: "0x38",
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                  name: "BNB",
+                  symbol: "BNB",
+                  decimals: 18
+              },
+              blockExplorerUrls: ["https://bscscan.com/"]
+          }]
+      });
+      await userProvider.send("eth_requestAccounts", []);
+      let signer = userProvider.getSigner();
+
+      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
+      
+      try {
+        await huntContract.attup();
+      } catch(e) {
+        alert(e.data.message.replace('execution reverted: ',''))
+      }
+    }
+  };
+
+  let Defup = async () => {
+   
+      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+              chainId: "0x38",
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                  name: "BNB",
+                  symbol: "BNB",
+                  decimals: 18
+              },
+              blockExplorerUrls: ["https://bscscan.com/"]
+          }]
+      });
+      await userProvider.send("eth_requestAccounts", []);
+      let signer = userProvider.getSigner();
+
+      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
+      
+      try {
+        await huntContract.defup();
+      } catch(e) {
+        alert(e.data.message.replace('execution reverted: ',''))
+      }
+    
+  };
+
+
+  let Weaponup = async () => {
+   
+      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+              chainId: "0x38",
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                  name: "BNB",
+                  symbol: "BNB",
+                  decimals: 18
+              },
+              blockExplorerUrls: ["https://bscscan.com/"]
+          }]
+      });
+      await userProvider.send("eth_requestAccounts", []);
+      let signer = userProvider.getSigner();
+
+      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
+      
+      try {
+        await huntContract.weaponup();
+      } catch(e) {
+        alert(e.data.message.replace('execution reverted: ',''))
+      }
+    
+  };
+
+
+  let Armoup = async () => {
+   
+      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+              chainId: "0x38",
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                  name: "BNB",
+                  symbol: "BNB",
+                  decimals: 18
+              },
+              blockExplorerUrls: ["https://bscscan.com/"]
+          }]
+      });
+      await userProvider.send("eth_requestAccounts", []);
+      let signer = userProvider.getSigner();
+
+      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
+      
+      try {
+        await huntContract.armoup();
+      } catch(e) {
+        alert(e.data.message.replace('execution reverted: ',''))
+      }
+
+  };
+
+
+
+  let Mlogin = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop,signer);
+    
     let g2 = await cyacoopContract.g2();
+
     let mylevel = g2.level;
     let myexp = g2.exp;
     let levelexp = (2**g2.level)*10000;
-
+    let mybooster = g2.booster;
+     
     // level
-    document.getElementById("level").innerHTML = (mylevel);
-    document.getElementById("levelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다.
-    document.getElementById("exp").innerHTML = parseInt(myexp);
-    document.getElementById("expneeded").innerHTML = parseInt(levelexp - myexp);
+    document.getElementById("Level").innerHTML = (mylevel);
+    document.getElementById("LevelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다.
+    document.getElementById("Exp").innerHTML = parseInt(myexp);
+    document.getElementById("Expneeded").innerHTML = parseInt(levelexp - myexp);
+    document.getElementById("Mybooster").innerHTML = parseInt(mybooster);
+    
+    
 
-    // myBooster
-    document.getElementById("myBooster").innerHTML = g2.booster;
+    
+    let huntContract = new ethers.Contract(contractAddress.huntAddr,contractAbi.hunt,signer);    
+    let g4 = await huntContract.g4();
+    let hsapp = g4.sapp;
+    let hruby = g4.ruby;
+    let heme = g4.eme;
+    let hwes = g4.wes;
+    let hars = g4.ars;
+    let hhsapp = hsapp;
+    let hhruby = hruby;
+    let hheme = heme;
+    let hhwes = hwes;
+    let hhars = hars;
+    let mybox =  parseInt(await huntContract.getbox(await signer.getAddress()));
+    let hgetpower = await huntContract.getpower(await signer.getAddress());
+    let hgetatt =  await huntContract.getatt(await signer.getAddress());
+    let hgetdef =  await huntContract.getdef(await signer.getAddress());
+    let hgetweapon =  await huntContract.getweapon(await signer.getAddress());
+    let hgetarmo =  await huntContract.getarmo(await signer.getAddress());
+    let powerexp = (2**hgetpower);
+    let attexp = (2**hgetatt);
+    let defexp = (2**hgetdef);
+    let wesexp = (2**hgetweapon);
+    let arsexp = (2**hgetarmo);
+
+   
+    document.getElementById("Getpower").innerHTML = (hgetpower);
+    document.getElementById("Getatt").innerHTML =(hgetatt);
+    document.getElementById("Getdef").innerHTML = (hgetdef);
+    document.getElementById("Getweapon").innerHTML = (hgetweapon);
+    document.getElementById("Getarmo").innerHTML = (hgetarmo);
+    document.getElementById("Powerbar").style.width = `${hsapp/powerexp*100}%`;
+    document.getElementById("Attbar").style.width = `${hruby/attexp*100}%`;
+    document.getElementById("Defbar").style.width = `${heme/defexp*100}%`;
+    document.getElementById("Weaponbar").style.width = `${hwes/wesexp*100}%`;
+    document.getElementById("Armobar").style.width = `${hars/arsexp*100}%`;
+    
+    document.getElementById("Mybox").innnerHTML = (mybox); 
+    document.getElementById("Sapp").innnerHTML = (hhsapp);
+    document.getElementById("Ruby").innnerHTML = (hhruby); 
+    document.getElementById("Eme").innnerHTML =  (hheme); 
+    document.getElementById("Wes").innnerHTML =  (hhwes); 
+    document.getElementById("Ars").innnerHTML =  (hhars);
+      
+   
+    console.log(mybox);
+
   };
+
+
+
 
   let levelUp = async () => {
     if (document.getElementById("level").value !== '-') {
@@ -222,15 +413,9 @@ let contractAddress = {
     });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-
     let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
 
-    // Approve
-    let erc20 = new ethers.Contract(contractAddress.erc20, contractAbi.erc20, signer);
-    if (await erc20.allowance(await signer.getAddress(), contractAddress.cyadexAddr) < 5e17) {
-      await erc20.approve(contractAddress.cyadexAddr, 2^256-1);
-    }
-
+   
     try {
       await cyacoopContract.addmento();
     } catch(e) {
@@ -268,62 +453,8 @@ let contractAddress = {
     await cyacoopContract.buybooster();
   };
 
-  let buyCat = async () => {
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0x38",
-            rpcUrls: ["https://bsc-dataseed.binance.org/"],
-            chainName: "Binance Smart Chain",
-            nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://bscscan.com/"]
-        }]
-    });
-    await userProvider.send("eth_requestAccounts", []);
-    let signer = userProvider.getSigner();
-
-    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
-
-    try {
-      await cyacoopContract.buycat(document.getElementById('buyAmount').value);
-    } catch(e) {
-      alert(e.data.message.replace('execution reverted: ',''))
-    }
-  };
-
-  let sellCat = async () => {
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0x38",
-            rpcUrls: ["https://bsc-dataseed.binance.org/"],
-            chainName: "Binance Smart Chain",
-            nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://bscscan.com/"]
-        }]
-    });
-    await userProvider.send("eth_requestAccounts", []);
-    let signer = userProvider.getSigner();
-
-    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
-
-    try {
-      await cyacoopContract.sellcat(document.getElementById('sellAmount').value);
-    } catch(e) {
-      alert(e.data.message.replace('execution reverted: ',''))
-    }
-  };
-
+ 
+    
 
   (async () => {
     topDataSync();

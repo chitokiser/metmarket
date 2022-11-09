@@ -56,49 +56,6 @@
     </head>
     <!-- 여기까지 헤드 -->
 
-
-    <div class="alert alert-secondary" role="alert">
-
-
-      <!-- 바디 감싸기 -->
-      <div class="container">
-        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-          <div class="col">
-            <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
-          </div>
-          <div class="col">
-            <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
-          </div>
-          <div class="col">
-            <div class="p-3 border bg-light">1CYA = $1000</div>
-          </div>
-          <div class="col">
-            <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
-          </div>
-          <div class="col">
-            <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
-          </div>
-
-          <div class="col">
-            <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
-          </div>
-          <div class="col">
-            <div class="p-3 border bg-light">BNB TVL = <span id="tvl">-</span>BNB</div>
-          </div>
-          <div class="col">
-            <div class="p-3 border bg-light">BNB TVL2 : <span id="tvl2">-</span> BNB</div>
-          </div>
-          <div class="col">
-            <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
-          </div>
-          <div class="col">
-            <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p></p>
-    <!--여기까지 대쉬보드 -->
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -147,7 +104,7 @@
         <p>시아 생태계에서 인증된 데모계좌만 거래가능 합니다</p>
         <p></p>
       </div>
-    <h5>MT5 프로그램 다운로드</h5>
+    <h5>MT5 안내</h5>
     <div class="alert alert-light" role="alert">
       <table class="table table-hover">
           <table class="table">
@@ -176,33 +133,39 @@
                   
                 <tr>
                   <th scope="row">3</th>
-                  <td>구매가능</td>
-                  <td>MT5 계좌를 구매할 수 있는 상태</td>
-                  <td>상태6</td>
+                  <td>거래가능</td>
+                  <td>MT5 계좌를 거래할 수 있는 상태</td>
+                  <td>계좌상태6</td>
                 </tr>
                 <tr>
                   <th scope="row">4</th>
                   <td>활동중</td>
                   <td>MT5 계좌를 누군가 소유하여 플레이하는 상태</td>
-                  <td>상태5</td>
+                  <td>계좌상태5</td>
                 </tr>
                 <tr>
                   <th scope="row">5</th>
                   <td>판매등록</td>
-                  <td>MT5 계좌를 누군가 플레이하다가 판매 등록한 상태</td>
-                  <td>상태4</td>
+                  <td>MT5 계좌를 누군가 플레이하다가 거래 등록한 상태</td>
+                  <td>계좌상태4</td>
                 </tr>
                 <tr>
                   <th scope="row">6</th>
-                  <td>판매등록취소</td>
+                  <td>거래등록취소</td>
                   <td>MT5 계좌를 판매등록 하였으나 잔고와 가격이 맞지 않아 등록이 취소되어  다시 등록해야 함</td>
-                  <td>상태3</td>
+                  <td>계좌상태3</td>
                 </tr>
                 <tr>
-                  <th scope="row">3</th>
-                  <td>판매완료</td>
-                  <td>판매등록 한 MT5계좌 거래가 완료되어 포인트를 환전받을 수 있음</td>
-                  <td>상태0</td>
+                  <th scope="row">7</th>
+                  <td>거래완료</td>
+                  <td>거래등록 한 MT5계좌 거래가 완료되어 포인트 충전됨</td>
+                  <td>계좌상태0</td>
+                </tr>
+                <tr>
+                  <th scope="row">8</th>
+                  <td><a href="https://kr.investing.com/economic-calendar/"><img src="https://i-invdn-com.investing.com/logos/investing-com-logo-2022.png" alt="" width="100" height="25"></a></td>
+                  <td>전세계 경제 이슈 실시간 제공</td>
+                  <td><a href="https://kr.investing.com/economic-calendar/">경제캘린더</a></td>
                 </tr>
               </tbody>
             </table>
@@ -483,7 +446,7 @@
                       </div>  
                         <li class="list-group-item">요청한 계좌 비밀번호: <span id="Mp"></span></li> 
                         
-                              <p>MT5 나의 계좌 판매등록하기 </p>
+                              <p>MT5 나의 계좌 거래등록하기 </p>
                               <div class="input-group mb-3">
                                <input type="text" class="form-control" id="Anum" placeholder="계좌번호를 정확히 입력하세요"
                                  aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -516,10 +479,6 @@
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>
-<script type=module src="../module/topinfo.js"></script>
-<script type="module">
-  import topDataSync from '../module/topinfo.js'
-</script>
 
 <script src="meta5.js"></script>
 <script type="module" src="meta52.js"></script>

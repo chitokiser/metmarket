@@ -100,15 +100,15 @@ let contractAddress = {
     let signer = userProvider.getSigner();
     let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle,signer);
     let gm = await battleContract.getmy();
-    let bmessage = gm.message;
-    let benemy= gm.enemy;
+    let bmessage = (gm.message);
+    let benemy= (gm.enemy);
     let bdepo = gm.depo;
     let att = gm.at;
     let bdt = gm.dt;
     let baib = gm.aib;
     let bfm = gm.fm;
     let bbuff = gm.buff;
-    console.log(parseInt(bdepo));
+    console.log(bmessage);
     
     
     document.getElementById("Benemy").innerHTML = (benemy);

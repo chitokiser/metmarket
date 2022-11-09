@@ -53,88 +53,111 @@
       </div>
     </nav>
     </head>
-    <!-- 여기까지 헤드 -->
-
-    <body>
+    <!-- 여기까지 헤드 -->    
+      마이페이지
+      <div class="alert alert-primary" role="alert">
      
-      <div class="alert alert-secondary" role="alert">
-        <body>
-     
-          <div class="alert alert-secondary" role="alert">
-           
-            <!-- 바디 감싸기 -->
-            <div class="container">
-              <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                <div class="col">
-                  <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1CYA = $1000</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
-                </div>
-              
-                <div class="col">
-                  <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">BNB TVL = <span id="tvl">-</span>BNB</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">BNB TVL2 : <span id="tvl2">-</span> BNB</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
-                </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
-                </div>
-              </div>
-            </div>
-            <p></p>
-            <!--여기까지 대쉬보드 -->
- 
-     
-
-      <div class="input-group mb-3">
-        <input type="number" class="form-control" id="mentorNumInput" placeholder="여기에 멘토번호(주소 아님) 넣고 클릭하면 0.05CYA가 자동기부되면서 레벨1 멤버가 됩니다 " aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="signupGuild()">멘토번호 넣고 레벨1되기</span>
-      </div>
-      
-      
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="여기에 아무것도 넣지 않아도 우측버튼을 클릭하면 랜덤으로 멘토 번호가 입력되어  0.05CYA가 자동기부되면서 레벨1 멤버가 됩니다 " aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="autoSignupGuild()">멘토번호 없이 레벨1되기</span>
-     
-            </div>
-            <button class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="memberLogin()">
-              메타마스크 연결
-            </button>
-     
-      <h5>My Level <span class="badge bg-warning text-dark" id="level">-</span></h5> 
-      <div class="progress">
-        <div class="progress-bar progress-bar-success progress-bar-striped" id="levelBar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-       
-          <P>.</P>
+        <span onclick="AGuild()">레벨1되기(0.05CYA필요함)</span>
         </div>
-      </div>
-      <ul class="list-group">
-    
-        <span class="btn btn-outline-success" cursor: pointer; onclick="levelUp()">Level up</span>
-        <li class="list-group-item">나의 경험치 : <span id="exp"></span>EXP</li>  
-        <li class="list-group-item">레벨업까지 필요한 경험치 : <span id="expneeded"></span>EXP</li>  
-        <li class="list-group-item">My booster =  <span id="myBooster">-</span></li>
-        <li class="list-group-item">My point = 0</li>  <!--미구현-->
-      </ul>
-    </div>
-  </div>
+          
+              <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Mlogin()">
+                나의 상태 보기
+              </li>
+          
+      <li class="list-group-item">  
+        <button type="button" class="btn btn-secondary">
+          보물박스 <span class="badge text-bg-secondary" id="Mybox" ></span></button>
+          <button type="button" class="btn btn-primary">
+            사피이어 <span class="badge text-bg-secondary" id="Sapp" ></span></button>
+            <button type="button" class="btn btn-danger">
+              루비 <span class="badge text-bg-secondary" id="Ruby" ></span></button>
+              <button type="button" class="btn btn-success">
+                에메랄드 <span class="badge text-bg-success" id="Eme" ></span></button>
+              <button type="button" class="btn btn-dark">
+                무기마법서 <span class="badge text-bg-secondary" id="Wes" ></span></button>
+                <button type="button" class="btn btn-info">
+                  방어구마법서 <span class="badge text-bg-secondary" id="Ars" ></span></button>
+      </li>
+              </li>
+             
+              <li class="list-group-item">나의 경험치 : <span id="Exp"></span>EXP</li>
+              <li class="list-group-item">레벨업까지 필요한 경험치 : <span id="Expneeded"></span>EXP</li>
+              <li class="list-group-item">My booster = <span id="Mybooster">-</span></li>
+              
+              <li class="list-group-item"> <button type="button" class="btn btn-outline-warning position-relative" cursor:
+                  pointer; onclick="levelUp()">
+                  레벨업
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning" id="Level">
+                    -</span></button>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success progress-bar-striped" id="LevelBar" role="progressbar"
+                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                  </div>
+              </li>
+        
+        
+              <li class="list-group-item"> <button type="button" class="btn btn-outline-primary position-relative" cursor:
+                  pointer; onclick="Powerup()">
+                  파워업
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" id="Getpower">
+                    -</span></button>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success progress-bar-striped" id="Powerbar" role="progressbar"
+                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                  </div>
+              </li>
+        
+        
+              <li class="list-group-item"> <button type="button" class="btn btn-outline-danger position-relative" cursor:
+                  pointer; onclick="Attup()">
+                  공격력업
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="Getatt">
+                    -</span></button>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-danger" id="Attbar" role="progressbar" aria-valuenow="75"
+                    aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                  </div>
+              </li>
+        
+        
+              <li class="list-group-item"> <button type="button" class="btn btn-outline-success position-relative" cursor:
+                  pointer; onclick="Defup()">
+                  방어력업
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success" id="Getdef">
+                    -</span></button>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success progress-bar-striped" id="Defbar" role="progressbar"
+                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                  </div>
+              </li>
+           
+        
+              <li class="list-group-item"> <button type="button" class="btn btn-outline-dark position-relative" cursor: pointer;
+                  onclick="Weaponup()">
+                  무기업
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark" id="Getweapon">
+                    -</span></button>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success progress-bar-striped" id="Weaponbar" role="progressbar"
+                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                  </div>
+              </li>
+        
+              <li class="list-group-item"> <button type="button" class="btn btn-outline-info position-relative" cursor: pointer;
+                  onclick="Armoup()">
+                  갑옷업
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info" id="Getarmo">
+                    -</span></button>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success progress-bar-striped" id="Armobar" role="progressbar"
+                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                  </div>
+              </li>
+              
+              </div>
+            </div>       
+
+
   <button class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="buyBooster()">
     부스터를 충전하면 경험치를 추가로 획득할 수 있습니다 [부스터 충전 0.1CYA Token]
   </button>
@@ -144,7 +167,7 @@
     <li class="list-group-item">total mento : <span id="totalMentor">-</span></li>
   </ul>
   <button class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="addMento()">
-    멘토등록을 하면 자동으로 추천을 받을 수 있으며 추천을 받으면 멘티가 CAT를 구매하면 경험치를 얻을 수 있습니다  [멘토등록 1CYA Token]
+    멘토등록을 하면 자동으로 추천을 받을 수 있음   [멘토등록 1CYA Token]
   </button>
   </div>
     <p>.</p>
@@ -169,14 +192,8 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>  
 <script src="mypage.js"></script> 
-<script type=module src="../module/topinfo.js"></script>
-<script type = "module">
-  import topDataSync from '../module/topinfo.js'
-</script> 
-<script type=module src="ad/adget6.js"></script>
-<script type="module">
-  import topDataSync from 'ad/adget6.js'
-</script>
+<script type=module src="../ad/adget6.js"></script>
+<script type="module">import adget from '../ad/adget6.js'</script>
   </body>
 </div>
 </html>

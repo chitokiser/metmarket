@@ -67,13 +67,16 @@ let contractAddress = {
     });
 }
 
+  
+
+
   let HtopDataSync = async () => {
 
     let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
     let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, provider);
-  
-   
-    let a0 = await meta5Contract.getl1(0);  //계좌번호
+    let removal = 1 ;
+     
+    let a0 = await meta5Contract.getl1(0 + removal);  //계좌번호
     let s0 = await meta5Contract.getstate(a0);  //계좌상태
     let b0 = await meta5Contract.getbalan(a0);  //계좌잔고
     let o0 = await meta5Contract.getpass1(a0);  //관전비번
@@ -87,7 +90,7 @@ let contractAddress = {
     document.getElementById("Oo0-T0").innerHTML = (oo0);
    
 
-    let a1 = await meta5Contract.getl1(1);  //계좌번호
+    let a1 = await meta5Contract.getl1(1+ removal);  //계좌번호
     let s1 = await meta5Contract.getstate(a1);  //계좌상태
     let b1 = await meta5Contract.getbalan(a1);  //계좌잔고
     let o1 = await meta5Contract.getpass1(a1);  //관전비번
@@ -100,7 +103,7 @@ let contractAddress = {
     document.getElementById("P1-T1").innerHTML = (b1/1e18).toFixed(6);
     document.getElementById("Oo1-T1").innerHTML = (oo1);
 
-    let a2 = await meta5Contract.getl1(2);  //계좌번호
+    let a2 = await meta5Contract.getl1(2+ removal);  //계좌번호
     let s2 = await meta5Contract.getstate(a2);  //계좌상태
     let b2 = await meta5Contract.getbalan(a2);  //계좌잔고
     let o2 = await meta5Contract.getpass1(a2);  //관전비번
@@ -113,7 +116,7 @@ let contractAddress = {
     document.getElementById("P2-T2").innerHTML = (b2/1e18).toFixed(6);
     document.getElementById("Oo2-T2").innerHTML = (oo2);
     
-    let a3 = await meta5Contract.getl1(3);  //계좌번호
+    let a3 = await meta5Contract.getl1(3+ removal);  //계좌번호
     let s3 = await meta5Contract.getstate(a3);  //계좌상태
     let b3 = await meta5Contract.getbalan(a3);  //계좌잔고
     let o3 = await meta5Contract.getpass1(a3);  //관전비번
@@ -126,7 +129,7 @@ let contractAddress = {
     document.getElementById("P3-T3").innerHTML = (b3/1e18).toFixed(6);
     document.getElementById("Oo3-T3").innerHTML = (oo3);
 
-    let a4 = await meta5Contract.getl1(4);  //계좌번호
+    let a4 = await meta5Contract.getl1(4+ removal);  //계좌번호
     let s4 = await meta5Contract.getstate(a4);  //계좌상태
     let b4 = await meta5Contract.getbalan(a4);  //계좌잔고
     let o4 = await meta5Contract.getpass1(a4);  //관전비번
@@ -139,7 +142,7 @@ let contractAddress = {
     document.getElementById("P4-T4").innerHTML = (b4/1e18).toFixed(6);
     document.getElementById("Oo4-T4").innerHTML = (oo4);
    
-    let a5 = await meta5Contract.getl1(5);  //계좌번호
+    let a5 = await meta5Contract.getl1(5+ removal);  //계좌번호
     let s5 = await meta5Contract.getstate(a5);  //계좌상태
     let b5 = await meta5Contract.getbalan(a5);  //계좌잔고
     let o5 = await meta5Contract.getpass1(a5);  //관전비번
@@ -152,7 +155,7 @@ let contractAddress = {
     document.getElementById("P5-T5").innerHTML = (b5/1e18).toFixed(6);
     document.getElementById("Oo5-T5").innerHTML = (oo5);
    
-    let a6 = await meta5Contract.getl1(6);  //계좌번호
+    let a6 = await meta5Contract.getl1(6+ removal);  //계좌번호
     let s6 = await meta5Contract.getstate(a6);  //계좌상태
     let b6 = await meta5Contract.getbalan(a6);  //계좌잔고
     let o6 = await meta5Contract.getpass1(a6);  //관전비번
@@ -165,7 +168,7 @@ let contractAddress = {
     document.getElementById("P6-T6").innerHTML = (b6/1e18).toFixed(6);
     document.getElementById("Oo6-T6").innerHTML = (oo6);
    
-    let a7 = await meta5Contract.getl1(7);  //계좌번호
+    let a7 = await meta5Contract.getl1(7+ removal);  //계좌번호
     let s7 = await meta5Contract.getstate(a7);  //계좌상태
     let b7 = await meta5Contract.getbalan(a7);  //계좌잔고
     let o7 = await meta5Contract.getpass1(a7);  //관전비번
@@ -178,7 +181,7 @@ let contractAddress = {
     document.getElementById("P7-T7").innerHTML = (b7/1e18).toFixed(6);
     document.getElementById("Oo7-T7").innerHTML = (oo7);
    
-    let a8 = await meta5Contract.getl1(8);  //계좌번호
+    let a8 = await meta5Contract.getl1(8+ removal);  //계좌번호
     let s8 = await meta5Contract.getstate(a8);  //계좌상태
     let b8 = await meta5Contract.getbalan(a8);  //계좌잔고
     let o8 = await meta5Contract.getpass1(a8);  //관전비번
@@ -191,7 +194,7 @@ let contractAddress = {
     document.getElementById("P8-T8").innerHTML = (b8/1e18).toFixed(6);
     document.getElementById("Oo8-T8").innerHTML = (oo8);
    
-    let a9 = await meta5Contract.getl1(9);  //계좌번호
+    let a9 = await meta5Contract.getl1(9+ removal);  //계좌번호
     let s9 = await meta5Contract.getstate(a9);  //계좌상태
     let b9 = await meta5Contract.getbalan(a9);  //계좌잔고
     let o9 = await meta5Contract.getpass1(a9);  //관전비번
@@ -204,7 +207,7 @@ let contractAddress = {
     document.getElementById("P9-T9").innerHTML = (b9/1e18).toFixed(6);
     document.getElementById("Oo9-T9").innerHTML = (oo9);
    
-    let a10 = await meta5Contract.getl1(10);  //계좌번호
+    let a10 = await meta5Contract.getl1(+ removal);  //계좌번호
     let s10 = await meta5Contract.getstate(a10);  //계좌상태
     let b10 = await meta5Contract.getbalan(a10);  //계좌잔고
     let o10 = await meta5Contract.getpass1(a10);  //관전비번
@@ -217,7 +220,7 @@ let contractAddress = {
     document.getElementById("P10-T10").innerHTML = (b10/1e18).toFixed(6);
     document.getElementById("Oo10-T10").innerHTML = (oo10);
    
-    let a11 = await meta5Contract.getl1(11);  //계좌번호
+    let a11 = await meta5Contract.getl1(11+ removal);  //계좌번호
     let s11 = await meta5Contract.getstate(a11);  //계좌상태
     let b11 = await meta5Contract.getbalan(a11);  //계좌잔고
     let o11 = await meta5Contract.getpass1(a11);  //관전비번
@@ -230,7 +233,7 @@ let contractAddress = {
     document.getElementById("P11-T11").innerHTML = (b11/1e18).toFixed(6);
     document.getElementById("Oo11-T11").innerHTML = (oo11);
    
-    let a12 = await meta5Contract.getl1(12);  //계좌번호
+    let a12 = await meta5Contract.getl1(12+ removal);  //계좌번호
     let s12 = await meta5Contract.getstate(a12);  //계좌상태
     let b12 = await meta5Contract.getbalan(a12);  //계좌잔고
     let o12 = await meta5Contract.getpass1(a12);  //관전비번
@@ -244,7 +247,7 @@ let contractAddress = {
     document.getElementById("Oo12-T12").innerHTML = (oo12);
     
     
-    let a13 = await meta5Contract.getl1(13);  //계좌번호
+    let a13 = await meta5Contract.getl1(13+ removal);  //계좌번호
 let s13 = await meta5Contract.getstate(a13);  //계좌상태
 let b13 = await meta5Contract.getbalan(a13);  //계좌잔고
 let o13 = await meta5Contract.getpass1(a13);  //관전비번
@@ -258,7 +261,7 @@ document.getElementById("P13-T13").innerHTML = (b13/1e18).toFixed(6);
 document.getElementById("Oo13-T13").innerHTML = (oo13);
 
 
-let a14 = await meta5Contract.getl1(14);  //계좌번호
+let a14 = await meta5Contract.getl1(14+ removal);  //계좌번호
 let s14 = await meta5Contract.getstate(a14);  //계좌상태
 let b14 = await meta5Contract.getbalan(a14);  //계좌잔고
 let o14 = await meta5Contract.getpass1(a14);  //관전비번
@@ -271,7 +274,7 @@ document.getElementById("O14-T14").innerHTML = (o14);
 document.getElementById("P14-T14").innerHTML = (b14/1e18).toFixed(6);
 document.getElementById("Oo14-T14").innerHTML = (oo14);
 
-let a15 = await meta5Contract.getl1(15);  //계좌번호
+let a15 = await meta5Contract.getl1(15+ removal);  //계좌번호
 let s15 = await meta5Contract.getstate(a15);  //계좌상태
 let b15 = await meta5Contract.getbalan(a15);  //계좌잔고
 let o15 = await meta5Contract.getpass1(a15);  //관전비번
@@ -284,7 +287,7 @@ document.getElementById("O15-T15").innerHTML = (o15);
 document.getElementById("P15-T15").innerHTML = (b15/1e18).toFixed(6);
 document.getElementById("Oo15-T15").innerHTML = (oo15);
 
-let a16 = await meta5Contract.getl1(16);  //계좌번호
+let a16 = await meta5Contract.getl1(16+ removal);  //계좌번호
 let s16 = await meta5Contract.getstate(a16);  //계좌상태
 let b16 = await meta5Contract.getbalan(a16);  //계좌잔고
 let o16 = await meta5Contract.getpass1(a16);  //관전비번
@@ -297,7 +300,7 @@ document.getElementById("O16-T16").innerHTML = (o16);
 document.getElementById("P16-T16").innerHTML = (b16/1e18).toFixed(6);
 document.getElementById("Oo16-T16").innerHTML = (oo16);
 
-let a17 = await meta5Contract.getl1(17);  //계좌번호
+let a17 = await meta5Contract.getl1(17+ removal);  //계좌번호
 let s17 = await meta5Contract.getstate(a17);  //계좌상태
 let b17 = await meta5Contract.getbalan(a17);  //계좌잔고
 let o17 = await meta5Contract.getpass1(a17);  //관전비번
@@ -310,7 +313,7 @@ document.getElementById("O17-T17").innerHTML = (o17);
 document.getElementById("P17-T17").innerHTML = (b17/1e18).toFixed(6);
 document.getElementById("Oo17-T17").innerHTML = (oo17);
 
-let a18 = await meta5Contract.getl1(18);  //계좌번호
+let a18 = await meta5Contract.getl1(18+ removal);  //계좌번호
 let s18 = await meta5Contract.getstate(a18);  //계좌상태
 let b18 = await meta5Contract.getbalan(a18);  //계좌잔고
 let o18 = await meta5Contract.getpass1(a18);  //관전비번
@@ -323,7 +326,7 @@ document.getElementById("O18-T18").innerHTML = (o18);
 document.getElementById("P18-T18").innerHTML = (b18/1e18).toFixed(6);
 document.getElementById("Oo18-T18").innerHTML = (oo18);
 
-let a19 = await meta5Contract.getl1(19);  //계좌번호
+let a19 = await meta5Contract.getl1(19+ removal);  //계좌번호
 let s19 = await meta5Contract.getstate(a19);  //계좌상태
 let b19 = await meta5Contract.getbalan(a19);  //계좌잔고
 let o19 = await meta5Contract.getpass1(a19);  //관전비번
