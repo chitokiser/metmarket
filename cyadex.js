@@ -150,6 +150,33 @@
         
       };
 
+      const Cyabuy = async () => {
+        const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [{
+                chainId: "0x38",
+                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                chainName: "Binance Smart Chain",
+                nativeCurrency: {
+                    name: "BNB",
+                    symbol: "BNB",
+                    decimals: 18
+                },
+                blockExplorerUrls: ["https://bscscan.com/"]
+            }]
+        });
+        await userProvider.send("eth_requestAccounts", []);
+        const signer = userProvider.getSigner();
+        const cyadex2Contract = new ethers.Contract(contractAddress.cyadex2Addr, contractAbi.cyadex2, signer);
+        try {
+          await cyadex2Contract.cyabuy({ value: ethers.utils.parseUnits(document.getElementById('bnbInput').value, 'ether') });
+        } catch(e) {
+          alert(e.data.message.replace('execution reverted: ',''))
+        }
+       
+       
+      };
 
       const Priceup = async () => {
         const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
