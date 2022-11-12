@@ -116,11 +116,8 @@ let contractAddress = {
     let heme = g4.eme;
     let hwes = g4.wes;
     let hars = g4.ars;
-    let hhsapp = hsapp;
-    let hhruby = hruby;
-    let hheme = heme;
-    let hhwes = hwes;
-    let hhars = hars;
+  
+   
     let mybox =  parseInt(await huntContract.getbox(await signer.getAddress()));
     let hgetpower = await huntContract.getpower(await signer.getAddress());
     let hgetatt =  await huntContract.getatt(await signer.getAddress());
@@ -145,16 +142,23 @@ let contractAddress = {
     document.getElementById("Weaponbar").style.width = `${hwes/wesexp*100}%`;
     document.getElementById("Armobar").style.width = `${hars/arsexp*100}%`;
     
-    document.getElementById("Mybox").innnerHTML = (mybox); 
-    document.getElementById("Sapp").innnerHTML = (hhsapp);
-    document.getElementById("Ruby").innnerHTML = (hhruby); 
-    document.getElementById("Eme").innnerHTML =  (hheme); 
-    document.getElementById("Wes").innnerHTML =  (hhwes); 
-    document.getElementById("Ars").innnerHTML =  (hhars);
-      
    
-    console.log(mybox);
+	let mmybox = document.querySelector("#Mybox");
+	mmybox.innerText = mybox;
 
+  let ssapp = document.querySelector("#Sapp");
+	ssapp.innerText = hsapp;
+  
+  let rruby = document.querySelector("#Ruby");
+	rruby.innerText = hruby;
+  let eeme = document.querySelector("#Eme");
+	eeme.innerText = heme;
+
+  let wwes = document.querySelector("#Wes");
+	wwes.innerText = hwes;
+
+  let aars = document.querySelector("#Ars");
+	aars.innerText = hars;
   };
 
 
@@ -461,13 +465,13 @@ let contractAddress = {
     let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');   
     let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, provider);
     
-    let tbid = parseInt(document.getElementById('Tid2').value);
-    let gg2 = await huntContract.g2(tbid);
-    let gg2box = gg2.box;
+    // let tid2 = document.getElementById('Tid2').value;
+    let gg2 = await huntContract.g2(0);
+    let ggg2 = gg2.box;
+    // let leftb = document.querySelector("Leftbox");
+    // leftb.innerText =(gg2.box);
 
-    document.getElementById("Leftbox").innerHTML = (gg2box);
-    console.log(tbid);
-
+    console.log(ggg2)
   };
 
 

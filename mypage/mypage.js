@@ -293,11 +293,7 @@ let contractAddress = {
     let heme = g4.eme;
     let hwes = g4.wes;
     let hars = g4.ars;
-    let hhsapp = hsapp;
-    let hhruby = hruby;
-    let hheme = heme;
-    let hhwes = hwes;
-    let hhars = hars;
+ 
     let mybox =  parseInt(await huntContract.getbox(await signer.getAddress()));
     let hgetpower = await huntContract.getpower(await signer.getAddress());
     let hgetatt =  await huntContract.getatt(await signer.getAddress());
@@ -322,15 +318,25 @@ let contractAddress = {
     document.getElementById("Weaponbar").style.width = `${hwes/wesexp*100}%`;
     document.getElementById("Armobar").style.width = `${hars/arsexp*100}%`;
     
-    document.getElementById("Mybox").innnerHTML = (mybox); 
-    document.getElementById("Sapp").innnerHTML = (hhsapp);
-    document.getElementById("Ruby").innnerHTML = (hhruby); 
-    document.getElementById("Eme").innnerHTML =  (hheme); 
-    document.getElementById("Wes").innnerHTML =  (hhwes); 
-    document.getElementById("Ars").innnerHTML =  (hhars);
-      
+  
+    let mmybox = document.querySelector("#Mybox");
+    mmybox.innerText = mybox;
+  
+    let ssapp = document.querySelector("#Sapp");
+    ssapp.innerText = hsapp;
+    
+    let rruby = document.querySelector("#Ruby");
+    rruby.innerText = hruby;
+    let eeme = document.querySelector("#Eme");
+    eeme.innerText = heme;
+  
+    let wwes = document.querySelector("#Wes");
+    wwes.innerText = hwes;
+  
+    let aars = document.querySelector("#Ars");
+    aars.innerText = hars; 
    
-    console.log(mybox);
+    
 
   };
 

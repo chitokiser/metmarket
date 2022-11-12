@@ -118,39 +118,14 @@ let memberLogin = async () => {
   let myseed = await cyafarmContract.getmyseedmoney();
   let myjack = await cyafarmContract.getmyjack(); 
   
-  // var tmp_val="";
-  // for(i=1; i<13; i++){
-  //  if (cyafarmContract.getmyfarm(i) != null  && cyafarmContract.getmyfarm(i) != "" ){
-  //  if(tmp_val!=""){
-  //     tmp_val = tmp_val+",";
-  //  }
-  //  tmp_val = tmp_val+i;
-  //  }
-  //  }
 
-  var tmp_val="";
-  for(i=1; i<13; i++){
-     console.log(i+"="+cyafarmContract.getmyfarm(i)+"=");
-   if (cyafarmContract.getmyfarm(i) != null  && cyafarmContract.getmyfarm(i) != "" ){
-     
-     
-   if(tmp_val!=""){
-      tmp_val = tmp_val+",";
-   }
-   tmp_val = tmp_val+i;
-   }
-   }
   
- 
-
   document.getElementById("farmdepo").innerHTML=(mydepo/1e18).toFixed(6);  //예치금 총액
   document.getElementById("farmgain").innerHTML = (mygain/1e18).toFixed(6); //순이익 총액
   document.getElementById("farmwin").innerHTML = (mywin/1e18).toFixed(6); //인출 총액
   document.getElementById("farmseed").innerHTML = (myseed/1e18).toFixed(6); //남아있는 예치금
   document.getElementById("farmjack").innerHTML = (myjack/1e18).toFixed(6); //찾을 돈
-  document.getElementById("myfarms").append = parseInt(await cyafarmContract.getmyfarm(i));
-  document.getElementById("myfarms").append = ",";
-  // document.getElementById("myfarms").innerHTML = (newstring);
+
 };
 
 
