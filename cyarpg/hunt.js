@@ -32,7 +32,8 @@ let contractAddress = {
       "function getpower(address user) public view returns(uint)",
       "function getbox(address user) public view returns(uint)",
       "function boxprice() public view returns(uint)",
-      "function winners() public view returns(uint)"   
+      "function winners() public view returns(uint)",  
+      "function tid() public view returns(uint)"  
       ],
       
       cyacoop: [
@@ -63,8 +64,10 @@ let contractAddress = {
    
     let boxp =  await huntContract.boxprice();
     let hwin =  await huntContract.winners();
+    let htid =  await huntContract.tid();
     document.getElementById("Boxprice").innerHTML = (boxp/1e18).toFixed(6);
     document.getElementById("Winners").innerHTML = (hwin);
+    document.getElementById("Htid").innerHTML = (htid);
     let htvl = await huntContract.g1();
     document.getElementById("Htvl").innerHTML = (htvl/1e18).toFixed(6);
   
