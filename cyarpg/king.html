@@ -20,37 +20,37 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="../index.html">
+          <img src="https://i.ibb.co/FXZnR5D/cyalogo2.png" alt="" width="88" height="32">
+        </a>
+        <a href="../pratner.html"><img src="https://i.ibb.co/rpCKCFy/topid.png" alt="" width="120" height="27"><a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" href="../cyadex.html">CYA Exchange</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../cyasevice.html">CYA P2E</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../cutlist.html">CUT List</a>
+            </li>
+        
+            <li class="nav-item">
+              <a class="nav-link" href="../community.html">Community</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../mypage/mypage.html">My page</a>
+            </li>
+          </ul>
 
-      <a class="navbar-brand" href="../index.html">
-        <img src="https://i.ibb.co/FXZnR5D/cyalogo2.png" alt="" width="88" height="32">
-      </a>
-      <a href="../pratner.html"><img src="https://i.ibb.co/3fMStfs/partnerpng.png" alt="" width="120" height="22"><a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item">
-                <a class="nav-link" href="../cyadex.html">CYA교환소</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../cyasevice.html">CYA P2E</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../cutlist.html">CUT리스트</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="../community.html">커뮤니티</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../mypage/mypage.html">마이페이지</a>
-              </li>
-            </ul>
-
-          </div>
-          </div>
+        </div>
+      </div>
     </nav>
     </head>
     <!-- 여기까지 헤드 -->
@@ -106,12 +106,14 @@
       <li class="list-group-item">계약잔고: <span id="Ktvl"></span>CYA</li>
       
 
-      <li class="list-group-item">방어전적: <span id="Kingstory">-</span></li>
+      <li class="list-group-item">왕의방어전적: <span id="Kingstory">-</span></li>
      
       <div class="alert alert-secondary" role="alert">
         <li class="list-group-item">왕: <span id="King"></span></li>
+        <p>승리요건 나의공격력+@ >왕의 방어력+@ </p>
         <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Battleking()">
           왕과 결투하기 (보물박스 -3)
+          
         </li>
         <li class="list-group-item">왕 기본 방어력: <span id="Kpower">-</span></li>
         <li class="list-group-item">이번세금액: <span id="Ktax">-</span></li>
@@ -121,6 +123,7 @@
       </div>
       <div class="alert alert-secondary" role="alert">
         <li class="list-group-item">여왕: <span id="Queen"></span></li>
+        <p>승리요건 나의공격력+@ >여왕의 방어력+@ </p>
         <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Battlequeen()">
           여왕과 결투하기(보물박스 -2)
         </li>
@@ -132,6 +135,7 @@
       </div>
       <div class="alert alert-secondary" role="alert">
         <li class="list-group-item">기사: <span id="Knight"></span></li>
+        <p>승리요건 나의공격력+@ 을 나눈 나머지 값이 50이면 </p>
         <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Battleknight()">
           기사와 결투하기(보물박스 -1)
         </li>
@@ -140,11 +144,11 @@
           세금인출하기(기사)
         </li>
       </div>
-      <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="kmember()">
-      메타 마스크 연결
+      <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Kmember()">
+      나의 공격력 보기
       </li>
       <li class="list-group-item">나의 공격력: <span id="Myatt">-</span></li>
-      <li class="list-group-item">나의 공격력: <span id="Kbuff">-</span></li>
+      <li class="list-group-item">전투 경험: <span id="Kbuff">-</span></li>
       <li class="list-group-item">전투 메세지: <span id="Kmessage">-</span></li>
       <li class="list-group-item">세금인출까지 남은시간(자신이 해당자일 경우 활성화 됨): <span id="Kallowt">-</span></li>
        

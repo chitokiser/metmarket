@@ -1,6 +1,4 @@
 let contractAddress = {  
-    cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",  
-    huntAddr: "0x85e8a930767B2ea47D5642E3B15aC2e32ADeeAf6",
     kingAddr: "0x63846a736D143565278FbeF45a8B0c2EA26cD1EF"
   };
   let contractAbi = {
@@ -29,51 +27,8 @@ let contractAddress = {
       "function king() public view returns(address)",
       "function queen() public view returns(address)",
       "function knight() public view returns(address)"
-    ],
+    ]
   
-    hunt: [
-        "function creat(string memory _answer,uint _level)public",
-        "function hunting(uint _tid,string memory _answer)public",
-        "function buybox(uint num)public",
-        "function sellbox(uint num)public",
-        "function huntregi( )public",
-        "function powerup( )public",
-        "function attup( )public",
-        "function defup( )public",
-        "function weaponup( )public",
-        "function armoup( )public",
-        "function unbox(uint num)public",
-        "function g1() public view virtual returns(uint256)",
-        "function g2(uint256 _id) public view returns(uint,uint256,address[]memory winner,uint box)",
-        "function g4()public view returns(uint depo,uint sapp,uint ruby,uint eme,uint wes,uint ars)",
-        "function getatt(address user) public view returns(uint)",
-        "function getdef(address user) public view returns(uint)",
-        "function getweapon(address user) public view returns(uint)",
-        "function getarmo(address user) public view returns(uint)",
-        "function getpower(address user) public view returns(uint)",
-        "function getbox(address user) public view returns(uint)",
-        "function boxprice() public view returns(uint256)",
-        "function winners() public view returns(uint256)"
-      ],
-      
-      cyacoop: [
-        "function getprice() public view returns(uint256)",
-        "function allow() public view returns(uint256)",
-        "function g1() public view returns(uint256)",
-        "function g2() public view returns(uint256 allowt, uint256 exp, uint8 level, uint256 booster)",
-        "function g6() public view returns(uint256)",
-        "function g7(address user) public view returns(uint256)",
-        "function memberjoin(uint256 _num) public",
-        "function automemberjoin() public",
-        "function levelup() public returns(bool)",
-        "function geteps(address user) external view returns (uint256)",
-        "function withdraw() public returns(bool)",
-        "function mentolength() public view returns(uint256)",
-        "function addmento() public",
-        "function buybooster() public",
-        "function buycat(uint _num) public returns(bool)",
-        "function sellcat(uint num) public returns(bool)"
-      ]
 
   };
 
@@ -181,7 +136,7 @@ let contractAddress = {
     let kingContract = new ethers.Contract(contractAddress.kingAddr, contractAbi.king, signer);
 
     try {
-      await kingContract.battleking();
+      await kingContract.battlekningt();
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -234,18 +189,26 @@ let contractAddress = {
     });
     await userProvider.send("eth_requestAccounts", []);  
     let signer = userProvider.getSigner();
-    
     let kingContract = new ethers.Contract(contractAddress.kingAddr, contractAbi.king, signer);
-    let myatt = await kingContract.g7();
-    let kgetmy = await kingContract.getmy();
-    let kallowt = kgetmy.allowt;
-    let kbuff = kgetmy.buff;
-    let kmessage = kgetmy.message;
+    let kget = await kingContract.getmy();
+    let kallowt = kget[0];
+    let kbuff = kget[1];
+    let kmessage = kget[2]; 
+    let myatt = await kingContract.g7(await signer.getAddress());
+   
+    
     document.getElementById("Myatt").innerHTML = (myatt);
-    document.getElementById("Kbuff").innerHTML = (kbuff);
-    document.getElementById("Kmessage").innerHTML = write(kmessage);
-    document.getElementById("Kallowt").innerHTML = (kallowt);
- 
+    document.getElementById("Kbuff").innerHTML = (kbuff);  //전투 경험치
+    document.getElementById("Kmessage").innerHTML = (kmessage);
+    
+    
+    let nowt = Math.floor(new Date().getTime() / 1000);
+    let left = parseInt((kallowt+ 86400 ) - nowt); 
+    let hour = parseInt(left/3600)%24;
+    let min = parseInt((left/60)%60);
+    let sec = left%60;
+    document.getElementById("Kallowt").innerHTML = left > 0 ? `${hour}시간${min}분${sec}초` : '';
+  
      };
      
 

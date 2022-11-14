@@ -70,7 +70,7 @@ let contractAddress = {
     document.getElementById("Htid").innerHTML = (htid);
     let htvl = await huntContract.g1();
     document.getElementById("Htvl").innerHTML = (htvl/1e18).toFixed(6);
-  
+    
   };
 
   
@@ -464,18 +464,24 @@ let contractAddress = {
     }
   };
 
-  let Getbox= async () => {
-    let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');   
-    let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, provider);
-    
-    // let tid2 = document.getElementById('Tid2').value;
-    let gg2 = await huntContract.g2(0);
-    let ggg2 = gg2.box;
-    // let leftb = document.querySelector("Leftbox");
-    // leftb.innerText =(gg2.box);
-
-    console.log(ggg2)
-  };
+  // let Getbox = async () => {
+  //   if (document.getElementById("Tid2").value !== 'null') {
+  
+  //   let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
+  //   let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt,provider);
+   
+  //   let tid2 = document.getElementById('Tid2').value;
+  //   try{
+  //   let gg2 = await huntContract.g2(tid2);
+  //   let leftb = document.querySelector("Leftbox");
+  //   leftb.innerText =gg2[1];
+  //   console.log(gg)
+  //   }
+  //   catch(e) {
+  //     alert("no box")
+  //   }
+  //   }
+  // };
 
 
   (async () => {
@@ -497,3 +503,4 @@ let contractAddress = {
     });
     await userProvider.send("eth_requestAccounts", []);
   })();
+
