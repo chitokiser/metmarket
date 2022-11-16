@@ -31,7 +31,9 @@
     const provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
     const cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr,contractAbi.cyafarm,provider);
 
-     //12번농장
+  
+  
+    //12번농장
      let depo12 = await cyafarmContract.allportinfo(12);
      let period12 = await cyafarmContract.getperiod(12);
      let value12 = await cyafarmContract.getvalue(12);
@@ -63,16 +65,8 @@
      document.getElementById("portowner7").innerHTML = (depo7.owner);
      document.getElementById("porttime7").innerHTML = (period7);
      document.getElementById("portvalue7").innerHTML = (value7 / 1e18).toFixed(6);
-    //9번농장
-    let depo9 = await cyafarmContract.allportinfo(9);
-    let period9 = await cyafarmContract.getperiod(9);
-    let value9 = await cyafarmContract.getvalue(9);
-  
-    document.getElementById("portdepo9").innerHTML = (depo9.depo / 1e18).toFixed(6);
-    document.getElementById("portdepon9").innerHTML = (depo9.depon);
-    document.getElementById("portowner9").innerHTML = (depo9.owner);
-    document.getElementById("porttime9").innerHTML = (period9);
-    document.getElementById("portvalue9").innerHTML = (value9 / 1e18).toFixed(6);
+    
+   
   };
   
 

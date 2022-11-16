@@ -1,6 +1,6 @@
 let contractAddress = {  
     cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",  
-    battleAddr: "0x7dDe57bfe9aBC5aA9E7Ef3A9e42E2b9400B608F4"
+    battleAddr: "0xf96cf2dd0Adbdd214Df30Eb9DdBE0B9885Ef352c"
   };
   let contractAbi = {
     battle: [
@@ -13,7 +13,6 @@ let contractAddress = {
         "function endwar( )public",
         "function feeup(uint _num)public",
         "function luckup(uint _num)public",
-        "function cutup(address _cut )public",
         "function withdraw(uint num)public",
         "function g1(address user) public view returns(uint256)",
         "function g2(address user) public view returns(uint256)",
@@ -25,13 +24,13 @@ let contractAddress = {
         "function g8(address user ) public view  returns(uint256)",
         "function g9(address user ) public view  returns(uint256)",
         "function g10(address user) public view  returns(uint256)",
-        "function g11(address user) public view  returns(uint256)",
+        "function g11() public view  returns(uint256)",
         "function g12() public view  returns(uint256)",
         "function tp() public view returns(uint256)",
         "function g13() public view virtual returns(uint256)",
         "function g14(address user) public view virtual returns(uint256)",
-        "function getmy() public view virtual returns(uint,uint,uint,uint,address,uint,uint,uint,string memory)",
-        "function myinfo(address user) public view returns(uint,uint,uint,uint,address,uint,uint,uint,string memory)"
+        "function getch() public view virtual returns(uint,address,uint,uint,string memory)",
+        "function getde() public view virtual returns(uint,address,uint,uint,string memory)"
    ]
   
 
@@ -99,32 +98,55 @@ let contractAddress = {
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
     let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle,signer);
-    let gm = await battleContract.getmy();
-    let bmessage = gm[8];
-    let benemy= gm[4];
-    let bdepo = gm[1];
-    let att = gm[2];
-    let bdt = gm[3];   //방어시간
-    let baib = gm[7];
-    let bfm = gm[6];
-    let bbuff = gm[5];
-    console.log(gm);
-    
-    
-    document.getElementById("Benemy").innerHTML = (benemy);
-    document.getElementById("Bdepo").innerHTML =  (bdepo/1e18).toFixed(6);
-    document.getElementById("Baib").innerHTML =  (baib);
-    document.getElementById("Bfm").innerHTML =  (bfm/1e18).toFixed(6);
-    document.getElementById("Bbuff").innerHTML = (bbuff);  
-    document.getElementById("Att").innerHTML = (att);
-    document.getElementById("Bdt").innerHTML = (bdt);
-    document.getElementById("Bmessage").innerHTML = (bmessage);
-
+    let bdepo = await battleContract.g12();
     let batt =  await battleContract.g7(await signer.getAddress());
     let bdef =  await battleContract.g8(await signer.getAddress());
-    document.getElementById("Batt").innerHTML = (batt);
-    document.getElementById("Bdef").innerHTML = (bdef);
+    let bbuff = await battleContract.g11();
+    
+    document.getElementById("Bdepo").innerHTML =  (bdepo/1e18).toFixed(6);
+    document.getElementById("Batt").innerHTML = (batt);   //공격력
+    document.getElementById("Bdef").innerHTML = (bdef);   //방어력
+    document.getElementById("Bbuff").innerHTML = (bbuff); 
+
+    let gc = await battleContract.getch();
+    let bat = await gc[0];  //공력시간
+    let benemy = await gc[1];
+    let bfm = await gc[2];
+    let bbatt = await gc[3];  //마지막 전투 공격력
+    let bmessage = await gc[4];
+    
+    document.getElementById("Bmessage").innerHTML = (bmessage); 
+    document.getElementById("Benemy").innerHTML = (benemy); 
+    document.getElementById("Bfm").innerHTML = (bfm/1e18).toFixed(6); 
+    document.getElementById("Bbatt").innerHTML = (bbatt); 
+
+    let nowt = Math.floor(new Date().getTime() / 1000);
+    let left = parseInt((bat+86400 ) - nowt); 
+    let hour = parseInt(left/3600)%24;
+    let min = parseInt((left/60)%60);
+    let sec = left%60;
+    document.getElementById("Att").innerHTML = left > 0 ? `${hour}시간${min}분${sec}초` : '';
    
+    let gd = await battleContract.getde();
+    let bdt = await gd[0];  //방어시간
+    let bdenemy = await gd[1];
+    let bdfm = await gd[2];
+    let bamo = await gd[3];  //마지막 전투 공격력
+    let bdmessage = await gd[4];
+    
+    document.getElementById("Bdmessage").innerHTML = (bdmessage); 
+    document.getElementById("Bdenemy").innerHTML = (bdenemy); 
+    document.getElementById("Bdfm").innerHTML = (bdfm/1e18).toFixed(6); 
+    document.getElementById("Bbamo").innerHTML = (bamo); 
+   
+    let dleft = parseInt((bdt+86400 ) - nowt); 
+    let dhour = parseInt(dleft/3600)%24;
+    let dmin = parseInt((dleft/60)%60);
+    let dsec = dleft%60;
+    document.getElementById("Bdt").innerHTML = dleft > 0 ? `${dhour}시간${dmin}분${dsec}초` : '';
+
+
+
   };
 
   let Charge = async () => {
@@ -177,10 +199,9 @@ let contractAddress = {
     let signer = userProvider.getSigner();
     
     let battleContract = new ethers.Contract(contractAddress.battleAddr, contractAbi.battle, signer);
-    let amount = ethers.utils.parseUnits(document.getElementById('Winput').value, 18);
-    
+  
     try {
-      await battleContract.withdraw(amount);
+      await battleContract.withdraw();
       
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))

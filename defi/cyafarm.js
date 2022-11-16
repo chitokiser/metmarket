@@ -62,6 +62,17 @@ const topDataSync = async () => {
   document.getElementById("fcyatvl100").innerHTML = (fcyabal/1e20).toFixed(6);
   document.getElementById("fcyatvl1000").innerHTML = (fcyabal/1e21).toFixed(6);
 
+       //9번농장
+       let depo9 = await cyafarmContract.allportinfo(9);
+       let period9 = await cyafarmContract.getperiod(9);
+       let value9 = await cyafarmContract.getvalue(9);
+     
+       document.getElementById("portdepo9").innerHTML = (depo9.depo / 1e18).toFixed(6);
+       document.getElementById("portdepon9").innerHTML = (depo9.depon);
+       document.getElementById("portowner9").innerHTML = (depo9.owner);
+       document.getElementById("porttime9").innerHTML = (period9);
+       document.getElementById("portvalue9").innerHTML = (value9 / 1e18).toFixed(6);
+
 };
 
 let fwithdraw = async () => {  //해결완료  에러메세지 작동함

@@ -121,44 +121,34 @@
                 
                 <div class="alert alert-secondary" role="alert">
                   
-                <li class="list-group-item">전투메세지: <span id="Bmessage"></span></li>
+              
                 <li class="list-group-item">포인트 충전안내: 추가 충전을 이용 하려면 먼저 [전투참여등록] 부터 해야 합니다</li>
-                <li class="list-group-item"><div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                  <div class="col">
-                    <div class="p-3 border bg-light">전투포인트:<span id="Bdepo">-</span>P</div>
-                  </div>
-                 
-                  <div class="col">
-                    <div class="p-3 border bg-light">총 공격력<span id="Batt">-</span></div>
-                  </div>
-                  <div class="col">
-                    <div class="p-3 border bg-light">나의 총 방어력 <span id="Bdef"></span></div>
-                  </div>
-                 
-                    <div class="col">
-                      <div class="p-3 border bg-light">나의 버프<span id="Bbuff">-</span></div>
-                    </div>
-                </li>  
-                <li class="list-group-item">나의 적: <span id="Benemy">아직 적이 없습니다</span></li>
-                <li class="list-group-item">파이트머니: <span id="Bfm">싸움에서 이기면 얻을 수 있습니다</span>P</li>
-                <li class="list-group-item">전투포인트  교환 금액의 90%만 CYA Toknen으로 교환됩니다</li>
-                <div class="input-group mb-3">
-                    <input id="Winput" type="text" class="form-control" placeholder="여기에 교환할 포인트를 입력하세요" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Withdraw()">포인트 변환하기</span>        
-                </div>
+                <li class="list-group-item">전투포인트: <span id="Bdepo">-</span>P</li>
+                <li class="list-group-item">기본공격력: <span id="Batt">-</span></li>
+                <li class="list-group-item">기본방어력: <span id="Bdef">-</span></li>
+                <li class="list-group-item">버프: <span id="Bbuff">-</span></li>
+                <li class="list-group-item">전투포인트 0.05P를 제외한 금액만 인출 가능합니다.</li>
+                <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Withdraw()">
+                  전투포인트 인출하기
+                </li>
+                
                </div>
 
                 <div class="alert alert-danger" role="alert">
-                <li class="list-group-item">공격안내 : 전체 전투참여인원 중 랜덤으로 선택하여 도전장을 제출합니다</li>
-                
-                <div class="input-group mb-3">
-                    <input id="Tinput" type="text" class="form-control" placeholder="여기에 파이트 머니를 입력하세요(전투 포인트의 1/2 이내에서만 입력가능소수점 허용) " aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <p>공격안내 : 전체 전투참여인원 중 랜덤으로 선택하여 도전장을 제출합니다</p>
+                  <div class="input-group mb-3">
+                    <input id="Tinput" type="text" class="form-control" placeholder="여기에 파이트 머니를 입력하세요" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Taunt()">도전장제출하기</span>        
                 </div>
-                <li class="list-group-item">도발 반응까지 상대의 남은 시간: <span id="Att">-</span></li>
-                <li class="list-group-item">상대가 24시간 동안 반응하지 않으면 전투강제종료를 클릭 하세요 제출했던 파이트머니의 20%를 확보합니다 </li>
+                <li class="list-group-item">전투메세지:<span id="Bmessage"></span></li>
+                <li class="list-group-item">공격대상:<span id="Benemy"></span></li>
+                <li class="list-group-item">상금:<span id="Bfm"></span></li>
+                <li class="list-group-item">최근공격력:<span id="Bbatt"></span></li>
+               
+                <li class="list-group-item">전투 종료까지 남은 시간: <span id="Att">-</span></li>
+                <li class="list-group-item">상대가 종료까지 전투 또는 항복하지 않으면 전투종료를 클릭 하세요.</li>
                 <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Endwar()">
-                    전투강제종료
+                    전투종료
                     </li>
    
                     
@@ -167,24 +157,30 @@
             </div>
 
             <div class="alert alert-primary" role="alert">
-                <li class="list-group-item">방어안내:도전장을 받으면 파이트머니를 걸고 도전장 처리시간 내에 전투 아니면 항복을 결정해야 합니다. 24시 동안 응하지 않으면 파이트머니의 20%가 차감됩니다.  전투메세지="the enemy has come"</li>
-                <li class="list-group-item">전투 승리요건 : 나의 방어력+랜덤숫자(1~100)가 상대의 공격력+랜덤숫자(1~100)보다 강하면 승</li>
-                <li class="list-group-item">도전장 처리까지 남은 시간: <span id="Bdt">-</span></li> 
+              <p>방어안내:도전장을 받으면  처리시간 내에 전투 아니면 항복을 결정해야 합니다</p>
+              <p>항복안내:적이 너무 강하다 생각되면 항복도 전략입니다 파이트머니의 10%만 차감됩니다</p>
+              <p>전투에서 승리하면 파이트머니를 확보하고 버프값이 0이 됩니다</p>
+              <p>전투에서 패하면 파이트머니를 잃게 되지만 버프 +3을 받습니다</p>
+              <li class="btn btn-outline-primary" id="basic-addon2" type="submit" onclick="Battle()">
+                전투하기 
+            </li>
+            
+            <li class="btn btn-outline-warning" id="basic-addon2" type="submit" onclick="Surrender()">
+              항복하기 
+          </li>
+              
                 
-                <li class="btn btn-outline-primary" id="basic-addon2" type="submit" onclick="Battle()">
-                    전투하기 
-                </li>
-                <li class="list-group-item">전투에서 승리하면 파이트머니를 확보하고 버프값이 0이 됩니다</li>
-                <li class="list-group-item">전투에서 패하면 파이트머니를 잃게 되지만 버프 +3을 받습니다</li>
-                <li class="list-group-item">항복안내:적이 너무 강하다 생각되면 항복도 전략입니다 파이트머니의 10%만 차감됩니다.  전투메세지="surrenderer"</li>
-                <li class="btn btn-outline-warning" id="basic-addon2" type="submit" onclick="Surrender()">
-                    항복하기 
-                </li>
+                <li class="list-group-item">전투메세지:<span id="Bdmessage"></span></li>
+                <li class="list-group-item">도전자:<span id="Bdenemy"></span></li>
+                <li class="list-group-item">상금:<span id="Bdfm"></span></li>
+                <li class="list-group-item">최근방어력:<span id="Bbamo"></span></li>
+                <li class="list-group-item">도전장 처리까지 남은 시간: <span id="Bdt">-</span></li> 
             </div>
+
+            
             <div class="alert alert-secondary" role="alert">
-                <li class="list-group-item">몬스터사냥 안내 : 나의 방어력 수준의 몬스터를 사냥하세요.승리시 나의 포인 대비 10%를 획득합니다</li>
-                <li class="list-group-item">전투에서 승패와 관계없이 버프 +3을 받습니다</li>
-                <li class="list-group-item">몬스터티켓:<span id="Baib">-</span>장</li>             
+              <p>나의 방어력 수준의 몬스터를 사냥하세요.승리시 나의 포인트 대비 10%를 획득합니다</p>
+              <p>버프 1개가 소모 됩니다</p>            
                  <li class="btn btn-outline-secondary" id="basic-addon2" type="submit" onclick="BAIbattle()">
                     몬스터사냥 
                  </li>
