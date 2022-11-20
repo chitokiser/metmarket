@@ -141,7 +141,7 @@ let memberLogin = async () => {
 
 
 
-let buyfarm = async () => {
+let Buyfarm = async () => {
   let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
   await window.ethereum.request({
       method: "wallet_addEthereumChain",
@@ -160,7 +160,7 @@ let buyfarm = async () => {
   await userProvider.send("eth_requestAccounts", []);
   let signer = userProvider.getSigner();
   let cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
-  let amount = ethers.utils.parseUnits(document.getElementById('seed').value, 18);  //입력금액을 인자로 하여 시딩함.
+  let amount = ethers.utils.parseUnits(document.getElementById('Seed').value, 18);  //입력금액을 인자로 하여 시딩함.
 
   try {
     await cyafarmContract.seeding(amount);
