@@ -57,9 +57,10 @@
 
 
     <div class="bg-light p-5 rounded">
-        <h5>CYA Governance</h5>
+        <h5>CYA DAO Governance</h5>
         <p>레벨5이상 멤버이어야 하고 CAT 1개 이상 소유하고 있어야 참여가능합니다</p>
-        <p>제안한 내용에 관련하여 의결 수 10%이상의 좋아요를 받으면 안건이 상정되어 투표가 진행됩니다</p>
+        <p>제안한 내용에 관련하여 의결권의 10%이상의 좋아요를 받으면 안건이 상정되어 투표가 진행됩니다</p>
+        <p>의결권의 30%이상을 찬성득표하면 가결 됩니다</p>
         <p>제안에 대한 의견 및 투표에 참여하면 참여자가 가지고 있는 CAT에 비례하여 CYA 토큰을 보상 받습니다</p>
         <p>참여보상 건당 1CAT*0.0000000001CYA</p>
       </div>
@@ -163,7 +164,7 @@
 
     <div class="alert alert-primary" role="alert">
       <h5>안건 등록하기</h5>
-      <p>거버넌스 staff만 가능합니다</p>
+      <p>거버넌스 staff만 입력 가능합니다</p>
         <p><input type="text" class="form-control" id="Agenda" placeholder="안건 제목을 입력하세요 "
             aria-label="Recipient's username" aria-describedby="basic-addon2"></p>
         
@@ -185,42 +186,40 @@
               <th scope="col">#</th>
               <th scope="col">제목</th>
               <th scope="col">토론링크</th>
-              <th scope="col">👍좋아요</th>
-              <th scope="col">👎싫어요</th>
-              <th scope="col">제안상태</th>
+              <th scope="col">👌찬성</th>
+              <th scope="col">🚫반대</th>
+              <th scope="col">의결상태</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">1</th>
-              <td><span id="P0-T0">-</span></td>
-              <th scope="row"> <a class="link" href="Home1" id="P0_L0">
+              <td><span id="A1">-</span></td>
+              <th scope="row"> <a class="link" href="Home1" id="Vl1">
                   <img src= "../images/agendalogo.png" width="60" height="20" id="">  </a></th>
-              <td><span id="P0-G0"></span></td>
-             <td><span id="P0-H0"></span></td>
-             <td><span id="P0-S0"></span></td>  
+              <td><span id="Y1"></span></td>
+             <td><span id="N1"></span></td>
+             <td><span id="S21"></span></td>  
             </tr>
-           
             <tr>
               <th scope="row">2</th>
-              <td><span id="T1">-</span></td>
-              <th scope="row"> <a class="link" href="Home2" id="L1">
+              <td><span id="A2">-</span></td>
+              <th scope="row"> <a class="link" href="Home1" id="Vl2">
                   <img src= "../images/agendalogo.png" width="60" height="20" id="">  </a></th>
-              <td><span id="G1"></span></td>
-             <td><span id="H1"></span></td>
-             <td><span id="S1"></span></td>  
+              <td><span id="Y2"></span></td>
+             <td><span id="N2"></span></td>
+             <td><span id="S22"></span></td>  
             </tr>
-           
+          
             <tr>
               <th scope="row">3</th>
-              <td><span id="T3">-</span></td>
-              <th scope="row"> <a class="link" href="Home3" id="L3">
+              <td><span id="A3">-</span></td>
+              <th scope="row"> <a class="link" href="Home1" id="Vl3">
                   <img src= "../images/agendalogo.png" width="60" height="20" id="">  </a></th>
-              <td><span id="G3"></span></td>
-             <td><span id="H3"></span></td>
-             <td><span id="S3"></span></td>  
+              <td><span id="Y3"></span></td>
+             <td><span id="N3"></span></td>
+             <td><span id="S23"></span></td>  
             </tr>
-      
           </tbody>
         </table>
        
@@ -235,18 +234,22 @@
 <div class="alert alert-primary" role="alert">
   <P>안건번호 입력 후 찬성 또는 반대를 선택 해 주세요</P>
 <div class="input-group mb-3">
-  <input type="text" class="form-control" id="Vid1" placeholder="제안번호" aria-label="Recipient's username"
+  <input type="text" class="form-control" id="Vid1" placeholder="안건번호" aria-label="Recipient's username"
     aria-describedby="basic-addon2">     
   <span class="input-group-text" id="basic-addon2" style="cursor: pointer;"
     onclick="Yesb()">👌찬성</span>
 
-    <input type="text" class="form-control" id="Vid2" placeholder="제안번호" aria-label="Recipient's username"
+    <input type="text" class="form-control" id="Vid2" placeholder="안건번호" aria-label="Recipient's username"
     aria-describedby="basic-addon2"> 
     <span class="input-group-text" id="basic-addon2" style="cursor: pointer;"
     onclick="Nob()">🚫반대</span>
   </div>  
 </div>
 </div>
+
+
+
+
     <!-- 하단 캐러셀 시작 -->
 
     <!-- 캐러셀 끝 -->

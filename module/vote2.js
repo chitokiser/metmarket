@@ -56,6 +56,23 @@ let addr = {
     document.getElementById("G3").innerHTML = (g3);
     document.getElementById("H3").innerHTML = (h3);
     document.getElementById("S3").innerHTML = (s3);
+
+
+
+
+    // 아젠다 데이타
+    let getvote1 =  await vote2Contract.getvote(1); 
+    let a1 = getvote1[0];  //아젠다
+    let vl1 =getvote1[1];  //토론링크
+    let y1 = getvote1[2];  //yse
+    let n1 = getvote1[3];  //no
+    let s21 = getvote1[4];  //제안상태
+ 
+    document.getElementById("A1").innerHTML = (a1);
+    document.getElementById("Vl1").href = (vl1);
+    document.getElementById("Y1").innerHTML = (y1);
+    document.getElementById("N1").innerHTML = (n1);
+    document.getElementById("S21").innerHTML = (s21);
     
   };
 

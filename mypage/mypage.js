@@ -372,7 +372,7 @@ let contractAddress = {
 
 
   let levelUp = async () => {
-    if (document.getElementById("level").value !== '-') {
+   {
       let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await window.ethereum.request({
           method: "wallet_addEthereumChain",
