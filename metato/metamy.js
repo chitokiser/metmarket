@@ -1,36 +1,24 @@
 let contractAddress = {
 
     cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",
-    huntAddr: "0x85e8a930767B2ea47D5642E3B15aC2e32ADeeAf6"
+    metahuntAddr: "0x22A58D3f1280A24c06Ec585DbacF6345d4cd64ee"
     
   };
   let contractAbi = {
-    hunt: [
+    metahunt: [
       "function creat(string memory _answer,uint _level)public",
       "function hunting(uint _tid,string memory _answer)public",
       "function withdraw( )public",
+      "function boxpriceup(uint _price)public",
       "function buybox(uint num)public",
-      "function sellbox(uint num)public",
-      "function boxdown(address user,uint num)public returns(bool)",
-      "function powerup( )public",
-      "function attup( )public",
-      "function defup( )public",
-      "function weaponup( )public",
-      "function armoup( )public",
-      "function depoup(address user,uint num)public",
-      "function faup(address _family )public",
+      "function depoup(uint num)public ",
       "function unbox(uint num)public",
       "function g1() public view virtual returns(uint256)",
       "function g2(uint256 _id) public view returns(uint,uint256,address[]memory winner,uint box)",
       "function g3(address user) public view virtual returns(uint256)",
-      "function g4()public view returns(uint depo,uint sapp,uint ruby,uint eme,uint wes,uint ars)",
+      "function g4() public view virtual returns(uint depo,uint,uint,uint,uint,uint)",
       "function g5(address user) public view returns(uint)",
-      "function g6(uint tid) public view returns(uint)",
-      "function getatt(address user) public view returns(uint)",
-      "function getdef(address user) public view returns(uint)",
-      "function getweapon(address user) public view returns(uint)",
-      "function getarmo(address user) public view returns(uint)",
-      "function getpower(address user) public view returns(uint)",
+      "function box(uint id) public view returns(uint)",
       "function getbox(address user) public view returns(uint)"
     ],
     cyacoop: [
@@ -54,18 +42,18 @@ let contractAddress = {
  
   };
 
-  let topDataSync = async () => {
+  let MtopDataSync = async () => {
     // ethers setup
     let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
     let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, provider);
-
+    
     // total mentor
     document.getElementById("totalMentor").innerHTML = await cyacoopContract.mentolength();
   };
 
 
 
-  let AGuild = async () => {
+  let Aguild = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -94,95 +82,6 @@ let contractAddress = {
     
 
 
-  let Powerup = async () => {
-    if (document.getElementById("Getpower").value !== '-') {
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0x38",
-              rpcUrls: ["https://bsc-dataseed.binance.org/"],
-              chainName: "Binance Smart Chain",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://bscscan.com/"]
-          }]
-      });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-
-      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
-      
-      try {
-        await huntContract.powerup();
-      } catch(e) {
-        alert(e.data.message.replace('execution reverted: ',''))
-      }
-    }
-  };
-
-  let Attup = async () => {
-    if (document.getElementById("Getatt").value !== '-') {
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0x38",
-              rpcUrls: ["https://bsc-dataseed.binance.org/"],
-              chainName: "Binance Smart Chain",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://bscscan.com/"]
-          }]
-      });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-
-      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
-      
-      try {
-        await huntContract.attup();
-      } catch(e) {
-        alert(e.data.message.replace('execution reverted: ',''))
-      }
-    }
-  };
-
-  let Defup = async () => {
-   
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0x38",
-              rpcUrls: ["https://bsc-dataseed.binance.org/"],
-              chainName: "Binance Smart Chain",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://bscscan.com/"]
-          }]
-      });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-
-      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
-      
-      try {
-        await huntContract.defup();
-      } catch(e) {
-        alert(e.data.message.replace('execution reverted: ',''))
-      }
-    
-  };
   let Munbox = async () => {
     
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -203,77 +102,17 @@ let contractAddress = {
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
+    let metahuntContract = new ethers.Contract(contractAddress.metahuntAddr, contractAbi.metahunt, signer);
     
     try {
-      await huntContract.unbox(document.getElementById('unboxamount').value);
+      await metahuntContract.unbox(document.getElementById('Unbox').value);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
 };
 
 
-  let Weaponup = async () => {
-   
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0x38",
-              rpcUrls: ["https://bsc-dataseed.binance.org/"],
-              chainName: "Binance Smart Chain",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://bscscan.com/"]
-          }]
-      });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-
-      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
-      
-      try {
-        await huntContract.weaponup();
-      } catch(e) {
-        alert(e.data.message.replace('execution reverted: ',''))
-      }
-    
-  };
-
-
-  let Armoup = async () => {
-   
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0x38",
-              rpcUrls: ["https://bsc-dataseed.binance.org/"],
-              chainName: "Binance Smart Chain",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://bscscan.com/"]
-          }]
-      });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-
-      let huntContract = new ethers.Contract(contractAddress.huntAddr, contractAbi.hunt, signer);
-      
-      try {
-        await huntContract.armoup();
-      } catch(e) {
-        alert(e.data.message.replace('execution reverted: ',''))
-      }
-
-  };
-
+ 
 
 
   let Mlogin = async () => {
@@ -311,61 +150,36 @@ let contractAddress = {
     document.getElementById("Expneeded").innerHTML = parseInt(levelexp - myexp);
     document.getElementById("Mybooster").innerHTML = parseInt(mybooster);
     
-    
 
     
-    let huntContract = new ethers.Contract(contractAddress.huntAddr,contractAbi.hunt,signer);    
-    let g4 = await huntContract.g4();
-    let hsapp = g4.sapp;
-    let hruby = g4.ruby;
-    let heme = g4.eme;
-    let hwes = g4.wes;
-    let hars = g4.ars;
- 
-    let mybox =  parseInt(await huntContract.getbox(await signer.getAddress()));
-    let hgetpower = await huntContract.getpower(await signer.getAddress());
-    let hgetatt =  await huntContract.getatt(await signer.getAddress());
-    let hgetdef =  await huntContract.getdef(await signer.getAddress());
-    let hgetweapon =  await huntContract.getweapon(await signer.getAddress());
-    let hgetarmo =  await huntContract.getarmo(await signer.getAddress());
-    let powerexp = (2**hgetpower);
-    let attexp = (2**hgetatt);
-    let defexp = (2**hgetdef);
-    let wesexp = (2**hgetweapon);
-    let arsexp = (2**hgetarmo);
-
+    let metahuntContract = new ethers.Contract(contractAddress.metahuntAddr,contractAbi.metahunt,signer);    
+    let g4 = await metahuntContract.g4();
+    let mydepo = g4.depo;
    
-    document.getElementById("Getpower").innerHTML = (hgetpower);
-    document.getElementById("Getatt").innerHTML =(hgetatt);
-    document.getElementById("Getdef").innerHTML = (hgetdef);
-    document.getElementById("Getweapon").innerHTML = (hgetweapon);
-    document.getElementById("Getarmo").innerHTML = (hgetarmo);
-    document.getElementById("Powerbar").style.width = `${hsapp/powerexp*100}%`;
-    document.getElementById("Attbar").style.width = `${hruby/attexp*100}%`;
-    document.getElementById("Defbar").style.width = `${heme/defexp*100}%`;
-    document.getElementById("Weaponbar").style.width = `${hwes/wesexp*100}%`;
-    document.getElementById("Armobar").style.width = `${hars/arsexp*100}%`;
+
+    let mmydepo = document.querySelector("#Mydepo");
+    mmydepo.innerText = mydepo;
     
-  
+    let gold = g4[1];
+    let silver = g4[2];
+    let peral = g4[3];
+    let pla = g4[4];
+    let opal = g4[5];
+    let mgold = document.querySelector("#Gold");
+    mgold.innerText = gold;
+    let msilver = document.querySelector("#Silver");
+    msilver.innerText = silver;
+    let mperal = document.querySelector("#Peral");
+    mperal.innerText = peral;
+    let mpla = document.querySelector("#Pla");
+    mpla.innerText = pla;
+    let mopal = document.querySelector("#Opal");
+    mopal.innerText = opal;
+    let mybox =  parseInt(await metahuntContract.getbox(await signer.getAddress()));
     let mmybox = document.querySelector("#Mybox");
     mmybox.innerText = mybox;
-  
-    let ssapp = document.querySelector("#Sapp");
-    ssapp.innerText = hsapp;
-    
-    let rruby = document.querySelector("#Ruby");
-    rruby.innerText = hruby;
-    let eeme = document.querySelector("#Eme");
-    eeme.innerText = heme;
-  
-    let wwes = document.querySelector("#Wes");
-    wwes.innerText = hwes;
-  
-    let aars = document.querySelector("#Ars");
-    aars.innerText = hars; 
-   
-    
 
+   
   };
 
 
@@ -401,7 +215,8 @@ let contractAddress = {
     }
   };
 
-  let withdraw = async () => {
+  
+  let Depoup = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -420,10 +235,38 @@ let contractAddress = {
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, signer);
-
+    let metahuntContract = new ethers.Contract(contractAddress.metahuntAddr, contractAbi.metahunt, signer);
+    let jewel = document.getElementById('jewel').value;
     try {
-      await cyacoopContract.withdraw();
+      await metahuntContract.depoup(jewel);
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+  
+
+  let Withdraw = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+    let metahuntContract = new ethers.Contract(contractAddress.metahuntAddr, contractAbi.metahunt, signer);
+    
+    try {
+      await metahuntContract.withdraw();
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -457,7 +300,7 @@ let contractAddress = {
     }
   };
 
-  let buyBooster = async () => {
+  let Buybooster = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -485,11 +328,39 @@ let contractAddress = {
   
   };
 
- 
+  let Addcya = async () => {
+    await window.ethereum.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: {
+          address: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9",
+          symbol: "CYA",
+          decimals: 18, 
+          // image: tokenImage,
+        },
+      },
+    });
+  }
+
+  let Addmetato = async () => {
+    await window.ethereum.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: {
+          address: "0xa2d18FEFA4f67C4F7531F3C29A76b9680915b380",
+          symbol: "MTT",
+          decimals: 0, 
+          // image: tokenImage,
+        },
+      },
+    });
+  }
     
 
   (async () => {
-    topDataSync();
+    MtopDataSync();
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",

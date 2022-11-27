@@ -3,7 +3,8 @@ let contractAddress = {
   cyadexAddr: "0x9536fe8544eDa3Bf488B1b87730D0E0b63E1D500",
   cyadex2Addr: "0x7E0f523CF51686c422881d4437759438C8eCDEF5",
   cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",
-  erc20: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9"
+  erc20: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9",
+  mttAddr: "0xa2d18FEFA4f67C4F7531F3C29A76b9680915b380"
 };
 let contractAbi = {
   cyadex: [
@@ -54,21 +55,22 @@ const topDataSync = async () => {
   let tvl = await cyadexContract.balance();
 
   // cyadex price
-  document.getElementById("cyaPrice2").innerHTML=(1000/cyadexPrice).toFixed(6);
+  document.getElementById("cyaPrice2").innerHTML=(1000/cyadexPrice).toFixed(4);
   
-  // cyacoop price
-  document.getElementById("catPrice").innerHTML=(cyacoopPrice/1e18).toFixed(6);
-
   // members *2 허수적용
   document.getElementById("members").innerHTML=(members);  
   // cyadex TVL
-  document.getElementById("tvl").innerHTML=(tvl/1e18).toFixed(6);
+  document.getElementById("tvl").innerHTML=(tvl/1e18).toFixed(4);
   // cyadex2 TVL
-  document.getElementById("tvl2").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadex2Contract.balance(), 18)).toFixed(6);
+  document.getElementById("tvl2").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadex2Contract.balance(), 18)).toFixed(4);
   // cyabalance 
-  document.getElementById("cyatvl").innerHTML = (cyabal/1e18).toFixed(6);
+  document.getElementById("cyatvl").innerHTML = (cyabal/1e18).toFixed(4);
   // catsold 
   document.getElementById("Catsold").innerHTML = (1000000000-catsold);
+  
+  // cyacoop price
+  document.getElementById("catPrice").innerHTML=(cyacoopPrice/1e18).toFixed(4);
+
 };
 
 
