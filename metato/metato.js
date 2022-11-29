@@ -1,16 +1,29 @@
 let contractAddress = {
-    cyadexAddr: "0x9536fe8544eDa3Bf488B1b87730D0E0b63E1D500",
+    cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",
     mttallowAddr: "0xdD28f7FA21c951aB00A8a46Df9aD81F57a7ceFA8",  
     erc20: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9",
     mttAddr: "0xa2d18FEFA4f67C4F7531F3C29A76b9680915b380"
   };
 let contractAbi = {
-    cyadex: [
-      "function getprice() public view returns(uint256)",
-      "function balance() public view returns(uint256)",
-      "function buy() payable public",
-      "function sell(uint256 num) public"
-    ],
+  cyacoop: [
+    "function getprice() public view returns(uint256)",
+    "function allow() public view returns(uint256)",
+    "function g1() public view returns(uint256)",
+    "function g2() public view returns(uint256 allowt, uint256 exp, uint8 level, uint256 booster)",
+    "function g6() public view returns(uint256)",
+    "function g7(address user) public view returns(uint256)",
+    "function memberjoin(uint256 _num) public",
+    "function automemberjoin() public",
+    "function levelup() public returns(bool)",
+    "function geteps(address user) external view returns (uint256)",
+    "function withdraw() public returns(bool)",
+    "function mentolength() public view returns(uint256)",
+    "function addmento() public",
+    "function boosting() public",
+    "function buycat(uint _num) public returns(bool)",
+    "function sellcat(uint num) public returns(bool)"
+  ],
+  
     mttallow: [
       "function getprice() public view returns(uint256)",
       "function buymetato(uint _num) public returns(bool)",
