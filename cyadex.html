@@ -53,104 +53,59 @@
       </div>
     </nav>
     </head>
-    <!-- 여기까지 헤드 -->
-
-    <body>
-     
-      <div class="alert alert-secondary" role="alert">
-        <!-- 바디 감싸기 -->
-        <div class="container">
-          <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-            <div class="col">
-              <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CYA = $1000</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
-            </div>
-          
-            <div class="col">
-              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">BNB TVL = <span id="tvl">-</span>BNB</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">BNB TVL2 : <span id="tvl2">-</span> BNB</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
-            </div>
-          </div>
-        </div>
-      </div>
-        <p></p>
-        <!--여기까지 대쉬보드 -->
+    <!-- head -->
     
         <div class="bg-light p-5 rounded">
-          <h2>CYA Token 교환소</h2>  
-          <p>CYA Toknen은 바이낸스 코인(네트워크ID:56)을 기반으로  발행되어 가치가 보장됩니다</p>
-          <p>1CYA는 항상 $1000을 수렴 하지만 중간에 슬리피지가 발생 될 수 있습니다</p>
-          <p>CUT을 가지고 있으면 매주 CYA Token을 분배 받을 수 있습니다.</p>
-          <p>바이낸스 코인으로 CYA Token을  교환할 수 있습니다.</p>
-          <p>CYA Token은 가맹점에서 쓸 수 있습니다. </p>
-          <a class="btn btn-light" href="https://youtu.be/dHANMtxLXt0" role="button">메타 마스크 설치 방법 &raquo;</a>
+          <h2>CYA Token Exchange</h2>  
+          <p>CYA Toknen will be issued based on BNB (Network ID:56)</p>
+          <p>1CYA always converges to $1000, but slippage may occur in the middle</p>
+          <p>If you have CUT, you can distribute CYA Token every week.</p>
+          <p>BNB can be exchanged for CYA Token.</p>
+          <a class="btn btn-light" href="https://youtu.be/dHANMtxLXt0" role="button">How to Install Metamask &raquo;</a>
         </div>
     
        
-          <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()"> <a><img src= "../images/cyalogo32x32.png" > </a>CYA Token 자동추가  
+          <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()"> <a><img src= "../images/cyalogo32x32.png" > </a>CYA Token auto add
            </button>
-          <a class="link" href="https://bscscan.com/">BNB자동추가 페이지 하단 좌측[Add BSC Network]</a>
+          <a class="link" href="https://bscscan.com/">BNB Auto Add page bottom left[Add BSC Network]</a>
         
         <div class="alert alert-info" role="alert">
-          <P>BNB로 CYA토큰 교환</P>
+          <P>BNB:CYA Token </P>
           <P>CYA Token address : 0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9</P>
 
         <div class="alert alert-secondary" role="alert">
-          <P>BNB:CYA 교환비율: 1BNB USD시세/ 1000</P>
-          <P>CYA:BNB 교환비율: (1CYA/USD시세*1000)-수수료 최대1%</P>
+          <P>BNB:CYA exchange rate: 1BNB USD Price/ 1000</P>
+          <P>CYA:BNB exchange rate: (1CYA/1BNB USD Price*1000)-fee max1%</P>
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">BNB input</span>
-          <input id="bnbInput" type="text" class="form-control" placeholder="여기에 BNB를 입력(소수점허용)하면...." aria-label="Username" aria-describedby="basic-addon1">
+          <input id="bnbInput" type="text" class="form-control" placeholder="Enter BNB here (decimal point allowed)...." aria-label="Username" aria-describedby="basic-addon1">
         </div>
         
         <div class="input-group mb-3">
-          <input id="bnbOutput" type="text" class="form-control" placeholder="여기에 교환되는 CYA양이 출력 됩니다" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <input id="bnbOutput" type="text" class="form-control" placeholder="The amount of CYA Token exchanged here is output" aria-label="Recipient's username" aria-describedby="basic-addon2">
           <span onclick="Cyabuy()" style="cursor: pointer;" class="input-group-text" id="basic-addon2">exchange</span>
         </div>
       </div>
       
       <div class="alert alert-info" role="alert">
         
-        <p>[사용자 전용] CYA에서 BNB교환 수수료 최대1% (레벨에 따라 0.01%씩할인) </p>
-        <li class="list-group-item">교환하려는 BNB만큼 교환포인트가 필요 없습니다.</li>
-        <li class="list-group-item">레벨에 따라 교환 수수료가 할인 됩니다.</li> 
+        <p>[User Only] Up to 1% of BNB exchange fee from CYA (0.01% discount per level) </p>
+        <li class="list-group-item">The exchange fee is discounted according to the level.</li> 
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">CYA input</span>
-          <input id="cyaInput2" type="text" class="form-control" placeholder="여기에 CYA를 입력하면...." aria-label="Username" aria-describedby="basic-addon1">
+          <input id="cyaInput2" type="text" class="form-control" placeholder="If you enter CYA here...." aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3">
           
-          <input id="cyaOutput2" type="text" class="form-control" placeholder="여기에 교환되는 BNB양이 출력 됩니다" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <input id="cyaOutput2" type="text" class="form-control" placeholder="The amount of BNB exchanged here is displayed" aria-label="Recipient's username" aria-describedby="basic-addon2">
           <span onclick="Bnbsell()" style="cursor: pointer;" class="input-group-text" id="basic-addon2">exchange</span>
         </div>
       </div> 
 
       <div class="alert alert-info" role="alert">
-        <p>[가맹점 전용] CYA에서 BNB교환  우대 수수료 0.2%</p>
-        <li class="list-group-item">교환하려는 BNB만큼 교환포인트가 있어야 합니다.</li>
+        <p>[Merchant only] Preferential fee for BNB exchange at CYA 0.2%</p>
+        <li class="list-group-item">You must have as many exchange points as BNB you want to exchange.</li>
         <li class="list-group-item">교환포인트는 가맹점 매출과 동시에 1:1 비율로 가맹점주에게 적립됩니다.</li>
         <button class="btn btn-outline-success" cursor: pointer; onclick="DmemberLogin()">나의 BNB교환포인트 가져오기</button> 
           <li class="list-group-item">나의 BNB교환포인트 = <span id="Getmypoint">-</span>EP</li>

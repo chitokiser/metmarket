@@ -53,12 +53,12 @@
       </div>
     </nav>
     </head>
-    <!-- 여기까지 헤드 -->
+    <!-- head -->
 
     <body>
      
       <div class="alert alert-secondary" role="alert">
-        <!-- 바디 감싸기 -->
+        <!-- body -->
         <div class="container">
           <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <div class="col">
@@ -78,7 +78,7 @@
             </div>
           
             <div class="col">
-              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
+              <div class="p-3 border bg-light">Member= <span id="members">-</span>Holder</div>
             </div>
             <div class="col">
               <div class="p-3 border bg-light">BNB TVL = <span id="tvl">-</span>BNB</div>
@@ -90,13 +90,13 @@
               <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
+              <div class="p-3 border bg-light">CAT Circulation:<span id="Catsold">-</span> CAT</div>
             </div>
           </div>
         </div>
         <p></p>
         </div>
-        <!--여기까지 대쉬보드 -->
+        <!--dash board -->
 
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
@@ -108,25 +108,25 @@
             <div class="carousel-item active">
               <img src="https://i.ibb.co/VHt6r1j/dao.png" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5>우리는 서로를 믿지 못하지만 검증된 스마트컨트렉트 속에서 서로를 신뢰하고 연대할 수 있습니다.</h5>
-                <a class="nav-link" href="cyadex.html">1st 미션 : BNB로 CYA Token 교환하기 </a>
+                <h5>We may not trust each other, but we can trust and solidarity with each other in a proven smart contract.</h5>
+                <a class="nav-link" href="cyadex.html">1st Mission: Exchange CYA Token for BNB </a>
                 
               </div>
             </div>
             <div class="carousel-item">
               <img src="https://i.ibb.co/dLBYLVH/20221002-141801.png" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5>바이낸스 스마트체인에서 구동되는 "글로벌 크립토 동맹" CYA DAO의 일원이 되세요</h5>
-                <h5>CYA Token은 BNB로 가치를 저장하고 USD $1000을 수렴하는 구조의 스테이블 토큰 입니다 </h5>
-                <a class="nav-link" href="./mypage/mypage.html">2st 미션 : 레벨1 되기 </a>
+                <h5>Become a member of CYA DAO, the “Global Crypto Alliance” powered by Binance Smart Chain</h5>
+                <h5>CYA Token is a stable token with a structure that stores value in BNB and converges USD $1000</h5>
+                <a class="nav-link" href="./mypage/mypage.html">2st Mission: Becoming Level 1 </a>
               </div>
             </div>
             <div class="carousel-item">
               <img src="https://i.ibb.co/hYYmLSQ/20221002-142000.png" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5>"투명한 과정과 정의로운 분배"</h5>
-                <h5>매주 CYA Token을 배당 받을 수 있는 CUT(Cya Utility Token)</h5>
-                <a class="nav-link" href="cat.html">3st 미션 : CUT 구매하기 </a>
+                <h5>“Transparent process and just distribution”</h5>
+                <h5>CUT (Cya Utility Token) that can receive CYA Token every week</h5>
+                <a class="nav-link" href="cat.html">3st Mission: Buy CUT </a>
               </div>
             </div>
           </div>
@@ -139,14 +139,14 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-        <!-- 여기까지 인덱스 케러셀 -->
+        <!-- carousel -->
         <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()"><a><img src= "../images/cyalogo32x32.png" > </a>CYA Token 자동추가 </button>
      
         <div class="bg-light p-5 rounded">
           <h5>CYA(CrYptoAlliance) DAO(Decentralized Autonomous Organization)</h5>
-          <p>규율권력을 넘어 나만의 가치를 창조하는 DAO의 세계에 오신걸 환영합니다 </p>
-          <p>우리는 서로를 믿지 못하지만 검증된 스마트컨트렉트 속에서 서로를 신뢰하고 연대할 수 있습니다</p>
-          <p>처음오셨으면 아래 미션을 수행해 보세요 </p>
+          <p>Welcome to the world of DAO, where you create your own value beyond disciplinary power.</p>
+          <p>We may not trust each other, but we can trust and solidarity with each other in a proven smart contract.</p>
+          <p>If this is your first time, please complete the mission below.</p>
         </div>
           <div class="d-flex align-items-start">
             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -158,52 +158,52 @@
             <div class="tab-content" id="v-pills-tabContent">
               <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                 <div class="alert alert-primary" role="alert">
-                  <p>CYA교환소 메뉴에서 BNB와 CYA Token을 교환해 보세요 </p>
-                <p>BNB가격의 등락과 관계 없이 1CYA는 항상 USD $1000을 수렴합니다</p>
-                <p>CYA Token의 가치는 BNB TVL(계약이 가지고 있는 BNB잔고)이 보장 합니다</p>
-                <a href="cyadex.html">CYA교환소 바로가기</a>
+                <p>Exchange BNB and CYA Token in the CYA exchange menu</p>
+                <p>1CYA always converges to USD $1000, regardless of BNB price fluctuations</p>
+                <p>The value of CYA Token is guaranteed by BNB TVL (BNB balance held by contract)</p>
+                <a href="cyadex.html">Go to CYA Exchange</a>
                 </div>
                </div>
 
               <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <div class="alert alert-primary" role="alert">
-                  <p>마이페이지 메뉴에서 CYA DAO에 0.05CYA를 기부하면  레벨1 정식 DAO멤버가 됩니다 </p>
-                <p>정식멤버가 되어 가맹점을 이용하거나 Defi를 이용하면 경험치가 제공됩니다</p>
-                <p>경험치가 쌓이면 레벨을 올릴 수 있습니다</p>
-                <p>CYA DAO는 어떠한 개인정보도 요구하지 않습니다</p>
-                <a href="mypage.html">마이페이지 바로가기</a>
+                  <p>If you donate 0.05 CYA to CYA DAO from My Page menu, you will become a Level 1 official DAO member. </p>
+                <p>If you become a full member and use P2E, experience points are provided.</p>
+                <p>As you gain experience, you can level up</p>
+                <p>CYA DAO does not ask for any personal information</p>
+                <a href="mypage.html">Go to My Page</a>
                 </div>
               </div>
               <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <div class="alert alert-primary" role="alert">
-                <p>CUT리스트 메뉴에서 마음에 드는 종목의 CUT을 CYA Tokne으로 구매해 보세요 </p>
-                <p>1개 이상 CUT을 가지고 있으면 매주 1회 해당 자금풀로 부터 배당을 받을 수 있습니다</p>
-                <p>배당금은 해당 종목 CUT의 수량과  레벨에 따라 차등 지급됩니다</p>
-                <p>계약에 CUT을 매각하려면 이체받은 시간을 기준으로 1년이 지나야 가능 하지만 P2P거래는 바로 가능합니다</p>
-                <a href="cutlist.html">cust 바로가기</a>
+                <p>Buy the CUT of your favorite item from the CUT list menu with CYA Tokne </p>
+                <p>If you have more than 1 CUT, you can receive rewards from the corresponding fund pool once a week.</p>
+                <p>Compensation is differentiated according to the quantity and level of CUT in the corresponding item</p>
+                <p>In order to sell CUT in the contract, it is possible to pass 1 year from the time of transfer, but P2P trading is possible immediately.</p>
+                <a href="cutlist.html">Go to cust</a>
               </div>
             </div>
               <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                 <div class="alert alert-primary" role="alert">
-                  <p>CYA Defi 메뉴에서 마음에 드는 서비스에 CYA Token을 스테이킹 해보세요 </p>
-                  <p>어떤 서비스건 지급불능 사태가 발생되지 않게 프로그래밍 되어 있습니다 </p>
-                  <p>처음에는 수익률 보다 리스크가 없는 서비스를 이용해 보세요</p>
-                  <a href="cyasevice.html">디파이 바로가기</a>
+                  <p>Stake CYA Token for your favorite service in the CYA P2E menu</p>
+                  <p>Any service is programmed to prevent insolvency </p>
+                  <p>At first, try a service that has less risk than return.</p>
+                  <a href="cyasevice.html">Go to P2E</a>
                 </div>
            
               </div>
 
               <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                 <div class="alert alert-primary" role="alert">
-                  <p>CYA Defi 메뉴에서 마음에 드는 서비스에 CYA Token을 스테이킹 해보세요 </p>
-                  <p>어떤 서비스건 지급불능 사태가 발생되지 않게 프로그래밍 되어 있습니다 </p>
-                  <p>처음에는 수익률 보다 리스크가 없는 서비스를 이용해 보세요</p>
-                  <a href="cyasevice.html">디파이 바로가기</a>
+                  <p>Stake CYA Token for your favorite service in the CYA P2E menu</p>
+                  <p>Any service is programmed to prevent insolvency </p>
+                  <p>Try using a service with less risk than return</p>
+                  <a href="cyasevice.html">Go to P2E</a>
                 </div>
             </div>
           </div>
           </div>
-        <!-- 챠트 시작  -->
+        <!-- chart start  -->
      
           <link href="dashboard.css" rel="stylesheet">
       
@@ -227,7 +227,7 @@
         </div>
           <div class="list-group">
             <a a href="cat.html" class="btn btn-outline-primary" aria-current="true">
-              CYA Token을 매주 배당 받을 수 있는 [CAT]
+              CYA Token can be distributed every week [CAT]
             </a>
           </div>
         </div>
@@ -243,42 +243,39 @@
           </nav>
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-              <p>CYA Token은 BNB와 교환 할 수 있습니다</p>
-              <p>BNB를 이용하여 CYA를 추가로 교환할 수 있습니다.</p>
-              <p>1CYA는 항상 $1000을 수렴하나 중간 BNB 가격변동 과정에서 약간의 차이가 발생될 수 있습니다</p>
-              <p>BNB시세가 계속해서 하락하면 계약은 BNB를 지불할 능력을 상실 할 수도 있습니다</p>
+              <p>CYA Token can be exchanged for BNB</p>
+              <p>You can further exchange CYA using BNB.</p>
+              <p>1CYA always converges to $1000, but there may be slight differences in the course of intermediate BNB price fluctuations</p>
+              <p>If the BNB price continues to decline, the contract may lose its ability to pay BNB.</p>
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-              <p>CUT는 Cya Utility Token의 약자 입니다</p>
-                <p>다양한 사업자들의 참여로 종목수는 계속 추가됩니다 </p>
-                <p>CUT를 보유한 멤버는 해당 종목에 관련하여 추가 혜택을 받을 수 있습니다 </p>
-                <p>CUT마다 사업범위가 다르고 소속되어 있는 가맹점도 다르지만 모두 CYA Token을 통용합니다</p>
-                <p>가맹점 이용시 약정된 수수료 중 일부가 소속되어 있는 CUT의 자금풀로 이체됩니다</p>
-                <p>CUT 페이지 광고비는 해당종목 자금풀로 이체됩니다</p>
-                <p>각 CUT마다 배당을 1주일에 한번 별도로 받을 수 있습니다</p>
-           
+              <p>CUT(Cya Utility Token)</p>
+                <p>The number of items will continue to be added due to the participation of various operators. </p>
+                <p>Members with CUT can receive additional benefits related to the event </p>
+                <p>Each CUT has a different business scope, but all use CYA Token.</p>
+            
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-              <p>CUT의 사업수익이 모이는 자금풀 입니다</p>
-              <p>종목마다 별도의 자금풀이 존재합니다</p>
-              <p>자금풀 상태에 따라 배당금 및 CUT 가치가 변동됩니다</p>
-              <p>해당 자금풀에서 CUT수량과 레벨에 따라 1주일에 한번 CYA Token을 받을 수 있습니다</p>
-              <p>1회분배공식 = (자금풀 잔고/유통토큰수량) * 본인레벨/1000 </p>
-              <p>CAT과 CUST자금풀은  특별인출은 없습니다</p>
+              <p>his is a fund pool where CUT's business profits are gathered.</p>
+              <p>There is a separate fund pool for each stock.</p>
+              <p>Dividends and CUT values fluctuate depending on the fund pool status</p>
+              <p>You can receive CYA Token once a week depending on the CUT quantity and level from the corresponding fund pool.</p>
+              <p>One-time distribution formula = (fund pool balance / number of tokens sold) * own level / 1000</p>
+          
               
           
           </div>
         </div>
       </div>
 
-          <!-- 하단 캐러셀 시작 -->
+          <!-- Start bottom carousel -->
         
             <div class="card">
               <a class="link" href="Home3" id="tmp_home3">
               <img src= "Metainfo3"
               class="card-img-top" alt="..." id="tmp_img3"> </a>
             </div>
-            <!-- 캐러셀 끝 -->
+            <!-- End carousel -->
 
               <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
                 <p>&copy; 2022 CYA DAO, Inc. All rights reserved.</p>
@@ -286,7 +283,7 @@
                 <p><a class="link" href="../module/vote.html" id="">
                   <img src= "../images/20221120_133815.png" width="170" height="30" id="">  </a></p>
               </div>
-           <!-- 푸터 끝 -->
+           <!-- End footer -->
         </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
