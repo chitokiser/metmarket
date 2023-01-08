@@ -15,31 +15,34 @@
 
 </head>
 
-
 <main class="container">
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"></main>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <a class="link" href="https://metato.biz" id="">
-          <img src= "../images/metatologo.png" width="120" height="30" id=""> </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="http://metato.biz">
+          <img src="../mimages/logo.png" alt="" width="40" height="35">
+        </a>
+        <a href="https://www.metato.biz/general-6"><img src="https://i.ibb.co/rpCKCFy/topid.png" alt="" width="120" height="27"><a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link" href="../metato/metato.html">MetaTokenBank</a>
+              <a class="nav-link" href="../mindex.html">토큰리스트</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../metato/metahunt.html">보물찾기</a>
+              <a class="nav-link" href="../bnbex.html">BNB교환소</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../metato/metamy.html">Mypage</a>
+              <a class="nav-link" href="../metamy.html">마이페이지</a>
             </li>
+          
           </ul>
-         
+
         </div>
       </div>
     </nav>
@@ -53,73 +56,69 @@
         <div class="container">
           <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <div class="col">
-              <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
+              <div class="p-3 border bg-light">1BNB=$<span id="BNBprice">-</span></div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
+              <div class="p-3 border bg-light">1BNB=<span id="CYAprice">-</span>CYA</div>
             </div>
             <div class="col">
               <div class="p-3 border bg-light">1CYA = $1000</div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
+              <div class="p-3 border bg-light">1CYA = <span id="CYAprice2">-</span>BNB</div>
             </div>
-    
-                      <div class="col">
-              <div class="p-3 border bg-light">BNB TVL = <span id="tvl">-</span>BNB</div>
+        
+            <div class="col">
+              <div class="p-3 border bg-light">BNB TVL = <span id="Tvl">-</span>BNB</div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">BNB TVL2 : <span id="tvl2">-</span> BNB</div>
+              <div class="p-3 border bg-light">참여자 = <span id="Members">-</span>명</div>
             </div>
-          
-            <div class="col">
-              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
-            </div>
-           
+        
           </div>
         </div>
       </div>
-    
+        <p></p>
         <!--여기까지 대쉬보드 -->
         
           <div class="bg-light p-5 rounded">
-            <h3>MetaToken</h3>
-            <p>현재가 : 1MTT = <span id="Mttprice">-</span>CYA</p>
-            <p>토큰심볼 : MTT</p>
-            <p>BNB기반의 스테이블 토큰 CYA Token으로 거래합니다</p>
+            <h3>SuShi Token</h3>
+            <p>1SST 시세= <span id="Sstprice">-</span>CYA</p>
+            <p>토큰심볼 : SST</p>
+            <p>수익모델 : 테라스시 온/오프 매출 10%</p>
           </div>
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h3 class="h3">MTT가격 변화</h3>
+            <h3 class="h3">SST가격 변화</h3>
             <div class="btn-toolbar mb-2 mb-md-0">
               <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <span data-feather="calendar"></span>
-                <span id="Mid">-</span>
+                <span id="Sstid">-</span>
               </button>
             </div>
           </div>
-          <div class="my-4 w-100" id="Mchart" style="width: 900px; height: 380px;"></div>
+          <div class="my-4 w-100" id="Sstchart" style="width: 900px; height: 380px;"></div>
           <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
           <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
           <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
             integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
             crossorigin="anonymous"></script>
-          <script src="mboard.js"></script>
+          <script src="ssboard.js"></script>
 
      
       <div class="panel panel-default">
             <a class="list-group">
        
-            <button class="btn btn-outline-success" type="submit" onclick="Addmtt()">
-              MTT 메타마스크에 자동추가
+            <button class="btn btn-outline-success" type="submit" onclick="Addsst()">
+              SST 메타마스크에 자동추가
               </button>
-            <li class="list-group-item">발행총량 = 100,000,000MMT</li>
-            <li class="list-group-item">MMT주소 : 0xa2d18FEFA4f67C4F7531F3C29A76b9680915b380</li>
-            <li class="list-group-item">유통 총량 = <span id="Soldmtt">-</span>MMT</li>
-            <li class="list-group-item">시가 총액 = <span id="Mttcap">-</span>MMT</li><!-- 시가총액-->
-            <li class="list-group-item">계약 잔고 = <span id="Mtvl">-</span>MMT</li>
-            <li class="list-group-item">레벨1 이상만 MTT거래를 할 수 있습니다</li>
-            <li class="list-group-item"></li>  <a class="btn btn-light" href="../metato/metamy.html"role="button">레벨1되기 &raquo;</a> </li>
+            <li class="list-group-item">발행총량 = 100,000,000SST</li>
+            <li class="list-group-item">SST주소 : 0x9E15F2A5Ee9b7B8316353F9ccC48131bD97C599F</li>
+            <li class="list-group-item">유통 총량 = <span id="Soldsst">-</span>SST</li>
+            <li class="list-group-item">시가 총액 = <span id="Sstcap">-</span>CYA</li><!-- 시가총액-->
+            <li class="list-group-item">계약 잔고 = <span id="Mtvl">-</span>CYA</li>
+            <li class="list-group-item">주의:레벨0이면 배당금을 받지 못 합니다</li>
+            <li class="list-group-item"></li>  <a class="btn btn-light" href="../metamy.html"role="button">레벨1되기 &raquo;</a> </li>
 
           <!-- List group -->
           <a class="list-group">
@@ -127,36 +126,34 @@
           나의 현황보기
           </button>
           <ul class="list-group">
-            <li class="list-group-item">나의 MTT : <span id="Mymtt">-</span>MTT</li>
-            <li class="list-group-item">나의 MTT 가치: <span id="Mymttvalue"></span>CYA</li>
+            <li class="list-group-item">나의 SST : <span id="Mysst">-</span>SST</li>
+            <li class="list-group-item">나의 SST 가치: <span id="Mysstvalue"></span>CYA</li>
             <li class="list-group-item">다음 배당 예상금액 : <span id="Myeps"></span>CYA</li>
             <!--geteps-->
-            <li class="list-group-item">다음 배당까지 남은 시간 : <span id="Mttallowtime">-</span></li>
-            <li class="list-group-item">MTT매도까지 남은 시간 : <span id="Mttselltime">-</span></li>
+            <li class="list-group-item">다음 배당까지 남은 시간 : <span id="Sstallowtime">-</span></li>
+            <li class="list-group-item">SST매도까지 남은 시간 : <span id="Sstselltime">-</span></li>
           </ul>
 
           
-            <button class="btn btn-outline-success" type="submit" onclick="Mwithdraw()">CYA Token 배당받기</button>
+            <button class="btn btn-outline-success" type="submit" onclick="Mwithdraw()">CYA 배당받기</button>
           
             <div class="alert alert-secondary" role="alert">
           <div class="input-group mb-3">
-            <input type="text" id="Buynum" class="form-control" placeholder="구매할 MMT 개수입력(소수점허용안됨)" aria-label="CYA"
+            <input type="text" id="Buynum" class="form-control" placeholder="구매할 SST 개수입력(소수점허용안됨)" aria-label="CYA"
               aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Mbuymtt()">MTT 사기</span>
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Mbuysst()">SST 사기</span>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" id="Sellnum" placeholder="판매할 MMT 개수 입력(소수점허용안됨)" aria-label="CYA"
+            <input type="text" class="form-control" id="Sellnum" placeholder="판매할 SST 개수 입력(소수점허용안됨)" aria-label="CYA"
               aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Msellmtt()">MTT 팔기</span>
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Msellsst()">SST 팔기</span>
           </div>
         </div>
       </div>
    
       <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
         <p>&copy; 2022 Metato, Inc. All rights reserved.</p>
-      
-        <p><a class="link" href="https://metato.biz" id="">
-          <img src= "../images/metatologo.png" width="120" height="30" id="">  </a></p>
+
       </div>
       
    <!-- 푸터 끝 -->
@@ -166,12 +163,11 @@
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>
-<script src="metato.js"></script>
-<script type=module src="../module/topinfo.js"></script>
+<script src="sst.js"></script>
+<script type=module src="../dash/dash.js"></script>
 <script type="module">
-  import topDataSync from '../module/topinfo.js'
+  import topDataSync from '../dash/dash.js'
 </script>
-<!--topinfo export 없는데 어떻게 작동하는지?-->
 </body>
 
 </html>

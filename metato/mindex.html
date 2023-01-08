@@ -80,57 +80,72 @@
         <p></p>
         <!--여기까지 대쉬보드 -->
 
-    <h5>My page</h5>
-     
-              <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Mlogin()">
-                나의 상태 보기(메타마스크 연결)
-              </li>
-  
-              <li class="list-group-item">
-              <button type="button" class="btn btn-outline-success position-relative" cursor:pointer; onclick="levelUp()">
-                레벨업
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success" id="Level">
-                  -</span></button>
-              <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped" id="LevelBar" role="progressbar"
-                  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+        <div class="bg-light p-5 rounded">
+          <h3>유틸리티 토큰 리스트</h3>
+          <p>나만의 가치를 창조하는 토큰 경제</p>
+          <p>고객을 공유하는 상생 연대</p>
+          <p>이제 토큰경제를 시작할때 </p>
+        </div>
+        <div class="list-group">
+          <span type="button" class="list-group-item list-group-item-action active" aria-current="true">
+            List of Registered Utility Tokens
+          </span>
+      
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <div>
+                  <h5 class="card-title">Metato Token</h5>
+                </div>
+                <p class="card-text">다른 토큰에서 발생하는 수수료</p>
+            
+                <a href="mtt/metato.html" class="btn btn-outline-primary">Go To The MTT</a>
               </div>
-            </li>
-               
-              <li class="list-group-item">나의 경험치 : <span id="Exp"></span>EXP</li>
-              <li class="list-group-item">레벨업까지 필요한 경험치 : <span id="Expneeded"></span>EXP</li>
-  
-  
-    <li class="list-group-item">total mento : <span id="totalMentor">-</span></li>
-    <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Aguild()">
-      레벨1되기
-    </li>
-  <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="addMento()">
-    멘토등록하기(유료1CYA)
-  </li>
-</ul>
-  </div>
-    <p>.</p>
-    
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Shared Aura Token</h5>
+                <p class="card-text">아우라 공유 토큰</p>
+                <a href="sat/sat.html" class="btn btn-outline-primary">Go To The SAT</a>
+              </div>
+            </div>
+          </div>
+     
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">SuShi Token</h5>
+              <p class="card-text">테라스시 온/오프 매출</p>
+              <a href="sst/sst.html" class="btn btn-outline-primary">Go To The SST</a>
+            </div>
+          </div>
+        </div>
+      </div>
+       
 
-
-    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-      <p>&copy; 2022 Metato, Inc. All rights reserved.</p>
-
-    </div>
-    
- <!-- 푸터 끝 -->
+<!-- 푸터 시작 -->
+     
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+        <p>&copy; 2022 Metato, Inc. All rights reserved.</p>
+       
+      </div>
+   <!-- 푸터 끝 -->
 </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script type="text/javascript"></script>  
-<script src="metamy.js"></script> 
+<script type="text/javascript"></script>
+
 <script type=module src="../metato/dash/dash.js"></script>
 <script type="module">
   import topDataSync from '../metato/dash/dash.js'
 </script>
 
-  </body>
-</div>
+
+</body>
+
 </html>
