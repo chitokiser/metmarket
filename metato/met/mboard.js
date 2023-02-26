@@ -7,7 +7,7 @@
   
     // Graphs
     const contractAddress = {
-      mttallowAddr: "0xdD28f7FA21c951aB00A8a46Df9aD81F57a7ceFA8"
+      mttallowAddr: "0xaDd161Bd2b891ac74FEBc6116fb22CEaa015a691"
     };
     const contractAbi = {
       mttallow: [

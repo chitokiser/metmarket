@@ -1,8 +1,7 @@
 let contractAddress = {
-    cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",
-    mttallowAddr: "0xdD28f7FA21c951aB00A8a46Df9aD81F57a7ceFA8",  
+    metallowAddr: "0xaDd161Bd2b891ac74FEBc6116fb22CEaa015a691",  
     erc20: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9",
-    mttAddr: "0xa2d18FEFA4f67C4F7531F3C29A76b9680915b380"
+    metAddr: "0xb0f78f9577A851b7a1BA5Ac246c6adB1E2ECbcEA"
   };
 let contractAbi = {
   cyacoop: [
@@ -24,27 +23,29 @@ let contractAbi = {
     "function sellcat(uint num) public returns(bool)"
   ],
   
-    mttallow: [
+    metallow: [
       "function getprice() public view returns(uint256)",
-      "function buymetato(uint _num) public returns(bool)",
-      "function sellmetato(uint _num)public returns(bool)",
-      "function tetex( )public returns(bool)",
-      "function airdrop(address _mento )public returns(bool)",
+      "function buymet(uint _num) public",
+      "function sellmet(uint _num)public returns(bool)",
+      "function getlevel(address user) public view virtual returns(uint256)",
       "function withdraw( )public returns(bool)",
       "function allowt(address user) public view returns(uint256)",
       "function g1() public view returns(uint256)",
       "function g2() public view returns(uint256)",
       "function g6() public view returns(uint256)",
+      "function automemberjoin( )public",
       "function g7(address user) public view returns(uint256)",
-      " function g8(address user) public view virtual returns(uint256)",
-      "function getprice() external view returns (uint256)",
+      "function g8(address user) public view virtual returns(uint256)",
+      "function price() external view returns (uint256)",
+      "function getsold( ) public view returns( uint256 )",
       "function geteps(address user) external view returns (uint256)" 
     ],
+
     erc20: [
       "function approve(address spender, uint256 amount) external returns (bool)",
       "function allowance(address owner, address spender) external view returns (uint256)"
     ],
-    mtt: [
+    met: [
       "function getdepot(address user) external view returns (uint256)"
     ]
   };
@@ -52,16 +53,15 @@ let contractAbi = {
   let MtopDataSync = async () => {
     // ethers setup
     let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed.binance.org/');
-    let mttallowContract = new ethers.Contract(contractAddress.mttallowAddr, contractAbi.mttallow, provider);
-    let mttprice = await mttallowContract.getprice();
-    let totalsold = 100000000 - await mttallowContract.g6();
-    let mtvl =  await mttallowContract.g1();
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, provider);
+  
+    let totalsold = await metallowContract.getsold();
+    let metprice =  await metallowContract.price();
 
     
-    document.getElementById("Mttprice").innerHTML = ((mttprice)/1e18).toFixed(6);
-    document.getElementById("Soldmtt").innerHTML = (totalsold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    document.getElementById("Mttcap").innerHTML = ((mttprice*totalsold)/1e18).toFixed(6);//시가총액
-    document.getElementById("Mtvl").innerHTML = (mtvl/1e18).toFixed(6);
+    document.getElementById("Soldmet").innerHTML = (totalsold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //유통총량
+    document.getElementById("Metcap").innerHTML = ((metprice*totalsold)/1e18).toFixed(6);//시가총액
+    document.getElementById("Mtvl").innerHTML = (100000000-totalsold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //계약에 가지고 있는 MET 잔고
 
   };
   
@@ -83,50 +83,74 @@ let contractAbi = {
     });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-    let mttallowContract = new ethers.Contract(contractAddress.mttallowAddr, contractAbi.mttallow, signer);
-    let mymtt = mttallowContract.g7(await signer.getAddress());
-    let mymttvalue = await mttallowContract.getprice() * await mymtt;
-    let myeps = mttallowContract.geteps(await signer.getAddress());
-    
-    document.getElementById("Mymtt").innerHTML = await mymtt;
-    document.getElementById("Mymttvalue").innerHTML=(mymttvalue/1e18).toFixed(6); 
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
+    let mymet = metallowContract.g7(await signer.getAddress());
+    let mymetvalue = await metallowContract.price() * await mymet;
+    let myeps = metallowContract.geteps(await signer.getAddress());
+    let mylevel = metallowContract.getlevel(await signer.getAddress());
+
+    document.getElementById("Mymet").innerHTML = await mymet;
+    document.getElementById("Mymetvalue").innerHTML=(mymetvalue/1e18).toFixed(6); 
     document.getElementById("Myeps").innerHTML = (await myeps/1e18).toFixed(6); 
-   
- 
-    let at = parseInt(await mttallowContract.allowt(await signer.getAddress()));
+    document.getElementById("Mylevel").innerHTML = await mylevel;
+    let metContract =  new ethers.Contract(contractAddress.metAddr, contractAbi.met, signer);
+    let at = parseInt(await metContract.getdepot(await signer.getAddress()));
     let nowt = Math.floor(new Date().getTime() / 1000);
-    let left = parseInt((at + 604800 ) - nowt); 
+    let left = parseInt((at + 2592000 ) - nowt); 
     let day = parseInt(left/60/60/24);
     let hour = parseInt(left/3600)%24;
     let min = parseInt((left/60)%60);
     let sec = left%60;
-    let mttContract =  new ethers.Contract(contractAddress.mttAddr, contractAbi.mtt, signer);
-    let g3 =  parseInt(await mttContract.getdepot(await signer.getAddress()));
-    let left2 = parseInt((g3 + 31536000 ) - nowt);  
-    let days = parseInt(left2/60/60/24);
-    let hours = parseInt(left2/3600)%24;
-    let mins = parseInt((left2/60)%60);
-    let secs = left2%60;
     
-    document.getElementById("Mttallowtime").innerHTML = left > 0 ? `${day}일${hour}시간${min}분${sec}초` :'';
-    document.getElementById("Mttselltime").innerHTML = left2 > 0 ? `${days}일${hours}시간${mins}분${secs}초` : ''; 
+    document.getElementById("Metallowtime").innerHTML = left > 0 ? `${day}일${hour}시간${min}분${sec}초` :'';
+   
 
   };
 
 
-  const Addmtt = async () => {
+  const Addmet = async () => {
     await window.ethereum.request({
       method: 'wallet_watchAsset',
       params: {
         type: 'ERC20',
         options: {
-          address: "0xa2d18FEFA4f67C4F7531F3C29A76b9680915b380",
-          symbol: "MTT",
+          address: "0xb0f78f9577A851b7a1BA5Ac246c6adB1E2ECbcEA",
+          symbol: "MET",
           decimals:0, 
         },
       },
     });
   }
+
+
+  let Automember = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+            chainId: "0x38",
+            rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            chainName: "Binance Smart Chain",
+            nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18
+            },
+            blockExplorerUrls: ["https://bscscan.com/"]
+        }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
+
+    try {
+      await metallowContract.automemberjoin();
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
 
   let Mwithdraw = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -147,15 +171,15 @@ let contractAbi = {
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let mttallowContract = new ethers.Contract(contractAddress.mttallowAddr, contractAbi.mttallow, signer);
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
 
     try {
-      await mttallowContract.withdraw();
+      await metallowContract.withdraw();
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
   };
-  let Mbuymtt = async () => {
+  let Mbuymet = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -174,16 +198,16 @@ let contractAbi = {
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let mttallowContract = new ethers.Contract(contractAddress.mttallowAddr, contractAbi.mttallow, signer);
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
 
     try {
-      await mttallowContract.buymetato(document.getElementById('Buynum').value);
+      await metallowContract.buymet(document.getElementById('Buynum').value);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
   };
 
-  let Msellmtt = async () => {
+  let Msellmet = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -202,10 +226,10 @@ let contractAbi = {
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let mttallowContract = new ethers.Contract(contractAddress.mttallowAddr, contractAbi.mttallow, signer);
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
 
     try {
-      await mttallowContract.sellmetato(document.getElementById('Sellnum').value);
+      await metallowContract.sellmet(document.getElementById('Sellnum').value);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }

@@ -11,6 +11,7 @@ let contractAbi = {
       "function buysat(uint _num) public",
       "function sellsat(uint _num)public returns(bool)",
       "function withdraw( )public",
+      "function allow() public view returns(uint256)",
       "function g1() public view returns(uint256)",
       "function g2() public view returns(uint256)",
       "function g6() public view returns(uint256)",
@@ -34,12 +35,13 @@ let contractAbi = {
     let satprice = await satallowContract.getprice();
     let totalsold = 100000000 - await satallowContract.g6();
     let mtvl =  await satallowContract.g1();
-
+    let eps =  await satallowContract.allow();
     
     document.getElementById("Satprice").innerHTML = ((satprice)/1e18).toFixed(6);
     document.getElementById("Soldsat").innerHTML = (totalsold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     document.getElementById("Satcap").innerHTML = ((satprice*totalsold)/1e18).toFixed(6);//시가총액
     document.getElementById("Sattvl").innerHTML = (mtvl/1e18).toFixed(6);
+    document.getElementById("Sateps").innerHTML = (eps/1e18).toFixed(18);
 
   };
   

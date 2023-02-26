@@ -16,6 +16,7 @@
           ],
           cyadex2: [
             "function cyabuy() payable public",
+            "function getprice() public view returns(uint256)",
             "function bnbsell(uint256 num) public",
             "function balance()public view returns(uint256)",
             "function cyabalances() public view returns(uint256)",
@@ -37,36 +38,17 @@
           // BNB Price
           const responseBinanceTicker = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT');
           const bnbPrice = parseFloat(responseBinanceTicker.data.price);
-          document.getElementById("bPrice").innerHTML=bnbPrice.toFixed(4);
-          document.getElementById("cyaPrice").innerHTML=(bnbPrice/1000).toFixed(4);
+         
+    
   
           // ethers setup
           const provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
-          const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, provider);
-          const cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, provider);
-  
-          const cyadexPrice = await cyadexContract.getprice();
-          const cyacoopPrice = await cyacoopContract.getprice();
-          const allows = await cyacoopContract.allow();
-          const members = await cyacoopContract.sum();
-          const cyabal = await cyacoopContract.g1();
-  
-          // cyadex price
-          document.getElementById("cyaPrice2").innerHTML=(1000/cyadexPrice).toFixed(6);
-          
-          // cyacoop price
-          document.getElementById("catPrice").innerHTML=(cyacoopPrice/1e18).toFixed(6);
-  
-          // allocation
-          document.getElementById("allocation").innerHTML=(allows/1e18).toFixed(6);
-  
-          // members
-          document.getElementById("members").innerHTML=(members);
-         
-          // cyadex TVL
-          document.getElementById("tvl").innerHTML=parseFloat(ethers.utils.formatUnits(await cyadexContract.balance(), 18)).toFixed(6);
-          // cyabalance 
-          document.getElementById("cyatvl").innerHTML = (cyabal/1e18).toFixed(6);
+          const cyadex2Contract = new ethers.Contract(contractAddress.cyadex2Addr, contractAbi.cyadex, provider);
+          const bnbp = await cyadex2Contract.getprice();
+        
+
+
+          document.getElementById("Bnbp").innerHTML = (bnbp);
         };
      
         const Addcya = async () => {
@@ -138,9 +120,9 @@
        
        
       
-        const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
+        const cyadex2Contract = new ethers.Contract(contractAddress.cyadex2Addr, contractAbi.cyadex2, signer);
         try {
-          await cyadexContract.priceup(document.getElementById('Bnbprice').value);
+          await cyadex2Contract.priceup(parselnt(document.getElementById('Upprice').value));
         } catch(e) {
           alert(e.data.message.replace('execution reverted: ',''))
         }
@@ -206,23 +188,24 @@
         });
         await userProvider.send("eth_requestAccounts", []);
         
-        let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, userProvider);
+        let cyadex2Contract = new ethers.Contract(contractAddress.cyadex2Addr, contractAbi.cyadex2, userProvider);
         let selectElement = document.getElementById('bnbInput');
-        let selectElement2 = document.getElementById('cyaInput');
-        let selectElement3 = document.getElementById('cyaInput2');
+        let selectElement2 = document.getElementById('cyaInput2');
 
         selectElement.addEventListener('change', async (event) => {
           if (event.target.value < 0.001) {
-            alert("now enough value");
+            c
           } else {
-            document.getElementById('bnbOutput').value=event.target.value*parseFloat(await cyadexContract.getprice())/1000
+            document.getElementById('bnbOutput').value=event.target.value*parseFloat(await cyadex2Contract.getprice())/1000
           }
         });
+       
         selectElement2.addEventListener('change', async (event) => {
-          document.getElementById('cyaOutput').value=event.target.value/parseFloat(await cyadexContract.getprice())*980
-        })
-        selectElement3.addEventListener('change', async (event) => {
-          document.getElementById('cyaOutput2').value=event.target.value/parseFloat(await cyadexContract.getprice())*980
+          if (event.target.value < 0.001) {
+           c
+          } else{
+          document.getElementById('cyaOutput2').value=event.target.value/parseFloat(await cyadex2Contract.getprice())*900
+          }
         })
         })();
 

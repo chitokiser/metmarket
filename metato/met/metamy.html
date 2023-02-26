@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
         <a class="navbar-brand" href="http://metato.biz">
-          <img src="../metato/mimages/logo.png" alt="" width="40" height="35">
+          <img src="../mimages/logo.png" alt="" width="40" height="35">
         </a>
         <a href="https://www.metato.biz/general-6"><img src="https://i.ibb.co/rpCKCFy/topid.png" alt="" width="120" height="27"><a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -32,13 +32,16 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link" href="../metato/mindex.html">토큰리스트</a>
+              <a class="nav-link" href="../met/metato.html">메타토큰</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../metato/bnbex.html">BNB교환소</a>
+              <a class="nav-link" href="../met/bnbex.html">BNB교환소</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../metato/metamy.html">마이페이지</a>
+              <a class="nav-link" href="../met/hideout.html">아지트</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../met/metamy.html">레벨관리</a>
             </li>
           
           </ul>
@@ -72,8 +75,15 @@
               <div class="p-3 border bg-light">BNB TVL = <span id="Tvl">-</span>BNB</div>
             </div>
             <div class="col">
+              <div class="p-3 border bg-light">CYA TVL = <span id="Cyatvl">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">MET Price = <span id="Metprice">-</span>CYA</div>
+            </div>
+            <div class="col">
               <div class="p-3 border bg-light">참여자 = <span id="Members">-</span>명</div>
             </div>
+        
           </div>
         </div>
       </div>
@@ -106,7 +116,7 @@
       레벨1되기
     </li>
   <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="addMento()">
-    멘토등록하기(유료1CYA)
+    멘토등록하기(유료 0.5CYA)
   </li>
 </ul>
   </div>
@@ -126,9 +136,9 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>  
 <script src="metamy.js"></script> 
-<script type=module src="../metato/dash/dash.js"></script>
+<script type=module src="../dash/dash.js"></script>
 <script type="module">
-  import topDataSync from '../metato/dash/dash.js'
+  import topDataSync from '../dash/dash.js'
 </script>
 
   </body>

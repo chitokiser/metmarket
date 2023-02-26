@@ -2,7 +2,7 @@
 let contractAddress = {
     cyadex2Addr: "0x7E0f523CF51686c422881d4437759438C8eCDEF5",
     erc20: "0x3C410361E6443B04Fa559c4640bA3071f8C4bEc9",
-    satAddr: "0x9B72171dc4d66AfB09b7A5e9f596d76965dba328"
+    metallowAddr: "0xaDd161Bd2b891ac74FEBc6116fb22CEaa015a691"
   };
 
   let contractAbi = {
@@ -15,8 +15,9 @@ let contractAddress = {
       "function g1(address user) public view returns(uint256)",
       "function g2(address user) public view returns(uint256)"
     ],
-    satallow: [
+    metallow: [
       "function sum() public view returns(uint256)",
+      "function price() public view returns(uint256)",
       "function g1() public view returns(uint256)",
       "function g6() public view virtual returns(uint256)"
     ],
@@ -37,14 +38,22 @@ let contractAddress = {
     // ethers setup
     let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
     let cyadex2Contract = new ethers.Contract(contractAddress.cyadex2Addr, contractAbi.cyadex2, provider);
-    let satContract = new ethers.Contract(contractAddress.satAddr, contractAbi.satallow, provider);
-    let members = await satContract.sum();
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, provider);
+    let members = await metallowContract.sum();
+    let cyatvl = await metallowContract.g1();
+    let metprice = await metallowContract.price();
     let tvl = await cyadex2Contract.balance();
     
     // cyadex TVL
     document.getElementById("Tvl").innerHTML=(tvl/1e18).toFixed(3);
+    // cyaTVL
+    document.getElementById("Cyatvl").innerHTML=(cyatvl/1e18).toFixed(3);
+
+    // met price
+    document.getElementById("Metprice").innerHTML=(metprice/1e18).toFixed(3);
     // members *2 허수적용
     document.getElementById("Members").innerHTML=(members);  
+    
   };
   
   

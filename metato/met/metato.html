@@ -32,13 +32,16 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link" href="../mindex.html">토큰리스트</a>
+              <a class="nav-link" href="../met/metato.html">메타토큰</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../bnbex.html">BNB교환소</a>
+              <a class="nav-link" href="../met/bnbex.html">BNB교환소</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../metamy.html">마이페이지</a>
+              <a class="nav-link" href="../met/hideout.html">아지트</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../met/metamy.html">레벨관리</a>
             </li>
           
           </ul>
@@ -72,6 +75,12 @@
               <div class="p-3 border bg-light">BNB TVL = <span id="Tvl">-</span>BNB</div>
             </div>
             <div class="col">
+              <div class="p-3 border bg-light">CYA TVL = <span id="Cyatvl">-</span>CYA</div>
+            </div>
+            <div class="col">
+              <div class="p-3 border bg-light">MET Price = <span id="Metprice">-</span>CYA</div>
+            </div>
+            <div class="col">
               <div class="p-3 border bg-light">참여자 = <span id="Members">-</span>명</div>
             </div>
         
@@ -83,13 +92,12 @@
         
           <div class="bg-light p-5 rounded">
             <h3>MetaToken</h3>
-            <p>1MTT 시세= <span id="Mttprice">-</span>CYA</p>
-            <p>토큰심볼 : MTT</p>
-            <p>수익모델 : 다른 토큰에서 공제되는 수수료</p>
+            <p>토큰심볼 : MET</p>
+            <p>배당 적립금 : 메타토 협동조합 매출 10% 이상 적립</p>
           </div>
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h3 class="h3">MTT가격 변화</h3>
+            <h3 class="h3">MET가격 변화</h3>
             <div class="btn-toolbar mb-2 mb-md-0">
               <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <span data-feather="calendar"></span>
@@ -109,29 +117,30 @@
       <div class="panel panel-default">
             <a class="list-group">
        
-            <button class="btn btn-outline-success" type="submit" onclick="Addmtt()">
-              MTT 메타마스크에 자동추가
+            <button class="btn btn-outline-success" type="submit" onclick="Addmet()">
+              MET 메타마스크에 자동추가
               </button>
             <li class="list-group-item">발행총량 = 100,000,000MMT</li>
-            <li class="list-group-item">MMT주소 : 0xa2d18FEFA4f67C4F7531F3C29A76b9680915b380</li>
-            <li class="list-group-item">유통 총량 = <span id="Soldmtt">-</span>MMT</li>
-            <li class="list-group-item">시가 총액 = <span id="Mttcap">-</span>CYA</li><!-- 시가총액-->
-            <li class="list-group-item">계약 잔고 = <span id="Mtvl">-</span>CYA</li>
-            <li class="list-group-item">CYA 레벨1이상(메타토 멤버 아님)만 MTT거래를 할 수 있습니다</li>
-            <li class="list-group-item"></li>  <a class="btn btn-light" href="https://cyadao.io/mypage/mypage.html"role="button">레벨1되기 &raquo;</a> </li>
-
+            <li class="list-group-item">MET주소 : 0xb0f78f9577A851b7a1BA5Ac246c6adB1E2ECbcEA</li>
+            <li class="list-group-item">유통 총량 = <span id="Soldmet">-</span>MET</li>
+            <li class="list-group-item">시가 총액 = <span id="Metcap">-</span>CYA</li><!-- 시가총액-->
+            <li class="list-group-item">판매가능MET수량 = <span id="Mtvl">-</span>MET</li>
+            <li class="list-group-item">멤버만 거래가능 <button class="btn btn-outline-success" type="submit" onclick="Automember()">
+              멤버되기</button></li>
+          
           <!-- List group -->
           <a class="list-group">
           <button class="btn btn-outline-success" type="submit" onclick="MmemberLogin()">
           나의 현황보기
           </button>
           <ul class="list-group">
-            <li class="list-group-item">나의 MTT : <span id="Mymtt">-</span>MTT</li>
-            <li class="list-group-item">나의 MTT 가치: <span id="Mymttvalue"></span>CYA</li>
+            <li class="list-group-item">나의 MET : <span id="Mymet">-</span>MET</li>
+            <li class="list-group-item">나의 MET 가치: <span id="Mymetvalue"></span>CYA</li>
             <li class="list-group-item">다음 배당 예상금액 : <span id="Myeps"></span>CYA</li>
             <!--geteps-->
-            <li class="list-group-item">다음 배당까지 남은 시간 : <span id="Mttallowtime">-</span></li>
-            <li class="list-group-item">MTT매도까지 남은 시간 : <span id="Mttselltime">-</span></li>
+            <li class="list-group-item">다음 배당까지 남은 시간 : <span id="Metallowtime">-</span></li>
+            <li class="list-group-item">MET매도를 하려면 레벨 10이상 부터 가능합니다</li>
+            <li class="list-group-item">나의 현재레벨 : <span id="Mylevel">-</span></li>
           </ul>
 
           
@@ -139,20 +148,20 @@
           
             <div class="alert alert-secondary" role="alert">
           <div class="input-group mb-3">
-            <input type="text" id="Buynum" class="form-control" placeholder="구매할 MMT 개수입력(소수점허용안됨)" aria-label="CYA"
+            <input type="text" id="Buynum" class="form-control" placeholder="구매할 MET 개수입력(소수점허용안됨)" aria-label="CYA"
               aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Mbuymtt()">MTT 사기</span>
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Mbuymet()">MET 사기</span>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" id="Sellnum" placeholder="판매할 MMT 개수 입력(소수점허용안됨)" aria-label="CYA"
+            <input type="text" class="form-control" id="Sellnum" placeholder="판매할 MET 개수 입력(소수점허용안됨)" aria-label="CYA"
               aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Msellmtt()">MTT 팔기</span>
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Msellmet()">MET 팔기</span>
           </div>
         </div>
       </div>
    
       <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-        <p>&copy; 2022 Metato, Inc. All rights reserved.</p>
+        <p>&copy; 2023 Metato, Inc. All rights reserved.</p>
 
       </div>
       

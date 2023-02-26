@@ -1,11 +1,11 @@
 let contractAddress = {
 
-    satallowAddr: "0x9B72171dc4d66AfB09b7A5e9f596d76965dba328" 
+    metallowAddr: "0xaDd161Bd2b891ac74FEBc6116fb22CEaa015a691" 
     
   };
   let contractAbi = {
  
-    satallow: [
+    metallow: [
       "function addmento( ) public",
       "function automemberjoin( )public",
       "function levelup( )public returns(bool)",
@@ -19,10 +19,10 @@ let contractAddress = {
   let MtopDataSync = async () => {
     // ethers setup
     let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
-    let satallowContract = new ethers.Contract(contractAddress.satallowAddr, contractAbi.satallow, provider);
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, provider);
     
     // total mentor
-    document.getElementById("totalMentor").innerHTML = await satallowContract.mentolength();
+    document.getElementById("totalMentor").innerHTML = await metallowContract.mentolength();
   };
 
 
@@ -45,10 +45,10 @@ let contractAddress = {
     });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-    let satallowContract = new ethers.Contract(contractAddress.satallowAddr, contractAbi.satallow, signer);
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
 
     try {
-      await satallowContract.automemberjoin();
+      await metallowContract.automemberjoin();
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -75,11 +75,11 @@ let contractAddress = {
 
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-    let satallowContract = new ethers.Contract(contractAddress.satallowAddr, contractAbi.satallow,signer);
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow,signer);
     
-    let g1 = await satallowContract.getlevel(await signer.getAddress());
-    let g2 = await satallowContract.getexp(await signer.getAddress());
-    let levelexp = (2**g1)*5e16;
+    let g1 = await metallowContract.getlevel(await signer.getAddress());
+    let g2 = await metallowContract.getexp(await signer.getAddress());
+    let levelexp = (2**g1)*10000;
    
     // level
     document.getElementById("Level").innerHTML = (g1);
@@ -112,10 +112,10 @@ let contractAddress = {
       await userProvider.send("eth_requestAccounts", []);
       let signer = userProvider.getSigner();
 
-      let satallowContract = new ethers.Contract(contractAddress.satallowAddr, contractAbi.satallow, signer);
+      let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
       
       try {
-        await satallowContract.levelup();
+        await metallowContract.levelup();
       } catch(e) {
         alert(e.data.message.replace('execution reverted: ',''))
       }
@@ -141,11 +141,11 @@ let contractAddress = {
     });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-    let satallowContract = new ethers.Contract(contractAddress.satallowAddr, contractAbi.satallow, signer);
+    let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
 
    
     try {
-      await satallowContract.addmento();
+      await metallowContract.addmento();
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
