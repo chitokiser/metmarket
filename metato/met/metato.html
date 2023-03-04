@@ -124,6 +124,11 @@
             <li class="list-group-item">MET주소 : 0xb0f78f9577A851b7a1BA5Ac246c6adB1E2ECbcEA</li>
             <li class="list-group-item">유통 총량 = <span id="Soldmet">-</span>MET</li>
             <li class="list-group-item">시가 총액 = <span id="Metcap">-</span>CYA</li><!-- 시가총액-->
+            <li class="list-group-item">MET 1개 가격 = <span id="Metprice2">-</span>CYA</li>
+            <li class="list-group-item">레벨10기준 토큰당순이익(년)EPS = <span id="Meteps">-</span>CYA</li>
+            <li class="list-group-item">레벨10기준 토큰투자대비수익률(년)ROI = <span id="Metroi">-</span>%</li>
+            <li class="list-group-item">레벨10기준 토큰수익비율(년)PER = <span id="Metper">-</span>PER</li>
+            <li class="list-group-item">토큰 순자산 비율PBR = <span id="Metpbr">-</span>PBR</li>
             <li class="list-group-item">판매가능MET수량 = <span id="Mtvl">-</span>MET</li>
             <li class="list-group-item">멤버만 거래가능 <button class="btn btn-outline-success" type="submit" onclick="Automember()">
               멤버되기</button></li>
@@ -136,15 +141,20 @@
           <ul class="list-group">
             <li class="list-group-item">나의 MET : <span id="Mymet">-</span>MET</li>
             <li class="list-group-item">나의 MET 가치: <span id="Mymetvalue"></span>CYA</li>
-            <li class="list-group-item">다음 배당 예상금액 : <span id="Myeps"></span>CYA</li>
+
+            <li class="list-group-item">다음 배당 예상금액 : <span id="Myallow"></span>CYA</li>
             <!--geteps-->
             <li class="list-group-item">다음 배당까지 남은 시간 : <span id="Metallowtime">-</span></li>
+            <li class="list-group-item"><button class="btn btn-outline-success" type="submit" onclick="Mwithdraw()">CYA 배당받기</button></li>
             <li class="list-group-item">MET매도를 하려면 레벨 10이상 부터 가능합니다</li>
             <li class="list-group-item">나의 현재레벨 : <span id="Mylevel">-</span></li>
+          
           </ul>
 
           
-            <button class="btn btn-outline-success" type="submit" onclick="Mwithdraw()">CYA 배당받기</button>
+          <button class="btn btn-outline-success" type="submit" onclick="">
+            MET 거래하기 
+            </button>
           
             <div class="alert alert-secondary" role="alert">
           <div class="input-group mb-3">

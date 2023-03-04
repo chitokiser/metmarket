@@ -23,7 +23,7 @@
     let chartData = [];
     while (true) {
       try {
-        const close = parseFloat(ethers.utils.formatUnits(await mttallowContract.g5(i), 18)).toFixed(7);
+        const close = parseFloat(ethers.utils.formatUnits(await mttallowContract.g5(i), 18)).toFixed(8);
         console.log(i + ":" + close)
         if (j === 4) {
           j=0;

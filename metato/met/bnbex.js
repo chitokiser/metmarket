@@ -19,6 +19,7 @@
             "function getprice() public view returns(uint256)",
             "function bnbsell(uint256 num) public",
             "function balance()public view returns(uint256)",
+            "function priceup(uint256 num)public",
             "function cyabalances() public view returns(uint256)",
             "function g1(address user) public view returns(uint256)",
             "function g2(address user) public view returns(uint256)"
@@ -99,7 +100,7 @@
 
 
 
-      const Priceup = async () => {
+      let Priceup = async () => {
         const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
         await window.ethereum.request({
             method: "wallet_addEthereumChain",
@@ -119,10 +120,10 @@
         const signer = userProvider.getSigner();
        
        
-      
-        const cyadex2Contract = new ethers.Contract(contractAddress.cyadex2Addr, contractAbi.cyadex2, signer);
+        //cyadex1에서 가격 업 함..remix abi가 잘못됨
+        const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
         try {
-          await cyadex2Contract.priceup(parselnt(document.getElementById('Upprice').value));
+          await cyadexContract.priceup(document.getElementById('Upprice').value);
         } catch(e) {
           alert(e.data.message.replace('execution reverted: ',''))
         }

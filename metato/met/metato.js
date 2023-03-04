@@ -26,6 +26,7 @@ let contractAbi = {
     metallow: [
       "function getprice() public view returns(uint256)",
       "function buymet(uint _num) public",
+      "function allow() public view returns(uint256)",
       "function sellmet(uint _num)public returns(bool)",
       "function getlevel(address user) public view virtual returns(uint256)",
       "function withdraw( )public returns(bool)",
@@ -56,13 +57,19 @@ let contractAbi = {
     let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, provider);
   
     let totalsold = await metallowContract.getsold();
+    let cyabalan = await metallowContract.g1() /1e18;
     let metprice =  await metallowContract.price();
-
-    
+    let meteps = (metprice/1e19/2)*12;
+    let metprice3 =  metprice/1e18;
+    let metcap =  (metprice*totalsold)/1e18;
     document.getElementById("Soldmet").innerHTML = (totalsold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //유통총량
-    document.getElementById("Metcap").innerHTML = ((metprice*totalsold)/1e18).toFixed(6);//시가총액
+    document.getElementById("Metcap").innerHTML = (metcap).toFixed(6);//시가총액
     document.getElementById("Mtvl").innerHTML = (100000000-totalsold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //계약에 가지고 있는 MET 잔고
-
+    document.getElementById("Metprice2").innerHTML = (metprice/1e18).toFixed(10); 
+    document.getElementById("Meteps").innerHTML = (meteps).toFixed(10); 
+    document.getElementById("Metroi").innerHTML = (meteps/metprice3*100).toFixed(2);
+    document.getElementById("Metper").innerHTML = (metprice3/meteps).toFixed(2);  
+    document.getElementById("Metpbr").innerHTML = ((metcap/cyabalan)).toFixed(2); 
   };
   
   let MmemberLogin = async () => {
@@ -86,13 +93,14 @@ let contractAbi = {
     let metallowContract = new ethers.Contract(contractAddress.metallowAddr, contractAbi.metallow, signer);
     let mymet = metallowContract.g7(await signer.getAddress());
     let mymetvalue = await metallowContract.price() * await mymet;
-    let myeps = metallowContract.geteps(await signer.getAddress());
+    let myallow = metallowContract.geteps(await signer.getAddress());
     let mylevel = metallowContract.getlevel(await signer.getAddress());
 
     document.getElementById("Mymet").innerHTML = await mymet;
     document.getElementById("Mymetvalue").innerHTML=(mymetvalue/1e18).toFixed(6); 
-    document.getElementById("Myeps").innerHTML = (await myeps/1e18).toFixed(6); 
+    document.getElementById("Myallow").innerHTML = (await myallow/1e18).toFixed(10); 
     document.getElementById("Mylevel").innerHTML = await mylevel;
+
     let metContract =  new ethers.Contract(contractAddress.metAddr, contractAbi.met, signer);
     let at = parseInt(await metContract.getdepot(await signer.getAddress()));
     let nowt = Math.floor(new Date().getTime() / 1000);

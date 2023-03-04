@@ -50,7 +50,7 @@ let contractAddress = {
     document.getElementById("Cyatvl").innerHTML=(cyatvl/1e18).toFixed(3);
 
     // met price
-    document.getElementById("Metprice").innerHTML=(metprice/1e18).toFixed(3);
+    document.getElementById("Metprice").innerHTML=(metprice/1e18).toFixed(8);
     // members *2 허수적용
     document.getElementById("Members").innerHTML=(members);  
     
