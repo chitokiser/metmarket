@@ -47,43 +47,42 @@
       };
 
       const topDataSync = async () => {
-
-         // BNB Price
+    
+        // BNB Price
 const responseBinanceTicker = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT');
 const bnbPrice = parseFloat(responseBinanceTicker.data.price);
 document.getElementById("bPrice").innerHTML=bnbPrice.toFixed(4);
-document.getElementById("cPrice").innerHTML=(bnbPrice/1000).toFixed(4);
+document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
 
 
-        
-        let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
-        let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, provider);
+       // ethers setup
+       let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
+       let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, provider);
+     
+       
+       let cyadexPrice = await cyadexContract.getprice();
+       let dexBal = await cyadexContract.balance();
+       let cyamemContract = new ethers.Contract(contractAddress.cyamemAddr, contractAbi.cyamem, provider);
+       let mems = await cyamemContract.sum();
+       let cyabankContract = new ethers.Contract(contractAddress.cyabankAddr, contractAbi.cyabank, provider);
+       let allows = await cyabankContract.allow();
+       let cyabankPrice = await cyabankContract.price();
+       let cyatvl = await cyabankContract.g1();  //cya 보유량
+       let cutcir = await cyabankContract.g11();  //cut유통량
+       let eps = ((allows/1e18)*(1/200)*52);  //cut유통량
+       
+       document.getElementById("cyaPrice2").innerHTML=  parseFloat(1/cyadexPrice).toFixed(6);
+       document.getElementById("tvl").innerHTML=  parseFloat(dexBal/1e18).toFixed(3);  //안전금고 잔고 합사
+       document.getElementById("cyaCir").innerHTML = (cutcir);
+       document.getElementById("mem").innerHTML = parseInt(mems);
+       document.getElementById("cutPrice").innerHTML=(cyabankPrice/1e18).toFixed(6);
+       document.getElementById("Eps").innerHTML=(eps).toFixed(6);
+       document.getElementById("Per").innerHTML=((cyabankPrice/eps)/1e18).toFixed(3);
+     
       
-        
-        const cyadexPrice = await cyadexContract.getprice();
-        let dexBal = await cyadexContract.balance();
-        let cyamemContract = new ethers.Contract(contractAddress.cyamemAddr, contractAbi.cyamem, provider);
-        let mems = await cyamemContract.sum();
-        let cyabankContract = new ethers.Contract(contractAddress.cyabankAddr, contractAbi.cyabank, provider);
-        let allows = await cyabankContract.allow();
-        let cyabankPrice = await cyabankContract.price();
-        let cyatvl = await cyabankContract.g1();  //cya 보유량
-        let cutcir = await cyabankContract.g11();  //cut유통량
-       
-        document.getElementById("cyaPrice2").innerHTML=  parseFloat(1000/cyadexPrice).toFixed(3);
-        document.getElementById("tvl").innerHTML=  parseFloat(dexBal/1e18).toFixed(3);  //안전금고 잔고 합사
-        document.getElementById("cyaCir").innerHTML = (cutcir);
-        document.getElementById("cyaCir2").innerHTML = (cutcir);
-        document.getElementById("mem").innerHTML = parseInt(mems);
-        document.getElementById("cutPrice").innerHTML=(cyabankPrice/1e18).toFixed(6);
-        document.getElementById("cutPrice2").innerHTML=(cyabankPrice/1e18).toFixed(6);
-        document.getElementById("allocation").innerHTML=(allows/1e18).toFixed(6);
-        document.getElementById("marketCap").innerHTML=((cyabankPrice/1e18)*cutcir).toFixed(3);
-        document.getElementById("Cyabal").innerHTML = (cyatvl/1e18).toFixed(3);
-
-       
-      };
-
+      
+     };
+  
 
       
       const addTokenCut = async () => {
@@ -120,7 +119,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice/1000).toFixed(4);
     await window.ethereum.request({
       method: "wallet_addEthereumChain",
       params: [{
-          chainId: "204",
+          chainId: "0xCC",
           rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
           chainName: "opBNB",
           nativeCurrency: {
