@@ -7,14 +7,14 @@
 
   // Graphs
   const contractAddress = {
-    cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f"
+    cyacoopAddr: "0xE823F9d04faF94a570409DC0076580ba74820B4c"
   };
   const contractAbi = {
     cyacoop: [
       "function g5(uint256 _num) public view returns(uint256)",
     ]
   };
-  const provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
+  const provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3');
   const cyacoopContract = new ethers.Contract(contractAddress.cyacoopAddr, contractAbi.cyacoop, provider);
 
   let i = 0;

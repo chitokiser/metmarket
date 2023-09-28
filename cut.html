@@ -21,10 +21,10 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="https://metato.biz/">
           <img src="https://i.ibb.co/FXZnR5D/cyalogo2.png" alt="" width="88" height="32">
         </a>
-        <a href="pratner.html"><img src="https://i.ibb.co/rpCKCFy/topid.png" alt="" width="120" height="27"><a>
+        <a href="index.html"><img src="https://i.ibb.co/rpCKCFy/topid.png" alt="" width="120" height="27"><a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -32,20 +32,17 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link" href="cyadex.html">CYA Exchange</a>
+              <a class="nav-link" href="cyadex.html">CYA</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cyasevice.html">CYA P2E</a>
+              <a class="nav-link" href="cyasevice.html">CAT</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cutlist.html">CUT List</a>
+              <a class="nav-link" href="cut.html">CUT</a>
             </li>
-        
+     
             <li class="nav-item">
-              <a class="nav-link" href="community.html">Community</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./mypage/mypage.html">My page</a>
+              <a class="nav-link" href="./mypage/mypage.html">마이페이지</a>
             </li>
           </ul>
 
@@ -53,19 +50,19 @@
       </div>
     </nav>
     </head>
-    <!-- 여기까지 헤드 -->
+    <!-- head -->
 
     <body>
      
       <div class="alert alert-secondary" role="alert">
-        <!-- 바디 감싸기 -->
+      
         <div class="container">
           <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <div class="col">
-              <div class="p-3 border bg-light">1BNB=$<span id="bnbPrice">-</span></div>
+              <div class="p-3 border bg-light">1BNB=$<span id="bPrice">-</span></div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">1BNB=<span id="cyaPrice">-</span>CYA</div>
+              <div class="p-3 border bg-light">1BNB=<span id="cPrice">-</span>CYA</div>
             </div>
             <div class="col">
               <div class="p-3 border bg-light">1CYA = $1000</div>
@@ -74,40 +71,43 @@
               <div class="p-3 border bg-light">1CYA = <span id="cyaPrice2">-</span>BNB</div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">1CAT = <span id="catPrice">-</span>CYA</div>
-            </div>
-          
-            <div class="col">
-              <div class="p-3 border bg-light">참여자= <span id="members">-</span>명</div>
-            </div>
-            <div class="col">
               <div class="p-3 border bg-light">BNB TVL = <span id="tvl">-</span>BNB</div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">BNB TVL2 : <span id="tvl2">-</span> BNB</div>
+              <div class="p-3 border bg-light">CUT유통량: <span id="cyaCir">-</span> CUT</div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">CYA TVL : <span id="cyatvl">-</span> CYA</div>
+              <div class="p-3 border bg-light">Member= <span id="mem">-</span>Holder</div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">CAT 유통량:<span id="Catsold">-</span> CAT</div>
+              <div class="p-3 border bg-light">1CUT = <span id="cutPrice">-</span>CYA</div>
+            </div>
+      
+            <div class="col">
+              <div class="p-3 border bg-light">1CUT배당액 : <span id="allocation">-</span>CAY</div>
+            </div>
+           
+            <div class="col">
+              <div class="p-3 border bg-light">CYATVL<span id="Cyabal">-</span> CYA</div>
             </div>
           </div>
         </div>
-      </div>
-    
-        <!--여기까지 대쉬보드 -->
-        
+        <p></p>
+        </div>
+        <!--dash board -->
           <div class="bg-light p-5 rounded">
-            <h3>CYA Allowcatoin Token</h3>
-            <p>현재가 : 1CAT = <span id="catprice">-</span>CYA</p>
-            <p>토큰심볼 : CAT</p>
-            <p>수익모델 : 다른 CUT으로 부터 세금</p>
+            <h3>CUT(CYA Utility Token)</h3>
+            <p>현재가 : 1CUT = <span id="cutPrice2">-</span>CYA</p>
+            <p>토큰심볼 : CUT</p>
+            <p>수익모델 : 온오프라인 시아동맹 매출 10%</p>
           </div>
+          <div>
+          <button class="btn btn-outline-success"  role="button"  onclick="addTokenCut()"><a><img src= "../images/cyalogo32x32.png" > </a>CUT 자동추가 </button>
+         
+        </div>
           <link href="dashboard.css" rel="stylesheet">
-          <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h3 class="h3">CAT가격 변화</h3>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h3 class="h3">CUT가격 변화</h3>
             <div class="btn-toolbar mb-2 mb-md-0">
               <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <span data-feather="calendar"></span>
@@ -127,55 +127,61 @@
       <div class="panel panel-default">
         <ul class="list-group">
           <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-            CAT 기본정보
+            CUT 기본정보
           </button>
           <ul class="list-group">
-            <li class="list-group-item">발행가능총량 = 1,000,000,000CAT</li>
-            <button class="btn btn-outline-success" type="submit" onclick="addcat()">
-              CAT 메타마스크에 자동추가
-              </button>
-            <li class="list-group-item">CAT 주소 : 0xE9f81b32E6cEca07819806B827AEA1C71C53d257</li>
-            <li class="list-group-item">유통 총량 = <span id="outstandingCoin">-</span>CAT</li>
+            <li class="list-group-item">유통량 = <span id="cyaCir2">-</span>CUT</li>
+         
+            <li class="list-group-item">CUT 주소 : 0xE3Db99b8fBd7154201eA7F6326390787d1c53614</li>
+    
             <li class="list-group-item">시가 총액 = <span id="marketCap">-</span>CYA</li><!-- 시가총액-->
-            <li class="list-group-item">계약 잔고 = <span id="contractBalance">-</span>CYA </li>
+        
           </ul>
 
           <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-            CAT 보유 특별혜택
+            CUT 보유 특별혜택
           </button>
           <li class="list-group-item"> 운영 정책에 대한 제안 가능</li>
           <li class="list-group-item"> 안건에 대한 투표 가능</li>
-          <li class="list-group-item">제안에 대한 의견이나 투표참여시 CAT소유량에 비례하여 CYA Token 제공</li>
-          <li class="list-group-item">레벨1 이상만 CAT거래를 할 수 있습니다<a class="btn btn-light" href="./mypage/mypage.html"
+          <li class="list-group-item">제안에 대한 의견이나 투표참여시 CUT소유량에 비례하여 CUT 제공</li>
+          <li class="list-group-item">레벨1 이상만 배당받을 수 있습니다<a class="btn btn-light" href="./mypage/mypage.html"
               role="button">레벨1되기 &raquo;</a> </li>
 
           <!-- List group -->
-          <button class="btn btn-outline-success" type="submit" onclick="catmemberLogin()">
-          나의 현황보기
+          <button class="btn btn-outline-success" type="submit" onclick="cutmemberLogin()">
+          나의 현황보기(클릭하면 메타마스크와 연결)
           </button>
           <ul class="list-group">
-            <li class="list-group-item">나의 CAT : <span id="myCat">-</span>CAT</li>
-            <li class="list-group-item">나의 CAT 가치: <span id="myCatValue"></span>CYA</li>
-            <li class="list-group-item">다음 배당 예상금액 : <span id="eps"></span>CYA</li>
-            <!--geteps-->
+            <li class="list-group-item">나의 CUT : <span id="myCut">-</span>CUT</li>
+           
+            <li class="list-group-item">나의 CUT 총액 : <span id="myCutvalue">CYA</span>CYA</li>
+            <li class="list-group-item">나의 파워 : <span id="myPower"></span>P</li>
+            <li class="list-group-item">나의 CAT : <span id="myCat"></span>CAT</li>
             <li class="list-group-item">다음 배당까지 남은 시간 <span id="epsLeftTime">-</span></li>
-            <li class="list-group-item">CAT매도까지 남은 시간 <span id="sellLeftTime">-</span></li>
+
           </ul>
 
           
-            <button class="btn btn-outline-success" type="submit" onclick="withdraw()">CYA Token 배당받기</button>
+            <button class="btn btn-outline-success" type="submit" onclick="withdraw()">배당받기</button>
           
 
-          <h3>CAT 거래</h3>
+          <h3>CUT 거래</h3>
           <div class="input-group mb-3">
             <input type="text" id="buyAmount" class="form-control" placeholder="구매할  CAT 개수입력(소수점허용안됨)" aria-label="CYA"
               aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buycat()">CAT 사기</span>
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buycut()">CUT 사기</span>
+          </div>
+          <div><span style="color:red">CUT을 팔기위해서는 팔려고 하는 CUT만큼 파워가 필요 합니다</span></div>
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="catAmount" placeholder="충전할 만큼의 CAT입력(소수점허용안됨)" aria-label="CYA"
+              aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Powerup()">파워충전</span>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" id="sellAmount" placeholder="판매할  CAT 개수 입력(소수점허용안됨)" aria-label="CYA"
+            <input type="text" class="form-control" id="sellAmount" placeholder="판매할 만큼 파워가 있다면  CUT 개수 입력(소수점허용안됨)" aria-label="CYA"
               aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="sellCat()">CAT 팔기</span>
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="sellCut()">CUT 팔기</span>
           </div>
 
 
@@ -194,12 +200,9 @@
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>
-<script src="cat.js"></script>
-<script type=module src="module/topinfo.js"></script>
-<script type="module">
-  import topDataSync from 'module/topinfo.js'
-</script>
-<!--topinfo export 없는데 어떻게 작동하는지?-->
+<script src="cut.js"></script>
+
+
 </body>
 
 </html>
