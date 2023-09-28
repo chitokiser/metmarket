@@ -66,6 +66,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
        let mems = await cyamemContract.sum();
        let cyabankContract = new ethers.Contract(contractAddress.cyabankAddr, contractAbi.cyabank, provider);
        let allows = await cyabankContract.allow();
+       let cyabal = await cyabankContract.g1();
        let cyabankPrice = await cyabankContract.price();
        let cutcir = await cyabankContract.g11();  //cut유통량
        let eps = ((allows/1e18)*(1/200)*52);  //주당 순이익 레벨10인경우 52주 배당
@@ -76,7 +77,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
        document.getElementById("mem").innerHTML = parseInt(mems);
        document.getElementById("cutPrice").innerHTML=(cyabankPrice/1e18).toFixed(6);
        document.getElementById("Eps").innerHTML=(eps).toFixed(6);
-      
+       document.getElementById("Cyabal").innerHTML=(cyabal/1e18).toFixed(2);
       document.getElementById("Per").innerHTML=(per).toFixed(3);
       document.getElementById("CutcirP").innerHTML=((cutcir*cyabankPrice)/1e18).toFixed(3); //시가총액
       document.getElementById("Ycg").innerHTML=((10/per)*10).toFixed(2); //년 수익률
