@@ -132,7 +132,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
       }]
   });
     await userProvider.send("eth_requestAccounts", []);
-    let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3');
+    let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
     let signer = userProvider.getSigner();
     let cyabankContract = new ethers.Contract(contractAddress.cyabankAddr, contractAbi.cyabank, signer);
     let cyabankContract2 = new ethers.Contract(contractAddress.cyabankAddr, contractAbi.cyabank,provider);
@@ -164,7 +164,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
       method: "wallet_addEthereumChain",
       params: [{
           chainId: "0xCC",
-          rpcUrls: ["https://opbnb-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3"],
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
           chainName: "opBNB",
           nativeCurrency: {
               name: "BNB",
@@ -193,7 +193,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
       method: "wallet_addEthereumChain",
       params: [{
           chainId: "0xCC",
-          rpcUrls: ["https://opbnb-mainnet.nodereal.io/v1/e9a36765eb8a40b9bd12e680a1fd2bc5"],
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
           chainName: "opBNB",
           nativeCurrency: {
               name: "BNB",
@@ -221,7 +221,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
       method: "wallet_addEthereumChain",
       params: [{
           chainId: "0xCC",
-          rpcUrls: ["https://opbnb-mainnet.nodereal.io/v1/e9a36765eb8a40b9bd12e680a1fd2bc5"],
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
           chainName: "opBNB",
           nativeCurrency: {
               name: "BNB",
@@ -249,7 +249,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
       method: "wallet_addEthereumChain",
       params: [{
           chainId: "0xCC",
-          rpcUrls: ["https://opbnb-mainnet.nodereal.io/v1/3dc8527e1718485b86dd869bd840f562"],
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
           chainName: "opBNB",
           nativeCurrency: {
               name: "BNB",

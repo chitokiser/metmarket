@@ -176,11 +176,11 @@ const bnbPrice = parseFloat(responseBinanceTicker.data.price);
             if (event.target.value < 0.001) {
               alert("now enough value");
             } else {
-              document.getElementById('bnbOutput').value=event.target.value*parseFloat(await cyadexContract.getprice())/1000
+              document.getElementById('bnbOutput').value=event.target.value*parseFloat(await cyadexContract.getprice())
             }
           });
           selectElement2.addEventListener('change', async (event) => {
-            document.getElementById('cyaOutput').value=event.target.value/parseFloat(await cyadexContract.getprice())*990
+            document.getElementById('cyaOutput').value=event.target.value/parseFloat(await cyadexContract.getprice())*990/1000
           })
           })();
 

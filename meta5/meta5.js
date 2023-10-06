@@ -1,189 +1,194 @@
 let contractAddress = {  
-    cyacoopAddr: "0xfd323330e67a965098a38E8f173aC85fA5a9fA9f",  
-    meta5Addr: "0x4213ae7dd30FE130DB04B28a7D9bB7fA9666880E"
+    meta5Addr: "0x20517593aF1704fdc3Ae0c8A791aC0D25bc04ad9"
   };
   let contractAbi = {
   
     meta5: [
-       "function creat(uint _account,string memory _pass1,string memory _pass2,uint _balan )public",
-       "function memberjoin(address _mento)public",
-       "function buy(uint _account)public",
-       "function sell(uint _account,uint _balan)public",
-       "function withdraw( )public",
-       "function confirm(uint _account)public",
-       "function cencell(uint _account)public",
-       "function t1set(uint _num,uint _account)public",
-       "function balanset(uint _account,uint _balan)public",
-       "function g1() public view virtual returns(uint256)",
-       "function g3(address user) public view virtual returns(uint256)",
-       "function getpass1(uint _account) public view returns(string memory)",
-       "function getpass2(uint _account) public view returns(string memory)",
-       "function getbalan(uint _account) public view returns(uint256)",
-       "function getmymetalength() public view returns(uint256)",
-       "function getmymeta(uint num) public view returns(uint256)",
-       "function getmydepo() public view returns(uint256)",
-       "function getl1(uint _id) public view returns(uint256)",
-       "function getl2(uint _id) public view returns(uint256)",
-       "function getl3(uint _id) public view returns(uint256)",
-       "function gett4(uint _id) public view returns(uint256)",
-       "function gett5(uint _id) public view returns(uint256)",
-       "function t1lengeth() public view returns(uint256)",
-       "function t2lengeth() public view returns(uint256)",
-       "function t3lengeth() public view returns(uint256)",
-       "function t4lengeth() public view returns(uint256)",
-       "function t5lengeth() public view returns(uint256)",
-       "function owner(uint _num) public view returns(address)",
-       "function getstate(uint _account) public view  returns(uint256)",
-       "function getlevel(address user) public view  returns(uint256)"
+       "function newmeta(uint _nftid,uint _metanum,string memory _pass,uint256 _init,string memory _mainpass) public",
+       "function remetabuy(uint _nftid) public",
+       "function remetaadd(uint _nftid,uint _metanum,string memory _pass,uint256 _init,string memory _mainpass) public",
+       "function exactadd(uint _nftid) public",
+       "function deletemeta(uint _nftid) public",
+       "function exact(uint _nftid,uint _cat) public",
+       "function allowcation(uint tokenid )public returns(bool)",
+       "function newrequest()public  view virtua returns(bool)",
+       "function g6() public view virtual returns(uint256)",
+       "function g7() public view virtual returns(uint256)",
+       "function g8(address user) public view virtual returns(uint256)",
+       "function getcat(address user) public view virtual returns(uint256)",
+       "function getownerOf(uint256 _nftid)public view virtual returns (address)",
+       "function getmainpass(uint tokenid) external view returns (string memory)",
+       "function getpass(uint256 tokenid) external view returns (string memory)",
+       "function requestlength()external view returns (uint)",
+       "function getrequest(uint num)external view returns (uint)",
+       "function getsales(uint _meta5)external view returns (uint)",
+       "function getmeta5(uint tokenid)external view returns (uint256[] memory)",
+       "function getmetainfo(uint tokenid) public view returns(uint256 nftid,uint256 metanum,string memory metapass, uint256 init,bool play,uint256 depot)",
+       "function metainfo(uint tokenid) public view returns(uint256 nftid,uint256 metanum,string memory metapass, uint256 init,bool play,uint256 depot)"
       ],
       
-      cyacoop: [
-        "function getprice() public view returns(uint256)",
-        "function allow() public view returns(uint256)",
-        "function g1() public view returns(uint256)",
-        "function g2() public view returns(uint256 allowt, uint256 exp, uint8 level, uint256 booster)",
-        "function g6() public view returns(uint256)",
-        "function g7(address user) public view returns(uint256)",
-        "function memberjoin(uint256 _num) public",
-        "function automemberjoin() public",
-        "function levelup() public returns(bool)",
-        "function geteps(address user) external view returns (uint256)",
-        "function withdraw() public returns(bool)",
-        "function mentolength() public view returns(uint256)",
-        "function addmento() public",
-        "function buybooster() public",
-        "function buycat(uint _num) public returns(bool)",
-        "function sellcat(uint num) public returns(bool)"
-      ]
+ 
 
   };
 
-  let MtopDataSync = async () => {
+  let topDataSync = async () => {
 
-    let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
+    let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
     let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, provider);
- 
+  
+    
+    let newreq = await meta5Contract.newrequest();
+    let metacut = await meta5Contract.g6();
+    let metacat = await meta5Contract.g7();
+    let request = await meta5Contract.requestlength();
+  
+    document.getElementById("Newreq").innerHTML= (newreq);
+    document.getElementById("Metacut").innerHTML= (metacut);
+    document.getElementById("Metacat").innerHTML = (metacat);
+    document.getElementById("Request").innerHTML = (request);
+
+    const nftIds = [2, 3, 4]; // NFT ID 목록
+
+    for (let i = 0; i < nftIds.length; i++) {
+      const nftId = nftIds[i];
+  
+      const nftInfo = await meta5Contract.getmetainfo(nftId);
+      const owner = await meta5Contract.getownerOf(nftId);
+      const priceElementId = `Metanum${nftId}`;  //어카운트
+      const wpassElementId = `Wpass${nftId}`;  //관람자비번
+      const ownerElementId = `Owner${nftId}`;
+      const saleStatusElementId = `Play${nftId}`;
+      const leftTimeElementId = `LeftTime${nftId}`;
+  
+      const priceElement = document.getElementById(priceElementId);
+      const wpassElement = document.getElementById(wpassElementId);
+      const ownerElement = document.getElementById(ownerElementId);
+      const saleStatusElement = document.getElementById(saleStatusElementId);
+      const leftTimeElement = document.getElementById(leftTimeElementId);
+   
+
+  
+      // 요소가 존재하는지 확인하고 값을 설정
+      if (priceElement) {
+        priceElement.innerHTML = nftInfo.metanum;
+      }
+      if (wpassElement) {
+        wpassElement.innerHTML = nftInfo.metapass;
+      }
+      if (ownerElement) {
+        ownerElement.innerHTML = owner;
+      }
+      
+     
+      if (saleStatusElement) {
+        if (nftInfo.play === false) {
+          saleStatusElement.textContent = "현재 뭔가 요청한 상태 입니다";
+        } else {
+          saleStatusElement.textContent = "현재 플레이 가능 상태 입니다";
+        }
+      }
+
+      if (leftTimeElement) {
+        let nowt = Math.floor(new Date().getTime() / 1000);
+        let left1 = parseInt(await nftInfo.depot);
+        let left = parseInt((left1+ 604800 ) - nowt);      
+        let day = parseInt(left/60/60/24);
+        let hour = parseInt(left/3600)%24;
+        let min = parseInt((left/60)%60);
+        let sec = left%60;
+        leftTimeElement.innerHTML = left > 0 ? `${day}일${hour}시간${min}분${sec}초` : '';
+      }
+    }
   };
-
  
 
 
 
-
-  let Memberjoin = async () => {
+  let Exactadd = async (Nftid) => {
     
       let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0x38",
-              rpcUrls: ["https://bsc-dataseed.binance.org/"],
-              chainName: "Binance Smart Chain",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://bscscan.com/"]
-          }]
-      });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-      
-      let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, signer);
-      
-      try {
-        await meta5Contract.memberjoin(document.getElementById('mentoaddr').value);
-      } catch(e) {
-        alert(e.data.message.replace('execution reverted: ',''))
-      }
-    };
-
-
-  let Buy = async () => {
-    
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0x38",
-              rpcUrls: ["https://bsc-dataseed.binance.org/"],
-              chainName: "Binance Smart Chain",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://bscscan.com/"]
-          }]
-      });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-      
-      let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, signer);
-      
-      try {
-        await meta5Contract.buy(document.getElementById('Account').value);
-      } catch(e) {
-        alert(e.data.message.replace('execution reverted: ',''))
-      }
-  };
-
-  let Sell = async () => {
-    
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [{
-            chainId: "0x38",
-            rpcUrls: ["https://bsc-dataseed.binance.org/"],
-            chainName: "Binance Smart Chain",
+            chainId: "0xCC",
+            rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+            chainName: "opBNB",
             nativeCurrency: {
                 name: "BNB",
                 symbol: "BNB",
                 decimals: 18
             },
-            blockExplorerUrls: ["https://bscscan.com/"]
+            blockExplorerUrls: ["https://opbnbscan.com"]
         }]
     });
+      await userProvider.send("eth_requestAccounts", []);
+      let signer = userProvider.getSigner();
+      
+      let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, signer);
+      
+      try {
+        await meta5Contract.exactadd(Nftid);
+      } catch(e) {
+        alert(e.data.message.replace('execution reverted: ',''))
+      }
+  };
+
+
+  let Remetabuy = async (Nftid) => {
+    
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
     
     let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, signer);
-    let anum = document.getElementById('Anum').value;
-    let price1 =  document.getElementById('Price1').value;
+    
     try {
-      await meta5Contract.sell(anum,price1);
+      await meta5Contract.exactadd(Nftid);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
 };
 
 
-let Withdraw = async () => {
+
+let Allow = async (Nftid) => {
     
   let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
   await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [{
-          chainId: "0x38",
-          rpcUrls: ["https://bsc-dataseed.binance.org/"],
-          chainName: "Binance Smart Chain",
-          nativeCurrency: {
-              name: "BNB",
-              symbol: "BNB",
-              decimals: 18
-          },
-          blockExplorerUrls: ["https://bscscan.com/"]
-      }]
-  });
+    method: "wallet_addEthereumChain",
+    params: [{
+        chainId: "0xCC",
+        rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+        chainName: "opBNB",
+        nativeCurrency: {
+            name: "BNB",
+            symbol: "BNB",
+            decimals: 18
+        },
+        blockExplorerUrls: ["https://opbnbscan.com"]
+    }]
+});
   await userProvider.send("eth_requestAccounts", []);
   let signer = userProvider.getSigner();
   
   let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, signer);
- 
+  
   try {
-    await meta5Contract.withdraw();
+    await meta5Contract.allowcation(Nftid);
   } catch(e) {
     alert(e.data.message.replace('execution reverted: ',''))
   }
@@ -191,77 +196,47 @@ let Withdraw = async () => {
 
 
 
-let Mymeta = async () =>{
+
+
+let Getpass = async (Nftid) => {
+    
   let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
   await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [{
-        chainId: "0x38",
-        rpcUrls: ["https://bsc-dataseed.binance.org/"],
-        chainName: "Binance Smart Chain",
+    method: "wallet_addEthereumChain",
+    params: [{
+        chainId: "0xCC",
+        rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+        chainName: "opBNB",
         nativeCurrency: {
             name: "BNB",
             symbol: "BNB",
             decimals: 18
         },
-        blockExplorerUrls: ["https://bscscan.com/"]
+        blockExplorerUrls: ["https://opbnbscan.com"]
     }]
-  });
+});
+
+
   await userProvider.send("eth_requestAccounts", []);
   let signer = userProvider.getSigner();
   let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, signer);
-  let mydepo = await meta5Contract.getmydepo();
-  document.getElementById("Getmydepo").innerHTML = (mydepo/1e18).toFixed(6);
-  let mymetat = await meta5Contract.getmymetalength();  
-  document.getElementById("Mymetat").innerHTML = (mymetat);
+  let mp;
+if (Nftid === 2) {
+    mp = await meta5Contract.getmainpass(2);
+    document.getElementById("Mp2").innerHTML = mp;
+} else if (Nftid === 3) {
+    mp = await meta5Contract.getmainpass(3);
+    document.getElementById("Mp3").innerHTML = mp;
 
+} else if (Nftid === 4) {
+  mp = await meta5Contract.getmainpass(4);
+  document.getElementById("Mp4").innerHTML = mp;
 }
 
-
-let Getpass = async () => {
-    
-  let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-  await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [{
-          chainId: "0x38",
-          rpcUrls: ["https://bsc-dataseed.binance.org/"],
-          chainName: "Binance Smart Chain",
-          nativeCurrency: {
-              name: "BNB",
-              symbol: "BNB",
-              decimals: 18
-          },
-          blockExplorerUrls: ["https://bscscan.com/"]
-      }]
-  });
-  await userProvider.send("eth_requestAccounts", []);
-  let signer = userProvider.getSigner();
-  let meta5Contract = new ethers.Contract(contractAddress.meta5Addr, contractAbi.meta5, signer);
-  let anum2 = document.getElementById('Anum2').value;
-  let mp = await meta5Contract.getpass2(anum2);
-  document.getElementById("Mp").innerHTML = (mp);
 };
 
 
+ // 호출 코드
+ topDataSync();
+  
 
-
-  (async () => {
-    HtopDataSync();
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0x38",
-            rpcUrls: ["https://bsc-dataseed.binance.org/"],
-            chainName: "Binance Smart Chain",
-            nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://bscscan.com/"]
-        }]
-    });
-    await userProvider.send("eth_requestAccounts", []);
-  })();
