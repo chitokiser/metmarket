@@ -1,0 +1,23 @@
+/* 이미지 크기를 조절하기 위한 스타일 */
+.card-img-top {
+    width: 100%; /* 이미지의 너비를 100%로 설정하여 부모 요소에 맞게 크기 조절 */
+    height: auto; /* 높이를 자동으로 조절하여 이미지 비율 유지 */
+    max-height: 200px; /* 이미지의 최대 높이를 지정 (원하는 크기로 조절) */
+  }
+  
+  /* styles.css */
+
+/* .card-group를 flex로 설정하여 가로 방향으로 정렬 */
+.card-group {
+    display: flex;
+    flex-wrap: wrap; /* 넘치면 다음 줄로 내려가게 함 */
+    justify-content: space-between; /* 요소 사이의 간격을 최대한 벌림 */
+}
+
+/* 각 .card의 너비를 24%로 설정하여 한 줄에 4개씩 보이게 함 */
+.card {
+    width: 32%;
+    margin-bottom: 20px; /* 카드 아래 여백 추가 (선택 사항) */
+}
+
+/* 카드 사이의 간격을 조절하려면 margin 또는 padding을 사용할 수 있습니다. */

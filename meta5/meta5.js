@@ -42,7 +42,10 @@ let contractAddress = {
     let metacat = await meta5Contract.g7();
     let request = await meta5Contract.requestlength();
   
+    
+    
     document.getElementById("Newreq").innerHTML= (newreq);
+
     document.getElementById("Metacut").innerHTML= (metacut);
     document.getElementById("Metacat").innerHTML = (metacat);
     document.getElementById("Request").innerHTML = (request);
@@ -80,6 +83,8 @@ let contractAddress = {
       }
       
      
+     
+      
       if (saleStatusElement) {
         if (nftInfo.play === false) {
           saleStatusElement.textContent = "현재 뭔가 요청한 상태 입니다";
@@ -87,7 +92,6 @@ let contractAddress = {
           saleStatusElement.textContent = "현재 플레이 가능 상태 입니다";
         }
       }
-
       if (leftTimeElement) {
         let nowt = Math.floor(new Date().getTime() / 1000);
         let left1 = parseInt(await nftInfo.depot);
