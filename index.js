@@ -59,7 +59,7 @@
             let eps = ((allows/1e18)*(1/200)*52);  //cut유통량
             
             document.getElementById("cyaPrice2").innerHTML=  parseFloat(1/cyadexPrice).toFixed(6);
-            document.getElementById("tvl").innerHTML=  parseFloat(dexBal/1e18).toFixed(3);  //안전금고 잔고 합사
+            document.getElementById("tvl").innerHTML=  parseFloat(dexBal/1e18).toFixed(3);  //안전금고 잔고 합산
             document.getElementById("cyaCir").innerHTML = (cutcir);
             document.getElementById("mem").innerHTML = parseInt(mems);
             document.getElementById("cutPrice").innerHTML=(cyabankPrice/1e18).toFixed(6);
