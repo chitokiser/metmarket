@@ -159,13 +159,12 @@ let MemberLogin = async () => {
   let signer = userProvider.getSigner();
   let cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
   let mydepo = await cyafarmContract.getmydepo();
-
   let mygain = await cyafarmContract.getmygain();
   
   let mywin = await cyafarmContract.getmywin();
   let myseed = await cyafarmContract.getmyseedmoney();
   let mycat = await cyafarmContract.getmycat(); 
-  console.log(mycat);
+
   document.getElementById("farmdepo").innerHTML= parseInt(mydepo);  //예치금 총액
   document.getElementById("farmgain").innerHTML = parseInt(mygain); //순이익 총액
   document.getElementById("farmwin").innerHTML = parseInt(mywin); //인출 총액

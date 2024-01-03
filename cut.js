@@ -5,6 +5,7 @@
         cyabankAddr:"0xE823F9d04faF94a570409DC0076580ba74820B4c",
         erc20: "0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748",
         cut: "0xE3Db99b8fBd7154201eA7F6326390787d1c53614",
+        cutdefiAddr:"0xdFF7cA654021566dFDc00acA9D4d187E6a4ad346",
       };
       const contractAbi = {
         cyadex: [
@@ -27,10 +28,10 @@
           "function g8(address user) public view virtual returns(uint256)",
           "function g10() public view virtual returns(uint256)",
           "function allow() public view returns(uint256)",
-          "function allowt() public view returns(uint256)",
+          "function allowt(address user) public view returns(uint256)",
           "function g11() public view virtual returns(uint256)",
           "function geteps(address user) external view returns (uint256)",
-          "function gettime( ) external view returns (uint256)",
+          "function gettime() external view returns (uint256)",
           "function getcat(address user) public view virtual returns(uint256)",
           "function withdraw( )public returns(bool)",
           "function buycut(uint _num) public returns(bool)",
@@ -43,7 +44,20 @@
         ],
         cut: [
           "function getdepot(address user) external view returns (uint256)"
-        ]
+        ],
+        cutdefi: [
+          "function buycut() public returns(bool)",
+          "function sellcut(uint num)public returns(bool)",
+          "function g1() public view virtual returns(uint256)",
+          "function g2() public view returns(uint256)",
+          "function g3() public view virtual returns(uint256)",
+          "function g6() public view virtual returns(uint256)",
+          "function g8() public view virtual returns(uint256)",
+          "function g13() public view virtual returns(uint256)",
+          "function g18(address user) public view virtual returns(uint256)",
+          
+          
+        ],
       };
 
       const topDataSync = async () => {
@@ -58,7 +72,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
        // ethers setup
        let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
        let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, provider);
-     
+
        
        let cyadexPrice = await cyadexContract.getprice();
        let dexBal = await cyadexContract.balance();
@@ -80,8 +94,20 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
        document.getElementById("Cyabal").innerHTML=(cyabal/1e18).toFixed(2);
       document.getElementById("Per").innerHTML=(per).toFixed(3);
       document.getElementById("CutcirP").innerHTML=((cutcir*cyabankPrice)/1e18).toFixed(3); //시가총액
-      document.getElementById("Ycg").innerHTML=((10/per)*10).toFixed(2); //년 수익률
-      document.getElementById("Allow").innerHTML=((allows*1/200)/1e18).toFixed(8); //년 수익률
+      document.getElementById("Ycg").innerHTML=((10/per)*10).toFixed(2); //APR
+      document.getElementById("Allow").innerHTML=((allows*1/200)/1e18).toFixed(8); 
+      document.getElementById("Apy").innerHTML=  parseFloat((per)^52).toFixed(2); //APY
+    
+      let cutdefiContract = new ethers.Contract(contractAddress.cutdefiAddr, contractAbi.cutdefi,provider);
+      let min = await cutdefiContract.g8();
+      let cutprice = await cutdefiContract.g2();
+      let minprice = await cutdefiContract.g13();
+      let sellprice = await cutdefiContract.g1();
+
+      document.getElementById("Min").innerHTML = (min*10/100).toFixed(0); //cutdefi 최소 구매개수
+      document.getElementById("Minprice").innerHTML = (minprice/1e18).toFixed(4); //cutdefi 최소 구매금액
+      document.getElementById("Cutprice").innerHTML = (cutprice/1e18).toFixed(4); //cutdefi 구매단가
+      document.getElementById("Sellprice").innerHTML = (sellprice/1e18).toFixed(4); //cutdefi 판매단가
      };
   
 
@@ -140,15 +166,20 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
     let mycut = parseInt(await cyabankContract.g8(await signer.getAddress()));
     let mypower = parseInt(await cyabankContract.g9(await signer.getAddress()));
     let mycat = parseInt(await cyabankContract.getcat(await signer.getAddress()));
+    let myallow= parseInt(await cyabankContract.geteps(await signer.getAddress()));
   
   
     document.getElementById("myCut").innerHTML = (mycut).toFixed(0);
     document.getElementById("myCutvalue").innerHTML = (mycut*(bankprice/1e18)).toFixed(6);
     document.getElementById("myPower").innerHTML = (mypower);
     document.getElementById("myCat").innerHTML = (mycat);
-   // document.getElementById("eps").innerHTML = parseFloat(ethers.utils.formatUnits(await cyabankContract.geteps(await signer.getAddress()), 18)).toFixed(18);
-
-    let left = parseInt(await cyabankContract.gettime());
+    
+   
+  
+    let myt = parseInt(await cyabankContract2.allowt(await signer.getAddress()));
+    let time2 = parseInt(604800); 
+    let nowt = Math.floor(new Date().getTime()/ 1000);
+    let left = parseInt((myt + time2)- nowt );
     let day = parseInt(left/60/60/24);
     let hour = parseInt(left/3600)%24;
     let min = parseInt((left/60)%60);
@@ -237,7 +268,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
     let cyabankContract = new ethers.Contract(contractAddress.cyabankAddr, contractAbi.cyabank, signer);
 
     try {
-      await cyabankContract.buycut(document.getElementById('buyAmount').value);
+      await cyabankContract.buycut();
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -271,6 +302,62 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
     }
   };
 
+  let Salebuycut = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+
+    let cutdefiContract = new ethers.Contract(contractAddress.cutdefiAddr, contractAbi.cutdefi, signer);
+
+    try {
+      await cutdefiContract.buycut();
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+  let Salesellcut = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+
+    let cutdefiContract = new ethers.Contract(contractAddress.cutdefiAddr, contractAbi.cutdefi, signer);
+
+    try {
+      await cutdefiContract.sellcut(document.getElementById('salesell').value);
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+ 
 
 
     (async () => {

@@ -1,5 +1,6 @@
 let contractAddress = {
-  cyamemAddr: "0x3Fa37ba88e8741Bf681b911DB5C0F9d6DF99046f" 
+  cyamemAddr: "0x3Fa37ba88e8741Bf681b911DB5C0F9d6DF99046f",
+  cutdefiAddr:"0xdFF7cA654021566dFDc00acA9D4d187E6a4ad346",
 
   };
   let contractAbi = {
@@ -17,8 +18,17 @@ let contractAddress = {
       "function getmymento(address user)public view returns(address)",
       "function  levelcheck(address user)public view returns(uint256)",
       "function  mentolevelcheck(address user)public view returns(uint256)"
-   
-    ]
+    ],
+    cutdefi: [
+      "function g1() public view virtual returns(uint256)",
+      "function g2() public view returns(uint256)",
+      "function g3() public view virtual returns(uint256)",
+      "function g6() public view virtual returns(uint256)",
+      "function g8() public view virtual returns(uint256)",
+      "function withdraw()public returns(bool)",
+      "function g18(address user) public view virtual returns(uint256)",
+      "function g16(address user) public view virtual returns(uint256)",
+    ],
 
   };
 
@@ -87,6 +97,12 @@ let contractAddress = {
     document.getElementById("Mymento").innerHTML = (mymento);
     document.getElementById("Mymentolevel").innerHTML = (mymentolevel);
     document.getElementById("LevelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다. 
+
+    let cutdefiContract = new ethers.Contract(contractAddress.cutdefiAddr, contractAbi.cutdefi, signer);
+    let myfee = parseInt(await cutdefiContract.g18(await signer.getAddress()));
+    let totalfee = parseInt(await cutdefiContract.g16(await signer.getAddress()));
+    document.getElementById("Myfee").innerHTML=(myfee/1e18).toFixed(4);
+    document.getElementById("Totalfee").innerHTML=(totalfee/1e18).toFixed(4);
   };
 
   let Levelup = async () => {
@@ -183,6 +199,37 @@ let Bonuswithdraw = async () => {
 
 };
 
+
+let Withdraw = async () => {
+   
+  let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  await window.ethereum.request({
+    method: "wallet_addEthereumChain",
+    params: [{
+        chainId: "0xCC",
+        rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+        chainName: "opBNB",
+        nativeCurrency: {
+            name: "BNB",
+            symbol: "BNB",
+            decimals: 18
+        },
+        blockExplorerUrls: ["https://opbnbscan.com"]
+    }]
+});
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
+
+  let cutdefiContract = new ethers.Contract(contractAddress.cutdefiAddr, contractAbi.cutdefi, signer);
+  
+  try {
+    await cutdefiContract. withdraw(); //cutdefi 멘토수당
+    //await cyabankContract.buycut(document.getElementById('buyAmount').value);
+  } catch(e) {
+    alert(e.data.message.replace('execution reverted: ',''))
+  }
+
+};
 
 let Mentolevelup = async () => {
    
