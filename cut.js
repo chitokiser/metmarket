@@ -23,7 +23,7 @@
         cyabank: [
           "function g1() public view virtual returns(uint256)",
           "function price() public view returns(uint256)",
-          "function g6() public view virtual returns",
+          "function g6() public view virtual returns(uint256)",
           "function g7() public view virtual returns(uint256)",
           "function g8(address user) public view virtual returns(uint256)",
           "function g10() public view virtual returns(uint256)",
@@ -80,7 +80,8 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
        let mems = await cyamemContract.sum();
        let cyabankContract = new ethers.Contract(contractAddress.cyabankAddr, contractAbi.cyabank, provider);
        let allows = await cyabankContract.allow();
-       let cyabal = await cyabankContract.g1();
+       let cyabal = await cyabankContract.g1(); //cya잔고
+       let cutbal = await cyabankContract.g6(); //cut잔고
        let cyabankPrice = await cyabankContract.price();
        let cutcir = await cyabankContract.g11();  //cut유통량
        let eps = ((allows/1e18)*(1/200)*52);  //주당 순이익 레벨10인경우 52주 배당
@@ -91,7 +92,8 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
        document.getElementById("mem").innerHTML = parseInt(mems);
        document.getElementById("cutPrice").innerHTML=(cyabankPrice/1e18).toFixed(6);
        document.getElementById("Eps").innerHTML=(eps).toFixed(6);
-       document.getElementById("Cyabal").innerHTML=(cyabal/1e18).toFixed(2);
+       document.getElementById("Sccya").innerHTML=(cyabal/1e18).toFixed(2);
+       document.getElementById("Sccut").innerHTML= parseInt(cutbal-1000000000);
       document.getElementById("Per").innerHTML=(per).toFixed(3);
       document.getElementById("CutcirP").innerHTML=((cutcir*cyabankPrice)/1e18).toFixed(3); //시가총액
       document.getElementById("Ycg").innerHTML=((10/per)*10).toFixed(2); //APR
@@ -268,7 +270,7 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
     let cyabankContract = new ethers.Contract(contractAddress.cyabankAddr, contractAbi.cyabank, signer);
 
     try {
-      await cyabankContract.buycut();
+      await cyabankContract.buycut(document.getElementById('buyAmount').value);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }

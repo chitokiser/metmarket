@@ -32,22 +32,25 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="../index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cyadex.html">CYA</a>
+              <a class="nav-link" href="../cyadex.html">CYA</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cyasevice.html">CAT</a>
+              <a class="nav-link" href="../cyasevice.html">CAT</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cut.html">CUT</a>
+              <a class="nav-link" href="../cut.html">CUT</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="defi.html">Defi</a>
+              <a class="nav-link" href="../defi.html">Defi</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./mypage/mypage.html">Mypage</a>
+              <a class="nav-link" href="../cyatree2.html">P2E</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../mypage/mypage.html">Mypage</a>
             </li>
           </ul>
 
@@ -56,6 +59,7 @@
     </nav>
     </head>
     <!-- head -->
+    
   <!-- body 시작 -->
     <body>
      
@@ -102,9 +106,7 @@
             <div class="col">
               <div class="p-3 border bg-light">1회배당 :<span id="Allow">-</span> CYA</div>
             </div>
-            <div class="col">
-              <div class="p-3 border bg-light">CYA TVL:<span id="Cyabal">-</span> CYA</div>
-            </div>
+          
             <div class="col">
               <div class="p-3 border bg-light">APR :<span id="Ycg">-</span> %</div>
             </div>
@@ -154,12 +156,14 @@
           <li class="list-group-item"> 운영 정책에 대한 제안 가능</li>
           <li class="list-group-item"> 안건에 대한 투표 가능</li>
           <li class="list-group-item">제안에 대한 의견이나 투표참여시 CUT소유량에 비례하여 CUT 제공</li>
+          <li class="list-group-item">계약CUT잔고 : <span id="Sccut">-</span>CUT</li>
+          <li class="list-group-item">계약CYA잔고 : <span id="Sccya">-</span>CYA</li>
           <li class="list-group-item">레벨1 이상만 배당받을 수 있습니다<a class="btn btn-light" href="./mypage/mypage.html"
               role="button">레벨1되기 &raquo;</a> </li>
 
           <!-- List group -->
           <button class="btn btn-outline-success" type="submit" onclick="cutmemberLogin()">
-          나의 현황보기(클릭하면 지갑과 연결)
+          나의 현황보기(지갑연결)
           </button>
           <div><span style="color:red">배당을 받기 위해서는 거래소에서 1개이상이라도 CUT을 구매한 기록이 필요합니다(1회이상 거래기록 있어야  배당시간 활성화 됨)</span></div>
           <ul class="list-group">
