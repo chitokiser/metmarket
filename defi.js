@@ -54,8 +54,7 @@
        document.getElementById("Apr").innerHTML=  parseFloat(apr).toFixed(2); //년 이자율 apr
        document.getElementById("Apy").innerHTML=  parseFloat((rate)^yac).toFixed(2); //년 수익률 apy
      };
-  
-
+     
      let Input = async () => {
       let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await window.ethereum.request({
@@ -113,7 +112,6 @@
     document.getElementById("Myrate").innerHTML=  parseFloat(myrate/100).toFixed(2); //내 이율
     document.getElementById("Mybenefit").innerHTML = parseFloat(mybenefit/1e18).toFixed(4);;  //내 정산금액
     
- 
     let day = parseInt(left/60/60/24);
     let hour = parseInt(left/3600)%24;
     let min = parseInt((left/60)%60);

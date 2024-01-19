@@ -95,7 +95,10 @@
     
         let cyatree2Contract = new ethers.Contract(contractAddress.cyatree2Addr, contractAbi.cyatree2, signer);
         let get2 = await cyatree2Contract.g2(await signer.getAddress());
-        let sum = await cyatree2Contract.getsum();
+        let sum =  parseInt(await cyatree2Contract.getsum());
+      
+        //console.log(sum);
+    
         document.getElementById("Dep").innerHTML =  (get2.dep*10); 
          document.getElementById("Depo").innerHTML=  parseFloat(get2.depo /1e18).toFixed(0);//cya인출가능액
          document.getElementById("Depo2").innerHTML=  parseFloat(get2.depo /1e18).toFixed(0);//cya인출가능액
@@ -103,7 +106,17 @@
          document.getElementById("Push").innerHTML =  parseFloat(get2[6]/1e18).toFixed(0);
          document.getElementById("Pushpay").innerHTML = parseFloat(get2.pushpay/1e18).toFixed(0);
          
- document.getElementById("RipeBar").style.width = `${(sum-(get2.asum  + get2.mynum))/get2.dep*100}%`; 
+         let mynum =  parseInt(get2.mynum);  
+         let asum =  parseInt(get2.asum); 
+         let dep =  parseInt(get2.dep);     
+         let bar =  parseInt(sum-(mynum + asum));   
+         
+         console.log(bar);  
+         console.log(dep);  
+        document.getElementById("Sum").innerHTML = (asum);          
+        document.getElementById("Bar").style.width = `${(bar/dep)*100}%`;
+
+ 
  document.getElementById("Mywc").innerHTML =  (10-get2.wc);
     
     };  

@@ -104,7 +104,8 @@
           </div>
           <button class="btn btn-outline-success" cursor: pointer; onclick="TmemberLogin()">지갑연결</button>
         <li class="list-group-item">신규 참여하시고 메타마스크 지갑을 연결 하면 나의 수당 정보가 보입니다</li>
-        <li class="list-group-item">이번 신규참여자 수당액 : <span id="Dep">-</span>CYA</li>
+        <li class="list-group-item">수당준비번호: <span id="Sum">-</span>번</li>
+        <li class="list-group-item">이번 신규참여자 수당액(아직 미참여 경우 0으로 표시됨): <span id="Dep">-</span>CYA</li>
         <li class="list-group-item">인출가능한 추천 수당액: <span id="Push">-</span>CYA</li>
         <li class="list-group-item">인출가능한 신규 참여자 수당액: <span id="Depo">-</span>CYA</li>
         <li class="list-group-item">누적 신규참여자 수당액: <span id="Totaldepo">-</span>CYA</li>
@@ -113,7 +114,7 @@
        
         
         <li class="list-group-item"><div class="progress">
-        <div class="progress-bar progress-bar-striped bg-danger" id="RipeBar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></li>
+        <div class="progress-bar progress-bar-striped bg-danger" id="Bar" role="progressbar" aria-valuenow="75" aria-valuemin="1" aria-valuemax="100" style="width: 1%"></li>
           <li class="list-group-item">막대가 100% 채워지면 신규참여자 수당 수령이 가능합니다</li>  
         <button class="btn btn-outline-success" cursor: pointer; onclick="Tcheck()">신규참여자 수당 수령하기 </button>
         <button class="btn btn-outline-success" cursor: pointer; onclick="Expush()">추천 수당 수령하기 </button>
