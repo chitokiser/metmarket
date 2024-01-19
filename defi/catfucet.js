@@ -1,6 +1,6 @@
  
       const contractAddress = {
-        catfaucetAddr: "0xFC2EE608c727ae8148cE3529D5D6FEaE63198f8c",
+        catfaucetAddr: "0x08EDcf65D041217D74bF250d5b48dde34e9B19AF",
       
       };
       const contractAbi = {
@@ -11,6 +11,7 @@
           "function mycut() public view returns(uint256)",
           "function allowt() public view returns(uint256)",
           "function gettime() public view returns(uint256)",
+          "function catbalances() public view returns(uint256)",
           "function mycutbalances(address user) public view returns(uint256)"
         ]
       
@@ -24,8 +25,10 @@
        let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
        let catfaucetContract = new ethers.Contract(contractAddress.catfaucetAddr, contractAbi.catfaucet, provider);
        let catpay = await catfaucetContract.getpay();
+       let get3 = await catfaucetContract.catbalances();
        
        document.getElementById("Catpay").innerHTML=  (catpay);
+       document.getElementById("Get3").innerHTML=  (get3);
     
      };
   
