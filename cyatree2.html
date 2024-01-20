@@ -67,9 +67,9 @@
           </div>
         <div class="bg-light p-5 rounded">
           <p>추천인을 입력하고 참여하기를 하시면 150CYA가 지불 되고 이에 해당하는 CUT이 이체됩니다</p>
-          <p>150CYA에 해당하는 CUT과 더불어 추천수당 1회당 50CYA가 지불됩니다</p>
+          <p>추천을 받으면 추천수당 1회당 50CYA가 지불됩니다</p>
           <p>나 이후 신규참여자에 대한 수당 최대20,460CYA까지 10회 지불됩니다 </p>
-
+          <p>신규 참여자 배당 요건 : 전체참여자수 - (가입번호 + 수당배수) >= 수당배수 </p>
         </div>
         <div class="card" style="width: rem; text-align: center;">
           <img src="/images/moneytree2.jpg" class="card-img-top" alt="pendig" style="width: 100%; max-width: 400px; margin: 0 auto;">
@@ -104,8 +104,9 @@
           </div>
           <button class="btn btn-outline-success" cursor: pointer; onclick="TmemberLogin()">지갑연결</button>
         <li class="list-group-item">신규 참여하시고 메타마스크 지갑을 연결 하면 나의 수당 정보가 보입니다</li>
-        <li class="list-group-item">수당준비번호: <span id="Sum">-</span>번</li>
-        <li class="list-group-item">이번 신규참여자 수당액(아직 미참여 경우 0으로 표시됨): <span id="Dep">-</span>CYA</li>
+        <li class="list-group-item">수당배수: <span id="Dep">-</span>배</li>
+        <li class="list-group-item">가입번호: <span id="Sum">-</span>번</li>
+        <li class="list-group-item">이번 신규참여자 수당액(미참여 상태에서는 0으로 표시됨): <span id="Dep10">-</span>CYA</li>
         <li class="list-group-item">인출가능한 추천 수당액: <span id="Push">-</span>CYA</li>
         <li class="list-group-item">인출가능한 신규 참여자 수당액: <span id="Depo">-</span>CYA</li>
         <li class="list-group-item">누적 신규참여자 수당액: <span id="Totaldepo">-</span>CYA</li>

@@ -1,6 +1,6 @@
  
       const contractAddress = {
-        defiAddr: "0x2A73d3B5EDbe3bb4D2E72496b9C9927890186A49",
+        defiAddr: "0x2A73d3B5EDbe3bb4D2E72496b9C9927890186A49",  //cyadefi
       };
       const contractAbi = {
     

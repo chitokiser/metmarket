@@ -105,11 +105,15 @@ document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
       let cutprice = await cutdefiContract.g2();
       let minprice = await cutdefiContract.g13();
       let sellprice = await cutdefiContract.g1();
+      let cutdeficutbal = await cutdefiContract.g8();
+      let cutdeficyabal = await cutdefiContract.g6();
 
       document.getElementById("Min").innerHTML = (min*10/100).toFixed(0); //cutdefi 최소 구매개수
       document.getElementById("Minprice").innerHTML = (minprice/1e18).toFixed(4); //cutdefi 최소 구매금액
       document.getElementById("Cutprice").innerHTML = (cutprice/1e18).toFixed(4); //cutdefi 구매단가
       document.getElementById("Sellprice").innerHTML = (sellprice/1e18).toFixed(4); //cutdefi 판매단가
+      document.getElementById("Cutbal").innerHTML = (cutdeficutbal); //cut잔고
+      document.getElementById("Cyabal").innerHTML = (cutdeficyabal/1e18).toFixed(4); //cya잔고
      };
   
 

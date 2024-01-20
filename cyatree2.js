@@ -98,8 +98,8 @@
         let sum =  parseInt(await cyatree2Contract.getsum());
       
         //console.log(sum);
-    
-        document.getElementById("Dep").innerHTML =  (get2.dep*10); 
+        document.getElementById("Dep").innerHTML =  (get2.dep); 
+        document.getElementById("Dep10").innerHTML =  (get2.dep*10); 
          document.getElementById("Depo").innerHTML=  parseFloat(get2.depo /1e18).toFixed(0);//cya인출가능액
          document.getElementById("Depo2").innerHTML=  parseFloat(get2.depo /1e18).toFixed(0);//cya인출가능액
          document.getElementById("Totaldepo").innerHTML =  parseFloat((get2.totaldepo-get2.pushpay) /1e18 ).toFixed(0); //cya누적수당
