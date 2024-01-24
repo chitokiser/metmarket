@@ -73,20 +73,18 @@
               <div class="p-3 border bg-light">정산기간:<span id="Defitime">-</span>일</div>
             </div>
             <div class="col">
-              <div class="p-3 border bg-light">1CAT팔때:<span id="Catsell">-</span>CYA</div>
+              <div class="p-3 border bg-light">CYA잔고:<span id="Treecyabal">-</span>CYA</div>
             </div>
            
             <div class="col">
-              <div class="p-3 border bg-light">1CAT살때:<span id="Catbuy">-</span>CYA</div>
+              <div class="p-3 border bg-light">CUT보유량:<span id="Treecutbal">-</span>CUT</div>
             </div>
             <div class="col">
               <div class="p-3 border bg-light">Defi잔고:<span id="Defitvl">-</span>CYA</div>
             </div>
+  
             <div class="col">
-              <div class="p-3 border bg-light">CAT보유량:<span id="Deficat">-</span>CAT</div>
-            </div>
-            <div class="col">
-              <div class="p-3 border bg-light">CAT시가총액:<span id="Tprice">-</span>CYA</div>
+              <div class="p-3 border bg-light">CUT시가총액:<span id="Tprice">-</span>CYA</div>
             </div>
             <div class="col">
               <div class="p-3 border bg-light">1회정산 수익율:<span id="Rate">-</span>%</div>
@@ -97,9 +95,7 @@
             <div class="col">
               <div class="p-3 border bg-light">APR:<span id="Apr">-</span>%</div>
             </div>
-            <div class="col">
-              <div class="p-3 border bg-light">APY:<span id="Apy">-</span>%</div>
-            </div>
+          
           </div>
         </div>
         <p></p>
@@ -108,11 +104,9 @@
         <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
          CYA Defi안내
           </button>
-        <li class="list-group-item">CAT거래소 차익을 유동성을 제공(CYA스테이킹)한 회원에게 제공합니다</li>
+        <li class="list-group-item">토큰 거래소 차익을 유동성을 제공(CYA스테이킹)한 참여자에게 CYA로 지급합니다</li>
         <li class="list-group-item">위에 APR(Annual Percentage Rate)은 연간 단리 수익율 입니다</li>
-        <li class="list-group-item">위에 APY(Annual Percentage Yield)은 연간 복리 수익율 입니다</li>
-        <li class="list-group-item">레벨3이상만 Defi 스테이킹(예치) 할 수 있습니다.레벨이 모자라면 CAT을 이용해 Mypage에서 레벨업을 완료 하세요</li>
-        <li class="list-group-item">Defi 수익율은  CAT거래 및 잔고등에 의해 자동 변경됩니다</li>
+        <li class="list-group-item">Defi 수익율은  CUT 시세 및 Defi잔고등에 의해 자동 변경됩니다</li>
         <li class="list-group-item">정산 수익율은 스테이킹 할 때 시점 수익율로 고정되어 지급됩니다</li>
   
         
@@ -120,9 +114,8 @@
           <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
         CYA Defi에 스테이킹(예치) 하기 
           </button>
-          <li class="list-group-item">레벨3 이상만 스테이킹 할 수 있습니다 </li>
-          <a class="btn btn-light" href="./mypage/mypage.html" role="button">레벨업 하러 가기 &raquo;</a>
-              <li class="list-group-item">Defi잔고 기준 10%이내에서 스테이킹 가능합니다</li>
+  
+          <li class="list-group-item">스테이킹 가능금액 : <span id="Defitvl2">-</span>CYA 이하 스테이킹 가능</li>
           <div class="input-group mb-3">
             <input type="text" id="cyaAmount" class="form-control" placeholder="스테이킹할  CYA 개수입력" aria-label="CYA"
               aria-describedby="basic-addon2">

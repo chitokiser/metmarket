@@ -36,6 +36,7 @@
           "function withdraw( )public returns(bool)",
           "function buycut(uint _num) public returns(bool)",
           "function sellcut(uint num)public returns(bool)",
+          "function powerup(uint _cat )public",
           "function g9(address user) public view virtual returns(uint256)"
         ],
         erc20: [

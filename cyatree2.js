@@ -96,14 +96,17 @@
         let cyatree2Contract = new ethers.Contract(contractAddress.cyatree2Addr, contractAbi.cyatree2, signer);
         let get2 = await cyatree2Contract.g2(await signer.getAddress());
         let sum =  parseInt(await cyatree2Contract.getsum());
-      
-        //console.log(sum);
+        let total =  parseInt(get2.totaldepo);  
+        let totalpush =  parseInt(get2.pushpay);
+        let totaldep = parseInt(total-totalpush);
+        console.log(totaldep);
         document.getElementById("Dep").innerHTML =  (get2.dep); 
         document.getElementById("Dep10").innerHTML =  (get2.dep*10); 
+        document.getElementById("Push").innerHTML =  parseFloat(get2[6]/1e18).toFixed(0);
          document.getElementById("Depo").innerHTML=  parseFloat(get2.depo /1e18).toFixed(0);//cya인출가능액
          document.getElementById("Depo2").innerHTML=  parseFloat(get2.depo /1e18).toFixed(0);//cya인출가능액
-         document.getElementById("Totaldepo").innerHTML =  parseFloat((get2.totaldepo-get2.pushpay) /1e18 ).toFixed(0); //cya누적수당
-         document.getElementById("Push").innerHTML =  parseFloat(get2[6]/1e18).toFixed(0);
+         document.getElementById("Totaldep").innerHTML =  parseFloat(totaldep /1e18 ).toFixed(0); //cya누적수당
+         
          document.getElementById("Pushpay").innerHTML = parseFloat(get2.pushpay/1e18).toFixed(0);
          
          let mynum =  parseInt(get2.mynum);  
