@@ -47,7 +47,7 @@
               <a class="nav-link" href="../defi.html">Defi</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../cyatree2.html">P2E</a>
+              <a class="nav-link" href="../p2e/p2e.html">P2E</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../mypage/mypage.html">Mypage</a>
@@ -61,43 +61,27 @@
     <!-- head -->
 
     <body>
-     
+      <div class="d-grid gap-2">
+        <button class="btn btn-dark" type="button">CYA Farm</button>
+      </div>
    
 
-        <div class="bg-light p-5 rounded">
-          <h1>CAT Farm </h1>
-          <p>최저100개에서 계약이 가지고 있는 CAT잔고에서 최대 1/100까지 규모로 농장을 매수 할 수 있습니다</p>
-          <p>농장번호가 랜덤하게 결정됩니다</p>
-          <p>다음 참여자의 농장번호가 나의 농장번호와 같을 경우 해당 농장은 이익실현이 되면서 나의 농장은 자동 매각 됩니다.</p>
-          <p>하나의 계정으로 여러개의 농장을 동시에 매수할 수 있습니다</p>
-
-        </div>
-        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-          시아 농장 현황
-        </button>
-        <li class="list-group-item">거래가능 농장개수 :<span id="farmtotal">-</span>개</li>
+       
+          <li class="list-group-item">농장가격  :<span id="Fprice">-</span>FT(CYA)</li>
+          <li class="list-group-item">농장개수  :<span id="farmtotal">-</span>개</li>
         <li class="list-group-item">이번생성순번 : <span id="farmnum">-</span>번째</li>
-        <li class="list-group-item">계약잔고 : <span id="fcyatvl">-</span>CUT</li>
-        <li class="list-group-item">최고 입금가능액 : <span id="fcyatvl100">-</span>FT </li>
-        <li class="list-group-item">최저 입금가능액 : 100 FT</li>
+        <li class="list-group-item">계약잔고 : <span id="fcyatvl">-</span>CYA</li>
+        <li class="list-group-item">누적CUT세금 : <span id="Ttax">-</span>CYA</li>
         <div class="list-group">
 
           <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-            CAT으로 FT을 충전한 후 농장구매하기를 해야 합니다
+            CYA로 FT을 충전한 후 농장구매하기를 누르면 1회당 100FT 인출 됩니다
           </button>
           <div class="input-group mb-3">
-            <input type="text" id="Seed2" class="form-control" placeholder="100이상 충전가능합니다.교환 비율 1CAT:1FT"
+            <input type="text" id="Seed2" class="form-control" placeholder="구매예정 농자개수를 입력하세요  1개당 100CYA가 인출됩니다"
               aria-label="CYA" aria-describedby="basic-addon2">
             <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Charge()">농장구매용 FT충전</span>
-          </div>
-          
-          <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-            원하시는 FT 을 입력하고 농장구매하기를 눌러 주세요
-          </button>
-          <div class="input-group mb-3">
-            <input type="text" id="Seed" class="form-control" placeholder="농장 최저액~농장 최고액까지 입금가능합니다"
-              aria-label="CYA" aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buyfarm()">농장구매하기</span>
+         
           </div>
 
          
@@ -105,17 +89,19 @@
             <button class="btn btn-outline-success" type="submit" onclick="MemberLogin()">나의현황보기</button>
             
           
-            <li class="list-group-item">나의 누적 예치금 : <span id="farmdepo">-</span>CAT</li>
-            <li class="list-group-item">나의 누적 수익실현금액: <span id="farmgain">-</span>CAT</li>
-            <li class="list-group-item">나의 누적 인출총액: <span id="farmwin">-</span>CAT</li>
-            <li class="list-group-item">나의 남아있는 예치금: <span id="farmseed">-</span>CAT</li>
-            <li class="list-group-item">내가 보유중인 농장번호  <span id="myfarms"></span></li>
-            <li class="list-group-item">CAT으로 교환가능한 FT: <span id="farmjack">-</span>FT</li>
-          <div>
-            <button class="btn btn-outline-success" type="submit" onclick="fwithdraw()">CAT 교환하기</button>
-          </div>
+            <li class="list-group-item">나의 FT : <span id="farmdepo">-</span>FT</li>
+            <li class="list-group-item">나의 누적 수익실현금액: <span id="farmgain">-</span>CYA</li>
+            <li class="list-group-item">인출가능금액: <span id="farmjack">-</span>CYA</li>
+            <li class="list-group-item">농장구매하기를 누르면 1회당  -<span id="Fprice2">-</span>FT</li>
+            <li class="list-group-item">
+              <button class="btn btn-outline-success" type="submit" onclick="Buyfarm()">농장구매하기 </button>
+              <button class="btn btn-outline-success" type="submit" onclick="fwithdraw()">CYA인출하기</button>
+            </li>
+          
+
+          
           <div class="card-group" id="farmCards">
-            <!-- 농장 카드들이 여기에 추가됩니다 그런데 6개중 4개밖에 표시되지 않습니다. -->
+            <!-- 농장 카드들이 여기에 추가됩니다 그런데 12개중 4개밖에 표시되지 않습니다. -->
         </div>
 
     

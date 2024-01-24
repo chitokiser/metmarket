@@ -1,13 +1,14 @@
  // testnet
  let contractAddress = {
-  cyafarmAddr: "0xb33428f8124415Ad0D3EA88e5456EcB64694C3cB"
+  cyafarmAddr: "0x297897704076FE20E9b54202776a5eF2Ca6C8916"
 };
  let contractAbi = {
 
   cyafarm: [
-    "function seeding(uint256 pay) public",
+    "function seeding() public",
     "function withdraw( )public",
     "function g1( ) public view virtual returns(uint256)",
+    "function g2(address user) public view virtual returns(uint256)",
     "function pllength( ) public view returns(uint)",
     "function getpl(uint num) public view returns(uint)",
     "function allportinfo(uint num) public view returns(uint depo,uint depon,uint portn,address owner,uint start)",
@@ -18,9 +19,11 @@
     "function getmyseedmoney( ) public view returns(uint)",
     "function getmyfarm(uint num) public view returns(uint) ",
     "function getmygain( ) public view returns(uint)",
-    "function getmycat( ) public view returns(uint)", 
-    "function charge(uint pay) public",
-    "function remain( ) public view returns(uint256)"
+    "function gettax( ) public view returns(uint)", 
+    "function charge(uint num) public",
+    "function remain( ) public view returns(uint256)",
+    "function price( ) public view returns(uint256)",
+    "function totaltax( ) public view returns(uint256)"
   ]
 
 };
@@ -30,18 +33,19 @@ const topDataSync = async () => {
   // ethers setup
   const provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
   const cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr,contractAbi.cyafarm,provider);
-  //농장개수
+  const fprice = await cyafarmContract.price();
+  const fprice2 = await cyafarmContract.price();
   const fsum = await cyafarmContract.remain();
-  //농장생성순서
+  const ttax = await cyafarmContract.totaltax();
   const creatnum = await cyafarmContract.pllength();
   //계약잔고
   const fcyabal = await cyafarmContract.g1();
- 
+  document.getElementById("Fprice").innerHTML = (fprice);
+  document.getElementById("Fprice2").innerHTML = (fprice2);
   document.getElementById("farmtotal").innerHTML = (fsum);
   document.getElementById("farmnum").innerHTML = (creatnum);
-  document.getElementById("fcyatvl").innerHTML = (fcyabal);
-  document.getElementById("fcyatvl100").innerHTML = (fcyabal*10/100);
-
+  document.getElementById("fcyatvl").innerHTML = (fcyabal/1e18).toFixed(2);;
+  document.getElementById("Ttax").innerHTML = (ttax/1e18).toFixed(2);;
   
           // JavaScript 코드
           const nftIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -69,7 +73,7 @@ const topDataSync = async () => {
               
               const depoText = document.createElement("p");
               depoText.className = "card-text";
-              depoText.textContent = `최초 농장가치 : ${depoInfo.depo} CAT`;
+              depoText.textContent = `최초 농장가치 : ${depoInfo.depo} CYA`;
               
               const deponText = document.createElement("p");
               deponText.className = "card-text";
@@ -81,7 +85,7 @@ const topDataSync = async () => {
               
               const valueText = document.createElement("p");
               valueText.className = "card-text";
-              valueText.textContent = `농장현재가치 : ${valueInfo} CAT`;
+              valueText.textContent = `농장현재가치 : ${valueInfo} CYA`;
               
                 // 소유자 정보를 추가
   const ownerText = document.createElement("p");
@@ -160,16 +164,10 @@ let MemberLogin = async () => {
   let cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
   let mydepo = await cyafarmContract.getmydepo();
   let mygain = await cyafarmContract.getmygain();
-  
-  let mywin = await cyafarmContract.getmywin();
-  let myseed = await cyafarmContract.getmyseedmoney();
-  let mycat = await cyafarmContract.getmycat(); 
 
-  document.getElementById("farmdepo").innerHTML= parseInt(mydepo);  //예치금 총액
+  document.getElementById("farmdepo").innerHTML= parseInt(mydepo);  //충전금 총액
   document.getElementById("farmgain").innerHTML = parseInt(mygain); //순이익 총액
-  document.getElementById("farmwin").innerHTML = parseInt(mywin); //인출 총액
-  document.getElementById("farmseed").innerHTML = parseInt(myseed); //남아있는 예치금
-  document.getElementById("farmjack").innerHTML = parseInt(mycat*95/100); //찾을 돈
+  document.getElementById("farmjack").innerHTML = parseInt(mydepo*95/100); //인출 가능한돈 CYA
 
   
 };
@@ -194,11 +192,10 @@ let Buyfarm = async () => {
   });
   await userProvider.send("eth_requestAccounts", []);
   let signer = userProvider.getSigner();
-  let cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
-  let amount = parseInt(document.getElementById('Seed').value, 10);
+  let cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer)
 
   try {
-    await cyafarmContract.seeding(amount);
+    await cyafarmContract.seeding();
   } catch(e) {
     alert(e.message.replace('execution reverted: ',''));
   }
@@ -224,10 +221,8 @@ let Charge = async () => {
   await userProvider.send("eth_requestAccounts", []);
   let signer = userProvider.getSigner();
   let cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
-  let amount2 = parseInt(document.getElementById('Seed2').value, 10);
-
   try {
-    await cyafarmContract.charge(amount2);
+    await cyafarmContract.charge(document.getElementById('Seed2').value);
   } catch(e) {
     alert(e.message.replace('execution reverted: ',''));
   }
