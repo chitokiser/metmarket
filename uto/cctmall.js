@@ -60,10 +60,34 @@ let Abi = {
          document.getElementById("P2pc").innerHTML = (p2pc);
          document.getElementById("P2pn").innerHTML = (p2pn);
 
+     
+
+
+       
+         //3번상품
+         let p3cashback = await cctContract.g7(3);
+         document.getElementById("P3cash").innerHTML=  parseFloat(p3cashback/1e18).toFixed(2);
+         let p3 = await cctContract.g4(3);
+     
+         let p3name  = await p3[0];
+         let p3price  = await p3[1];
+         let p3pc  = await p3[2];
+         let p3pn  = await p3[3];
+     
+       
+         document.getElementById("P3name").innerHTML = (p3name);
+         document.getElementById("P3price").innerHTML = (p3price);
+         document.getElementById("P3pc").innerHTML = (p3pc);
+         document.getElementById("P3pn").innerHTML = (p3pn);
+
        let buylist1 = await cctContract.getcust(1);
        document.getElementById("Blist1").innerHTML = (buylist1);
+
        let buylist2= await cctContract.getcust(2);
        document.getElementById("Blist2").innerHTML = (buylist2);
+       let buylist3= await cctContract.getcust(3);
+       document.getElementById("Blist3").innerHTML = (buylist3);
+
   };
 
   let Buyp = async () => {
