@@ -1,3 +1,11 @@
+/* Adjust image size */
+.card-img-top {
+    width: 100%;
+    height: 100px;
+    max-height: 200px;
+}
+
+/* Set .card-group to flex to align it horizontally */
 .card-group {
     display: flex;
     flex-wrap: wrap;
@@ -6,7 +14,7 @@
 
 /* Set the width of each .card to 24% to fit 4 cards per line */
 .card {
-    width: calc(25% - 20px);
+    width: calc(24% - 20px); /* Adjusted width to fit 4 cards per line with some spacing */
     margin-bottom: 20px;
     box-sizing: border-box;
 }

@@ -9,9 +9,9 @@
   <meta name="generator" content="Hugo 0.88.1">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
   <link rel="shortcut icon" href="https://i.ibb.co/3YqKwff/bg.png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+  <link href="https:/cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  
+  <link href="cyafarm.css" rel="stylesheet"> 
 
 </head>
 
@@ -74,11 +74,12 @@
         <li class="list-group-item">누적CUT세금 : <span id="Ttax">-</span>CYA</li>
         <div class="list-group">
 
-          <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-            CYA로 FT을 충전한 후 농장구매하기를 누르면 1회당 100FT 인출 됩니다
-          </button>
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark" type="button">CYA로 FT을 충전한 후 농장구매하기를 누르면 1회당 100FT 인출 됩니다</button>
+          </div>
+      
           <div class="input-group mb-3">
-            <input type="text" id="Seed2" class="form-control" placeholder="구매예정 농자개수를 입력하세요  1개당 100CYA가 인출됩니다"
+            <input type="text" id="Seed2" class="form-control" placeholder="구매예정 농자개수를 입력하세요  1개당  100CYA씩 인출됩니다"
               aria-label="CYA" aria-describedby="basic-addon2">
             <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Charge()">농장구매용 FT충전</span>
          
@@ -93,18 +94,15 @@
             <li class="list-group-item">나의 누적 수익실현금액: <span id="farmgain">-</span>CYA</li>
             <li class="list-group-item">인출가능금액: <span id="farmjack">-</span>CYA</li>
             <li class="list-group-item">농장구매하기를 누르면 1회당  -<span id="Fprice2">-</span>FT</li>
-            <li class="list-group-item">
-              <button class="btn btn-outline-success" type="submit" onclick="Buyfarm()">농장구매하기 </button>
-              <button class="btn btn-outline-success" type="submit" onclick="fwithdraw()">CYA인출하기</button>
-            </li>
-          
-
-          
+            <div> <button class="btn btn-outline-success" type="submit" onclick="Buyfarm()">농장구매하기 </button></div>
+            <li class="list-group-item">추첨된 농장번호: <span id="eventData">-</span>번</li>
+            <div><button class="btn btn-outline-success" type="submit" onclick="fwithdraw()">CYA인출하기</button></div>
+            
           <div class="card-group" id="farmCards">
-            <!-- 농장 카드들이 여기에 추가됩니다 그런데 12개중 4개밖에 표시되지 않습니다. -->
+            
+            <!-- 농장 카드들이 여기에 추가됩니다 그런데 12개가 모두 한줄에 표시되고 있습니다. -->
         </div>
-
-    
+ 
 
         <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
           <p><a class="nav-link" href="https://twitter.com/choecheolung8">CYADAO소식</a></p>
@@ -118,6 +116,8 @@
               <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
               <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
               <script type="text/javascript"></script>
+              <script src="web3.min.js"></script>
+              <script src="app.js"></script>
               <script src="cyafarm.js"></script>
              
               </script>

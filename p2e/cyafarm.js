@@ -23,7 +23,8 @@
     "function charge(uint num) public",
     "function remain( ) public view returns(uint256)",
     "function price( ) public view returns(uint256)",
-    "function totaltax( ) public view returns(uint256)"
+    "function totaltax( ) public view returns(uint256)",
+    "event farmnum(uint winnum)"
   ]
 
 };
@@ -67,13 +68,13 @@ const topDataSync = async () => {
               const cardBody = document.createElement("div");
               cardBody.className = "card-body";
               
-              const cardTitle = document.createElement("h5");
+              const cardTitle = document.createElement("h6");
               cardTitle.className = "card-title";
               cardTitle.textContent = `농장번호 ${nftId}`;
               
               const depoText = document.createElement("p");
               depoText.className = "card-text";
-              depoText.textContent = `최초 농장가치 : ${depoInfo.depo} CYA`;
+              depoText.textContent = `최초농장가치 : ${depoInfo.depo} CYA`;
               
               const deponText = document.createElement("p");
               deponText.className = "card-text";
@@ -199,7 +200,8 @@ let Buyfarm = async () => {
   } catch(e) {
     alert(e.message.replace('execution reverted: ',''));
   }
-};
+
+}
 
 
 let Charge = async () => {
@@ -229,6 +231,3 @@ let Charge = async () => {
 };
 
 topDataSync();
-
-
-
