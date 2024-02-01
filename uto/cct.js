@@ -312,14 +312,14 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
       alert(e.data.message.replace('execution reverted: ',''))
     }
   };
-  const addcust = async () => {
+  const Addcct = async () => {
     await window.ethereum.request({
       method: 'wallet_watchAsset',
       params: {
         type: 'ERC20',
         options: {
-          address: "0xB96fefF9a0D1B13738b432dCC7F5Ced0109f4D73",
-          symbol: "CUST",
+          address: "0x97c29C2EC9fe37AFA26367E5477992618796A618",
+          symbol: "CCT",
           decimals: 0, 
           // image: tokenImage,
         },

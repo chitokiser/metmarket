@@ -109,7 +109,7 @@
             <li class="list-group-item">누적세금 : <span id="Ttax"></span>CYA</li>
           </ul>
       
-        <button class="btn btn-outline-success"  role="button"  onclick="Addtokencct()">CCT Token 자동추가 </button>
+        <button class="btn btn-outline-success"  role="button"  onclick="Addcct()">CCT Token 자동추가 </button>
         <P><a class="link" href="https://opbnbscan.com"></a>
           <!-- 챠트시작 --></P>
         <link href="cctboard.css" rel="stylesheet">
@@ -133,6 +133,7 @@
       
       
               <li class="list-group-item">추천인 어카운트를 입력 후 조합에 가입하세요(무료).멤버가입에 성공하면 레벨1이 되며 CCT를거래할 수 있습니다 </li>
+              <li class="list-group-item">추천인 어카운트 : 0x97665586235b76f6Fd34fDD1db675C2D129A6824</li>
               <div class="input-group mb-3">
                 <input type="text" id="mentoaddress" class="form-control" placeholder="추천인 어카운트를 입력하세요" aria-label="CYA"
                   aria-describedby="basic-addon2">    
@@ -207,31 +208,75 @@
         <li class="list-group-item">비례분배 공식 : 캐쉬백 준비금 총액 * 상품가격/(총 매출 - 캐쉬백받은 매출)</li>
         <li class="list-group-item">상품별 캐쉬백 금액을 확인 후 캐쉬백 받기를 실행하시면 이체 됩니다</li>
         <li class="list-group-item">CCT거래금액 및 상품구매현황에 따라 캐쉬백금액이 실시간 변경 됩니다</li>
-        <li class="list-group-item">캐쉬백 준비금 총액 : <span id="G1"></span>CYA</li>
-        <li class="list-group-item">캐쉬백 누적 총액 : <span id="G2"></span>CYA</li>
-        <div class="card" style="width: 18rem;">
-          <img src="\images\_cd13df24-abbc-4538-af40-f5df98ae9d23.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">하노이 블럭체인 투어</h5>
-            <p class="card-text">베트남 하노이 블럭체인 사업파트너 Meet up.</p>
+        <li class="list-group-item">캐쉬백 준비금 총액 : <span id="G1">-</span>CYA</li>
+        <li class="list-group-item">캐쉬백 누적 총액 : <span id="G2">-</span>CYA</li>
+       
+      
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">제품no1</h5>
+                <img src="\images\_cd13df24-abbc-4538-af40-f5df98ae9d23.jpg" class="card-img-top" alt="...">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">예정 캐쉬백<span id="P1cash"></span>CYA</li>
+                  <li class="list-group-item">상품명 :<span id="P1name"></span></li>
+                  <li class="list-group-item">가격 :<span id="P1price"></span>CCT</li>
+                  <li class="list-group-item">구매가능개수 : <span id="P1pc"></span>개</li>
+                  <li class="list-group-item">제품no :<span id="P1pn"></span></li> 
+                </ul>
+                <a href="#" class="btn btn-outline-success">제품상세보기</a>     
+              </div>
+            </div>
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">예정 캐쉬백<span id="P1cash"></span>CYA</li>
-            <li class="list-group-item">상품명<span id="P1name"></span></li>
-            <li class="list-group-item">가격<span id="P1price"></span>CCT</li>
-            <li class="list-group-item">구매가능개수  <span id="P1pc"></span>개</li>
-            <li class="list-group-item">제품no<span id="P1pn"></span></li> 
-          </ul>
-          <div class="card-body">
-            <a href="#" class="card-link">제품상세보기</a>
+      
+    
+        
+              <div class="col-sm-6">
+           <div class="card">
+             <div class="card-body">
+               <h5 class="card-title">제품no2</h5>
+               <img src="\images\glloo.png" class="card-img-top" alt="...">
+               <ul class="list-group list-group-flush">
+                 <li class="list-group-item">예정 캐쉬백<span id="P2cash"></span>CYA</li>
+                 <li class="list-group-item">상품명 :<span id="P2name"></span></li>
+                 <li class="list-group-item">가격 :<span id="P2price"></span>CCT</li>
+                 <li class="list-group-item">구매가능개수 : <span id="P2pc"></span>개</li>
+                 <li class="list-group-item">제품no :<span id="P2pn"></span></li> 
+               </ul>
+               <a href="#" class="btn btn-outline-success">제품상세보기</a>   
+             </div>
+           </div>
+         </div>
           </div>
+          
+          
+
          
-          <button class="btn btn-outline-success" type="submit" onclick="Buyp(1)">Buy Product 1</button>
+
+         
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" id="Productnum" class="form-control" placeholder="구매할 제품no를 입력후 제품구매하기를 클릭하세요" aria-label="CYA"
+            aria-describedby="basic-addon2">
+            
+          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buyp()">제품구매하기</span>
         </div>
 
-
-
-
+        <div class="d-grid gap-2">
+          <button class="btn btn-outline-success" type="submit" onclick="Plogin()"> 지갑 연결</button>
+          </div> 
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">나의 캐쉬백 :<span id="Mypay"></span>CYA</li>
+            <li class="list-group-item">누적 캐쉬백 :<span id="Mytotalpay"></span>CYA</li>  
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-success" type="submit" onclick="Cashback()">나의 캐쉬백 인출하기</button>
+              </div>
+              
+              <li class="list-group-item">1번상품구매자 :<span id="Blist1"></span></li>  
+              <li class="list-group-item">2번상품구매자 :<span id="Blist2"></span></li>  
+          </ul>
         
       <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
         <p><a class="nav-link" href="https://twitter.com/choecheolung8">CYADAO소식</a></p>
@@ -244,8 +289,6 @@
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>
-<script src="web3.min.js"></script>
-<script src="app.js"></script>
 <script src="cct.js"></script>
 <script src="cctmall.js"></script>
 
