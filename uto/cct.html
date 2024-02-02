@@ -298,9 +298,88 @@
                 <input type="text" id="Address" class="form-control" placeholder="구매자 어카운트 입력" aria-label="CYA"
                   aria-describedby="basic-addon2">
                 <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Getname()">구매목록  가져오기</span>
-              </div></li>
-              <div id ="output">구매목록</div>
+              </div> <div id ="output">구매목록</div></li>
+             
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    배송 및 구매상품 정보를 받으려면 고객정보를 입력하세요[정보입력하기]
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <strong>입력된 정보는 관리자만 열람 가능합니다</strong>
+                    <div class="mb-3">
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">이름</span>
+                        <input type="text" class="form-control" id="name" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">택배받을주소</span>
+                        <input type="text" class="form-control" id="add" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">전화번호</span>
+                        <input type="text" class="form-control" id="mobile" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">이메일</span>
+                        <input type="text" class="form-control" id="mail" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">생년월일</span>
+                        <input type="text" class="form-control" id="ymd" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+
+                      <button class="btn btn-outline-success" type="submit" onclick="Kyc()">정보제출하기</button>
+                </div>  
+                  </div>
+                </div>
+              </div>
+
+
+
               
+
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    고객정보 수정 하기[기존 정보 입력자에 한함]
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <strong>한개를 수정하더라도 모든 정보를 다시 입력해야 합니다</strong>
+                    <div class="mb-3">
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">이름</span>
+                        <input type="text" class="form-control" id="rname" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">택배받을주소</span>
+                        <input type="text" class="form-control" id="radd" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">전화번호</span>
+                        <input type="text" class="form-control" id="rmobile" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">이메일</span>
+                        <input type="text" class="form-control" id="rmail" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">생년월일</span>
+                        <input type="text" class="form-control" id="rymd" aria-describedby="basic-addon3 basic-addon4">
+                      </div>
+
+                      <button class="btn btn-outline-success" type="submit" onclick="Modify()">정보제출하기</button>
+                </div>  
+                  </div>
+                </div>
+              </div>
+        
+
               <h6>상품별 구매자 리스트</h6>
               <li class="list-group-item">1번상품구매자 :<span id="Blist1"></span></li>  
               <li class="list-group-item">2번상품구매자 :<span id="Blist2"></span></li> 

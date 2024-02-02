@@ -1,5 +1,6 @@
 let Address = {
     cctAddr: "0x7c0b0Cec4674E81582d5332eDCe5D1E6a2f39998",
+    kycAddr: "0x6bbAca1ccEF61A0FB60f38d65Db6abBA357F7051",
   };
 let Abi = {
     cct: [
@@ -14,6 +15,13 @@ let Abi = {
       "function withdraw( )public returns(bool)",
       "function getcust(uint id)external view returns (address[] memory)",
       "function getname(address user)external view returns (string[] memory)"
+    ],
+
+    kyc: [
+      "function memberjoin(string memory _name,string memory _house,string memory _phone,string memory _email,uint _birth)public ",
+      "function modify(string memory _name,string memory _house,string memory _phone,string memory _email,uint _birth)public ",
+      "function g1(address user) public view returns(string memory name,string memory house,string memory phone,string memory email,uint birth,uint time)",
+     
     ],
 
   };
@@ -233,6 +241,117 @@ let Plogin = async () => {
     }
   };
 
+
+
+  let Kyc = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
+
+  let kycContract = new ethers.Contract(Address.kycAddr, Abi.kyc, signer);
+  var name = document.getElementById('name').value;
+  var address = document.getElementById('add').value;
+  var mobile = document.getElementById('mobile').value;
+  var email = document.getElementById('mail').value;
+  var birthdate = document.getElementById('ymd').value;
+
+  try {
+    await kycContract.memberjoin(name,address,mobile,email,birthdate);
+  } catch(e) {
+    alert(e.data.message.replace('execution reverted: ',''))
+  }
+
+    
+  };
+
+
+
+  let Modify = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
+
+  let kycContract = new ethers.Contract(Address.kycAddr, Abi.kyc, signer);
+  var name = document.getElementById('rname').value;
+  var address = document.getElementById('radd').value;
+  var mobile = document.getElementById('rmobile').value;
+  var email = document.getElementById('rmail').value;
+  var birthdate = document.getElementById('rymd').value;
+
+  try {
+    await kycContract.modify(name,address,mobile,email,birthdate);
+  } catch(e) {
+    alert(e.data.message.replace('execution reverted: ',''))
+  }
+
+    
+  };
+
+
+  let Getcust = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
+
+  let kycContract = new ethers.Contract(Address.kycAddr, Abi.kyc, signer);
+
+    try {
+      let customer = await kycContract.g1(document.getElementById("Getaddress").value);
+      
+      document.getElementById("Customer Name:").innerHTML=  (customer[0]);
+      document.getElementById("Customer Address:").innerHTML=  (customer[1]);
+      document.getElementById("Customer Phone:").innerHTML=  (customer[2]);
+      document.getElementById("Customer Email:").innerHTML=  (customer[3]);
+      document.getElementById("Customer Birth:").innerHTML=  (customer[4]);
+      document.getElementById("Customer Time:").innerHTML=  (customer[5]);
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+  
 
   (async () => {
     topDataSync2();
