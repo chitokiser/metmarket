@@ -12,7 +12,8 @@ let Abi = {
       "function  myinfo(address user) public view returns(uint256,uint256,uint256)",
       " function  totalcash() public view returns(uint)",
       "function withdraw( )public returns(bool)",
-      "function getcust(uint id)external view returns (address[] memory)"
+      "function getcust(uint id)external view returns (address[] memory)",
+      "function getname(address user)external view returns (string[] memory)"
     ],
 
   };
@@ -87,6 +88,7 @@ let Abi = {
        document.getElementById("Blist2").innerHTML = (buylist2);
        let buylist3= await cctContract.getcust(3);
        document.getElementById("Blist3").innerHTML = (buylist3);
+     
 
   };
 
@@ -180,6 +182,55 @@ let Plogin = async () => {
     document.getElementById("Mypay").innerHTML= parseFloat(mypay/1e18).toFixed(2);
     document.getElementById("Mytotalpay").innerHTML= parseFloat(mytotalpay/1e18).toFixed(2);
     
+  };
+
+
+
+  let Getname = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
+
+  let cctContract = new ethers.Contract(Address.cctAddr, Abi.cct, signer);
+
+    try {
+      let plist = await cctContract.getname(document.getElementById("Address").value);
+      console.log(plist);
+  
+      var outputDiv = document.getElementById("output");
+
+      // Create a new unordered list element
+      var ul = document.createElement("ul");
+
+      // Iterate over the elements of the array
+      plist.forEach(function(item) {
+          // Create a new list item element
+          var li = document.createElement("li");
+          // Set the text content of the list item
+          li.textContent = item;
+          // Append the list item to the unordered list
+          ul.appendChild(li);
+      });
+
+      // Append the unordered list to the output div
+      outputDiv.appendChild(ul);
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
   };
 
 

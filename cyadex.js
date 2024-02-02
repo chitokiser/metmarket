@@ -118,36 +118,7 @@ const bnbPrice = parseFloat(responseBinanceTicker.data.price);
           await cyadexContract.sell(quantity);
         };
   
-        const Priceup = async () => {
-          const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [{
-                chainId: "0xCC",
-                rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-                chainName: "opBNB",
-                nativeCurrency: {
-                    name: "BNB",
-                    symbol: "BNB",
-                    decimals: 18
-                },
-                blockExplorerUrls: ["https://opbnbscan.com"]
-            }]
-        });
-          await userProvider.send("eth_requestAccounts", []);
-          const signer = userProvider.getSigner();
-         
-         
-        
-          const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
-          try {
-            await cyadexContract.priceup(document.getElementById('Bnbprice').value);
-          } catch(e) {
-            alert(e.data.message.replace('execution reverted: ',''))
-          }
-          
-          
-        };
+ 
 
         (async () => {
           topDataSync();
