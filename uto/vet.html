@@ -103,8 +103,8 @@
           </div>
         
           <ul class="list-group">
-            <li class="list-group-item">발행총량 = 100,000,000CCT</li>
-            <li class="list-group-item">VET기능:가맹점이용 포인트 레베리지,배당</li>
+            <li class="list-group-item">발행총량 = 100,000,000VET</li>
+            <li class="list-group-item">VET기능:가맹점이용 PV 레베리지,VET 멤버쉽 확인,프리미엄서비스 액서스 권한,할인기능등</li>
             <li class="list-group-item">5000VET이상 소유자 1주일 1회 배당</li>
             <li class="list-group-item">누적세금 : <span id="Ttax"></span>CYA</li>
           </ul>
@@ -114,7 +114,7 @@
           <!-- 챠트시작 --></P>
         <link href="cctboard.css" rel="stylesheet">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h3 class="h3">CCT가격 변화</h3>
+          <h3 class="h3">VET가격 변화</h3>
           <div class="btn-toolbar mb-2 mb-md-0">
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
               <span data-feather="calendar"></span>
@@ -208,16 +208,17 @@
         <li class="list-group-item">모든 가맹점에서는 CYA를 현지화폐로 교환해 드립니다(수수료 10-레벨)</li>
         <li class="list-group-item">모든 가맹점은 멘토자격이 부여되며 신규회원을 모집할 수 있습니다</li>
         <li class="list-group-item">PV나 RP를 캐쉬백으로 변환(1~100배)하려면 Tiket이 필요합니다</li>
-        <li class="list-group-item">Tiket은 아래가격으로 VET로 충전가능합니다</li>
-        <li class="list-group-item">Tiket 교환비율  1Tiket: <span id="TiketP">-</span>VET</li>
-        <li class="list-group-item">캐쉬백 준비금 총액 : <span id="G1">-</span>CYA</li>
-        <li class="list-group-item">캐쉬백 누적 총액 : <span id="G2">-</span>CYA</li>
+        <li class="list-group-item">티켓은 아래가격으로 VET로 충전가능합니다</li>
+        <li class="list-group-item">티켓 교환비율  1티켓 : <span id="Tprice">-</span> VET</li>
+        <li class="list-group-item">캐쉬백 준비금 총액 : <span id="Cashtotal">-</span>CYA</li>
+        <li class="list-group-item">계약VET잔고 : <span id="Vtvl">-</span>VET</li>
+     
         <div class="input-group mb-3">
              
-          <input type="text" id="Productnum" class="form-control" placeholder="충전할 Tiket 수량 입력" aria-label="CYA"
+          <input type="text" id="tiketnum" class="form-control" placeholder="충전할 Tiket 수량 입력" aria-label="CYA"
           aria-describedby="basic-addon2">
           
-        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buyp()">Tiket 충전</span>
+        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buyt()">Tiket 충전</span>
       </div>
        
       
@@ -226,15 +227,17 @@
           <div class="col-sm-6">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">가맹점no1 CYA 라운지펍</h5>
-                <img src="\images\clubcya.jpg" class="card-img-top" alt="...">
+                <h5 class="card-title">no0</h5>
+                <img src="\images\_320571b1-e787-441e-a311-c083489d2683.jpg" class="card-img-top" alt="...">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">가맹점이름<span id="P1cash"></span>CYA</li>
-                  <li class="list-group-item">PV 비율 :<span id="P1name"></span></li>
-                  <li class="list-group-item">인출가능금액 :<span id="P1price"></span>CYA</li>
-                  <li class="list-group-item">총매출 : <span id="P1pc"></span>CYA</li>
-                  <li class="list-group-item">가맹점no :<span id="P1pn"></span></li> 
-                  <li class="list-group-item">가맹점owner :<span id="P1pn"></span></li> 
+                  <li class="list-group-item">가맹점이름 :<span id="A1name"></span></li>
+                  <li class="list-group-item">매출대비 PV비율 :<span id="A1rate"></span></li>
+                  <li class="list-group-item">인출가능매출 :<span id="A1depo"></span>CYA</li>
+                  <li class="list-group-item">누적매출 : <span id="A1tdepo"></span>CYA</li>
+                  <li class="list-group-item">가맹점no :<span id="A1id"></span></li> 
+                  <li class="list-group-item">가맹점owner :<span id="A1owner"></span></li> 
+                  <li class="list-group-item">주소 :</li> 
+                  <li class="list-group-item">전화번호 :</li> 
                 </ul>
                 <a href="https://www.thecya.net/"  target="_blank" class="btn btn-outline-success">가맹점상세보기</a>     
               </div>
@@ -242,55 +245,62 @@
           </div>
       
     
-        
-              <div class="col-sm-6">
-           <div class="card">
-             <div class="card-body">
-               <h5 class="card-title">가맹점no2</h5>
-               <img src="\images\glloo.png" class="card-img-top" alt="...">
-               <ul class="list-group list-group-flush">
-                 <li class="list-group-item">예정 캐쉬백<span id="P2cash"></span>CYA</li>
-                 <li class="list-group-item">상품명 :<span id="P2name"></span></li>
-                 <li class="list-group-item">가격 :<span id="P2price"></span>CCT</li>
-                 <li class="list-group-item">구매가능개수 : <span id="P2pc"></span>개</li>
-                 <li class="list-group-item">제품no :<span id="P2pn"></span></li> 
-               </ul>
-               <a href="#" class="btn btn-outline-success">제품상세보기</a>   
-             </div>
-           </div>
-         </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">no1</h5>
+                  <img src="\images\_e3f20e3c-4c2b-40d5-8a5a-9c45d74c9356.jpg" class="card-img-top" alt="...">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">가맹점이름 :<span id="A2name"></span></li>
+                    <li class="list-group-item">매출대비 PV비율 :<span id="A2rate"></span></li>
+                    <li class="list-group-item">인출가능매출 :<span id="A2depo"></span>CYA</li>
+                    <li class="list-group-item">누적매출 : <span id="A2tdepo"></span>CYA</li>
+                    <li class="list-group-item">가맹점no :<span id="A2id"></span></li> 
+                    <li class="list-group-item">가맹점owner :<span id="A2owner"></span></li> 
+                    <li class="list-group-item">주소 :</li> 
+                    <li class="list-group-item">전화번호 :</li> 
+                  </ul>
+                  <a href="#"  target="_blank" class="btn btn-outline-success">가맹점상세보기</a>     
+                </div>
+              </div>
+            </div>
+          </div> 
 
          
       
-         
-
-         
+        
         </div>
         <div class="input-group mb-3">
-          <input type="text" id="Productnum" class="form-control" placeholder="가맹점 번호를 정확히 입력하세요" aria-label="CYA"
+          <input type="text" id="aid" class="form-control" placeholder="가맹점 번호를 정확히 입력하세요" aria-label="CYA"
             aria-describedby="basic-addon2">
-            <input type="text" id="Productnum" class="form-control" placeholder="결제할 CYA개수를 입력하세요" aria-label="CYA"
+            <input type="text" id="fee" class="form-control" placeholder="결제할 CYA금액을 입력하세요" aria-label="CYA"
             aria-describedby="basic-addon2">
             
-          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buyp()">가맹점결제하기</span>
+          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Aidbuy()">가맹점결제하기</span>
         </div>
-
+        <div class="input-group mb-3">
+          <input type="text" id="aid2" class="form-control" placeholder="가맹점 번호를 정확히 입력하세요" aria-label="CYA"
+            aria-describedby="basic-addon2">
+  
+          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Outpay()">가맹점주 매출인출하기</span>
+        </div>
+       
         <div class="d-grid gap-2">
-          <button class="btn btn-outline-success" type="submit" onclick="Plogin()">지갑 연결(캐쉬백정보)</button>
+          <button class="btn btn-outline-success" type="submit" onclick="Vlogin()">지갑 연결(캐쉬백정보)</button>
           </div> 
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">인출가능 캐쉬백 :<span id="Mypay"></span>CYA</li>
-            <li class="list-group-item">누적 캐쉬백 :<span id="Mytotalpay"></span>CYA</li> 
+            <li class="list-group-item">RP로 바꿀수 있는 PV :<span id="Mypv"></span>PV</li>
+            <li class="list-group-item">레버리지 할 수 있는 RP :<span id="Myrp"></span>RP</li> 
           
-            <li class="list-group-item">나의 PV  :<span id="Mytotalpay"></span>PV</li>
-            <li class="list-group-item">지금전환하면 확정되는 RP  :<span id="Mytotalpay"></span>RP</li>
+            <li class="list-group-item">보유 티켓  :<span id="Mytiket"></span>개</li>
+            <li class="list-group-item">지금전환하면 확정되는 RP  :<span id="Myg7"></span>RP</li>
             <div class="d-grid gap-2">
-              <button class="btn btn-outline-success" type="submit" onclick="Plogin()">RP로 전환하기</button>
+              <button class="btn btn-outline-success" type="submit" onclick="Saverp()">PV를 RP로 전환하기</button>
               </div>  
-            <li class="list-group-item">나의 RP :<span id="Mytotalpay"></span>RP</li> 
+            <li class="list-group-item">RP와 티켓이 있으면 RP를 레버리지 하세요 1~100배 랜덤보상되며 결과는 위에 수당보기에서 확인 가능합니다</li> 
       
             <div class="d-grid gap-2">
-              <button class="btn btn-outline-success" type="submit" onclick="Cashback()">인출하기</button>
+              <button class="btn btn-outline-success" type="submit" onclick="Bet()">레버리지 하기</button>
               </div>
              
               
@@ -309,6 +319,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>
 <script src="vetbank.js"></script>
+<script src="vetalliance.js"></script>
 
 </body>
 

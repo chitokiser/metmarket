@@ -1,5 +1,5 @@
 let contractAddress = {
-  cctbankAddr: "0x58B27e740CBB0414eA3e606Cd67680b11D029D4e",  
+  cctbankAddr: "0x58B27e740CBB0414eA3e606Cd67680b11D029D4e",  //vet로 바꾸기 귀찮아서 그냥 cct 사용함
   erc20: "0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748",  //CYAToken 주소
   cctAddr: "0x97c29C2EC9fe37AFA2635477992618796A618"
 };
