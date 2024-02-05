@@ -101,16 +101,18 @@ let vetAddress = {
       let signer = userProvider.getSigner();
       let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, signer);
       let myg7 = await vetContract.g7(await signer.getAddress());
-      document.getElementById("Myg7").innerHTML= parseFloat(myg7/1e18).toFixed(2); 
+      document.getElementById("Myg7").innerHTML= parseFloat(myg7/1e18).toFixed(4); 
+       
       
        let my = await vetContract.myinfo(await signer.getAddress());
        let mypv =  parseInt(await my[0]);
        let myrp =  parseInt(await my[1]);
        let mytiket =  parseInt(await my[2]);
 
-     document.getElementById("Mypv").innerHTML= parseFloat(mypv/1e18).toFixed(2); 
-     document.getElementById("Myrp").innerHTML= parseFloat(myrp/1e18).toFixed(2);
+     document.getElementById("Mypv").innerHTML= parseFloat(mypv/1e18).toFixed(4); 
+     document.getElementById("Myrp").innerHTML= parseFloat(myrp/1e18).toFixed(4);
      document.getElementById("Mytiket").innerHTML= (mytiket);
+     document.getElementById("Rpfix").innerHTML= parseFloat(mypv/myg7).toFixed(4);
    
     
     };
