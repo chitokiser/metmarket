@@ -1,5 +1,5 @@
 let vetAddress = {
-    vetAddr: "0x6D27F6B5F0eCc4792141D8DC3e9C2b01065A973b",  //vet alliance
+    vetAddr: "0xFED6f5A7031fd24fB11012F187abe2D1741c8c21",  //vet alliance
   };
 
   let vetAbi = {
@@ -112,7 +112,7 @@ let vetAddress = {
      document.getElementById("Mypv").innerHTML= parseFloat(mypv/1e18).toFixed(4); 
      document.getElementById("Myrp").innerHTML= parseFloat(myrp/1e18).toFixed(4);
      document.getElementById("Mytiket").innerHTML= (mytiket);
-     document.getElementById("Rpfix").innerHTML= parseFloat(mypv/myg7).toFixed(4);
+
    
     
     };

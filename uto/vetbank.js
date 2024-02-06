@@ -127,7 +127,7 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
     document.getElementById("Mylev2").innerHTML= (mylev);
     document.getElementById("Mymento").innerHTML= (mento);
     document.getElementById("Myagent").innerHTML= (agent);
-    document.getElementById("Expneeded").innerHTML= (levelexp);
+    document.getElementById("Expneeded").innerHTML= (levelexp - myexp);
     document.getElementById("LevelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다. 
      
     let myt = parseInt(await vetContract.allowt(await signer.getAddress()));
