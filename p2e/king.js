@@ -36,11 +36,10 @@ let contractAddress2 = {
       "function getid(uint num) public view virtual returns(uint256)",
       "function getfm(uint num) public view virtual returns(uint256)",
       "function getdp(uint num) public view virtual returns(uint256)",
-      "function getowner(uint num) public view virtual returns(address)"
+      "function getowner(uint num) public view virtual returns(address)",
    
     ]
   
-
   };
 
   let KSync = async () => {
