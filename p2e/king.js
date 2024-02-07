@@ -139,8 +139,8 @@ let contractAddress2 = {
     const numRows = Math.ceil(nftIds.length / 2);
 
     for (let i = 0; i < numRows; i++) {
-        const start = i * 3;
-        const end = Math.min(start + 3, nftIds.length);
+        const start = i * 2;
+        const end = Math.min(start + 2, nftIds.length);
         updateFarmCards(start, end);
     }
   }
