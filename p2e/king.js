@@ -1,6 +1,5 @@
 let contractAddress2 = {  
-    kingAddr:"0xE087f9C4C0b367b8a9AbaFB2501262Bca1BaF9E3",
-  
+    kingAddr:"0x16163a32e9C6aB20Db6c0A7900C6bb1802e9C602",
   };
   let contractAbi2 = {
     king: [
@@ -30,7 +29,15 @@ let contractAddress2 = {
       "function totaldepo() public view returns(uint)",
       "function fee() public view returns(uint)",
       "function withdraw( )public",
-      "function charge(uint pay)public"
+      "function charge(uint pay)public",
+      "function fighting(uint num)public",
+      "function g13(uint num) public view returns (uint256)",
+      "function fs(uint num) public view returns (uint256,uint265,uint256,address)",
+      "function getid(uint num) public view virtual returns(uint256)",
+      "function getfm(uint num) public view virtual returns(uint256)",
+      "function getdp(uint num) public view virtual returns(uint256)",
+      "function getowner(uint num) public view virtual returns(address)"
+   
     ]
   
 
@@ -50,21 +57,83 @@ let contractAddress2 = {
     let tiket = await kingContract.fee();
 
 
-    document.getElementById("Ktvl").innerHTML = parseInt(ktvl);
+    document.getElementById("Ktvl").innerHTML = parseFloat(ktvl/1e18).toFixed(2);
     document.getElementById("Kingstory").innerHTML = parseInt(kkingstory);
-    document.getElementById("Kingfee").innerHTML = parseInt(tiket*3);
-    document.getElementById("Queenfee").innerHTML = parseInt(tiket*2);
-    document.getElementById("Knightfee").innerHTML = parseInt(tiket);
-    document.getElementById("Monsterfee").innerHTML = parseInt(tiket);
-    document.getElementById("Mpay").innerHTML = parseInt(total/10);
+    document.getElementById("Kingfee").innerHTML = parseInt(tiket*3/1e18);
+    document.getElementById("Queenfee").innerHTML = parseInt(tiket*2/1e18);
+    document.getElementById("Knightfee").innerHTML = parseInt(tiket/1e18);
+    document.getElementById("Monsterfee").innerHTML = parseInt(tiket/1e18);
+    document.getElementById("Fighterfee").innerHTML = parseInt(tiket*2/1e18);
+    document.getElementById("Mpay").innerHTML =  parseFloat(total/10/1e18).toFixed(2);
     document.getElementById("King").innerHTML = (kking);
     document.getElementById("Queen").innerHTML = (kqueen);
     document.getElementById("Knight").innerHTML = (kknight);
     document.getElementById("Kpower").innerHTML = (kpower);
     document.getElementById("Qpower").innerHTML = (qpower);
-    document.getElementById("Ktax").innerHTML = parseInt(total/100);
-    document.getElementById("Qtax").innerHTML = parseInt(total/250);
-    document.getElementById("Ntax").innerHTML =  parseInt(total/500);
+    document.getElementById("Ktax").innerHTML = parseFloat(total/100/1e18).toFixed(2);
+    document.getElementById("Qtax").innerHTML = parseFloat(total/250/1e18).toFixed(2);
+    document.getElementById("Ntax").innerHTML = parseFloat(total/500/1e18).toFixed(2);
+
+
+      // JavaScript 코드
+      const nftIds = [0,1, 2, 3, 4,5];
+  
+      const updateFarmCard = async (nftId) => {
+          const periodInfo = await kingContract.getfm(nftId);
+          const valueInfo = await kingContract.getdp(nftId);
+          const ownerInfo = await kingContract.getowner(nftId);
+          const depen = await kingContract.g13(nftId);
+          const card = document.createElement("div");
+          card.className = "card";
+          
+          const img = document.createElement("img");
+          img.src = `../images/knight/nft-id-${nftId}.jpg`;
+          img.className = "card-img-top";
+          img.alt = "...";
+          img.loading = "lazy";
+          
+          const cardBody = document.createElement("div");
+          cardBody.className = "card-body";
+          
+          const cardTitle = document.createElement("h2");
+          cardTitle.className = "card-title";
+          cardTitle.textContent = `파이터 ID ${nftId}`;
+          
+          
+          const periodText = document.createElement("p");
+          periodText.className = "card-text";
+          periodText.textContent = `파이트머니 : ${parseFloat(periodInfo/1e18).toFixed(2)} CYA`;  
+          
+          const valueText = document.createElement("p");
+          valueText.className = "card-text";
+          valueText.textContent = `방어성공횟수 : ${valueInfo-100}`;
+
+          const depenText = document.createElement("p");
+          valueText.className = "card-text";
+          valueText.textContent = `기본방어력 : ${depen}`;
+          
+            // 소유자 정보를 추가
+const ownerText = document.createElement("p");
+ownerText.className = "card-text";
+ownerText.textContent = ` ${ownerInfo}`;
+          cardBody.appendChild(cardTitle);
+          cardBody.appendChild(periodText);
+          cardBody.appendChild(valueText);
+          cardBody.appendChild(depenText);
+          // 카드 하단에 소유자 정보를 추가
+cardBody.appendChild(ownerText);  
+          card.appendChild(img);
+          card.appendChild(cardBody);
+          
+          // 카드를 farmCards div에 추가
+          const farmCards = document.getElementById("farmCards");
+          farmCards.appendChild(card);
+      };
+
+      // 위에서 정의한 함수를 사용하여 농장 카드 업데이트
+      for (const nftId of nftIds) {
+          updateFarmCard(nftId);
+      }
   };
   
   let Charge = async () => {
@@ -87,9 +156,9 @@ let contractAddress2 = {
   let signer = userProvider.getSigner();
 
   let kingContract = new ethers.Contract(contractAddress2.kingAddr, contractAbi2.king, signer);
-
+  const quantity = ethers.utils.parseUnits(document.getElementById('cyaInput').value, 18);
     try {
-      await kingContract.charge(document.getElementById('chargenum').value);
+      await kingContract.charge(quantity);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -182,7 +251,33 @@ let contractAddress2 = {
     }
   };
 
+  let Fighting = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
 
+  let kingContract = new ethers.Contract(contractAddress2.kingAddr, contractAbi2.king, signer);
+
+    try {
+      await kingContract.fighting(document.getElementById('fighternum').value);
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
 
 
   let Kwithdraw = async () => {
@@ -330,7 +425,7 @@ let contractAddress2 = {
     document.getElementById("Myatt").innerHTML = (myatt);
     document.getElementById("Kbuff").innerHTML = (kbuff);  //전투 경험치
     document.getElementById("Kmessage").innerHTML = (kmessage);
-    document.getElementById("Kdepo").innerHTML = parseInt(kdepo);
+    document.getElementById("Kdepo").innerHTML = parseFloat(kdepo/1e18).toFixed(2)
     document.getElementById("Klastdem").innerHTML = (klastdem);
     
     

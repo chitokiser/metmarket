@@ -11,8 +11,20 @@
   <link rel="shortcut icon" href="https://i.ibb.co/3YqKwff/bg.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="king.css">
+    <style>
+     
+      h1 {
+          font-size: 1.5rem; /
+      }
 
-
+      h2 {
+          font-size: 1.3rem; 
+      }
+      h9 {
+          font-size: 1.0rem; 
+      }
+  </style>
 </head>
 
 <main class="container">
@@ -108,7 +120,6 @@
     <ul class="list-group">
 
       <li class="list-group-item">보물 시세(1box) : <span id="Boxprice"></span>CUT</li>
-      <li class="list-group-item">계약잔고 : <span id="Cutbal"></span>CUT</li>
       <li class="list-group-item">CYA Money Tree 멤버이면 무료참여 가능 매일 매일 보물박스 무료 지급</li>
       
       <li class="list-group-item"><button type="button" class="btn btn-outline-warning position-relative" cursor:
@@ -257,10 +268,10 @@
     <!-- 여기까지 캐러셀 -->
     <ul class="list-group">
 
-      <li class="list-group-item">계약잔고: <span id="Ktvl"></span>CUT</li>
+      <li class="list-group-item">계약잔고: <span id="Ktvl"></span>CYA</li>
       <li class="list-group-item">왕의방어전적: <span id="Kingstory">-</span></li>
       <div class="input-group mb-3">
-        <input type="text" id="chargenum" class="form-control" placeholder="충전하고자 하는  CUT개수를 입력하세요 1CUT=1BM" aria-label="CYA"
+        <input type="text" id="cyaInput" class="form-control" placeholder="충전하고자 하는  CYA개수를 입력하세요 1CYA=1BM" aria-label="CYA"
           aria-describedby="basic-addon2">
         <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Charge()">배틀머니충전</span>
       </div>
@@ -268,6 +279,7 @@
       <li class="list-group-item">여왕과결투하기 금액: <span id="Queenfee">-</span>BT</li>
       <li class="list-group-item">기사와결투하기 금액: <span id="Knightfee">-</span>BT</li>
       <li class="list-group-item">보스몬스터 전투하기 금액: <span id="Monsterfee">-</span>BT</li>
+      <li class="list-group-item">견습기사와 전투하기 금액: <span id="Fighterfee">-</span>BT</li>
       <div class="alert alert-secondary" role="alert">
         <li class="list-group-item">왕: <span id="King"></span></li>
         <p>승리요건 나의공격력+@ >왕의 방어력+@ </p>
@@ -276,7 +288,7 @@
           
         </li>
         <li class="list-group-item">왕 기본 방어력: <span id="Kpower">-</span></li>
-        <li class="list-group-item">이번세금액: <span id="Ktax">-</span></li>
+        <li class="list-group-item">이번세금액: <span id="Ktax">-</span>CYA</li>
         <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Kingtax()">
          하루한번 세금받기(왕)
         </li>
@@ -288,7 +300,7 @@
           여왕과 결투하기
         </li>
         <li class="list-group-item">여왕 기본 방어력: <span id="Qpower">-</span></li>
-        <li class="list-group-item">이번세금액: <span id="Qtax">-</span></li>
+        <li class="list-group-item">이번세금액: <span id="Qtax">-</span>CYA</li>
         <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Queentax()">
          하루한번 세금받기(여왕)
         </li>
@@ -299,7 +311,7 @@
         <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Battleknight()">
           기사와 결투하기
         </li>
-        <li class="list-group-item">이번세금액: <span id="Ntax">-</span></li> 
+        <li class="list-group-item">이번세금액: <span id="Ntax">-</span>CYA</li> 
         <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Knigthtax()">
           세금받기(기사)
         </li>
@@ -308,15 +320,25 @@
 
 
       <div class="alert alert-secondary" role="alert">
-        <li class="list-group-item">보스 몬스터와 결투 보상금: <span id="Mpay"></span></li>
+        <li class="list-group-item">보스 몬스터와 결투 보상금: <span id="Mpay"></span>CYA</li>
         <p>승리요건 나의공격력+@ 을 나눈 나머지 값이 33이면 </p>
         <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="BattleAi()">
           보스 몬스터와 결투하기
         </li>
         
       </div>
+      <li class="list-group-item">싸움 좀 한다면 싸워보세요</span></li>    
+      <div class="card-group" id="farmCards">
+        <!--파이터들 리스트가 여기에 출력. -->
+    </div>
 
-      
+    <div class="input-group mb-3">
+      <input type="text" id="fighternum" class="form-control" placeholder="싸우려하는 파이터의 아이디를 입력하세요" aria-label="CYA"
+        aria-describedby="basic-addon2">
+      <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Fighting()">싸움시작</span>
+    </div>
+
+
       <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Kmember()">
       나의 상태 보기
       </li>
