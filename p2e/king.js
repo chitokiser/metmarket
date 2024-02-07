@@ -75,67 +75,77 @@ let contractAddress2 = {
     document.getElementById("Ntax").innerHTML = parseFloat(total/500/1e18).toFixed(2);
 
 
-      // JavaScript 코드
-      const nftIds = [0,1, 2, 3, 4,5];
-  
-      const updateFarmCard = async (nftId) => {
-          const periodInfo = await kingContract.getfm(nftId);
-          const valueInfo = await kingContract.getdp(nftId);
-          const ownerInfo = await kingContract.getowner(nftId);
-          const depen = await kingContract.g13(nftId);
-          const card = document.createElement("div");
-          card.className = "card";
-          
-          const img = document.createElement("img");
-          img.src = `../images/knight/nft-id-${nftId}.jpg`;
-          img.className = "card-img-top";
-          img.alt = "...";
-          img.loading = "lazy";
-          
-          const cardBody = document.createElement("div");
-          cardBody.className = "card-body";
-          
-          const cardTitle = document.createElement("h2");
-          cardTitle.className = "card-title";
-          cardTitle.textContent = `파이터 ID ${nftId}`;
-          
-          
-          const periodText = document.createElement("p");
-          periodText.className = "card-text";
-          periodText.textContent = `파이트머니 : ${parseFloat(periodInfo/1e18).toFixed(2)} CYA`;  
-          
-          const valueText = document.createElement("p");
-          valueText.className = "card-text";
-          valueText.textContent = `방어성공횟수 : ${valueInfo-100}`;
+    const nftIds = [0, 1, 2, 3, 4, 5];
 
-          const depenText = document.createElement("p");
-          valueText.className = "card-text";
-          valueText.textContent = `기본방어력 : ${depen}`;
-          
-            // 소유자 정보를 추가
-const ownerText = document.createElement("p");
-ownerText.className = "card-text";
-ownerText.textContent = ` ${ownerInfo}`;
-          cardBody.appendChild(cardTitle);
-          cardBody.appendChild(periodText);
-          cardBody.appendChild(valueText);
-          cardBody.appendChild(depenText);
-          // 카드 하단에 소유자 정보를 추가
-cardBody.appendChild(ownerText);  
-          card.appendChild(img);
-          card.appendChild(cardBody);
-          
-          // 카드를 farmCards div에 추가
-          const farmCards = document.getElementById("farmCards");
-          farmCards.appendChild(card);
-      };
+    const updateFarmCards = async (start, end) => {
+        for (let i = start; i < end; i++) {
+            const nftId = nftIds[i];
+            const periodInfo = await kingContract.getfm(nftId);
+            const valueInfo = await kingContract.getdp(nftId);
+            const ownerInfo = await kingContract.getowner(nftId);
+            const depen = await kingContract.g13(nftId);
 
-      // 위에서 정의한 함수를 사용하여 농장 카드 업데이트
-      for (const nftId of nftIds) {
-          updateFarmCard(nftId);
-      }
-  };
+            const card = document.createElement("div");
+            card.className = "card";
+
+            // Create card content (image, text, etc.) here
+            const img = document.createElement("img");
+            img.src = `../images/knight/nft-id-${nftId}.jpg`;
+            img.className = "card-img-top";
+            img.alt = "...";
+            img.loading = "lazy";
+
+            const cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+
+            const cardTitle = document.createElement("h2");
+            cardTitle.className = "card-title";
+            cardTitle.textContent = `파이터 ID ${nftId}`;
+
+            const periodText = document.createElement("p");
+            periodText.className = "card-text";
+            periodText.textContent = `파이트머니 : ${parseFloat(periodInfo/1e18).toFixed(2)} CYA`;
+
+            const valueText = document.createElement("p");
+            valueText.className = "card-text";
+            valueText.textContent = `방어성공횟수 : ${valueInfo-100}`;
+
+            const depenText = document.createElement("p");
+            depenText.className = "card-text";
+            depenText.textContent = `기본방어력 : ${depen}`;
+
+                         // 소유자 정보를 추가
+  const ownerText = document.createElement("p");
+  ownerText.className = "card-text";
+  ownerText.textContent = `농장소유자 : ${ownerInfo}`;
+              cardBody.appendChild(cardTitle);
+              cardBody.appendChild(depenText);
+              cardBody.appendChild(periodText);
+              cardBody.appendChild(valueText);
+              // 카드 하단에 소유자 정보를 추가
+  cardBody.appendChild(ownerText);  
+              card.appendChild(img);
+              card.appendChild(cardBody);
+              
+              // 카드를 farmCards div에 추가
+              const farmCards = document.getElementById("farmCards");
+              farmCards.appendChild(card);
+          };
   
+  
+
+};
+
+    const numRows = Math.ceil(nftIds.length / 2);
+
+    for (let i = 0; i < numRows; i++) {
+        const start = i * 3;
+        const end = Math.min(start + 3, nftIds.length);
+        updateFarmCards(start, end);
+    }
+  }
+
+
   let Charge = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
