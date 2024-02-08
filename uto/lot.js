@@ -153,7 +153,7 @@ let contractAddress = {
       let mycctvalue = await vetContract.getprice() * await mycct;
       document.getElementById("Mycct").innerHTML=(mycct); 
       document.getElementById("Mytvl").innerHTML=(mycctvalue/1e18).toFixed(4); 
-      document.getElementById("Mypay").innerHTML=(mypay/1e18).toFixed(4); 
+     
       let my = await vetContract.myinfo(await signer.getAddress());
       let tpoint =  parseInt(await my[0]);
       let point =  parseInt(await my[1]);
@@ -169,6 +169,7 @@ let contractAddress = {
       document.getElementById("Mylev2").innerHTML= (mylev);
       document.getElementById("Mymento").innerHTML= (mento);
       document.getElementById("Myagent").innerHTML= (agent);
+      document.getElementById("Mypay").innerHTML=(mypay*mylev/1e18).toFixed(4); 
       document.getElementById("Expneeded").innerHTML= (levelexp - myexp);
       document.getElementById("LevelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다. 
        
