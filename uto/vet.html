@@ -208,9 +208,10 @@
         <li class="list-group-item">모든 가맹점에서는 CYA를 현지화폐로 교환해 드립니다(수수료 10-레벨)</li>
         <li class="list-group-item">모든 가맹점은 멘토자격이 부여되며 신규회원을 모집할 수 있습니다</li>
         <li class="list-group-item">PV나 RP를 캐쉬백으로 변환(1~100배)하려면 Tiket이 필요합니다</li>
-        <li class="list-group-item">티켓은 아래가격으로 VET로 충전가능합니다</li>
+        <li class="list-group-item">현재 세금 : <span id="Tax">-</span> VET</li>
+        <li class="list-group-item">누적 세금 : <span id="Totaltax">-</span> VET</li>
         <li class="list-group-item">티켓 교환비율  1티켓 : <span id="Tprice">-</span> VET</li>
-        <li class="list-group-item">캐쉬백 준비금 총액 : <span id="Cashtotal">-</span>CYA</li>
+        <li class="list-group-item">캐쉬백 준비금 총액 : <span id="Cyatvl">-</span>CYA</li>
         <li class="list-group-item">계약VET잔고 : <span id="Vtvl">-</span>VET</li>
      
         <div class="input-group mb-3">
@@ -236,8 +237,9 @@
                   <li class="list-group-item">누적매출 : <span id="A1tdepo"></span>CYA</li>
                   <li class="list-group-item">가맹점no :<span id="A1id"></span></li> 
                   <li class="list-group-item">가맹점owner :<span id="A1owner"></span></li> 
-                  <li class="list-group-item">주소 :</li> 
-                  <li class="list-group-item">전화번호 :</li> 
+                  <li class="list-group-item">주소 :대전 중구 중앙로168,43 3층 CYA </li> 
+                  <li class="list-group-item">전화번호 : 010 3687 0314</li> 
+                  <li class="list-group-item"></li> 
                 </ul>
                 <a href="https://www.thecya.net/"  target="_blank" class="btn btn-outline-success">가맹점상세보기</a>     
               </div>
@@ -296,13 +298,15 @@
             <li class="list-group-item">지금전환하면 확정되는 RP  :<span id="Myg7"></span>RP</li>
        
             <div class="d-grid gap-2">
-              <button class="btn btn-outline-success" type="submit" onclick="Saverp()">PV를 RP로 전환하기</button>
+              <button class="btn btn-outline-success" type="submit" onclick="Saverp()">PV를 RP로 전환하기(티켓1장소모)</button>
               </div>  
-            <li class="list-group-item">RP와 티켓이 있으면 RP를 레버리지 하세요 1~100배 랜덤보상되며 결과는 위에 수당보기에서 확인 가능합니다</li> 
+            <li class="list-group-item">RP와 티켓이 있으면 RP를 레버리지 하세요 1~100배 랜덤보상 됩니다</li> 
       
             <div class="d-grid gap-2">
-              <button class="btn btn-outline-success" type="submit" onclick="Bet()">레버리지 하기</button>
+              <button class="btn btn-outline-success" type="submit" onclick="Bet()">레버리지 하기(티켓1장소모)</button>
               </div>
+
+              <li class="list-group-item"><span id="eventData">-</span>CYA</li>
              
               
 
@@ -318,6 +322,7 @@
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
 <script type="text/javascript"></script>
 <script src="vetbank.js"></script>
 <script src="vetalliance.js"></script>

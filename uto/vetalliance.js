@@ -1,3 +1,5 @@
+
+
 let vetAddress = {
     vetAddr: "0xFED6f5A7031fd24fB11012F187abe2D1741c8c21",  //vet alliance
   };
@@ -20,11 +22,15 @@ let vetAddress = {
     "function tiketprice() public view virtual returns(uint256)", 
     "function allis(uint256 num) public view returns(string memory name,uint256 rate,address owner,uint256 pay,uint256 totalpay,uint256 id)", 
     "function myinfo(address user) public view returns (uint256,uint256,uint256,uint256)",
-
+    "function tax() public view virtual returns(uint256)", 
+    "function totaltax() public view virtual returns(uint256)",
+     "event reward(uint amount)"
     ],
    
   };
   
+    
+
     let Vtop = async () => {
 
   
@@ -32,11 +38,16 @@ let vetAddress = {
     
           let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, provider);
          let tprice = await vetContract.tiketprice(); 
-         let casht = await vetContract.g1(); 
-         let vtvl = await vetContract.g3(); 
+         let tvl = await vetContract.g1();
+         let vtvl = await vetContract.g3();
+         let tax = await vetContract.tax(); 
+         let totaltax = await vetContract.totaltax(); 
   
          document.getElementById("Tprice").innerHTML=  parseInt(tprice);
-         document.getElementById("Cashtotal").innerHTML = parseFloat(casht/1e18).toFixed(2);
+         document.getElementById("Tax").innerHTML = parseFloat(tax/1e18).toFixed(2);
+         document.getElementById("Totaltax").innerHTML = parseFloat(totaltax/1e18).toFixed(2);
+         document.getElementById("Totaltax").innerHTML = parseFloat(totaltax/1e18).toFixed(2);
+         document.getElementById("Cyatvl").innerHTML=  parseFloat(tvl/1e18).toFixed(2);
          document.getElementById("Vtvl").innerHTML=  parseInt(vtvl);
   
 
@@ -75,12 +86,17 @@ let vetAddress = {
       document.getElementById("A2id").innerHTML = (a2id);
       document.getElementById("A2owner").innerHTML = (a2owner);
 
-
+      vetContract.on('reward', (winnum) => {
+        // Handle incoming event data
+        console.log('레버리지된금액:', winnum);
+        
+        // Display the event on your webpage as needed
+        // For example, update an HTML element with the event data
+        document.getElementById('eventData').innerText = `레버리지된 금액: ${winnum/1e18}`;
+    });
+   
    };
  
-  
-
-    
     let Vlogin = async () => {
       let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await window.ethereum.request({
