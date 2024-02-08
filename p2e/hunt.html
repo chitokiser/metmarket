@@ -328,7 +328,12 @@
         
       </div>
       <li class="list-group-item">싸움 좀 한다면 싸워보세요</span></li>  
-
+      <div class="input-group mb-3">
+        <input type="text" id="fighternum" class="form-control" placeholder="싸우려하는 파이터의 아이디를 입력하세요" aria-label="CYA"
+          aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Fighting()">싸움시작</span>
+      </div>
+      <li class="list-group-item"><span id="eventData"></span></li>
   
       <div class="col-sm-12" id="farmCards">
       
@@ -336,11 +341,6 @@
     </div>
  
   
-    <div class="input-group mb-3">
-      <input type="text" id="fighternum" class="form-control" placeholder="싸우려하는 파이터의 아이디를 입력하세요" aria-label="CYA"
-        aria-describedby="basic-addon2">
-      <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Fighting()">싸움시작</span>
-    </div>
     
     
       <li class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Kmember()">

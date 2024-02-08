@@ -37,6 +37,7 @@ let contractAddress2 = {
       "function getfm(uint num) public view virtual returns(uint256)",
       "function getdp(uint num) public view virtual returns(uint256)",
       "function getowner(uint num) public view virtual returns(address)",
+      "event result(uint point)"
    
     ]
   
@@ -116,7 +117,7 @@ let contractAddress2 = {
                          // 소유자 정보를 추가
   const ownerText = document.createElement("p");
   ownerText.className = "card-text";
-  ownerText.textContent = `농장소유자 : ${ownerInfo}`;
+  ownerText.textContent = `견습기사: ${ownerInfo}`;
               cardBody.appendChild(cardTitle);
               cardBody.appendChild(depenText);
               cardBody.appendChild(periodText);
@@ -142,7 +143,18 @@ let contractAddress2 = {
         const end = Math.min(start + 2, nftIds.length);
         updateFarmCards(start, end);
     }
-  }
+  
+
+    kingContract.on('result', (point) => {
+          
+      console.log('공격데미지:', point);
+
+      document.getElementById('eventData').innerText = `공격데미지: ${point}`;
+  });
+ 
+ };
+  
+  
 
 
   let Charge = async () => {

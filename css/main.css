@@ -35,3 +35,7 @@
   .show {
     display: block;
   }
+  #eventData {
+    font-size: 24px; /* Increase font size */
+    /* Add any other styles as needed */
+}

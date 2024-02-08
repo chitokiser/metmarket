@@ -112,7 +112,18 @@ const topDataSync = async () => {
               updateFarmCard(nftId);
           }
 
-};
+          cyafarmContract.on('farmnum', (winnum) => {
+          
+            console.log('구매한농장ID:', winnum);
+     
+            document.getElementById('eventData').innerText = `구매한농장ID: ${winnum}`;
+        });
+       
+       };
+     
+
+
+
 
  let fwithdraw = async () => {  //해결완료  에러메세지 작동함
   const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
