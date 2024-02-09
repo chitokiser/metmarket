@@ -69,26 +69,26 @@
                   <div class="p-3 border bg-light">1BNB=$<span id="bPrice">-</span></div>
                 </div>
                 <div class="col">
-                  <div class="p-3 border bg-light">1BNB=<span id="cPrice">-</span>CYA</div>
+                  <div class="p-3 border bg-light">1BNB:<span id="cPrice">-</span>CYA</div>
                 </div>
                 <div class="col">
-                  <div class="p-3 border bg-light">1CYA = $1</div>
+                  <div class="p-3 border bg-light">1CYA:$1</div>
                 </div>
                 <div class="col">
-                  <div class="p-3 border bg-light">1CYA = <span id="cPrice2">-</span>BNB</div>
+                  <div class="p-3 border bg-light">1CYA: <span id="cPrice2">-</span>BNB</div>
                 </div>
                 <div class="col">
-                  <div class="p-3 border bg-light">1LOT= <span id="Lprice">-</span>CYA</div>
+                  <div class="p-3 border bg-light">1LOT:<span id="Lprice">-</span>CYA</div>
                 </div>
               
                 <div class="col">
-                  <div class="p-3 border bg-light">참여자= <span id="Mem">-</span>holder</div>
+                  <div class="p-3 border bg-light">참여자<span id="Mem">-</span>holder</div>
                 </div>
                 <div class="col">
-                  <div class="p-3 border bg-light">계약잔고  = <span id="Tvl">-</span>CYA</div>
+                  <div class="p-3 border bg-light">잔고 <span id="Tvl">-</span>CYA</div>
                 </div>
                 <div class="col">
-                  <div class="p-3 border bg-light">LOT유통량 : <span id="Tvl2">-</span>CCT</div>
+                  <div class="p-3 border bg-light">LOTm1 <span id="Tvl2">-</span>LOT</div>
                 </div>
        
               </div>
@@ -106,7 +106,7 @@
           <ul class="list-group">
             <li class="list-group-item">발행총량 = 100,000,000CCT</li>
             <li class="list-group-item">LOT역활:합리적인 톤틴 시스템에 엑서스 하기 위한 토큰</li>
-            <li class="list-group-item">5000CCT이상 보유하고 있어야 조합원으로 인정됩니다</li>
+            <li class="list-group-item">5000CCT이상 보유하고 있어야 회원으로 인정됩니다</li>
             <li class="list-group-item">누적세금 : <span id="Ttax"></span>CYA</li>
           </ul>
       
@@ -154,7 +154,7 @@
                   <li class="list-group-item">나의멘토<span id="Mymento">-</span></li>
                   <li class="list-group-item">나의에이젼트<span id="Myagent">-</span></li>
                   <li class="list-group-item">이번배당준비금액<span id="Mypay">CYA</span></li>
-                  <li class="list-group-item">배당준비금 = 계약잔고/유통LOT총량 *나의LOT 보유수 *나의레벨*나의레벨/1000</li>
+                  <li class="list-group-item">배당준비금 = 계약잔고/유통LOT총량 *나의LOT 보유수 *나의레벨*나의레벨/30000</li>
                   <li class="list-group-item">배당금 = 배당준비금 *랜덤(1~100000)/50000 </li>
                   <li class="list-group-item"> <button type="button" class="btn btn-outline-dark position-relative" cursor:
                       pointer; onclick="Levelup()">
@@ -169,10 +169,10 @@
       
               
           
-          <li class="list-group-item">레버지를 하시면 50%확률로 배당준비금액  보다 더 많은 결과를 기대할 수 있고 2배까지 획득 가능합니다 </li>
+          <li class="list-group-item">레버지를 하시면 70%확률로 배당준비금액  보다 더 많은 결과를 기대할 수 있고 7배까지 획득 가능합니다 </li>
           <li class="list-group-item"><span id="eventData">-</span>CYA</li>
           <div class="d-grid gap-2">
-            <button class="btn btn-outline-success" type="submit" onclick="Allowcation()">레버리지 -10LOT</button>
+            <button class="btn btn-outline-success" type="submit" onclick="Allowcation()">레버리지 -<span id="Fee">-</span>LOT</button>
           <div class="d-grid gap-2">
         <button class="btn btn-outline-success" type="submit" onclick="Withdraw()">인출하기
         </button>

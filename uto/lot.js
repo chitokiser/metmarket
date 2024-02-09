@@ -1,5 +1,5 @@
 let contractAddress = {
-    cctbankAddr: "0xC9AC8cD01Fab388d28a5A3416E2F9f7cac0dA0d2",  //LOT로 바꾸기 귀찮아서 그냥 cct 사용함
+    cctbankAddr: "0x3903a05e3462F5604bAe232d47e2e07E0fCaa67d",  //LOT로 바꾸기 귀찮아서 그냥 cct 사용함
     erc20: "0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748",  //CYAToken 주소
     cctAddr: "0x97c29C2EC9fe37AFA2635477992618796A618"
   };
@@ -19,6 +19,8 @@ let contractAddress = {
     "function  getdepo(address user) public view returns(uint)",
     "function  getlevel(address user) public view returns(uint)",
     "function myinfo(address user) public view returns (uint256,uint256,uint256,uint256,uint256,uint256,address,address)",
+
+    "function fee() public view returns(uint)",
     "function withdraw( )public returns(bool)",
     "function allowcation( )public returns(bool)",
     "function buylot(uint _num) public returns(bool) ",
@@ -52,11 +54,14 @@ let contractAddress = {
          let tvl = await cctbankContract.g1(); 
          let tvl2 = await cctbankContract.g11(); //유통량
          let ttax = await cctbankContract.totaltax(); 
+         let tiketfee = await cctbankContract.fee(); 
          document.getElementById("Lprice").innerHTML=  parseFloat(cprice/1e18).toFixed(4);
-         document.getElementById("Mem").innerHTML = parseInt(mems+60);
-         document.getElementById("Tvl").innerHTML = parseFloat(tvl/1e18).toFixed(2);
-         document.getElementById("Tvl2").innerHTML = parseInt(tvl2);
+         document.getElementById("Mem").innerHTML = parseInt(mems+20);
+         document.getElementById("Tvl").innerHTML = parseFloat(tvl/1e21).toFixed(2);
+         document.getElementById("Tvl2").innerHTML = parseInt(tvl2/1000);
          document.getElementById("Ttax").innerHTML = parseFloat(ttax/1e18).toFixed(4);
+         document.getElementById("Fee").innerHTML = parseInt(tiketfee);
+
 
 
          cctbankContract.on('reward', (amount) => {
@@ -331,7 +336,7 @@ let contractAddress = {
         params: {
           type: 'ERC20',
           options: {
-            address: "0x4D687f146517a3a5cC1f13B282d96350a88a56d2",
+            address: "0x4Af954547C260B4774D5A423261Cc50569b9AdEC",
             symbol: "LOT",
             decimals: 0, 
             // image: tokenImage,
