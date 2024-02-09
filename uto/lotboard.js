@@ -7,7 +7,7 @@
   
     // Graphs
     const contractAddress = {
-      custallowAddr: "0x3903a05e3462F5604bAe232d47e2e07E0fCaa67d",
+      custallowAddr: "0x53BA588E927D5483C1Cd9bf842DF430dBec011B7",
     }
     const contractAbi = {
       custallow: [

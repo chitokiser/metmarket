@@ -1,5 +1,5 @@
 let contractAddress = {
-    cctbankAddr: "0x3903a05e3462F5604bAe232d47e2e07E0fCaa67d",  //LOT로 바꾸기 귀찮아서 그냥 cct 사용함
+    cctbankAddr: "0x53BA588E927D5483C1Cd9bf842DF430dBec011B7",  //LOT로 바꾸기 귀찮아서 그냥 cct 사용함
     erc20: "0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748",  //CYAToken 주소
     cctAddr: "0x97c29C2EC9fe37AFA2635477992618796A618"
   };
@@ -19,8 +19,8 @@ let contractAddress = {
     "function  getdepo(address user) public view returns(uint)",
     "function  getlevel(address user) public view returns(uint)",
     "function myinfo(address user) public view returns (uint256,uint256,uint256,uint256,uint256,uint256,address,address)",
-
-    "function fee() public view returns(uint)",
+    "function jack() public view returns(uint)",
+    "function myfee(address user ) public view returns(uint) ",
     "function withdraw( )public returns(bool)",
     "function allowcation( )public returns(bool)",
     "function buylot(uint _num) public returns(bool) ",
@@ -54,16 +54,15 @@ let contractAddress = {
          let tvl = await cctbankContract.g1(); 
          let tvl2 = await cctbankContract.g11(); //유통량
          let ttax = await cctbankContract.totaltax(); 
-         let tiketfee = await cctbankContract.fee(); 
+         let jack = await cctbankContract.jack(); 
          document.getElementById("Lprice").innerHTML=  parseFloat(cprice/1e18).toFixed(4);
          document.getElementById("Mem").innerHTML = parseInt(mems+20);
          document.getElementById("Tvl").innerHTML = parseFloat(tvl/1e21).toFixed(2);
          document.getElementById("Tvl2").innerHTML = parseInt(tvl2/1000);
          document.getElementById("Ttax").innerHTML = parseFloat(ttax/1e18).toFixed(4);
-         document.getElementById("Fee").innerHTML = parseInt(tiketfee);
-
-
-
+         document.getElementById("Jack").innerHTML = parseInt(jack);
+         document.getElementById("Jack1").innerHTML =  parseFloat((100000-jack)/1000).toFixed(2);
+         document.getElementById("Jack2").innerHTML =  parseFloat(100000/jack).toFixed(4);
          cctbankContract.on('reward', (amount) => {
             // Handle incoming event data
             console.log('레버리지된금액:',amount);
@@ -156,9 +155,10 @@ let contractAddress = {
       let mycct = await vetContract.g8(await signer.getAddress());
       let mypay = await vetContract.g6(await signer.getAddress());
       let mycctvalue = await vetContract.getprice() * await mycct;
+      let tiketfee = await vetContract.myfee(await signer.getAddress()); 
       document.getElementById("Mycct").innerHTML=(mycct); 
-      document.getElementById("Mytvl").innerHTML=(mycctvalue/1e18).toFixed(4); 
-     
+      document.getElementById("Mytvl").innerHTML=(mycctvalue/1e18).toFixed(4);      
+      document.getElementById("Fee").innerHTML = parseInt(tiketfee);
       let my = await vetContract.myinfo(await signer.getAddress());
       let tpoint =  parseInt(await my[0]);
       let point =  parseInt(await my[1]);
@@ -300,7 +300,7 @@ let contractAddress = {
     };
   
   
-    let Vsell = async () => {
+    let Lsell = async () => {
       let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await window.ethereum.request({
         method: "wallet_addEthereumChain",
@@ -336,7 +336,7 @@ let contractAddress = {
         params: {
           type: 'ERC20',
           options: {
-            address: "0x4Af954547C260B4774D5A423261Cc50569b9AdEC",
+            address: "0xce56910b12268DefBF223E73391C3fF781338F7A",
             symbol: "LOT",
             decimals: 0, 
             // image: tokenImage,

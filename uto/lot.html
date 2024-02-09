@@ -104,9 +104,9 @@
           </div>
         
           <ul class="list-group">
-            <li class="list-group-item">발행총량 = 100,000,000CCT</li>
+            <li class="list-group-item">발행총량 = 100,000,000LOT</li>
             <li class="list-group-item">LOT역활:합리적인 톤틴 시스템에 엑서스 하기 위한 토큰</li>
-            <li class="list-group-item">5000CCT이상 보유하고 있어야 회원으로 인정됩니다</li>
+            <li class="list-group-item">1000LOT이상 보유하고 있어야 배당받을 수 있습니다</li>
             <li class="list-group-item">누적세금 : <span id="Ttax"></span>CYA</li>
           </ul>
       
@@ -154,8 +154,8 @@
                   <li class="list-group-item">나의멘토<span id="Mymento">-</span></li>
                   <li class="list-group-item">나의에이젼트<span id="Myagent">-</span></li>
                   <li class="list-group-item">이번배당준비금액<span id="Mypay">CYA</span></li>
-                  <li class="list-group-item">배당준비금 = 계약잔고/유통LOT총량 *나의LOT 보유수 *나의레벨*나의레벨/30000</li>
-                  <li class="list-group-item">배당금 = 배당준비금 *랜덤(1~100000)/50000 </li>
+                  <li class="list-group-item">배당준비금 = 계약잔고/유통LOT총량 *나의LOT 보유수 *나의레벨*나의레벨/1000</li>
+                  <li class="list-group-item">배당금 = 배당준비금 *랜덤(1~100000)/<span id="Jack">-</span> </li>
                   <li class="list-group-item"> <button type="button" class="btn btn-outline-dark position-relative" cursor:
                       pointer; onclick="Levelup()">
                       레벨업
@@ -169,7 +169,7 @@
       
               
           
-          <li class="list-group-item">레버지를 하시면 70%확률로 배당준비금액  보다 더 많은 결과를 기대할 수 있고 7배까지 획득 가능합니다 </li>
+          <li class="list-group-item">레버지를 하시면 <span id="Jack1"></span>%확률로 배당준비금액  보다 더 많은 결과를 기대할 수 있고 <span id="Jack2"></span>배까지 획득 가능합니다 </li>
           <li class="list-group-item"><span id="eventData">-</span>CYA</li>
           <div class="d-grid gap-2">
             <button class="btn btn-outline-success" type="submit" onclick="Allowcation()">레버리지 -<span id="Fee">-</span>LOT</button>
@@ -193,7 +193,7 @@
       <div class="input-group mb-3">
         <input type="text" class="form-control" id="sellcustnum" placeholder="판매할 LOT수량 입력 레벨5이상이어야 하며 판매가능하며 1회거래 때마다 레벨1씩 줄어듭니다" aria-label="CYA"
           aria-describedby="basic-addon2">
-        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick=";Lsell()">LOT 팔기
+        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Lsell()">LOT 팔기
           </span>
       </div>
     
