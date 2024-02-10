@@ -40,6 +40,7 @@
   const bnbPrice = parseFloat(responseBinanceTicker.data.price);
   document.getElementById("bPrice").innerHTML=bnbPrice.toFixed(4);
   document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
+  document.getElementById("cPrice2").innerHTML=(1/bnbPrice).toFixed(4);
 
     
             // ethers setup
