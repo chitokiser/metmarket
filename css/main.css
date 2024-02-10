@@ -133,3 +133,18 @@
   border-color: #0f9d58; /* Border color matches the background color */
   color: #fff; /* Text color on hover */
 }
+
+.container-box {
+  width: 99%; /* Set the width of the container to 90% of the screen width */
+  max-width: 600px; /* Set the maximum width of the container */
+  height: auto; /* Automatically adjust the height based on content */
+  border: 1px solid black; /* Add a border for visibility */
+  margin: 20px auto; /* Center the container horizontally and add space around it */
+  padding: 10px; /* Add padding inside the container */
+}
+
+.container-box img {
+  width: 100%; /* Make the image fill the container horizontally */
+  height: auto; /* Automatically adjust the height based on the image's aspect ratio */
+  display: block; /* Make sure the image behaves as a block element */
+}
