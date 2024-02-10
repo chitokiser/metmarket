@@ -113,33 +113,46 @@
   animation: lightingAnimation 2s linear infinite alternate;
 }
 
-@keyframes lightingAnimation {
-  from {
-    background-position: -100%;
-  }
-  to {
-    background-position: 100%;
-  }
+
+.container-box img {
+  width: 100%; /* Make the image fill the container horizontally */
+  height: auto; /* Automatically adjust the height based on the image's aspect ratio */
+  display: block; /* Make sure the image behaves as a block element */
 }
 
 .fluorescent-btn {
+  position: relative;
   background-color: #bfd2aa; /* Fluorescent green color */
   border-color: #a5a9a4; /* Border color matches the background color */
   color: #000; /* Text color */
-  transition: box-shadow 0.3s ease; /* Smooth transition for the box-shadow property */
+  overflow: hidden;
+  padding: 10px 20px; /* Adjust padding as needed */
+}
+
+.fluorescent-btn::before {
+  content: "It's time to leverage"; /* Text for the billboard */
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  white-space: nowrap;
+  animation: billboard 10s linear infinite; /* Adjust duration and animation type as needed */
+}
+
+@keyframes billboard {
+  0% {
+    transform: translate(-100%, -50%);
+  }
+  100% {
+    transform: translate(-100%, -50%) translateX(-100%); /* Move text to the left */
+  }
 }
 
 .fluorescent-btn:hover {
   background-color: #0f9d58; /* Darker shade on hover */
   border-color: #0f9d58; /* Border color matches the background color */
   color: #fff; /* Text color on hover */
-  box-shadow: 0 0 10px #0f9d58; /* Soft glowing effect on hover */
 }
 
-
-
-.container-box img {
-  width: 100%; /* Make the image fill the container horizontally */
-  height: auto; /* Automatically adjust the height based on the image's aspect ratio */
-  display: block; /* Make sure the image behaves as a block element */
+.fluorescent-btn:hover::before {
+  display: none; /* Hide the text on hover */
 }
