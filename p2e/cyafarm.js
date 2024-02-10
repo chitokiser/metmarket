@@ -1,6 +1,6 @@
  // testnet
  let contractAddress = {
-  cyafarmAddr: "0x297897704076FE20E9b54202776a5eF2Ca6C8916"
+  cyafarmAddr: "0x297897704076FE20E9b54202776a5eF2Ca6C8916",
 };
  let contractAbi = {
 
@@ -49,7 +49,7 @@ const topDataSync = async () => {
   document.getElementById("Ttax").innerHTML = (ttax/1e18).toFixed(2);;
   
           // JavaScript 코드
-          const nftIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+          const nftIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15];
   
           const updateFarmCard = async (nftId) => {
               const depoInfo = await cyafarmContract.allportinfo(nftId);

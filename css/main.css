@@ -39,3 +39,70 @@
     font-size: 24px; /* Increase font size */
     /* Add any other styles as needed */
 }
+
+.threed {
+  text-shadow: 1px 1px 2px #ed6706, 0 0 1em #000, 0 0 0.2em #5a06f6;
+}
+
+.larger {
+  font-size: 2em;
+}
+
+.red {
+  color: red; 
+}
+
+.container-box {
+  position: relative;
+  padding: 20px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.container-box::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #000;
+  transform: translateY(-50%);
+}
+.flashy-button {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Win button style */
+.win-button {
+  background-color: #e1ebe2; /* Green */
+}
+
+.win-button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+/* Draw button style */
+.draw-button {
+  background-color: #c5bbd9; /* Purple */
+}
+
+.draw-button:hover {
+  background-color: #512da8; /* Darker purple */
+}
+
+/* Lose button style */
+.lose-button {
+  background-color: #d0aeab; /* Red */
+}
+
+.lose-button:hover {
+  background-color: #e53935; /* Darker red */
+}

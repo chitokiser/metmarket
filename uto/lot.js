@@ -1,7 +1,6 @@
 let contractAddress = {
     cctbankAddr: "0x53BA588E927D5483C1Cd9bf842DF430dBec011B7",  //LOT로 바꾸기 귀찮아서 그냥 cct 사용함
-    erc20: "0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748",  //CYAToken 주소
-    cctAddr: "0x97c29C2EC9fe37AFA2635477992618796A618"
+
   };
   let contractAbi = {
   
@@ -29,14 +28,8 @@ let contractAddress = {
     "function mentoadd(address _mento)public",
     "event reward(uint amount);"
     ],
-    erc20: [
-        "function approve(address spender, uint256 amount) external returns (bool)",
-        "function allowance(address owner, address spender) external view returns (uint256)"
-      ],
-      cct: [
-        "function getdepot(address user) external view returns (uint256)"
-      ]
-  
+
+
   };
   
     let Lottop = async () => {
@@ -57,8 +50,8 @@ let contractAddress = {
          let jack = await cctbankContract.jack(); 
          document.getElementById("Lprice").innerHTML=  parseFloat(cprice/1e18).toFixed(4);
          document.getElementById("Mem").innerHTML = parseInt(mems+20);
-         document.getElementById("Tvl").innerHTML = parseFloat(tvl/1e21).toFixed(2);
-         document.getElementById("Tvl2").innerHTML = parseInt(tvl2/1000);
+         document.getElementById("Tvl").innerHTML = parseFloat(tvl/1e18).toFixed(2);
+         document.getElementById("Tvl2").innerHTML = parseInt(tvl2);
          document.getElementById("Ttax").innerHTML = parseFloat(ttax/1e18).toFixed(4);
          document.getElementById("Jack").innerHTML = parseInt(jack);
          document.getElementById("Jack1").innerHTML =  parseFloat((100000-jack)/1000).toFixed(2);
@@ -70,9 +63,10 @@ let contractAddress = {
             // Display the event on your webpage as needed
             // For example, update an HTML element with the event data
             document.getElementById('eventData').innerText = `레버리지된 금액: ${amount/1e18}`;
+            
         });
-    
-  
+
+ 
     };
   
   
@@ -156,9 +150,12 @@ let contractAddress = {
       let mypay = await vetContract.g6(await signer.getAddress());
       let mycctvalue = await vetContract.getprice() * await mycct;
       let tiketfee = await vetContract.myfee(await signer.getAddress()); 
+      let tiketfee2 = await vetContract.myfee(await signer.getAddress()); 
       document.getElementById("Mycct").innerHTML=(mycct); 
       document.getElementById("Mytvl").innerHTML=(mycctvalue/1e18).toFixed(4);      
       document.getElementById("Fee").innerHTML = parseInt(tiketfee);
+      document.getElementById("Fee2").innerHTML = parseInt(tiketfee2);
+
       let my = await vetContract.myinfo(await signer.getAddress());
       let tpoint =  parseInt(await my[0]);
       let point =  parseInt(await my[1]);
