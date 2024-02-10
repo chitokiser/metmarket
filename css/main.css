@@ -126,12 +126,14 @@
   background-color: #bfd2aa; /* Fluorescent green color */
   border-color: #a5a9a4; /* Border color matches the background color */
   color: #000; /* Text color */
+  transition: box-shadow 0.3s ease; /* Smooth transition for the box-shadow property */
 }
 
 .fluorescent-btn:hover {
   background-color: #0f9d58; /* Darker shade on hover */
   border-color: #0f9d58; /* Border color matches the background color */
   color: #fff; /* Text color on hover */
+  box-shadow: 0 0 10px #0f9d58; /* Soft glowing effect on hover */
 }
 
 
