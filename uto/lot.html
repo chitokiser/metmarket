@@ -165,9 +165,9 @@
               
           
           <li class="list-group-item">레버리지를 하시면 <span id="Jack1"></span>%확률로 배당준비금액  보다 더 많은 결과를 기대할 수 있고 <span id="Jack2"></span>배까지 획득 가능합니다 </li>
-          <li class="list-group-item"><span id="eventData">-</span>CYA</li>
+          <div id="eventData" class="lighting-text"  style="font-size: 2em; color: red;">Leveraged amount: 0</div>
           <div class="d-grid gap-2">
-            <button class="btn btn-outline-dark" type="submit" onclick="Allowcation()">레버리지 <span id="Fee"></span></button>
+            <button class="btn btn-outline-dark fluorescent-btn" type="submit" onclick="Allowcation()">레버리지 <span id="Fee"></span></button>
           <div class="d-grid gap-2">
         <button class="btn btn-outline-success" type="submit" onclick="Withdraw()">인출하기
         </button>
@@ -180,9 +180,9 @@
       </div>
       <ul class="list-group">
         <li class="list-group-item">계약잔고: <span id="Stvl"></span>LOT</li>
-        <li class="list-group-item"><span id="eventS1">-</span></li>
+        <div id="eventData" class="lighting-text"  style="font-size: 2em; color: red;">당청삼금 amount: 0</div>
         <li class="list-group-item"><span id="eventS2">-</span></li>
-     
+
         <button id="winButton" class="flashy-button win-button">Win<span id="Winre"></span></button>
         <button id="drawButton" class="flashy-button draw-button">Draw<span id="Drawre"></span></button>
         <button id="loseButton" class="flashy-button lose-button">Lose<span id="Losere"></span></button>

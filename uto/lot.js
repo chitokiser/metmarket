@@ -56,13 +56,12 @@ let contractAddress = {
          document.getElementById("Jack").innerHTML = parseInt(jack);
          document.getElementById("Jack1").innerHTML =  parseFloat((100000-jack)/1000).toFixed(2);
          document.getElementById("Jack2").innerHTML =  parseFloat(100000/jack).toFixed(4);
-         cctbankContract.on('reward', (amount) => {
-            // Handle incoming event data
-            console.log('레버리지된금액:',amount);
             
-            // Display the event on your webpage as needed
-            // For example, update an HTML element with the event data
-            document.getElementById('eventData').innerText = `레버리지된 금액: ${amount/1e18}`;
+            cctbankContract.on('reward', (amount) => {
+            
+            console.log('레버리지된금액:',amount);
+       
+            document.getElementById('eventData').innerText = `${amount/1e18}CYA`;
             
         });
 
@@ -174,9 +173,9 @@ let contractAddress = {
       document.getElementById("Mypay").innerHTML=(mypay*mylev/1e18).toFixed(4); 
       document.getElementById("Expneeded").innerHTML= (levelexp - myexp);
       document.getElementById("LevelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다. 
-       
-    
-    
+     
+
+  
     };
   
   

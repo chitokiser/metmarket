@@ -105,4 +105,31 @@
 
 .lose-button:hover {
   background-color: #e53935; /* Darker red */
+}.lighting-text {
+  color: transparent;
+  background-image: linear-gradient(90deg, rgb(211, 212, 202), rgba(153, 235, 12, 0.903), transparent);
+  background-size: 200% 100%;
+  background-position: -100%;
+  animation: lightingAnimation 2s linear infinite alternate;
+}
+
+@keyframes lightingAnimation {
+  from {
+    background-position: -100%;
+  }
+  to {
+    background-position: 100%;
+  }
+}
+
+.fluorescent-btn {
+  background-color: #bfd2aa; /* Fluorescent green color */
+  border-color: #a5a9a4; /* Border color matches the background color */
+  color: #000; /* Text color */
+}
+
+.fluorescent-btn:hover {
+  background-color: #0f9d58; /* Darker shade on hover */
+  border-color: #0f9d58; /* Border color matches the background color */
+  color: #fff; /* Text color on hover */
 }
