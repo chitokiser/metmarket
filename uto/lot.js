@@ -149,11 +149,11 @@ let contractAddress = {
       let mypay = await vetContract.g6(await signer.getAddress());
       let mycctvalue = await vetContract.getprice() * await mycct;
       let tiketfee = await vetContract.myfee(await signer.getAddress()); 
-      let tiketfee2 = await vetContract.myfee(await signer.getAddress()); 
+
       document.getElementById("Mycct").innerHTML=(mycct); 
       document.getElementById("Mytvl").innerHTML=(mycctvalue/1e18).toFixed(4);      
       document.getElementById("Fee").innerHTML = parseInt(tiketfee);
-      document.getElementById("Fee2").innerHTML = parseInt(tiketfee2);
+ 
 
       let my = await vetContract.myinfo(await signer.getAddress());
       let tpoint =  parseInt(await my[0]);
@@ -161,10 +161,10 @@ let contractAddress = {
       let myexp =  parseInt(await my[2]);
       let mylev =  parseInt(await my[3]);
       let mento = (await my[6]);
-      let agent = (await my[7]);
       let levelexp = parseInt(2**mylev*10000);
+
       document.getElementById("Tpoint").innerHTML= (tpoint/1E18).toFixed(4); 
-      document.getElementById("Point").innerHTML= (point/1E18).toFixed(4); 
+      document.getElementById("Point").innerHTML= (point*80/100/1E18).toFixed(4); 
       document.getElementById("Myexp").innerHTML= (myexp);
       document.getElementById("Mylev").innerHTML= (mylev);
       document.getElementById("Mylev2").innerHTML= (mylev);
@@ -173,8 +173,6 @@ let contractAddress = {
       document.getElementById("Expneeded").innerHTML= (levelexp - myexp);
       document.getElementById("LevelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다. 
      
-
-  
     };
   
   
