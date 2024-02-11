@@ -130,7 +130,7 @@
 }
 
 .fluorescent-btn::before {
-  content: "It's time to leverage"; /* Text for the billboard */
+  content: "Good luck"; /* Text for the billboard */
   position: absolute;
   top: 50%;
   left: 100%;
@@ -149,7 +149,7 @@
 
 .fluorescent-btn:hover {
   background-color: #0f9d58; /* Darker shade on hover */
-  border-color: #0f9d58; /* Border color matches the background color */
+  border-color: #c9ecdb; /* Border color matches the background color */
   color: #fff; /* Text color on hover */
 }
 

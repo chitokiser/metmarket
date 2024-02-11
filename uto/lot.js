@@ -169,7 +169,6 @@ let contractAddress = {
       document.getElementById("Mylev").innerHTML= (mylev);
       document.getElementById("Mylev2").innerHTML= (mylev);
       document.getElementById("Mymento").innerHTML= (mento);
-      document.getElementById("Myagent").innerHTML= (agent);
       document.getElementById("Mypay").innerHTML=(mypay*mylev/1e18).toFixed(4); 
       document.getElementById("Expneeded").innerHTML= (levelexp - myexp);
       document.getElementById("LevelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다. 

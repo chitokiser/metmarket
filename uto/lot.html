@@ -126,12 +126,10 @@
           crossorigin="anonymous"></script>
         <script src="lotboard.js"></script>
       </div>
-      
-      
-              <li class="list-group-item">추천인 어카운트를 입력 후 회원에 가입하세요(무료).멤버가입에 성공하면 레벨1이 되며 LOT를거래할 수 있습니다 </li>
-              <li class="list-group-item">추천인 어카운트 : 0x54363a36aabA3ff0678f452c6592125441E2E25f</li>
+      <li class="list-group-item"><button class="btn btn-outline-success" id="randomButton">추천인 어카운트 자동출력 자동입력</button>
+        <p id="randomData" style="display: none;"></p>
               <div class="input-group mb-3">
-                <input type="text" id="mentoaddress" class="form-control" placeholder="추천인 어카운트를 입력하세요" aria-label="CYA"
+                <input type="text" id="mentoaddress" class="form-control" placeholder="추천인 어카운트를 입력 후 회원에 가입하세요(무료).멤버가입에 성공하면 레벨1이 되며 LOT를거래할 수 있습니다" aria-label="CYA"
                   aria-describedby="basic-addon2">    
                 <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Memberjoin()">회원가입하기</span>
               </div>
@@ -147,7 +145,6 @@
                   <li class="list-group-item">나의 레벨 : <span id="Mylev"></span></li>
                   <li class="list-group-item">레벨업까지 필요한 경험치 : <span id="Expneeded"></span>EXP</li>
                   <li class="list-group-item">나의멘토<span id="Mymento">-</span></li>
-                  <li class="list-group-item">나의에이젼트<span id="Myagent">-</span></li>
                   <li class="list-group-item">이번배당준비금액<span id="Mypay">CYA</span></li>
                   <li class="list-group-item">배당준비금 = 계약잔고/유통LOT총량 *나의LOT 보유수 *나의레벨/1000</li>
                   <li class="list-group-item">배당금 = 배당준비금 *랜덤(1~100000)/<span id="Jack">-</span> </li>
@@ -176,11 +173,20 @@
     </ul>
       </div> 
       <div class="d-grid gap-2">
-        <button class="btn btn-dark" type="button">주사위 축구  <span id="Fee2"></span></button>
+        <button class="btn btn-dark" type="button">주사위 축구 </button>
       </div>
       <ul class="list-group">
         <li class="list-group-item">계약잔고: <span id="Stvl"></span>LOT</li>
-        <div id="eventS1" class="lighting-text"  style="font-size: 2em; color: red;">당청상금 amount: 0</div>
+        <li class="list-group-item"><select id="bettingAmount">
+          <option value="10">10LOT</option>
+          <option value="50">50LOT</option>
+          <option value="100">100LOT</option>
+          <option value="500">500LOT</option>
+          <option value="1000">1000LOT</option>
+          <option value="5000">5000LOT</option>
+          <!-- Add more options as needed -->
+        </select></li>
+        <div id="eventS1" class="lighting-text"  style="font-size: 2em; color: red;">당첨상금 amount: 0</div>
         <li class="list-group-item"><span id="eventS2">-</span></li>
 
         <button id="winButton" class="flashy-button win-button">Win<span id="Winre"></span></button>
