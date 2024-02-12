@@ -43,7 +43,7 @@ let address2= {
             // After showing numbers, display the actual result
             setTimeout(() => {
                 eventS2.innerHTML = `
-                    <span class="threed larger green">${n1}</span> - <span class="threed larger red">${n2}</span>
+                    <span class="threed larger green">Home:${n1}</span> - <span class="threed larger red">Away:${n2}</span>
                 `;
             }, 3500); // Adjust the delay as needed
         });

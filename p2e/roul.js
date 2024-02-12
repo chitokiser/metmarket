@@ -1,87 +1,74 @@
-var $inner = $('.inner'),
-    $spin = $('#spin-button'),
-    $reset = $('#reset-button'),
-    $data = $('.data'),
-    $mask = $('.mask'),
-    maskDefault = 'Place Your Bets',
-    timer = 9000;
+// Define contract address and ABI
+let address3 = {
+    roulAddr: "0x9898C50e9D63Ff596B83de78E9a55220FFB44208"  // Address of the roul contract
+  };
+  
+  let abi3 = {
+    roul: [
+      "function single(uint8 _win, uint bet) public",
+      "function jack( ) public view returns (uint256)",
+      "function  jackprice() public view returns(uint)"
+    ],
+  };
+  
+ 
+  let updateRoulette = async () => {
 
-var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
-
-$reset.hide();
-
-$mask.text(maskDefault);
-
-$spin.on('click', function () {
-
-    // get a random number between 0 and 36 and apply it to the nth-child selector
-    var randomNumber = Math.floor(Math.random() * 36),
-        color = null;
-    $inner.attr('data-spinto', randomNumber).find('li:nth-child(' + randomNumber + ') input').prop('checked', 'checked');
-    // prevent repeated clicks on the spin button by hiding it
-    $(this).hide();
-    // disable the reset button until the ball has stopped spinning
-    $reset.addClass('disabled').prop('disabled', 'disabled').show();
-
-    $('.placeholder').remove();
+    const provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
+    
+    // Create a contract instance for the soccer contract
+    let roulContract = new ethers.Contract(address3.roulAddr, abi3.roul, provider);
+    
+    let jack1 = await roulContract.jackprice();
+    
+    document.getElementById("Jackpot").innerHTML = parseFloat(jack1/1e18).toFixed(2);
 
 
-    setTimeout(function () {
-        $mask.text('No More Bets');
-    }, timer / 2);
+   
+  }
+    
 
-    setTimeout(function () {
-        $mask.text(maskDefault);
-    }, timer + 500);
-
-
-
-    // remove the disabled attribute when the ball has stopped
-    setTimeout(function () {
-        $reset.removeClass('disabled').prop('disabled', '');
-
-        if ($.inArray(randomNumber, red) !== -1) {
-            color = 'red'
-        } else {
-            color = 'black'
-        };
-        if (randomNumber == 0) {
-            color = 'green'
-        };
-
-        $('.result-number').text(randomNumber);
-        $('.result-color').text(color);
-        $('.result').css({ 'background-color': '' + color + '' });
-        $data.addClass('reveal');
-        $inner.addClass('rest');
-
-        $thisResult = '<li class="previous-result color-' + color + '"><span class="previous-number">' + randomNumber + '</span><span class="previous-color">' + color + '</span></li>';
-
-        $('.previous-list').prepend($thisResult);
-
-
-    }, timer);
-
-});
-
-
-$reset.on('click', function () {
-    // remove the spinto data attr so the ball 'resets'
-    $inner.attr('data-spinto', '').removeClass('rest');
-    $(this).hide();
-    $spin.show();
-    $data.removeClass('reveal');
-});
-
-// so you can swipe it too
-var myElement = document.getElementById('plate');
-var mc = new Hammer(myElement);
-mc.on("swipe", function (ev) {
-    if (!$reset.hasClass('disabled')) {
-        if ($spin.is(':visible')) {
-            $spin.click();
-        } else {
-            $reset.click();
-        }
+  var rouletter = {
+    random: function () {
+      var min = Math.ceil(0);
+      var max = Math.floor(36);
+      return Math.floor(Math.random() * (max - min)) + min;
+    },
+    start: function () {
+      var btn = document.querySelector(".rouletter-btn");
+      var panel = document.querySelector(".rouletter-wacu");
+  
+      panel.classList.add("on");
+      btn.innerText = "stop";
+    },
+    stop: function () {
+      var btn = document.querySelector(".rouletter-btn");
+      var panel = document.querySelector(".rouletter-wacu");
+      var deg = [60, 120, 180, 240, 300, 360];
+  
+      panel.style.transform = "rotate(" + deg[rouletter.random()] + "deg)";
+      panel.classList.remove("on");
+      btn.innerText = "start";
     }
-});
+  };
+  
+  document.addEventListener("click", function (e) {
+    var target = e.target;
+    if (target.tagName === "BUTTON") {
+      target.innerText === "start" ? rouletter.start() : rouletter.stop();
+    }
+  });
+  
+  document.getElementById("app123").innerHTML = `
+  <div class="rouletter">
+      <div class="rouletter-bg">
+          <div class="rouletter-wacu"></div>
+      </div>
+      <div class="rouletter-arrow"></div>
+      <button class="rouletter-btn">start</button>
+  </div>
+  `;
+
+  
+  updateRoulette();
+  
