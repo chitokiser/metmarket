@@ -156,3 +156,43 @@
 .fluorescent-btn:hover::before {
   display: none; /* Hide the text on hover */
 }
+
+
+    /* Define custom cursor styles */
+    .btn {
+        cursor: pointer; /* Default cursor */
+    }
+
+    .btn:hover {
+        cursor: pointer; /* Cursor changes to hand shape on hover */
+    }
+
+    .btn:active {
+        transform: translateY(1px); /* Button moves down slightly when clicked, giving a pressed feeling */
+    }
+
+        /* Define custom styles for the input group text */
+        .input-group-text {
+          cursor: pointer; /* Default cursor */
+          transition: background-color 0.3s; /* Smooth transition for color change */
+      }
+  
+      .input-group-text:hover {
+          background-color: #f0f0f0; /* Change background color on hover */
+      }
+  
+      .input-group-text:active {
+          transform: translateY(1px); /* Move the text down slightly when clicked */
+      }
+
+      .list-group-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 15vh; /* Ensure full height of the viewport */
+    }
+    
+    #eventS1,
+    #eventS2 {
+        font-size: 4em;
+    }
