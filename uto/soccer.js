@@ -82,7 +82,8 @@ let address2= {
             await userProvider.send("eth_requestAccounts", []);
             let signer = userProvider.getSigner();
             let soccerContract = new ethers.Contract(address2.soccerAddr, abi2.soccer, signer);
-            let selectedValue = document.getElementById("bettingAmount").value;
+            
+            let selectedValue = document.getElementById("bettingAmount").value;  //LOT토큰이기 때문에 1E18 안함
             await soccerContract.play(argument, selectedValue); // Call the play function with the provided argument
         } catch (error) {
             alert(error.message); // Display error message if execution fails

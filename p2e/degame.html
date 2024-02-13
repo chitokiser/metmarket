@@ -99,17 +99,17 @@
       <li class="list-group-item"><button class="btn btn-outline-success" id="randomButton">추천인 어카운트 자동출력 자동입력</button>
         <p id="randomData" style="display: none;"></p>
 
-                <input type="text" id="mentoaddress" class="form-control" placeholder="추천인 어카운트를 입력 후 회원에 가입하세요(무료).멤버가입에 성공하면 레벨1이 되며 LOT를거래할 수 있습니다" aria-label="CYA"
-                  aria-describedby="basic-addon2">    
+               <div class="input-group mb-3">
+                <input type="text" id="mentoaddress" class="form-control" placeholder="추천인 어카운트를 입력 후 회원에 가입하세요(무료)" aria-label="CYA"
+                  aria-describedby="basic-addon2">
                 <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Memberjoin()">회원가입하기</span>
-               </li>
-         
-              <li class="list-group-item">
-                  <input type="text" id="cyaInput" class="form-control" placeholder="충전 후 지갑연결을 하면 인출가능금액란에서 확인가능"
-                    aria-label="CYA" aria-describedby="basic-addon2">
-                  <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Charge()">게임머니충전</span>
-               
-                </li>     
+              </div>
+             
+            <div class="input-group mb-3">
+              <input type="text" id="cyaInput" class="form-control" placeholder="충전할 CYA를 입력하세요" aria-label="CYA"
+                aria-describedby="basic-addon2">
+              <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Charge()">게임머니충전</span>
+            </div>
 
           </ul>
       
@@ -155,11 +155,15 @@
       <br> <!-- or <hr> for a horizontal line -->
 
       <div class="d-grid gap-2">
-        <button class="btn btn-dark" type="button">블럭체인 룰렛 <span id="Jackpot">jack pot point</span></button>
+        <button class="btn btn-dark" type="button">블럭체인 룰렛 </button>
       </div>
   
-      <div class="game-box">
-        <div class="rouletter">
+      <li class="list-group-item"><span id="eventR1"></span></li>
+      <li class="list-group-item"><span id="Reward2"></li>
+        <li class="list-group-item"><span id="Reward3"></li>
+          <li class="list-group-item"><span id="Reward4"></li>
+        
+        <div class="rouletter" style="margin: auto;">
           <div class="rouletter-arrow"></div>
           <div class="rouletter-bg">
               <div class="rouletter-wacu on"></div>
@@ -168,11 +172,95 @@
     </div>
   </div>
 </div>
+<li class="list-group-item">금액을 선택하세요<select id="betmoney">
+  <option value="1">1CYA</option>
+  <option value="5">5CYA</option>
+  <option value="10">10CYA</option>
+  <option value="50">50CYA</option>
+  <option value="100">100CYA</option>
+  <!-- Add more options as needed -->
+</select></li>
+
 <div class="d-grid gap-2">
-  <button class="btn btn-outline-success" type="submit" onclick="Jack()">잭팟도전</button>
+  <button class="btn btn-outline-success" type="submit" onclick="Jack()">잭팟도전(1/500자동정산)<span id="Jackpot"></span></button>
   </div>   
-  <button id="jaack">Start Roulette</button>
-  <li class="list-group-item"><span id="eventR1">-</span></li>
+  
+
+
+    <!-- Add more options as needed -->
+    <div class="d-grid gap-2 col-6 mx-auto">
+    <div class="row">
+      <div class="col-6">
+        <button id="oddB" class="btn btn-outline-danger w-100">홀 x1.8</button>
+      </div>
+      <div class="col-6">
+        <button id="evenB" class="btn btn-outline-dark w-100">짝 x1.8</button>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-4">
+        <button id="dozen1" class="btn btn-outline-info w-100">1~12 x2.4</button>
+      </div>
+      <div class="col-4">
+        <button id="dozen2" class="btn btn-outline-success w-100">13~24 x2.4</button>
+      </div>
+      <div class="col-4">
+        <button id="dozen3" class="btn btn-outline-warning w-100">25~36 x2.4</button>
+      </div>
+    </div>
+
+    
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <select id="Singlenum">
+          <option value="">오직 한개의 번호만 선택 x26.4</option>
+          <option value="1">1번</option>
+          <option value="2">2번</option>
+          <option value="3">3번</option>
+          <option value="4">4번</option>
+          <option value="5">5번</option>
+          <option value="6">6번</option>
+          <option value="7">7번</option>
+          <option value="8">8번</option>
+          <option value="9">9번</option>
+          <option value="10">10번</option>
+          <option value="11">11번</option>
+          <option value="12">12번</option>
+          <option value="13">13번</option>
+          <option value="14">14번</option>
+          <option value="15">15번</option>
+          <option value="16">16번</option>
+          <option value="17">17번</option>
+          <option value="18">18번</option>
+          <option value="19">19번</option>
+          <option value="20">20번</option>
+          <opion value="21">21번</option>
+          <option value="22">22번</option>
+          <option value="23">23번</option>
+          <option value="24">24번</option>
+          <option value="25">25번</option>
+          <option value="26">26번</option>
+          <option value="27">27번</option>
+          <option value="28">28번</option>
+          <option value="29">29번</option>
+          <option value="30">30번</option>
+          <option value="31">31번</option>
+          <option value="32">32번</option>
+          <option value="33">33번</option>
+          <option value="34">34번</option>
+          <option value="35">35번</option>
+          <option value="36">36번</option>
+        </select>
+      </div>
+     
+      <button id="singleB" class="btn btn-outline-secondary w-100">번호하나 맞추기 x26.4</button>
+      <span id="SSingle"></span>
+    </div>
+  </div>
+
+   
+
         <br> <!-- or <hr> for a horizontal line -->
      
         <div class="d-grid gap-2">
