@@ -7,14 +7,14 @@
 
   // Graphs
   const contractAddress = {
-    custallowAddr: "0xccD9EE2067A19B0064651E97d09efeA5582B3ac0"
-  };
+    custallowAddr: "0xf8Ff3D3E07aeacbc72f81d1A2AcEB8c06f8c429a",
+  }
   const contractAbi = {
     custallow: [
-      "function g5(uint256 _num) public view returns(uint256)",
+      "function chart(uint256 )external view returns(uint256)"
     ]
   };
-  let provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed1.binance.org/');
+  let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
   let custallowContract = new ethers.Contract(contractAddress.custallowAddr, contractAbi.custallow, provider);
 
   let i = 0;
@@ -23,7 +23,7 @@
   let chartData = [];
   while (true) {
     try {
-      const close = parseFloat(ethers.utils.formatUnits(await custallowContract.g5(i), 18)).toFixed(7);
+      const close = parseFloat(ethers.utils.formatUnits(await custallowContract.chart(i), 18)).toFixed(7);
       console.log(i + ":" + close)
       if (j === 4) {
         j=0;

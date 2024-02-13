@@ -40,6 +40,7 @@
   const bnbPrice = parseFloat(responseBinanceTicker.data.price);
   document.getElementById("bPrice").innerHTML=bnbPrice.toFixed(4);
   document.getElementById("cPrice").innerHTML=(bnbPrice).toFixed(4);
+  document.getElementById("cPrice2").innerHTML=(1/bnbPrice).toFixed(4);
 
     
             // ethers setup
@@ -59,8 +60,7 @@
             let eps = (allows)*(10/2000);  //1cut당 1회 배당엑 레벨10기준
             let per = (cutprice/(eps*52));
             
-            document.getElementById("cyaPrice2").innerHTML=  parseFloat(1/cyadexPrice).toFixed(4);
-            document.getElementById("tvl").innerHTML=  parseFloat(dexBal*10/1e18).toFixed(4);  //안전금고 잔고 합산
+            document.getElementById("tvl").innerHTML=  parseFloat(dexBal/1e18).toFixed(4);  //안전금고 잔고 합산
             document.getElementById("cyaCir").innerHTML = (cutcir);
             document.getElementById("mem").innerHTML = parseInt(mems);
             document.getElementById("cutPrice").innerHTML=(cutprice/1e18).toFixed(4);

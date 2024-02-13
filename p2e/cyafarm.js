@@ -1,6 +1,6 @@
  // testnet
  let contractAddress = {
-  cyafarmAddr: "0x297897704076FE20E9b54202776a5eF2Ca6C8916"
+  cyafarmAddr: "0x297897704076FE20E9b54202776a5eF2Ca6C8916",
 };
  let contractAbi = {
 
@@ -23,7 +23,8 @@
     "function charge(uint num) public",
     "function remain( ) public view returns(uint256)",
     "function price( ) public view returns(uint256)",
-    "function totaltax( ) public view returns(uint256)"
+    "function totaltax( ) public view returns(uint256)",
+    "event farmnum(uint winnum)"
   ]
 
 };
@@ -48,7 +49,7 @@ const topDataSync = async () => {
   document.getElementById("Ttax").innerHTML = (ttax/1e18).toFixed(2);;
   
           // JavaScript 코드
-          const nftIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+          const nftIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15];
   
           const updateFarmCard = async (nftId) => {
               const depoInfo = await cyafarmContract.allportinfo(nftId);
@@ -67,13 +68,13 @@ const topDataSync = async () => {
               const cardBody = document.createElement("div");
               cardBody.className = "card-body";
               
-              const cardTitle = document.createElement("h5");
+              const cardTitle = document.createElement("h6");
               cardTitle.className = "card-title";
               cardTitle.textContent = `농장번호 ${nftId}`;
               
               const depoText = document.createElement("p");
               depoText.className = "card-text";
-              depoText.textContent = `최초 농장가치 : ${depoInfo.depo} CYA`;
+              depoText.textContent = `최초농장가치 : ${depoInfo.depo} CYA`;
               
               const deponText = document.createElement("p");
               deponText.className = "card-text";
@@ -111,7 +112,18 @@ const topDataSync = async () => {
               updateFarmCard(nftId);
           }
 
-};
+          cyafarmContract.on('farmnum', (winnum) => {
+          
+            console.log('구매한농장ID:', winnum);
+     
+            document.getElementById('eventData').innerText = `구매한농장ID: ${winnum}`;
+        });
+       
+       };
+     
+
+
+
 
  let fwithdraw = async () => {  //해결완료  에러메세지 작동함
   const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -199,7 +211,8 @@ let Buyfarm = async () => {
   } catch(e) {
     alert(e.message.replace('execution reverted: ',''));
   }
-};
+
+}
 
 
 let Charge = async () => {
@@ -229,6 +242,3 @@ let Charge = async () => {
 };
 
 topDataSync();
-
-
-

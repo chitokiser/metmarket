@@ -34,25 +34,20 @@
        let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
      
        let defiContract = new ethers.Contract(contractAddress.defiAddr, contractAbi.defi, provider);
-       let defitime = await defiContract.time();
+
        let catsell = await defiContract.g1();
        let catbuy = await defiContract.g2();
        let defitvl = await defiContract.g6();
        let deficat = await defiContract.g8();
        let tprice = await defiContract.get10();
-       let rate = await defiContract.get11(); 
-       let yac = await defiContract.get17(); 
-       let apr = await defiContract.get18()/100; 
-       document.getElementById("Defitime").innerHTML=  (defitime/60/60/24);  //정산기간
+   
+
        document.getElementById("Catsell").innerHTML=  parseFloat(catsell/1e18).toFixed(4);  //1CAT팔때 가격
        document.getElementById("Catbuy").innerHTML=  parseFloat(catbuy/1e18).toFixed(4);  //1CAT살때 가격
        document.getElementById("Defitvl").innerHTML=  parseFloat(defitvl/1e18).toFixed(4);  //defi cya잔고
        document.getElementById("Deficat").innerHTML=  (deficat) //defi cat잔고
        document.getElementById("Tprice").innerHTML=  parseFloat(tprice/1e18).toFixed(2);  //defi cat시가총액
-       document.getElementById("Rate").innerHTML=  parseFloat(rate/100).toFixed(2);  //월 정산 이익율
-       document.getElementById("Yac").innerHTML=  (yac); //년 정산횟수
-       document.getElementById("Apr").innerHTML=  parseFloat(apr).toFixed(2); //년 이자율 apr
-       document.getElementById("Apy").innerHTML=  parseFloat((rate)^yac).toFixed(2); //년 수익률 apy
+ 
      };
   
 
