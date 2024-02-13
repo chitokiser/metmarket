@@ -7,6 +7,10 @@ let address2= {
         "function play(uint8 _winnum,uint pay) public",
         " function  getbal() public view returns(uint)",
         "function  g4(address user) public view returns(uint)",
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
         "event result(uint num1,uint num2)",
         "event reward(uint amount)"
       ]

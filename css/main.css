@@ -194,6 +194,7 @@
     
     #eventS1,
     #eventS2 {
+<<<<<<< HEAD
       font-size: 1em; /* Default font size */
   }
   
@@ -203,3 +204,7 @@
           font-size: 0.8em; /* Adjust font size for smaller screens */
       }
   }
+=======
+        font-size: 4em;
+    }
+>>>>>>> origin/master

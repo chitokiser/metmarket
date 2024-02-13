@@ -32,48 +32,28 @@ let address2= {
         });
 
         soccerContract.on('result', (n1, n2) => {
-            console.log('경기결과:', n1, n2);
-    
-            document.getElementById('eventS2').innerHTML = `
-            <span class="threed larger red">${n1}</span> - <span class="threed larger red">${n2}</span>
-            `;
-        });
-
-        soccerContract.on('result', (n1, n2) => {
-            console.log('경기결과:', n1, n2);
+            console.log('Match result:', n1, n2);
         
-            // 이미지 가져오기
-            let diceImage1 = getDiceImage(n1);
-            let diceImage2 = getDiceImage(n2);
-            
-            // 결과 표시하기
-            document.getElementById('eventS2').innerHTML = `
-            <img src="${diceImage1}" alt="home" class="dice-image">
-            <img src="${diceImage2}" alt="away" class="dice-image">
-            `;
-        });
+            let eventS2 = document.getElementById('eventS2');
+            eventS2.innerHTML = ''; // Clear previous content
         
-        // 주사위 이미지 가져오기
-        function getDiceImage(number) {
-            switch(number) {
-                case 1:
-                    return 'images/dice/dice-1.jpg';
-                case 2:
-                    return 'images/dice/dice-2.jpg';
-                case 3:
-                    return 'images/dice/dice-3.jpg';
-                case 4:
-                    return 'images/dice/dice-4.jpg';
-                case 5:
-                    return 'images/dice/dice-5.jpg';
-                case 6:
-                    return '../images/dice/dice-6.jpg';
-                default:
-                    return 'image_not_found.png'; // 이미지를 찾을 수 없을 때의 기본 이미지
+            // Show numbers 1 to 6 sequentially
+            for (let i = 1; i <= 6; i++) {
+                setTimeout(() => {
+                    eventS2.textContent = i;
+                }, 500 * i); // Adjust the delay as needed
             }
-        }
+        
+            // After showing numbers, display the actual result
+            setTimeout(() => {
+                eventS2.innerHTML = `
+                    <span class="threed larger green">Home:${n1}</span> - <span class="threed larger red">Away:${n2}</span>
+                `;
+            }, 3500); // Adjust the delay as needed
+        });
           
     };
+  
   
   
 
