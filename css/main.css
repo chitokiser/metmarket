@@ -191,7 +191,7 @@
         align-items: center;
         height: 15vh; /* Ensure full height of the viewport */
     }
-    
+    #eventR1,
     #eventS1,
     #eventS2 {
       font-size: 2em; /* Default font size */
