@@ -7,12 +7,8 @@ let address3 = {
     roul: [
       "function single(uint8 _win, uint bet) public",
       "function jack( ) public view returns (uint256)",
-<<<<<<< HEAD
       "function  jackprice() public view returns(uint)",
       "event result(uint num1)"
-=======
-      "function  jackprice() public view returns(uint)"
->>>>>>> origin/master
     ],
   };
   
@@ -27,57 +23,8 @@ let address3 = {
     let jack1 = await roulContract.jackprice();
     
     document.getElementById("Jackpot").innerHTML = parseFloat(jack1/1e18).toFixed(2);
-
-<<<<<<< HEAD
   
-=======
-
-   
   }
     
-
-  var rouletter = {
-    random: function () {
-      var min = Math.ceil(0);
-      var max = Math.floor(36);
-      return Math.floor(Math.random() * (max - min)) + min;
-    },
-    start: function () {
-      var btn = document.querySelector(".rouletter-btn");
-      var panel = document.querySelector(".rouletter-wacu");
-  
-      panel.classList.add("on");
-      btn.innerText = "stop";
-    },
-    stop: function () {
-      var btn = document.querySelector(".rouletter-btn");
-      var panel = document.querySelector(".rouletter-wacu");
-      var deg = [60, 120, 180, 240, 300, 360];
-  
-      panel.style.transform = "rotate(" + deg[rouletter.random()] + "deg)";
-      panel.classList.remove("on");
-      btn.innerText = "start";
-    }
-  };
-  
-  document.addEventListener("click", function (e) {
-    var target = e.target;
-    if (target.tagName === "BUTTON") {
-      target.innerText === "start" ? rouletter.start() : rouletter.stop();
-    }
-  });
-  
-  document.getElementById("app123").innerHTML = `
-  <div class="rouletter">
-      <div class="rouletter-bg">
-          <div class="rouletter-wacu"></div>
-      </div>
-      <div class="rouletter-arrow"></div>
-      <button class="rouletter-btn">start</button>
-  </div>
-  `;
-
->>>>>>> origin/master
-  
   updateRoulette();
   
