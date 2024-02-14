@@ -34,11 +34,7 @@ let address3 = {
     
     document.getElementById("Jackpot").innerHTML = parseFloat(jack1/1e18).toFixed(2);
   
-//     roulContract.on('reward1', (amount) => {
-//       console.log('Result value:', amount);
-//       document.getElementById('Reward1').innerText = `${amount}CYA`;
-//   });
-   
+
   roulContract.on('reward2', (amount) => {
     console.log('Reward value:', amount);
     document.getElementById('Reward2').innerText = `${amount/1e18}CYA`;
@@ -47,29 +43,21 @@ let address3 = {
 roulContract.on('reward3', (amount) => {
   console.log('Reward value:', amount);
   document.getElementById('Reward3').innerText = `${amount/1e18}CYA`;
-});
+});gi
 
 roulContract.on('reward4', (amount) => {
   console.log('Reward value:', amount);
   document.getElementById('Reward4').innerText = `${amount}CYA`;
 });
 
-// roulContract.on('reward5', (amount) => {
-//   console.log('Result value:', amount);
-//   document.getElementById('Reward5').innerText = `${amount}CYA`;
-// });
-
-// roulContract.on('reward6', (amount) => {
-//   console.log('Result value:', amount);
-//   document.getElementById('Reward6').innerText = `${amount}CYA`;
-// });
-
+   let num1; 
     roulContract.on('result', (num1) => {
       console.log('Result value:', num1);
       document.getElementById('eventR1').innerText = `${num1}`;
       rouletter.stop(num1); // Call to stop the roulette according to the blockchain result.
   });
-  
+  console.log(num1);
+
   var rouletter = {
   
       // Start button

@@ -188,32 +188,41 @@
 
 
     <!-- Add more options as needed -->
-    <div class="d-grid gap-2 col-6 mx-auto">
-    <div class="row">
-      <div class="col-6">
-        <button id="oddB" class="btn btn-outline-danger w-100">홀 x1.8</button>
+    <div class="container">
+      <div class="row justify-content-center"> <!-- Center the buttons horizontally -->
+          <div class="col-lg-6 col-md-8 col-sm-12"> <!-- Adjust column width based on screen size -->
+              <div class="row">
+                  <div class="col-6">
+                      <button id="oddB" class="btn btn-outline-danger w-100">Hole x1.8</button>
+                  </div>
+                  <div class="col-6">
+                      <button id="evenB" class="btn btn-outline-dark w-100">Even x1.8</button>
+                  </div>
+              </div>
+              
+              <div class="row">
+                  <div class="col-4">
+                      <button id="dozen1" class="btn btn-outline-info w-100">1~12 x2.4</button>
+                  </div>
+                  <div class="col-4">
+                      <button id="dozen2" class="btn btn-outline-success w-100">13~24 x2.4</button>
+                  </div>
+                  <div class="col-4">
+                      <button id="dozen3" class="btn btn-outline-warning w-100">25~36 x2.4</button>
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class="col-6">
-        <button id="evenB" class="btn btn-outline-dark w-100">짝 x1.8</button>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="col-4">
-        <button id="dozen1" class="btn btn-outline-info w-100">1~12 x2.4</button>
-      </div>
-      <div class="col-4">
-        <button id="dozen2" class="btn btn-outline-success w-100">13~24 x2.4</button>
-      </div>
-      <div class="col-4">
-        <button id="dozen3" class="btn btn-outline-warning w-100">25~36 x2.4</button>
-      </div>
-    </div>
+  </div>
 
     
-    <div class="d-flex align-items-center justify-content-between">
-      <div>
-        <select id="Singlenum">
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="d-flex flex-column flex-sm-row align-items-center justify-content-between">
+                <div class="mb-3 mb-sm-0"> <!-- Margin bottom for spacing between select and button -->
+                    <select id="Singlenum" class="form-select">
+
           <option value="">오직 한개의 번호만 선택 x26.4</option>
           <option value="1">1번</option>
           <option value="2">2번</option>
@@ -258,7 +267,9 @@
       <span id="SSingle"></span>
     </div>
   </div>
-
+</div>
+</div>
+</div>
    
 
         <br> <!-- or <hr> for a horizontal line -->
