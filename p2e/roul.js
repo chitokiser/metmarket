@@ -1,62 +1,43 @@
 // Define contract address and ABI
 let address3 = {
-    roulAddr: "0xC82367b370594Ff48525F046EC5872D8F3097041"  // Address of the roul contract
+    roulAddr: "0x397fc3d2B9405F0ae81f82dFf497cfA63fE0C697"  // Address of the roul contract
   };
-  
+
   let abi3 = {
     roul: [
       "function single(uint8 _win, uint bet) public",
       "function jack( ) public view returns (uint256)",
       "function  jackprice() public view returns(uint)",
-      "function single(uint8 _win, uint bet) public",
-      "function jackbet() public",
-      "function hilow(uint8 _win, uint bet) public",
       "function dozen(uint8 _win, uint bet) public",
       "function evenodd(uint8 _win, uint bet) public",
-      "event reward2(uint amount);", 
-      "event reward3(uint amount);",
-      "event reward4(uint amount);",
+      "function jackbet() public",
+      "event reward(uint amount)", 
       "event result(uint num1)"
       
 
     ],
   };
   
- 
   let updateRoulette = async () => {
-
     const provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
-    
-
     let roulContract = new ethers.Contract(address3.roulAddr, abi3.roul, provider);
     
     let jack1 = await roulContract.jackprice();
-    
-    document.getElementById("Jackpot").innerHTML = parseFloat(jack1/1e18).toFixed(2);
-  
+    document.getElementById("Jackpot").innerHTML = parseFloat(jack1 / 1e18).toFixed(2);
 
-  roulContract.on('reward2', (amount) => {
-    console.log('Reward value:', amount);
-    document.getElementById('Reward2').innerText = `${amount/1e18}CYA`;
-});
-
-roulContract.on('reward3', (amount) => {
-  console.log('Reward value:', amount);
-  document.getElementById('Reward3').innerText = `${amount/1e18}CYA`;
-});gi
-
-roulContract.on('reward4', (amount) => {
-  console.log('Reward value:', amount);
-  document.getElementById('Reward4').innerText = `${amount}CYA`;
-});
-
-   let num1; 
+    // Listen for the 'result' event
     roulContract.on('result', (num1) => {
-      console.log('Result value:', num1);
-      document.getElementById('eventR1').innerText = `${num1}`;
-      rouletter.stop(num1); // Call to stop the roulette according to the blockchain result.
-  });
-  console.log(num1);
+        console.log('Result value:', num1);
+        document.getElementById('eventR1').innerText = `Result: ${num1}`;
+    });
+
+    roulContract.on('reward', (amount) => {
+        console.log('Reward  value:', amount);
+        document.getElementById('Rewardr1').innerText = `Get money: ${amount/1e18}CYA`;
+    });
+};
+
+updateRoulette(); 
 
   var rouletter = {
   
@@ -85,7 +66,7 @@ roulContract.on('reward4', (amount) => {
       }
   }
 
-}
+
 
 
   let Jack = async () => {

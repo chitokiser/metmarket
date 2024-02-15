@@ -18,7 +18,7 @@ let address2= {
          const provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
         let soccerContract = new ethers.Contract(address2.soccerAddr,abi2.soccer, provider);
         let stvl = await soccerContract.getbal();
-        document.getElementById("Cyatvl2").innerHTML = parseFloat(stvl/1e18).toFixed(2);
+    
 
 
         soccerContract.on('reward', (amount) => {

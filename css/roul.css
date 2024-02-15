@@ -1,3 +1,15 @@
+   /* Style the 3D number */
+   #eventR1,
+   #Reward2,
+   #Reward3,
+   #Reward4 {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #f16305; /* Text color */
+    margin-bottom: 10px; /* Margin bottom for spacing */
+}
+
 .game-box {
   padding: 20px;
   border: 2px solid #ccc;
@@ -72,3 +84,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+
+

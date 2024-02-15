@@ -1,0 +1,35 @@
+.emit-animation {
+  animation: emit 1s ease-in-out;
+}
+
+@keyframes emit {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lotto-ball-emitted {
+  position: absolute;
+  width: 50px; /* Adjust size as needed */
+  height: 50px; /* Adjust size as needed */
+  background-color: blue; /* Adjust color as needed */
+  border-radius: 50%; /* Make it a circle */
+  animation: bounce 0.5s ease-in-out; /* Adjust animation duration and timing */
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-100px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100px);
+  }
+}

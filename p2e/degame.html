@@ -12,7 +12,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
     <link rel="stylesheet" href="\css\main.css">
-    <link rel="stylesheet" href="\p2e\roul.css">
+    <link rel="stylesheet" href="\css\roul.css">
+    <link rel="stylesheet" href="\css\delotto.css">
     <title>Degame</title>
 </head>
 
@@ -135,7 +136,6 @@
         <button class="btn btn-dark" type="button">블럭체인 축구 </button>
       </div>
       <ul class="list-group">
-        <li class="list-group-item">계약잔고: <span id="Cyatvl2"></span>CYA</li>
         <li class="list-group-item"><select id="bettingAmount">
           <option value="1">1CYA</option>
           <option value="5">5CYA</option>
@@ -153,16 +153,51 @@
         <button id="loseButton" class="flashy-button lose-button">Lose<span id="Losere"></span></button>
    
       <br> <!-- or <hr> for a horizontal line -->
-
       <div class="d-grid gap-2">
+        <button class="btn btn-dark" type="button">더블 로또</button>
+      </div>
+      
+        <h2>Lotto Results</h2>
+        <span id="lottoResults"></span>
+        <p id="rewardAmount"></p>
+  
+   
+      <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="mb-3">
+                    <input type="text" id="inputNumbers" class="form-control" placeholder="6자리 숫자를 쉼표로 구분하여 입력 후 당첨금확인을 클릭하세요">
+                </div>
+           
+            </div>
+        </div>
+    </div>
+    <button onclick="Lplay()">Play -1CYA</button>
+  </div>
+                  <button onclick="Lottologin()">지갑연결</button>
+                 
+                  <li class="list-group-item">로또누적인출금액: <span id="Ltotalpoint"></span>CYA</li>
+                  <li class="list-group-item">로또 당첨금: <span id="Lpoint"></span>CYA</li>
+                  <button onclick="Lwithdraw()">당첨금 인출하기</button>
+  
+                  <li class="list-group-item">총상금: <span id="Ltvl"></span>CYA</li>
+                  <li class="list-group-item">그 전 당첨금의 x2</li>
+                  <li class="list-group-item">1등 6개 일치: <span id="One"></span>CYA</li>
+                  <li class="list-group-item">2등 5개 일치: <span id="Two"></span>CYA</li>
+                  <li class="list-group-item">3등 4개 일치: <span id="Three"></span>CYA</li>
+                  <li class="list-group-item">4등 3개 일치:<span id="Four"></span>CYA</li>
+                  <li class="list-group-item">5등 2개 일치:<span id="Five"></span></li>
+         
+                  <br> <!-- or <hr> for a horizontal line -->
+      
+      
+                  <div class="d-grid gap-2">
         <button class="btn btn-dark" type="button">블럭체인 룰렛 </button>
       </div>
+      <div id="eventR1"></div>
+     <div id="Rewardr1"></div>
   
-      <li class="list-group-item"><span id="eventR1"></span></li>
-      <li class="list-group-item"><span id="Reward2"></li>
-        <li class="list-group-item"><span id="Reward3"></li>
-          <li class="list-group-item"><span id="Reward4"></li>
-        
+     
         <div class="rouletter" style="margin: auto;">
           <div class="rouletter-arrow"></div>
           <div class="rouletter-bg">
@@ -172,7 +207,7 @@
     </div>
   </div>
 </div>
-<li class="list-group-item">금액을 선택하세요<select id="betmoney">
+<li class="list-group-item"><select id="betmoney">
   <option value="1">1CYA</option>
   <option value="5">5CYA</option>
   <option value="10">10CYA</option>
@@ -193,10 +228,10 @@
           <div class="col-lg-6 col-md-8 col-sm-12"> <!-- Adjust column width based on screen size -->
               <div class="row">
                   <div class="col-6">
-                      <button id="oddB" class="btn btn-outline-danger w-100">Hole x1.8</button>
+                      <button id="oddB" class="btn btn-outline-danger w-100">홀 x1.8</button>
                   </div>
                   <div class="col-6">
-                      <button id="evenB" class="btn btn-outline-dark w-100">Even x1.8</button>
+                      <button id="evenB" class="btn btn-outline-dark w-100">짝 x1.8</button>
                   </div>
               </div>
               
@@ -263,15 +298,11 @@
         </select>
       </div>
      
-      <button id="singleB" class="btn btn-outline-secondary w-100">번호하나 맞추기 x26.4</button>
-      <span id="SSingle"></span>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-   
-
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-success" type="submit" onclick="Jack()">번호하나 맞추기</button>
+        </div>   
+      </div>   
+    </div>   
         <br> <!-- or <hr> for a horizontal line -->
      
         <div class="d-grid gap-2">
@@ -300,8 +331,15 @@
 <script src="degame.js"></script>
 <script src="desoccer.js"></script>
 <script src="roul.js"></script>
+<script src="delotto.js"></script>
 
-
+<script>
+  // Call Ltopdate function when the page loads
+  window.onload = function() {
+      Ltopdate();
+      listenForReward();
+  };
+</script>
 
 </body>
 
