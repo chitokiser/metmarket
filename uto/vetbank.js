@@ -217,6 +217,35 @@ document.getElementById("randomButton").addEventListener("click", autoFillMentoA
   
 };
 
+let Allow = async () => {
+  let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  await window.ethereum.request({
+    method: "wallet_addEthereumChain",
+    params: [{
+        chainId: "0xCC",
+        rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+        chainName: "opBNB",
+        nativeCurrency: {
+            name: "BNB",
+            symbol: "BNB",
+            decimals: 18
+        },
+        blockExplorerUrls: ["https://opbnbscan.com"]
+    }]
+});
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
+
+  let vetContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, signer);
+
+  try {
+    await vetContract.allowcation();
+
+  } catch(e) {
+    alert(e.data.message.replace('execution reverted: ',''))
+  }
+};
+
   let Withdraw = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
