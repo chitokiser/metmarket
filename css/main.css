@@ -207,3 +207,10 @@
           font-size: 0.8em; /* Adjust font size for smaller screens */
       }
   }
+
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height of the viewport */
+  }

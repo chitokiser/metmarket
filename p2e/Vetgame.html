@@ -3,12 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    
     <meta name="generator" content="Hugo 0.88.1">
     <link rel="shortcut icon" href="https://i.ibb.co/3YqKwff/bg.png" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
     <link rel="stylesheet" href="\css\main.css">
@@ -91,7 +92,7 @@
           </div>
 
 
-          
+      
           <div class="d-grid gap-2">
             <button class="btn btn-dark" type="button">Very good Token</button>
           </div>
@@ -188,11 +189,11 @@
                 <li class="list-group-item"> 포인트는 즉시 CYA로 인출 가능합니다</li>
                 <li class="list-group-item">1회 배당받을때마다 5000경험치가 추가됩니다</li>
                 <li class="list-group-item">포인트 레버리지를 하려면 VET토큰이 소진되며 포인트가 일부 20%확률로 손실될 수도 있습니다</li>
-              </div> 
+           
               <div class="d-grid gap-2">
                 <button class="btn btn-outline-success" type="submit" onclick="Withdraw()">포인트인출하기 x0.8
                 </button>
-        
+            </div> 
                 <button class="btn btn-outline-danger" type="submit" onclick="Withdraw2()">포인트 레버리지 x0.002~5배
                 </button>
                 <div class="d-grid gap-2">
@@ -210,12 +211,14 @@
                         aria-describedby="basic-addon2">
                       <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Vbuy()">VET 사기</span>
                     </div>
+                </div>
                     <div class="input-group mb-3">
                       <input type="text" class="form-control" id="sellcustnum" placeholder="판매할 VET수량 입력,레벨5이상이어야 하며 판매가능하며 1회거래 때마다 레벨1씩 줄어듭니다" aria-label="CYA"
                         aria-describedby="basic-addon2">
                       <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Vsell()">VET 팔기
                         </span>
                     </div>
+                </div>
                     <div class="card-container" style="display: flex;">
                       <div class="card" style="width: 18rem; margin-right: 10px;">
                         <div class="card-body">
@@ -331,8 +334,7 @@
       
       </div>
       </div>
-
-
+  
     
    <!-- End footer -->
 </main>
