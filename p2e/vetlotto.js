@@ -1,6 +1,6 @@
 let ltvl;
 let address4= {
-  delottoAddr: "0xf49A1Dab817752cedAb6982D26E56667BD6A7589"};
+  delottoAddr: "0x1D157F2F4dc3255B077A46e8B4A8A9162143A669"};//주소만 바꾸었음
 let abi4 = {
 
   delotto: [

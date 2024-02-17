@@ -1,27 +1,25 @@
 
 
-let vetAddress = {
-    vetAddr: "0xFED6f5A7031fd24fB11012F187abe2D1741c8c21",  //vet alliance
+let alliAddress = {
+    alliAddr: "0x6A5481aac9B5258F60af73345319AFa4e635478D",  
+
   };
 
-  let vetAbi = {
+  let alliAbi = {
   
-    vet: [
-    "function registration(string memory name,uint rate,address owner) public",
+    alli: [
+    "function registration(string memory name,string memory images,string memory home,string memory phone,string memory add,uint rate) public",
+    "function registration(string memory name,string memory images,string memory home,string memory phone,string memory add,uint rate) public",
+    "function certification(uint id) public",
     "function buy(uint id,uint fee)public",
-    "function charge (uint amount)public",
-    "function save( )public",
-    "function bet( )public",
     "function outpay(uint id )public",
     " function g1() public view virtual returns(uint256)",
-    " function  g3() public view returns(uint)",
-    "function  g7(address user) public view virtual returns(uint)",
-    "function  g8(address user) public view returns(uint)",
+    " function g2(address user) public view virtual returns(uint256)",
+    " function g3(address user) public view virtual returns(uint256)",
+    "function g4(uint id) public view returns(string memory,string memory,string memory,string memory,string memory,uint,address,bool,uint) ",
+    "function allis(uint id) public view returns(string memory,string memory,string memory,string memory,string memory,uint,address,uint,uint,uint,bool) ",
+    " function  g9() public view returns(uint)",
     "function  g10(address user) public view returns(uint)",
-    "function g11() public view virtual returns(uint256)", //계약이 가지고 있는 vet시가
-    "function tiketprice() public view virtual returns(uint256)", 
-    "function allis(uint256 num) public view returns(string memory name,uint256 rate,address owner,uint256 pay,uint256 totalpay,uint256 id)", 
-    "function myinfo(address user) public view returns (uint256,uint256,uint256,uint256)",
     "function tax() public view virtual returns(uint256)", 
     "function totaltax() public view virtual returns(uint256)",
      "event reward(uint amount)"
@@ -36,136 +34,70 @@ let vetAddress = {
   
          const provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
     
-          let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, provider);
-         let tprice = await vetContract.tiketprice(); 
-         let tvl = await vetContract.g1();
-         let vtvl = await vetContract.g3();
-         let tax = await vetContract.tax(); 
-         let totaltax = await vetContract.totaltax(); 
-  
-         document.getElementById("Tprice").innerHTML=  parseInt(tprice);
-         document.getElementById("Tax").innerHTML = parseFloat(tax/1e18).toFixed(2);
-         document.getElementById("Totaltax").innerHTML = parseFloat(totaltax/1e18).toFixed(2);
-         document.getElementById("Totaltax").innerHTML = parseFloat(totaltax/1e18).toFixed(2);
-         document.getElementById("Cyatvl").innerHTML=  parseFloat(tvl/1e18).toFixed(2);
-         document.getElementById("Vtvl").innerHTML=  parseInt(vtvl);
-  
-
+          let alliContract = new ethers.Contract(alliAddress.alliAddr, alliAbi.alli, provider);
+         let tvl = await alliContract.g1();
+         let tax = await alliContract.tax(); 
+         let totaltax = await alliContract.totaltax(); 
+         document.getElementById("Atvl").innerHTML = parseFloat(tvl/1e18).toFixed(2);
+         document.getElementById("Atax").innerHTML = parseFloat(tax/1e18).toFixed(2);
+         document.getElementById("Atotaltax").innerHTML = parseFloat(totaltax/1e18).toFixed(2);
+      
+      
+         
           //1번가맹점
-       let as1= await vetContract.allis(0);
-       let a1name  = await as1[0];
-       let a1rate  = await as1[1];
-       let a1owner  = await as1[2];
-       let a1depo  = await as1[3];
-       let a1tdepo  = await as1[4];
-       let a1id  = await as1[5];
-   
-     
+       let as1= await alliContract.allis(0);
+       let a1name  = await as1[0];  //이름
+       let a1images  = await as1[1];  //이미지 주소
+       let a1home  = await as1[2]; //홈페이지
+       let a1phone  = await as1[3];  //전화번호
+       let a1tadd  = await as1[4]; //매장주소
+       let a1rate  = await as1[5];    //DC비율
+       let a1owner  = await as1[6];    //오너
+       let a1tdepo  = await as1[7];    //가맹점   누적
+       let a1depo  = await as1[8];    //가맹점 인출가능 매출
+       let a1id  = await as1[9];   // id
+
        document.getElementById("A1name").innerHTML = (a1name);
-       document.getElementById("A1rate").innerHTML = (a1rate/10);
+       document.getElementById("A1rate").innerHTML = (a1rate);
        document.getElementById("A1depo").innerHTML =  parseFloat(a1depo/1e18).toFixed(2);
        document.getElementById("A1tdepo").innerHTML =  parseFloat(a1tdepo/1e18).toFixed(2);
-       document.getElementById("A1id").innerHTML = (a1id);
+       document.getElementById("A1id").innerHTML = parseInt(a1id);
        document.getElementById("A1owner").innerHTML = (a1owner);
 
 
 
       //2번가맹점
-      let as2= await vetContract.allis(1);
-      let a2name  = await as2[0];
-      let a2rate  = await as2[1];
-      let a2owner  = await as2[2];
-      let a2depo  = await as2[3];
-      let a2tdepo  = await as2[4];
-      let a2id  = await as2[5];
-  
+      let as2= await alliContract.allis(1);
+      let a2name  = await as2[0];  //이름
+      let a2images  = await as2[1];  //이미지 주소
+      let a2home  = await as2[2]; //홈페이지
+      let a2phone  = await as2[3];  //전화번호
+      let a2tadd  = await as2[4]; //매장주소
+      let a2rate  = await as2[5];    //DC비율
+      let a2owner  = await as2[6];    //오너
+      let a2depo  = await as2[7];    //가맹점 인출가능매출
+      let a2tdepo  = await as2[8];    //누적매출
+      let a2id  = await as2[9];   // id
       document.getElementById("A2name").innerHTML = (a2name);
-      document.getElementById("A2rate").innerHTML = (a2rate/10);
+      document.getElementById("A2rate").innerHTML = (a2rate);
       document.getElementById("A2depo").innerHTML =  parseFloat(a2depo/1e18).toFixed(2);
       document.getElementById("A2tdepo").innerHTML =  parseFloat(a2tdepo/1e18).toFixed(2);
       document.getElementById("A2id").innerHTML = (a2id);
       document.getElementById("A2owner").innerHTML = (a2owner);
 
-      vetContract.on('reward', (winnum) => {
+      alliContract.on('reward', (amount) => {
         // Handle incoming event data
-        console.log('레버리지된금액:', winnum);
+        console.log('Cashback:', amount); // Log amount to console for debugging
         
-        // Display the event on your webpage as needed
-        // For example, update an HTML element with the event data
-        document.getElementById('eventData').innerText = `레버리지된 금액: ${winnum/1e18}`;
+        // Assuming amount represents a token amount and needs to be divided by 1e18
+        const points = amount / 1e18; // Convert amount to human-readable format
+        
+        // Update the DOM with the points value
+        document.getElementById('eventA1').innerText = `Get Points: ${points}p`;
     });
    
    };
  
-    let Vlogin = async () => {
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0xCC",
-            rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-            chainName: "opBNB",
-            nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://opbnbscan.com"]
-        }]
-    });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-      let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, signer);
-      let myg7 = await vetContract.g7(await signer.getAddress());
-      document.getElementById("Myg7").innerHTML= parseFloat(myg7/1e18).toFixed(4); 
-       
-      
-       let my = await vetContract.myinfo(await signer.getAddress());
-       let mypv =  parseInt(await my[0]);
-       let myrp =  parseInt(await my[1]);
-       let mytiket =  parseInt(await my[2]);
-
-     document.getElementById("Mypv").innerHTML= parseFloat(mypv/1e18).toFixed(4); 
-     document.getElementById("Myrp").innerHTML= parseFloat(myrp/1e18).toFixed(4);
-     document.getElementById("Mytiket").innerHTML= (mytiket);
-
-   
-    
-    };
-  
-  
-    let Buyt = async () => {  //티겟구매
-     
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0xCC",
-            rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-            chainName: "opBNB",
-            nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://opbnbscan.com"]
-        }]
-    });
-      await userProvider.send("eth_requestAccounts", []);
-      let signer = userProvider.getSigner();
-  
-       let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, signer);
-      
-      try {
-        await vetContract.charge(document.getElementById('tiketnum').value); 
-      } catch(e) {
-        alert(e.data.message.replace('execution reverted: ',''))
-      }
-    
-  };
-  
-  
-  
     let Aidbuy = async () => {
       let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await window.ethereum.request({
@@ -184,10 +116,10 @@ let vetAddress = {
     });
       await userProvider.send("eth_requestAccounts", []);
       let signer = userProvider.getSigner();
-      let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, signer);
+      let alliContract = new ethers.Contract(alliAddress.alliAddr, alliAbi.alli, signer);
       const quantity = ethers.utils.parseUnits(document.getElementById('fee').value, 18);
       try {
-        await vetContract.buy(document.getElementById('aid').value,quantity);
+        await alliContract.buy(document.getElementById('aid').value,quantity);
         
       } catch(e) {
         alert(e.data.message.replace('execution reverted: ',''))
@@ -214,93 +146,16 @@ let vetAddress = {
       });
         await userProvider.send("eth_requestAccounts", []);
         let signer = userProvider.getSigner();
-        let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, signer);
+        let alliContract = new ethers.Contract(alliAddress.alliAddr, alliAbi.alli, signer);
         
         try {
-          await vetContract.outpay(document.getElementById('aid2').value);
+          await alliContract.outpay(document.getElementById('aid2').value);
           
         } catch(e) {
           alert(e.data.message.replace('execution reverted: ',''))
         }
       };
  
-  
-      let Saverp = async () => {
-        let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-        await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0xCC",
-              rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-              chainName: "opBNB",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://opbnbscan.com"]
-          }]
-      });
-        await userProvider.send("eth_requestAccounts", []);
-        let signer = userProvider.getSigner();
-        let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, signer);
-        
-        try {
-          await vetContract.save();
-          
-        } catch(e) {
-          alert(e.data.message.replace('execution reverted: ',''))
-        }
-      };
 
-
-      
-      let Bet = async () => {
-        let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-        await window.ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-              chainId: "0xCC",
-              rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-              chainName: "opBNB",
-              nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18
-              },
-              blockExplorerUrls: ["https://opbnbscan.com"]
-          }]
-      });
-        await userProvider.send("eth_requestAccounts", []);
-        let signer = userProvider.getSigner();
-        let vetContract = new ethers.Contract(vetAddress.vetAddr, vetAbi.vet, signer);
-        
-        try {
-          await vetContract.bet();
-          
-        } catch(e) {
-          alert(e.data.message.replace('execution reverted: ',''))
-        }
-      };
-
-
-  
-    (async () => {
       Vtop();
-      let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0xCC",
-            rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-            chainName: "opBNB",
-            nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://opbnbscan.com"]
-        }]
-    });
-   
-      })();
+     

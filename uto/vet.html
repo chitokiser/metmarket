@@ -12,7 +12,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
     <link rel="stylesheet" href="\css\main.css">
-    <title>Legacy of Triumph</title>
+
 </head>
 
 <body>
@@ -94,12 +94,12 @@
       
          
           <div class="d-grid gap-2">
-            <button class="btn btn-dark" type="button">Vetnam Token</button>
+            <button class="btn btn-dark" type="button">Very good Token</button>
           </div>
         
           <ul class="list-group">
             <li class="list-group-item">발행총량 = 100,000,000VET</li>
-            <li class="list-group-item">VET기능:가맹점이용 PV 레베리지,VET 멤버쉽 확인,프리미엄서비스 액서스 권한,할인기능등</li>
+            <li class="list-group-item">가맹점이용 마일리지  레베리지,VET 멤버쉽 확인,프리미엄서비스 액서스 권한,할인기능등</li>
             <li class="list-group-item">5000VET이상 소유자 1주일 1회 배당</li>
             <li class="list-group-item">누적세금 : <span id="Ttax"></span>CYA</li>
           </ul>
@@ -128,21 +128,30 @@
       
       
               <li class="list-group-item">추천인 어카운트를 입력 후 조합에 가입하세요(무료).멤버가입에 성공하면 레벨1이 되며 VET를거래할 수 있습니다 </li>
-              <li class="list-group-item">추천인 어카운트 : 0x54363a36aabA3ff0678f452c6592125441E2E25f</li>
-              <div class="input-group mb-3">
-                <input type="text" id="mentoaddress" class="form-control" placeholder="추천인 어카운트를 입력하세요" aria-label="CYA"
-                  aria-describedby="basic-addon2">    
-                <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Memberjoin()">VET회원가입하기</span>
+              <li class="list-group-item"><button class="btn btn-outline-success" id="randomButton">추천인 어카운트 자동출력 자동입력</button>
+                <p id="randomData" style="display: none;"></p>
+        
+                       <div class="input-group mb-3">
+                        <input type="text" id="mentoaddress" class="form-control" placeholder="추천인 어카운트를 입력 후 회원에 가입하세요(무료)" aria-label="CYA"
+                          aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Memberjoin()">VET회원가입하기</span>
+                      </div>
+                    </li>        
+          
               </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-outline-success" type="submit" onclick="MemberLogin()"> 지갑 연결</button>
                 </div>   
                 <ul class="list-group">
-                  <li class="list-group-item">나의 VET : <span id="Mycct"></span>VET</li>
+                  <li class="list-group-item">나의 VET : <span id="Myvet"></span>VET</li>
                   <li class="list-group-item">나의 VET 시가총액 : <span id="Mytvl"></span>CYA</li>
+                  <li class="list-group-item">누적인출액 : <span id="Tpoint"></span>CYA</li>
+                  <li class="list-group-item">인출가능포인트 : <span id="Point"></span>p</li>
+                  <li class="list-group-item">이번배당 예정 포인트 : <span id="Mypay"></span>p</li>
                   <li class="list-group-item">나의 경험치 : <span id="Myexp"></span>EXP</li>
                   <li class="list-group-item">나의 레벨 : <span id="Mylev"></span></li>
                   <li class="list-group-item">레벨업까지 필요한 경험치 : <span id="Expneeded"></span>EXP</li>
+                  <li class="list-group-item">멘티<span id="Mymenty">-</span>holder</li>
                   <li class="list-group-item">멘토<span id="Mymento">-</span></li>
                   <li class="list-group-item">에이젼트<span id="Myagent">-</span></li>
                   <li class="list-group-item"></li>
@@ -163,17 +172,28 @@
           <div class="d-grid gap-2">
         <button class="btn btn-outline-success" type="submit" onclick="Withdraw()">배당받기
         </button>
-        <li class="list-group-item">5000VET 이상  소유자만 배당 가능합니다</li>
+        <li class="list-group-item"> VET을 가지고 있으면 매주 1회 포인트를 배당받습니다</li>
+        <li class="list-group-item"> 포인트는 즉시 CYA로 인출 가능합니다</li>
         <li class="list-group-item">1회 배당받을때마다 5000경험치가 추가됩니다</li>
-        <li class="list-group-item">인출가능한 수당액:<span id="Point">-</span>CYA</li>
-        <li class="list-group-item">누적 수당액<span id="Tpoint">-</span>CYA</li>
+        <li class="list-group-item">포인트 레버리지를 하려면 VET토큰이 소진되며 포인트가 일부 20%확률로 손실될 수도 있습니다</li>
       </div> 
       <div class="d-grid gap-2">
-        <button class="btn btn-outline-success" type="submit" onclick="Withdraw()">수당인출하기
+        <button class="btn btn-outline-success" type="submit" onclick="Withdraw()">포인트인출하기 x0.8
         </button>
+
+        <button class="btn btn-outline-danger" type="submit" onclick="Withdraw2()">포인트 레버리지 x0.002~5배
+        </button>
+        <div class="d-grid gap-2">
+          <li class="list-group-center"><span id="eventV1"></span></li>
+        </div>
+
+
+
       <div class="d-grid gap-2">
-        <button class="btn btn-dark" type="button">VET거래소 </button>
-      </div>
+      <button class="btn btn-dark" type="button">VET거래소 </button>
+    </div>
+    
+        
       
       <div class="input-group mb-3">
         <input type="text" id="buycustnum" class="form-control" placeholder="구매할  VET수량 입력" aria-label="CYA"
@@ -186,36 +206,46 @@
         <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Vsell()">VET 팔기
           </span>
       </div>
+      <div class="card-container" style="display: flex;">
+        <div class="card" style="width: 18rem; margin-right: 10px;">
+          <div class="card-body">
+            <h5 class="card-title">Point Leverage</h5>
+            <p class="card-text">게임을 통해 포인트를 더 벌어보세요</p>
+            <a href="../p2e/vetgame.html" class="btn btn-primary">Go to Vet P2E</a>
+          </div>
+        </div>
       
-
-
-      
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Earn VET Tokens</h5>
+            <p class="card-text">단서를 보고 VET 토큰과 NFT 토큰을 획득 하세요</p>
+            <a href="../p2e/tresure.html" class="btn btn-primary">Go to Tresure</a>
+          </div>
+        </div>
+      </div>
       
       <div class="d-grid gap-2">
-        <button class="btn btn-dark" type="button">VET 가맹점</button>
+        <button class="btn btn-dark" type="button">VET 가맹점 (포인트 확보)</button>
       </div>
+
       <ul class="list-group">
-        <li class="list-group-item">가맹점 제공PV와 VET거래소 금액이 캐쉬백 준비금으로  적립되어 PV는 계속증가 합니다</li>
-        <li class="list-group-item">가맹점 CYA결제 시 가맹점이 설정한 PV를 보상받습니다</li>
-        <li class="list-group-item">가맹점 성장으로 인해 캐쉬백 준비금은 늘어납니다 </li>
-        <li class="list-group-item">자산의 PV가 최대치라고 생각할때 PV를 보상포인트RP 전환합니다</li>
-        <li class="list-group-item">RP를 변환하면 CYA로 인출할 수 있는 캐쉬백 점수가 1배~100배로 증가됩니다</li>
-        <li class="list-group-item">모든 가맹점에서는 CYA를 현지화폐로 교환해 드립니다(수수료 10-레벨)</li>
-        <li class="list-group-item">모든 가맹점은 멘토자격이 부여되며 신규회원을 모집할 수 있습니다</li>
-        <li class="list-group-item">PV나 RP를 캐쉬백으로 변환(1~100배)하려면 Tiket이 필요합니다</li>
-        <li class="list-group-item">현재 세금 : <span id="Tax">-</span> VET</li>
-        <li class="list-group-item">누적 세금 : <span id="Totaltax">-</span> VET</li>
-        <li class="list-group-item">티켓 교환비율  1티켓 : <span id="Tprice">-</span> VET</li>
-        <li class="list-group-item">캐쉬백 준비금 총액 : <span id="Cyatvl">-</span>CYA</li>
-        <li class="list-group-item">계약VET잔고 : <span id="Vtvl">-</span>VET</li>
-     
+        <li class="list-group-item">가맹점 CYA결제 시 가맹점이 설정한  포인트를 보상받을 수 있습니다</li>
+        <li class="list-group-item">포인트를 이용해 위 링크에서 더 많이 키울 수 있습니다</li>
+        <li class="list-group-item">계약 잔고 : <span id="Atvl">-</span> CYA</li>
+        <li class="list-group-item">현재 세금 : <span id="Atax">-</span> CYA</li>
+        <li class="list-group-item">누적 세금 : <span id="Atotaltax">-</span> CYA</li>
+    <div class="d-grid gap-2">
+          <li class="list-group-center"><span id="eventA1"></span></li>
+        </div>
         <div class="input-group mb-3">
-             
-          <input type="text" id="tiketnum" class="form-control" placeholder="충전할 Tiket 수량 입력" aria-label="CYA"
-          aria-describedby="basic-addon2">
-          
-        <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buyt()">Tiket 충전</span>
-      </div>
+          <input type="text" id="aid" class="form-control" placeholder="가맹점 번호를 정확히 입력하세요" aria-label="CYA"
+            aria-describedby="basic-addon2">
+            <input type="text" id="fee" class="form-control" placeholder="결제할 CYA금액을 입력하세요" aria-label="CYA"
+            aria-describedby="basic-addon2">
+            
+          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Aidbuy()">가맹점결제하기</span>
+        </div>
+     
        
       
 
@@ -227,9 +257,9 @@
                 <img src="\images\_320571b1-e787-441e-a311-c083489d2683.jpg" class="card-img-top" alt="...">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">가맹점이름 :<span id="A1name"></span></li>
-                  <li class="list-group-item">매출대비 PV비율 :<span id="A1rate"></span></li>
-                  <li class="list-group-item">인출가능매출 :<span id="A1depo"></span>CYA</li>
-                  <li class="list-group-item">누적매출 : <span id="A1tdepo"></span>CYA</li>
+                  <li class="list-group-item">포인트비율 :<span id="A1rate"></span>%</li>
+                  <li class="list-group-item">누적매출 :<span id="A1depo"></span>CYA</li>
+                  <li class="list-group-item">인출가능매출 : <span id="A1tdepo"></span>CYA</li>
                   <li class="list-group-item">가맹점no :<span id="A1id"></span></li> 
                   <li class="list-group-item">가맹점owner :<span id="A1owner"></span></li> 
                   <li class="list-group-item">주소 :대전 중구 중앙로168,43 3층 CYA </li> 
@@ -246,18 +276,18 @@
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">no1</h5>
-                  <img src="\images\_e3f20e3c-4c2b-40d5-8a5a-9c45d74c9356.jpg" class="card-img-top" alt="...">
+                  <img src="\images\alliance\reden.png" class="card-img-top" alt="...">
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">가맹점이름 :<span id="A2name"></span></li>
-                    <li class="list-group-item">매출대비 PV비율 :<span id="A2rate"></span></li>
+                    <li class="list-group-item">포인트 비율 :<span id="A2rate"></span>%</li>
                     <li class="list-group-item">인출가능매출 :<span id="A2depo"></span>CYA</li>
                     <li class="list-group-item">누적매출 : <span id="A2tdepo"></span>CYA</li>
                     <li class="list-group-item">가맹점no :<span id="A2id"></span></li> 
                     <li class="list-group-item">가맹점owner :<span id="A2owner"></span></li> 
-                    <li class="list-group-item">주소 :</li> 
-                    <li class="list-group-item">전화번호 :</li> 
+                    <li class="list-group-item">주소 : 대전 중구 대종로 529번길 54 1층</li> 
+                    <li class="list-group-item">전화번호 :042 223 2333</li> 
                   </ul>
-                  <a href="#"  target="_blank" class="btn btn-outline-success">가맹점상세보기</a>     
+                  <a href="http://www.riedenburger.co.kr/"  target="_blank" class="btn btn-outline-success">가맹점상세보기</a>     
                 </div>
               </div>
             </div>
@@ -267,14 +297,7 @@
       
         
         </div>
-        <div class="input-group mb-3">
-          <input type="text" id="aid" class="form-control" placeholder="가맹점 번호를 정확히 입력하세요" aria-label="CYA"
-            aria-describedby="basic-addon2">
-            <input type="text" id="fee" class="form-control" placeholder="결제할 CYA금액을 입력하세요" aria-label="CYA"
-            aria-describedby="basic-addon2">
-            
-          <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Aidbuy()">가맹점결제하기</span>
-        </div>
+        
         <div class="input-group mb-3">
           <input type="text" id="aid2" class="form-control" placeholder="가맹점 번호를 정확히 입력하세요" aria-label="CYA"
             aria-describedby="basic-addon2">
@@ -282,29 +305,7 @@
           <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Outpay()">가맹점주 매출인출하기</span>
         </div>
        
-        <div class="d-grid gap-2">
-          <button class="btn btn-outline-success" type="submit" onclick="Vlogin()">지갑 연결(캐쉬백정보)</button>
-          </div> 
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">RP로 바꿀수 있는 PV :<span id="Mypv"></span>PV</li>
-            <li class="list-group-item">레버리지 할 수 있는 RP :<span id="Myrp"></span>RP</li> 
-          
-            <li class="list-group-item">보유 티켓  :<span id="Mytiket"></span>개</li>
-            <li class="list-group-item">지금전환하면 확정되는 RP  :<span id="Myg7"></span>RP</li>
-       
-            <div class="d-grid gap-2">
-              <button class="btn btn-outline-success" type="submit" onclick="Saverp()">PV를 RP로 전환하기(티켓1장소모)</button>
-              </div>  
-            <li class="list-group-item">RP와 티켓이 있으면 RP를 레버리지 하세요 1~100배 랜덤보상 됩니다</li> 
-      
-            <div class="d-grid gap-2">
-              <button class="btn btn-outline-success" type="submit" onclick="Bet()">레버리지 하기(티켓1장소모)</button>
-              </div>
-
-              <li class="list-group-item"><span id="eventData">-</span>CYA</li>
-             
-              
-
+        
 
         
       <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">

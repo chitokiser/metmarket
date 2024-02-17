@@ -96,7 +96,7 @@
         
           <ul class="list-group">
             <li class="list-group-item">블럭체인 난수를 활용하여 가장 공정한 게임을 제공합니다</li>
-          
+            
       <li class="list-group-item"><button class="btn btn-outline-success" id="randomButton">추천인 어카운트 자동출력 자동입력</button>
         <p id="randomData" style="display: none;"></p>
 
@@ -161,7 +161,20 @@
         <span id="lottoResults"></span>
         <p id="rewardAmount"></p>
   
-   
+
+        
+        <button class="generate-btn">Generate Lotto Balls</button>
+        <div class="lotto-wrapper"></div>
+      
+        <!-- Template for lotto ball -->
+        <template id="lotto-ball-template">
+          <div class="lotto-ball"><span class="number"></span></div>
+        </template>
+        
+
+
+
+
       <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10 col-sm-12">
@@ -299,10 +312,12 @@
       </div>
      
       <div class="d-grid gap-2">
-        <button class="btn btn-outline-success" type="submit" onclick="Jack()">번호하나 맞추기</button>
+        <button class="btn btn-outline-success" type="submit" onclick="Single()">번호하나 맞추기</button>
         </div>   
       </div>   
     </div>   
+  </div> 
+</div> 
         <br> <!-- or <hr> for a horizontal line -->
      
         <div class="d-grid gap-2">
@@ -331,8 +346,8 @@
 <script src="degame.js"></script>
 <script src="desoccer.js"></script>
 <script src="roul.js"></script>
-<script src="delotto.js"></script>
-
+<!-- <script src="delotto.js"></script> -->
+<script src="lottotest.js"></script>
 <script>
   // Call Ltopdate function when the page loads
   window.onload = function() {

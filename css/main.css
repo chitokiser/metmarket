@@ -193,7 +193,11 @@
     }
     #eventR1,
     #eventS1,
-    #eventS2 {
+    #eventS2,
+    #eventV1,
+    #eventA1
+    
+     {
       font-size: 2em; /* Default font size */
   }
   

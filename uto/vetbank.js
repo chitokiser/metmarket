@@ -1,39 +1,34 @@
 let contractAddress = {
-  cctbankAddr: "0x58B27e740CBB0414eA3e606Cd67680b11D029D4e",  //vet로 바꾸기 귀찮아서 그냥 cct 사용함
-  erc20: "0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748",  //CYAToken 주소
-  cctAddr: "0x97c29C2EC9fe37AFA2635477992618796A618"
+  vetbankAddr: "0x27e8F277826AE9aD67178978d2c89a52f7a5177A",  
+
+
 };
 let contractAbi = {
 
-  cctbank: [
+  vetbank: [
   " function g1() public view virtual returns(uint256)",
   " function  g3() public view returns(uint)",
   "function  g5() public view returns(uint) ",
-  "function g11() public view virtual returns(uint256)",
-  " function getsum( ) public view returns(uint) ",
-  "function getprice( ) public view returns (uint256)",
-  "function totaltax( ) public view returns (uint256)",
-  "function memberjoin(address _mento) public ",
   "function  g8(address user) public view returns(uint)",
-  "function  getdepo(address user) public view returns(uint)",
+  "function  g9(address user) public view returns(uint)",
+  "function g11() public view virtual returns(uint256)",
+  "function  totaltax() public view returns(uint) ",
+  " function getsum( ) public view returns(uint) ",
+  "function  getprice( ) public view returns (uint256)",
+  "function memberjoin(address _mento) public ",
   "function  getlevel(address user) public view returns(uint)",
   " function getpay(address user) public view returns (uint256)",
   " function allowt(address user) public view returns (uint256)",
   "function gettime( ) public view returns (uint256)",
   "function myinfo(address user) public view returns (uint256,uint256,uint256,uint256,uint256,uint256,address,address)",
   "function withdraw( )public returns(bool)",
+  "function allowcation( )public returns(bool)",
+  "function withdraw2( )public returns(bool)",
   "function buyvet(uint _num) public returns(bool) ",
   "function sellvet(uint _num) public returns(bool) ",
   "function levelup() public ",
-
+  "event getdepo(uint amount);"
   ],
-  erc20: [
-    "function approve(address spender, uint256 amount) external returns (bool)",
-    "function allowance(address owner, address spender) external view returns (uint256)"
-  ],
-  cct: [
-    "function getdepot(address user) external view returns (uint256)"
-  ]
 };
 
   let Vettop = async () => {
@@ -45,17 +40,24 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
 
        const provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
   
-        let cctbankContract = new ethers.Contract(contractAddress.cctbankAddr, contractAbi.cctbank, provider);
-       let cprice = await cctbankContract.getprice(); 
-       let mems = parseInt (await cctbankContract.getsum()); //회원총원
-       let tvl = await cctbankContract.g1(); 
-       let tvl2 = await cctbankContract.g11(); 
-       let ttax = await cctbankContract.totaltax(); 
+       let vetbankContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, provider);
+       let cprice = await vetbankContract.getprice(); 
+    
+       let mems = parseInt (await vetbankContract.getsum()); //회원총원
+       let tvl = await vetbankContract.g1(); 
+       let tvl2 = await vetbankContract.g11(); 
+       let ttax = await vetbankContract.totaltax(); 
        document.getElementById("Vetprice").innerHTML=  parseFloat(cprice/1e18).toFixed(6);
        document.getElementById("Mem").innerHTML = parseInt(mems+20);
        document.getElementById("Tvl").innerHTML = parseFloat(tvl/1e18).toFixed(2);
        document.getElementById("Tvl2").innerHTML = parseInt(tvl2);
        document.getElementById("Ttax").innerHTML = parseFloat(ttax/1e18).toFixed(4);
+
+       vetbankContract.on('getdepo', (amount) => {
+        console.log('레버리지된금액:', amount);
+        document.getElementById('eventV1').innerText = `GetMoney ${amount/1e18} CYA`;
+    });
+
 
   };
 
@@ -79,7 +81,7 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let vetContract = new ethers.Contract(contractAddress.cctbankAddr, contractAbi.cctbank, signer);
+    let vetContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, signer);
 
     try {
       await vetContract.memberjoin(document.getElementById('mentoaddress').value);
@@ -106,25 +108,30 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
   });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-    let vetContract = new ethers.Contract(contractAddress.cctbankAddr, contractAbi.cctbank, signer);
-    let mycct = await vetContract.g8(await signer.getAddress());
-    let mycctvalue = await vetContract.getprice() * await mycct;
-    document.getElementById("Mycct").innerHTML=(mycct); 
-    document.getElementById("Mytvl").innerHTML=(mycctvalue/1e18).toFixed(4); 
-
+    let vetContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, signer);
+    let myvet = await vetContract.g8(await signer.getAddress());
+    let mypay = await vetContract.getpay(await signer.getAddress());
+    let myvetvalue = await vetContract.getprice() * await myvet;
+    document.getElementById("Myvet").innerHTML= parseInt(myvet); 
+    document.getElementById("Mytvl").innerHTML= parseFloat(myvetvalue/1e18).toFixed(4); 
+    document.getElementById("Mypay").innerHTML= parseFloat(mypay/1e18).toFixed(6); 
+    console.log(mypay);
     let my = await vetContract.myinfo(await signer.getAddress());
     let tpoint =  parseInt(await my[0]);
     let point =  parseInt(await my[1]);
     let myexp =  parseInt(await my[2]);
     let mylev =  parseInt(await my[3]);
+    let menty =  parseInt(await my[5]);
     let mento = (await my[6]);
     let agent = (await my[7]);
     let levelexp = parseInt(2**mylev*10000);
     document.getElementById("Tpoint").innerHTML= (tpoint/1E18).toFixed(4); 
-    document.getElementById("Point").innerHTML= (point/1E18).toFixed(4); 
+    document.getElementById("Point").innerHTML= (point/1E18).toFixed(4);   //찾을 돈 돈
     document.getElementById("Myexp").innerHTML= (myexp);
     document.getElementById("Mylev").innerHTML= (mylev);
     document.getElementById("Mylev2").innerHTML= (mylev);
+  
+    document.getElementById("Mymenty").innerHTML= (menty);
     document.getElementById("Mymento").innerHTML= (mento);
     document.getElementById("Myagent").innerHTML= (agent);
     document.getElementById("Expneeded").innerHTML= (levelexp - myexp);
@@ -142,6 +149,42 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
     document.getElementById("Left").innerHTML = left > 0 ? `${day}일${hour}시간${min}분${sec}초` : '';
   
   };
+
+
+  // 멘토데이타 입력
+var dataArray = [
+  "0x54363a36aabA3ff0678f452c6592125441E2E25f",
+  "0x54363a36aabA3ff0678f452c6592125441E2E25f",
+  "0x54363a36aabA3ff0678f452c6592125441E2E25f",
+  "0x54363a36aabA3ff0678f452c6592125441E2E25f",
+  "0x54363a36aabA3ff0678f452c6592125441E2E25f"
+];
+
+// Function to select and display random data
+function displayRandomData() {
+  // Select a random item from the array
+  var randomIndex = Math.floor(Math.random() * dataArray.length);
+  var randomData = dataArray[randomIndex];
+
+  // Display the random data
+  document.getElementById("randomData").textContent = randomData;
+}
+
+// Event listener for button click
+document.getElementById("randomButton").addEventListener("click", displayRandomData);
+
+
+function autoFillMentoAddress() {
+  // Retrieve the printed mentoaddress
+  var mentoaddress = document.getElementById('randomData').textContent;
+
+  document.getElementById('mentoaddress').value = mentoaddress;
+}
+
+document.getElementById("randomButton").addEventListener("click", autoFillMentoAddress);
+
+
+
 
 
   let Levelup = async () => {
@@ -164,10 +207,10 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let cctbankContract = new ethers.Contract(contractAddress.cctbankAddr, contractAbi.cctbank, signer);
+    let vetContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, signer);
     
     try {
-      await cctbankContract.levelup(); 
+      await vetContract.levelup(); 
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -193,7 +236,7 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let vetContract = new ethers.Contract(contractAddress.cctbankAddr, contractAbi.cctbank, signer);
+    let vetContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, signer);
 
     try {
       await vetContract.withdraw();
@@ -203,6 +246,35 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
     }
   };
 
+
+  let Withdraw2 = async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+
+    let vetContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, signer);
+
+    try {
+      await vetContract.withdraw2();
+
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
 
   let Vbuy = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -222,10 +294,10 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
   });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
-    let cctbankContract = new ethers.Contract(contractAddress.cctbankAddr, contractAbi.cctbank, signer);
+    let vetContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, signer);
 
     try {
-      await cctbankContract.buyvet(document.getElementById('buycustnum').value);
+      await vetContract.buyvet(document.getElementById('buycustnum').value);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -251,10 +323,10 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
 
-    let cctbankContract = new ethers.Contract(contractAddress.cctbankAddr, contractAbi.cctbank, signer);
+    let vetContract = new ethers.Contract(contractAddress.vetbankAddr, contractAbi.vetbank, signer);
 
     try {
-      await cctbankContract.sellvet(document.getElementById('sellcustnum').value);
+      await vetContract.sellvet(document.getElementById('sellcustnum').value);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -268,7 +340,7 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
       params: {
         type: 'ERC20',
         options: {
-          address: "0x9aFB0Bf81f742515B93ad1EeDF1cF3A59f300E2F",
+          address: "0xEBe3a75eeD0408EC145E1c5C5c131B212cf21788",
           symbol: "VET",
           decimals: 0, 
           // image: tokenImage,
@@ -277,23 +349,5 @@ document.getElementById("cPrice2").innerHTML= parseFloat(1/bnbPrice).toFixed(4);
     });
   }
 
-
-  (async () => {
-    Vettop();
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [{
-          chainId: "0xCC",
-          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-          chainName: "opBNB",
-          nativeCurrency: {
-              name: "BNB",
-              symbol: "BNB",
-              decimals: 18
-          },
-          blockExplorerUrls: ["https://opbnbscan.com"]
-      }]
-  });
+  Vettop();
  
-    })();
