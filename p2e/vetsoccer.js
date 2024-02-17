@@ -29,9 +29,25 @@ let address2= {
 
         soccerContract.on('result', (n1, n2) => {
             console.log('Match result:', n1, n2);
+
         
             let eventS2 = document.getElementById('eventS2');
             eventS2.innerHTML = ''; // Clear previous content
+        
+            // Show numbers 1 to 6 sequentially
+            for (let i = 1; i <= 6; i++) {
+                setTimeout(() => {
+                    eventS2.textContent = i;
+                }, 500 * i); // Adjust the delay as needed
+            }
+        
+            // After showing numbers, display the actual result
+            setTimeout(() => {
+                eventS2.innerHTML = `
+                    <span class="threed larger green">Home:${n1}</span> - <span class="threed larger red">Away:${n2}</span>
+                `;
+            }, 3500); // Adjust the delay as needed
+        });
         
             // Show numbers 1 to 6 sequentially
             for (let i = 1; i <= 6; i++) {

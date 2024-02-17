@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+</head>
+<body>
+    <h1>QR Code Scanner</h1>
+    <input type="text" id="inputField" placeholder="Scan result will appear here" style="width: 100%; padding: 10px; margin-bottom: 20px;">
+    <button id="scanButton">Scan QR Code</button>
+
+    <script>
+        // Set up QuaggaJS for scanning
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#scanner-container'),
+                constraints: {
+                    width: 480,
+                    height: 320,
+                    facingMode: "environment" // or "user" for front camera
+                }
+            },
+            locator: {
+                patchSize: "medium",
+                halfSample: true
+            },
+            numOfWorkers: navigator.hardwareConcurrency || 4,
+            decoder: {
+                readers: ["ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader"]
+            },
+            locate: true
+        }, function (err) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            console.log("Initialization finished. Ready to start");
+            Quagga.start();
+        });
+
+        // Listen for when a barcode is detected
+        Quagga.onDetected(function (result) {
+            const code = result.codeResult.code;
+            document.getElementById('inputField').value = code;
+            executeFunction(code); // Call your function with the scanned data
+        });
+
+        // Function to execute when QR code is scanned
+        function executeFunction(scannedData) {
+            console.log("Scanned Data: ", scannedData);
+            // Your function implementation here
+        }
+
+        // Bind click event to scan button
+        document.getElementById('scanButton').addEventListener('click', function () {
+            Quagga.start();
+        });
+    </script>
+</body>
+</html>
