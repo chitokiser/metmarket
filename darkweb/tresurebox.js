@@ -1,20 +1,22 @@
 
 let address= {
-  tresureAddr: "0x2ca4fB35eA908Bb41434Fe5B496B43FaE5c5e4fd"};//주소만 바꾸었음
+  tresureAddr: "0x8682F033668b18f13f1dBD83EcBc84a73ebc7399",
+  vetbankAddr: "0x27e8F277826AE9aD67178978d2c89a52f7a5177A",
+   }
 let abi = {
 
   tresure: [
-      "function openbox1( ) public returns(bool)",
-      "function openbox5( ) public returns(bool)",
-      "function openbox50( ) public returns(bool)",
-      "function openbox500( ) public returns(bool)",
-      "function openbox5000( ) public returns(bool)",
-      "function openboxsp( ) public returns(bool)",
+      "function openbox(uint _id) public",
       "function  total( ) public view returns(uint)",
       "function myinfo(address user) public view returns (uint256,uint256,uint256,uint256,uint256,uint256,uint256,)",
       "function getpower(address user) public view returns(uint)",
       "event reward(uint amount);"
     ],
+
+    vetbank: [
+     
+      "function myinfo(address user) public view returns (uint256,uint256,uint256,uint256,uint256,uint256,address,address)",
+      ],
 
 };
 
@@ -27,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
       let treasureContract = new ethers.Contract(address.tresureAddr, abi.tresure, provider);
       let tvl = await treasureContract.total();
       document.getElementById("Total").innerHTML = parseFloat(tvl / 1e18).toFixed(4);
+      
       
       // Register event listener after contract initialization
       treasureContract.on('reward', (amount) => {
@@ -48,7 +51,53 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-  let Open1= async () => {
+async function Openbox() {
+  // Connect to the user's Web3 provider
+  let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  
+  // Request adding Binance Smart Chain to wallet
+  await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+  
+  // Request access to user's accounts
+  await userProvider.send("eth_requestAccounts", []);
+  
+  // Get the signer (account) from the provider
+  let signer = userProvider.getSigner();
+
+  // Instantiate the treasure contract with the signer
+  let tresureContract = new ethers.Contract(address.tresureAddr, abi.tresure, signer);
+  
+  // Retrieve the treasure ID from HTML input
+  let treasureId = document.getElementById("tid").value;
+  
+  // Log the retrieved value (for debugging)
+  console.log("Treasure ID:", treasureId);
+  
+  try {
+      // Call the contract's 'openbox' function with the retrieved treasure ID
+      await tresureContract.openbox(treasureId);
+  } catch(e) {
+      // Handle any errors that occur during the transaction
+      alert(e.data.message.replace('execution reverted: ',''));
+  }
+};
+
+  document.getElementById("treasureButton").addEventListener("click", Openbox);
+
+  let MemberLogin = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
       method: "wallet_addEthereumChain",
@@ -66,47 +115,18 @@ document.addEventListener("DOMContentLoaded", function() {
   });
     await userProvider.send("eth_requestAccounts", []);
     let signer = userProvider.getSigner();
+    let vetContract = new ethers.Contract(address.vetbankAddr, abi.vetbank, signer);
+    let my = await vetContract.myinfo(await signer.getAddress());
+    let tpoint =  parseInt(await my[0]);
+    let point =  parseInt(await my[1]);
+   
 
-    let tresureContract = new ethers.Contract(address.tresureAddr, abi.tresure, signer);
-
-    try {
-      await tresureContract.openbox1( );
-    } catch(e) {
-      alert(e.data.message.replace('execution reverted: ',''))
-    }
-  };
-
-
-  let Open5= async () => {
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [{
-          chainId: "0xCC",
-          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-          chainName: "opBNB",
-          nativeCurrency: {
-              name: "BNB",
-              symbol: "BNB",
-              decimals: 18
-          },
-          blockExplorerUrls: ["https://opbnbscan.com"]
-      }]
-  });
-    await userProvider.send("eth_requestAccounts", []);
-    let signer = userProvider.getSigner();
-
-    let tresureContract = new ethers.Contract(address.tresureAddr, abi.tresure, signer);
-
-    try {
-      await tresureContract.openbox5( );
-    } catch(e) {
-      alert(e.data.message.replace('execution reverted: ',''))
-    }
-  };
-
-
-
-
+    document.getElementById("Tpoint").innerHTML= (tpoint/1E18).toFixed(4); 
+    document.getElementById("Point").innerHTML= (point/1E18).toFixed(4);   //찾을 돈 돈
 
   
+  };
+
+
+
+
