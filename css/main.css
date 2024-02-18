@@ -195,10 +195,13 @@
     #eventS1,
     #eventS2,
     #eventV1,
-    #eventA1
+    #eventA1,
+    #eventT1
     
      {
       font-size: 2em; /* Default font size */
+      color: rgb(238, 155, 11); /* Set font color to green */
+      transform: perspective(1000px) rotateY(10deg);
   }
   
   /* Adjust font size for smaller screens */
