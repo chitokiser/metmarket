@@ -53,14 +53,16 @@ let alliAddress = {
        let a1tadd  = await as1[4]; //매장주소
        let a1rate  = await as1[5];    //DC비율
        let a1owner  = await as1[6];    //오너
-       let a1tdepo  = await as1[7];    //가맹점   누적
-       let a1depo  = await as1[8];    //가맹점 인출가능 매출
+       let a1tdepo  = await as1[8];    //가맹점 누적
+       let a1temp  = await as1[7];    //가맹점 실맹출
+       let a1depo  = a1temp * (100-a1rate)/100;
        let a1id  = await as1[9];   // id
 
        document.getElementById("A1name").innerHTML = (a1name);
        document.getElementById("A1rate").innerHTML = (a1rate);
-       document.getElementById("A1depo").innerHTML =  parseFloat(a1depo/1e18).toFixed(2);
        document.getElementById("A1tdepo").innerHTML =  parseFloat(a1tdepo/1e18).toFixed(2);
+       document.getElementById("A1depo").innerHTML =  parseFloat(a1depo/1e18).toFixed(2);
+       
        document.getElementById("A1id").innerHTML = parseInt(a1id);
        document.getElementById("A1owner").innerHTML = (a1owner);
 
@@ -68,22 +70,27 @@ let alliAddress = {
 
       //2번가맹점
       let as2= await alliContract.allis(1);
-      let a2name  = await as2[0];  //이름
-      let a2images  = await as2[1];  //이미지 주소
-      let a2home  = await as2[2]; //홈페이지
-      let a2phone  = await as2[3];  //전화번호
-      let a2tadd  = await as2[4]; //매장주소
-      let a2rate  = await as2[5];    //DC비율
-      let a2owner  = await as2[6];    //오너
-      let a2depo  = await as2[7];    //가맹점 인출가능매출
-      let a2tdepo  = await as2[8];    //누적매출
-      let a2id  = await as2[9];   // id
-      document.getElementById("A2name").innerHTML = (a2name);
-      document.getElementById("A2rate").innerHTML = (a2rate);
-      document.getElementById("A2depo").innerHTML =  parseFloat(a2depo/1e18).toFixed(2);
-      document.getElementById("A2tdepo").innerHTML =  parseFloat(a2tdepo/1e18).toFixed(2);
-      document.getElementById("A2id").innerHTML = (a2id);
-      document.getElementById("A2owner").innerHTML = (a2owner);
+          let a2name  = await as2[0];  //이름
+          let a2images  = await as2[1];  //이미지 주소
+          let a2home  = await as2[2]; //홈페이지
+          let a2phone  = await as2[3];  //전화번호
+          let a2tadd  = await as2[4]; //매장주소
+          let a2rate  = await as2[5];    //DC비율
+          let a2owner  = await as2[6];    //오너
+          let a2tdepo  = await as2[8];    //가맹점 누적
+          let a2temp  = await as2[7];    //가맹점 실맹출
+          let a2depo  = a2temp * (100-a1rate)/100;
+          let a2id  = await as2[9];   // id
+   
+          document.getElementById("A2name").innerHTML = (a2name);
+          document.getElementById("A2rate").innerHTML = (a2rate);
+          document.getElementById("A2tdepo").innerHTML =  parseFloat(a2tdepo/1e18).toFixed(2);
+          document.getElementById("A2depo").innerHTML =  parseFloat(a2depo/1e18).toFixed(2);
+          
+          document.getElementById("A2id").innerHTML = parseInt(a2id);
+          document.getElementById("A2owner").innerHTML = (a2owner);
+
+
 
       alliContract.on('reward', (amount) => {
         // Handle incoming event data
