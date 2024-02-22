@@ -1,6 +1,6 @@
 
 let address= {
-  tresureAddr: "0x8682F033668b18f13f1dBD83EcBc84a73ebc7399",
+  tresureAddr: "0x3da25c4F7831C1642a025a2f26451b4c24A74aEF",
   vetbankAddr: "0x27e8F277826AE9aD67178978d2c89a52f7a5177A",
    }
 let abi = {
