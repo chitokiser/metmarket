@@ -1,5 +1,5 @@
 let metaddr = {  
-    metmarket: "0x8DaEcF9EAFE097A1043f6E1C6fFC9757F570D7eF" //metmarket 
+    metmarket: "0x9038A64fb4270D1BcC757971826855228721792B" //metmarket 
   };
 
   let metabi = {
@@ -12,7 +12,7 @@ let metaddr = {
        "function selladd(uint _mid,uint256 _init) public",
        "function getmainpass(uint _mid) external view returns (string memory)",
        "function getpass(uint256 _mid) external view returns (string memory)",  //관람자패스
-       "function getmetainfo(uint _num) public view returns (uint256, uint256, string memory, uint256, bool, address)",
+       "function getmetainfo(uint _num) public view returns (uint256, uint256, string memory, uint256,uint8, address)",
        "function charge(uint _pay) public"
       ],
       
@@ -55,45 +55,67 @@ async function getMetaInfoByNum(contract, _num) {
   }
 }
 
-// HTML에 정보를 표시하는 함수
 async function displayMetaInfo() {
-  let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
-  let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, provider);
-  let imid = await meta5Contract.mid();  //전체 발행 계좌 수
+  try {
+      // JSON-RPC 프로바이더 설정
+      let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
 
-  const infoContainer = document.getElementById("metaInfoContainer");
-  if (!infoContainer) {
-      console.error("HTML element 'metaInfoContainer' not found.");
-      return;
-  }
+      // 메타데이터 컨트랙트 인스턴스 생성
+      let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, provider);
 
-  // _num 값에 따라 각 정보를 가져와서 HTML에 표시합니다.
-  for (let i = 0; i <= imid; i++) {
-      const metaInfo = await getMetaInfoByNum(meta5Contract, i);
-      if (metaInfo) {
-        // 카드 형식으로 정보를 HTML에 추가합니다.
-        const isPurchasable = metaInfo.info5 ? '구매가능' : '구매불가';
-        const infoHtml = `
-        <div class="card mb-3">
-    <div class="card-body">
-        <h5 class="card-title">계좌정보${i}</h5>
-        <p class="card-text"><strong>계좌:</strong> ${metaInfo.info2}</p>
-        <p class="card-text"><strong>관람자비번:</strong> ${metaInfo.info3}</p>
-        <p class="card-text"><strong>가격:</strong> ${metaInfo.info4} CYA</p>
-        <p class="card-text"><strong>구매가능여부:</strong> ${isPurchasable}</p>
-        <p class="card-text"><strong>계좌주인:</strong> ${metaInfo.info6}</p>
-        <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">구매하기</button>
-        <button type="button" class="btn btn-primary btn-sm mr-2" onclick="registerSale(this)" data-id="${i}">판매등록</button>
-        <input type="number" id="saleAmount${i}" class="form-control form-control-sm" placeholder="판매금액입력">
-        <button type="button" class="btn btn-dark btn-sm mt-2" onclick="getMainPass(this)" data-id="${i}">메인 패스 가져오기</button>
-        <p id="mainPass${i}" class="mt-2"></p>
-    </div>
-</div>
+      // 전체 발행 계좌 수 가져오기
+      let imid = await meta5Contract.mid();
 
-        `;
-        infoContainer.innerHTML += infoHtml;
-    }
-    
+      // HTML 컨테이너 가져오기
+      const infoContainer = document.getElementById("metaInfoContainer");
+      if (!infoContainer) {
+          console.error("HTML element 'metaInfoContainer' not found.");
+          return;
+      }
+
+      // 각 계좌 정보를 가져와서 HTML에 표시
+      for (let i = 0; i <= imid; i++) {
+          const metaInfo = await getMetaInfoByNum(meta5Contract, i);
+          if (metaInfo) {
+              // 구매 가능 여부 텍스트 설정
+              let purchasableStatus;
+              switch (metaInfo.info5) {
+                  case 1:
+                      purchasableStatus = '플레이중';
+                      break;
+                  case 2:
+                      purchasableStatus = '판매승인대기중';
+                      break;
+                  case 3:
+                      purchasableStatus = '거래가능';
+                      break;
+                  default:
+                      purchasableStatus = '알 수 없음';
+              }
+              const isPurchasable = purchasableStatus;
+
+              // HTML 카드 추가
+              const infoHtml = `
+              <div class="card mb-3">
+                  <div class="card-body">
+                      <h5 class="card-title">계좌정보${i}</h5>
+                      <p class="card-text"><strong>계좌:</strong> ${metaInfo.info2}</p>
+                      <p class="card-text"><strong>관람자비번:</strong> ${metaInfo.info3}</p>
+                      <p class="card-text"><strong>가격:</strong> ${metaInfo.info4} p</p>
+                      <p class="card-text"><strong>구매가능여부:</strong> ${isPurchasable}</p>
+                      <p class="card-text"><strong>계좌주인:</strong> ${metaInfo.info6}</p>
+                      <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">구매하기</button>
+                      <button type="button" class="btn btn-primary btn-sm mr-2" onclick="registerSale(this)" data-id="${i}">판매등록</button>
+                      <input type="number" id="saleAmount${i}" class="form-control form-control-sm" placeholder="판매금액입력">
+                      <button type="button" class="btn btn-dark btn-sm mt-2" onclick="getMainPass(this)" data-id="${i}">메인 패스 가져오기</button>
+                      <p id="mainPass${i}" class="mt-2"></p>
+                  </div>
+              </div>`;
+              infoContainer.innerHTML += infoHtml;
+          }
+      }
+  } catch (error) {
+      console.error("Error displaying meta info:", error);
   }
 }
 
