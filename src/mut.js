@@ -9,6 +9,7 @@
 
         cyabank: [
           "function g1() public view virtual returns(uint256)",
+          "function g3() public view virtual returns(uint256)",
           "function g6() public view virtual returns(uint256)",
           "function g7() public view virtual returns(uint256)",
           "function g8(address user) public view virtual returns(uint256)",
@@ -38,11 +39,13 @@
      
 
        let cyabal = await cyabankContract.g1(); //cya잔고
+       let mutbal = await cyabankContract.g3(); //mut잔고
        let mutcir = await cyabankContract.g11();  //mut유통량
        let iprice = await cyabankContract.getprice();
        let iallow = await cyabankContract.allow();
      
        document.getElementById("Cyabal").innerHTML = (cyabal/1e18).toFixed(4);
+       document.getElementById("Mutbal").innerHTML = (mutbal);
        document.getElementById("Mutcir").innerHTML = (mutcir);
        document.getElementById("Mprice").innerHTML = (iprice/1e18).toFixed(4);
        document.getElementById("Mallow").innerHTML = (iallow/1e18).toFixed(8);

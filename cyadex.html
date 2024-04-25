@@ -41,10 +41,17 @@
                       <a class="nav-link" href="../mut.html">MUT거래소</a>
                   </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../mypage">마이페이지</a>
+                        <a class="nav-link" href="../mypage.html">마이페이지</a>
                     </li>
-             
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" onclick="addTokenCya()">CYA Token 자동추가</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="addTokenMut()">MUT Token 자동추가</a>
+                </li>
                 </ul>
+       
             </div>
         </div>
     </nav>
@@ -61,9 +68,7 @@
                 <div class="col">
                   <div class="p-3 border bg-light">1BNB=$<span id="bPrice">-</span></div>
                 </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1BNB:<span id="cPrice">-</span>CYA</div>
-                </div>
+               
                 <div class="col">
                   <div class="p-3 border bg-light">1CYA:$1</div>
                 </div>
@@ -71,7 +76,7 @@
                   <div class="p-3 border bg-light">1CYA: <span id="cPrice2">-</span>BNB</div>
                 </div>
                 <div class="col">
-                  <div class="p-3 border bg-light">BNB TVL: <span id="tvl">-</span>BNB</div>
+                  <div class="p-3 border bg-light">BNB TVL: <span id="Tvl">-</span>BNB</div>
                 </div>
               </div>
             </div>
@@ -90,18 +95,11 @@
     
         </div>
     
-        <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()"><a><img src= "\images\logo\cya32x32.png" > </a>CYA Token 자동추가 </button>
-        <button class="btn btn-outline-success"  role="button"  onclick="addTokenMut()"><a><img src= "\images\logo\cya32x32.png" > </a>MUToken 자동추가 </button>
-     
         
         <div class="alert alert-info" role="alert">
           <P>BNB:CYA BNB를 넣으면 CYA가 교환됩니다. </P>
-          <P>CYA address : 0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748</P>
-
-        <div class="alert alert-secondary" role="alert">
-          <P>BNB:CYA 교환비율: 1BNB= <span id="bPrice2">-</span>CYA</P>
-          <P>CYA:BNB 교환비율: 1CYA= <span id="cPrice3">-</span>BNB</P>
-        </div>
+          
+        
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">BNB input</span>
           <input id="bnbInput" type="text" class="form-control" placeholder="여기에 BNB를 입력하세요(소수점 허용)...." aria-label="Username" aria-describedby="basic-addon1">

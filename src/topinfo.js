@@ -39,7 +39,6 @@
 const responseBinanceTicker = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT');
 const bnbPrice = parseFloat(responseBinanceTicker.data.price);
 document.getElementById("bPrice").innerHTML=bnbPrice.toFixed(4);
-
 document.getElementById("cPrice2").innerHTML=(1/bnbPrice).toFixed(4);
 
 

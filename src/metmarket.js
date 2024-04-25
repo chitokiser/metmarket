@@ -31,7 +31,7 @@ let metaddr = {
     let ibal = await meta5Contract.g1();
    
     document.getElementById("Mid").innerHTML= (imid);
-    document.getElementById("Tp").innerHTML= ((itax+ibal) /1e18).toFixed(4);  //누적매출 
+    document.getElementById("Tp").innerHTML= ((itax+ibal) /1e18).toFixed(2);  //누적매출 
 
     }
   
@@ -85,7 +85,7 @@ async function displayMetaInfo() {
         <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">구매하기</button>
         <button type="button" class="btn btn-primary btn-sm mr-2" onclick="registerSale(this)" data-id="${i}">판매등록</button>
         <input type="number" id="saleAmount${i}" class="form-control form-control-sm" placeholder="판매금액입력">
-        <button type="button" class="btn btn-platinum btn-sm mt-2" onclick="getMainPass(this)" data-id="${i}">메인 패스 가져오기</button>
+        <button type="button" class="btn btn-dark btn-sm mt-2" onclick="getMainPass(this)" data-id="${i}">메인 패스 가져오기</button>
         <p id="mainPass${i}" class="mt-2"></p>
     </div>
 </div>

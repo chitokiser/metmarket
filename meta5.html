@@ -43,8 +43,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../mypage.html">마이페이지</a>
                     </li>
-             
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" onclick="addTokenCya()">CYA Token 자동추가</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="addTokenMut()">MUT Token 자동추가</a>
+                </li>
                 </ul>
+       
             </div>
         </div>
     </nav>
@@ -61,9 +68,7 @@
                 <div class="col">
                   <div class="p-3 border bg-light">1BNB=$<span id="bPrice">-</span></div>
                 </div>
-                <div class="col">
-                  <div class="p-3 border bg-light">1BNB:<span id="cPrice">-</span>CYA</div>
-                </div>
+               
                 <div class="col">
                   <div class="p-3 border bg-light">1CYA:$1</div>
                 </div>
@@ -172,11 +177,13 @@
    <div class="bg-light p-5 rounded">
     <p>발행된 계좌 수:<span id="Mid">-</span>개 </p>
     <p>거래총액:<span id="Tp">-</span>CYA</p>
+    <p>포인트 충전금액확인<a href="./mypage.html"></a></p>
 </div>
 <div class="input-group mb-3">
   <input type="text" id="chargeAmount" class="form-control" placeholder="충전할 포인트를 입력하세요(1CYA=1P)" aria-label="CYA"
     aria-describedby="basic-addon2">
   <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Charge()">포인트충전하기</span>
+  
 </div>
 
 <div id="metaInfoContainer">
