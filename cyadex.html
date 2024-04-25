@@ -12,14 +12,14 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
     <link rel="stylesheet" href="\css\main.css">
-    <title>Cyadex</title>
+    <title>Welcome to META</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <img src="/images/170x58.png" alt="" width="88" height="32">
+                <img src="\images\logo\logo58x52.png" alt="" width="58" height="52">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -32,49 +32,75 @@
                         <a class="nav-link" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../cyadex.html">CYA</a>
+                        <a class="nav-link" href="../cyadex.html">교환소</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../cyasevice.html">CAT</a>
+                        <a class="nav-link" href="../meta5.html">MT5거래소</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../uto/uto.html">UTO</a>
-                    </li>
+                      <a class="nav-link" href="../mut.html">MUT거래소</a>
+                  </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../defi.html">Defi</a>
+                        <a class="nav-link" href="../mypage">마이페이지</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../p2e/p2e.html">P2E</a>
-                    </li>
+             
                 </ul>
             </div>
         </div>
     </nav>
     
   <!--여기까지 헤드 -->
+  
+  
+  <body>
+
+          <div class="alert alert-secondary" role="alert">
+          
+            <div class="container-box">
+              <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                <div class="col">
+                  <div class="p-3 border bg-light">1BNB=$<span id="bPrice">-</span></div>
+                </div>
+                <div class="col">
+                  <div class="p-3 border bg-light">1BNB:<span id="cPrice">-</span>CYA</div>
+                </div>
+                <div class="col">
+                  <div class="p-3 border bg-light">1CYA:$1</div>
+                </div>
+                <div class="col">
+                  <div class="p-3 border bg-light">1CYA: <span id="cPrice2">-</span>BNB</div>
+                </div>
+                <div class="col">
+                  <div class="p-3 border bg-light">BNB TVL: <span id="tvl">-</span>BNB</div>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+            <!--여기까지 대쉬보드 -->
     
         <div class="bg-light p-5 rounded">
           <h2>CYA 교환소</h2>
           <p>CYA는 opBNB(네트워크 ID:204)를 기반으로 발행됩니다.</p>
           <p>CYA는 개당 $1 비율로 opBNB로 교환할 수 있습니다</p>
           <p>BNB:opBNB 공식 교환소(메타마스크에 해당코인이 있어야 합니다) =>  <a class="navbar-brand" href="https://opbnb-bridge.bnbchain.org/withdraw">
-            <img src="\images\brigdelogo.png" alt="" width="220" height="40">
+            <img src="\images\logo\opBNB.png" alt="" width="200" height="40">
           </a> </p>
           <p>opBNB는 CYA 토큰으로 교환할 수 있습니다.</p>
     
         </div>
     
-       
-          <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()"> <a><img src= "../images/cyalogo32x32.png" > </a>CYA 자동추가
-           </button>
+        <button class="btn btn-outline-success"  role="button"  onclick="addTokenCya()"><a><img src= "\images\logo\cya32x32.png" > </a>CYA Token 자동추가 </button>
+        <button class="btn btn-outline-success"  role="button"  onclick="addTokenMut()"><a><img src= "\images\logo\cya32x32.png" > </a>MUToken 자동추가 </button>
+     
         
         <div class="alert alert-info" role="alert">
           <P>BNB:CYA BNB를 넣으면 CYA가 교환됩니다. </P>
           <P>CYA address : 0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748</P>
 
         <div class="alert alert-secondary" role="alert">
-          <P>BNB:CYA 교환비율: 1BNB USD Price</P>
-          <P>CYA:BNB 교환비율: 1CYA/1BNB USD Price</P>
+          <P>BNB:CYA 교환비율: 1BNB= <span id="bPrice2">-</span>CYA</P>
+          <P>CYA:BNB 교환비율: 1CYA= <span id="cPrice3">-</span>BNB</P>
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">BNB input</span>
@@ -114,7 +140,8 @@
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript"></script>  
-    <script src="cyadex.js"></script>   
+    <script src="../src/topinfo.js"></script>
+    <script src="../src/cyadex.js"></script>   
             
   </body>
 
