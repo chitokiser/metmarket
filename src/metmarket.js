@@ -1,5 +1,6 @@
 let metaddr = {  
-    metmarket: "0x9038A64fb4270D1BcC757971826855228721792B" //metmarket 
+    metmarket: "0x58a5469af3D9F583e502d84Dca0F4dD76A9FfcA7" //metmarket2 
+    
   };
 
   let metabi = {
@@ -12,7 +13,7 @@ let metaddr = {
        "function selladd(uint _mid,uint256 _init) public",
        "function getmainpass(uint _mid) external view returns (string memory)",
        "function getpass(uint256 _mid) external view returns (string memory)",  //관람자패스
-       "function getmetainfo(uint _num) public view returns (uint256, uint256, string memory, uint256,uint8, address)",
+       "function getmetainfo(uint _num) public view returns (uint256, uint256, string memory, uint256,uint8, address,address) ",
        "function charge(uint _pay) public"
       ],
       
@@ -47,7 +48,8 @@ async function getMetaInfoByNum(contract, _num) {
           info3: metaInfo[2], // string memory
           info4: metaInfo[3], // uint256
           info5: metaInfo[4], // bool
-          info6: metaInfo[5]  // address
+          info6: metaInfo[5],ㄹ  // address
+          info7: metaInfo[6]  // address orgin
       };
   } catch (error) {
       console.error("Error fetching meta info:", error);
@@ -104,6 +106,7 @@ async function displayMetaInfo() {
                       <p class="card-text"><strong>가격:</strong> ${metaInfo.info4} p</p>
                       <p class="card-text"><strong>구매가능여부:</strong> ${isPurchasable}</p>
                       <p class="card-text"><strong>계좌주인:</strong> ${metaInfo.info6}</p>
+                      <p class="card-text"><strong>계좌발행자:</strong> ${metaInfo.info7}</p>
                       <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">구매하기</button>
                       <button type="button" class="btn btn-primary btn-sm mr-2" onclick="registerSale(this)" data-id="${i}">판매등록</button>
                       <input type="number" id="saleAmount${i}" class="form-control form-control-sm" placeholder="판매금액입력">
