@@ -48,7 +48,7 @@ async function getMetaInfoByNum(contract, _num) {
           info3: metaInfo[2], // string memory
           info4: metaInfo[3], // uint256
           info5: metaInfo[4], // bool
-          info6: metaInfo[5],ㄹ  // address
+          info6: metaInfo[5], // address
           info7: metaInfo[6]  // address orgin
       };
   } catch (error) {
