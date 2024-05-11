@@ -28,28 +28,44 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../cyadex.html">교환소</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../meta5.html">MT5거래소</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="../mut.html">MUT거래소</a>
-                  </li>
+            
                     <li class="nav-item">
                         <a class="nav-link" href="../mypage.html">마이페이지</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#" onclick="addTokenCya()">CYA Token 자동추가</a>
-                  </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="addTokenMut()">MUT Token 자동추가</a>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        거래소
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a class="dropdown-item" href="../cyadex.html">CYA교환소</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../meta5.html">MT5거래소</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../mut.html">MUT거래소</a></li>
+                      </ul>
+                    </li>  
+
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Defi
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a class="dropdown-item" href="../metafarm.html">MetaFarm</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../metaq.html">MetaQ</a></li>     
+                      </ul>
+                    </li>  
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    토큰자동추가
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">CYA Token</a>
+                  </li>
+                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">MUT Token</a>
                 </li>
+                  </ul>
+                </li>
+
                 </ul>
        
             </div>
@@ -121,7 +137,12 @@
     </div>
     <div><span style="color:red">1포인트=1CYA</span></div>
      <button class="btn btn-outline-success" type="submit" onclick="Bonuswithdraw()">포인트인출하기</button>
-
+     <div class="input-group mb-3">
+      <input type="text" id="chargeAmount" class="form-control" placeholder="충전할 포인트를 입력하세요(1CYA=1P)" aria-label="CYA"
+        aria-describedby="basic-addon2">
+      <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Charge()">포인트충전하기</span>
+      
+    </div>
      <!--Start footer -->
 
      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">

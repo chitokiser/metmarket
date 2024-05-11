@@ -14,7 +14,8 @@ let metaddr = {
        "function getmainpass(uint _mid) external view returns (string memory)",
        "function getpass(uint256 _mid) external view returns (string memory)",  //관람자패스
        "function getmetainfo(uint _num) public view returns (uint256, uint256, string memory, uint256,uint8, address,address) ",
-       "function charge(uint _pay) public"
+       "function charge(uint _pay) public",
+       "function newmeta(uint _metanum,string memory _investor,uint256 _init,string memory _mainpass) public"
       ],
       
  

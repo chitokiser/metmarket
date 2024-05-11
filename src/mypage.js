@@ -1,9 +1,22 @@
 let contractAddress = {
-  metbank: "0x0ef1043e59a7f38aC1acBeB04CcA9714C4eb0098"
- 
+  metbank: "0x0ef1043e59a7f38aC1acBeB04CcA9714C4eb0098",
+  metmarket: "0x58a5469af3D9F583e502d84Dca0F4dD76A9FfcA7" //metmarket2 
+    
   };
   let contractAbi = {
-
+   
+    metmarket: [
+      "function buy(uint _mid) public",
+      "function mid() public view returns (uint256)",
+      "function tax() public view returns (uint256)",
+      "function g1() public view virtual returns(uint256)",
+      "function selladd(uint _mid,uint256 _init) public",
+      "function getmainpass(uint _mid) external view returns (string memory)",
+      "function getpass(uint256 _mid) external view returns (string memory)",  //관람자패스
+      "function getmetainfo(uint _num) public view returns (uint256, uint256, string memory, uint256,uint8, address,address) ",
+      "function charge(uint _pay) public",
+      "function newmeta(uint _metanum,string memory _investor,uint256 _init,string memory _mainpass) public"
+     ],
    
     metbank: [
       "function g1() public view virtual returns(uint256)",
@@ -264,4 +277,33 @@ let Mentolevelup = async () => {
     alert(e.data.message.replace('execution reverted: ',''))
   }
 
+};
+
+
+let Charge = async () => {
+  let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  await window.ethereum.request({
+    method: "wallet_addEthereumChain",
+    params: [{
+        chainId: "0xCC",
+        rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+        chainName: "opBNB",
+        nativeCurrency: {
+            name: "BNB",
+            symbol: "BNB",
+            decimals: 18
+        },
+        blockExplorerUrls: ["https://opbnbscan.com"]
+    }]
+});
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
+
+  let meta5Contract = new ethers.Contract(contractAddress.metmarket, contractAbi.metmarket, signer);
+
+  try {
+    await meta5Contract.charge(document.getElementById('chargeAmount').value);
+  } catch(e) {
+    alert(e.data.message.replace('execution reverted: ',''))
+  }
 };

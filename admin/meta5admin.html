@@ -28,44 +28,28 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../cyadex.html">교환소</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../meta5.html">MT5거래소</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="../mut.html">MUT거래소</a>
+                  </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../mypage.html">마이페이지</a>
                     </li>
-
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        거래소
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a class="dropdown-item" href="../cyadex.html">CYA교환소</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="../meta5.html">MT5거래소</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="../mut.html">MUT거래소</a></li>
-                      </ul>
-                    </li>  
-
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Defi
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a class="dropdown-item" href="../metafarm.html">MetaFarm</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="../metaq.html">MetaQ</a></li>     
-                      </ul>
-                    </li>  
-
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    토큰자동추가
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">CYA Token</a>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" onclick="addTokenCya()">CYA Token 자동추가</a>
                   </li>
-                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">MUT Token</a>
-                </li>
-                  </ul>
-                </li>
 
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="addTokenMut()">MUT Token 자동추가</a>
+                </li>
                 </ul>
        
             </div>
@@ -99,16 +83,35 @@
           </div>
             
             <!--여기까지 대쉬보드 -->
+            <div class="alert alert-dark" role="alert">
+              신규계좌등록 페이지 (발행자 전용)
+            </div>
 
-      
-        <div class="bg-light p-5 rounded">
-          <h5>Welcom to META</h5>
-          <p>meta trade5 demo 계좌 p2p 거래소 플랫폼</p>
-          <p>Defi 서비스</p>
-          <p>opBNB를 바탕으로 발행한 CYA token을 사용</p>
-        </div>
+          <!--계좌등록 발행자 페이지-->
+          <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="Master()">발행자 등록하기</span>
+          <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="MemberLogin()">지갑연결하기</span>
 
-
+          <li class="list-group-item">계좌발행티켓수 : <span id="Mytiket"></span></li>
+          <li class="list-group-item">내가발행한계좌id : <span id="Myid"></span></li>
+       
+          <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="Buytiket()">티켓충전하기</span>
+          <!--새로운계좌입력-->
+          <h2>New Meta 생성하기</h2>
+          <form onsubmit="event.preventDefault(); newMeta()">
+              <label for="metanum">계좌번호:</label><br>
+              <input type="number" id="metanum" name="metanum" required><br><br>
+              
+              <label for="investor">관람자 비밀번호:</label><br>
+              <input type="text" id="investor" name="investor" required><br><br>
+              
+              <label for="init">판매가격(계좌잔고/10):</label><br>
+              <input type="number" id="init" name="init" required><br><br>
+              
+              <label for="mainpass">메인 비밀번호:</label><br>
+              <input type="text" id="mainpass" name="mainpass" required><br><br>
+              
+              <button type="submit">생성</button>
+          </form>
 
      <!--Start footer -->
 
@@ -124,8 +127,8 @@
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script type="text/javascript"></script>
-       
-        <script src="..\src\topinfo.js"></script>
+        <script src="../src/topinfo.js"></script>
+        <script src="../src/admin.js"></script>
         
     </body>
 
