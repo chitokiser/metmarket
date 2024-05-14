@@ -100,51 +100,60 @@
           </div>
             
             <!--여기까지 대쉬보드 -->
-    
+
+    <body>
+     
+        <div class="d-grid gap-2">
+            <button class="btn btn-dark" type="button">Meta Tree</button>
+          </div>
         <div class="bg-light p-5 rounded">
-          <h2>CYA 교환소</h2>
-          <p>CYA는 opBNB(네트워크 ID:204)를 기반으로 발행됩니다.</p>
-          <p>CYA는 개당 $1 비율로 opBNB로 교환할 수 있습니다</p>
-          <p>BNB:opBNB 공식 교환소(메타마스크에 해당코인이 있어야 합니다) =>  <a class="navbar-brand" href="https://opbnb-bridge.bnbchain.org/withdraw">
-            <img src="\images\logo\opBNB.png" alt="" width="200" height="40">
-          </a> </p>
-          <p>opBNB는 CYA 토큰으로 교환할 수 있습니다.</p>
-    
+          <p>MUT를 매주 10회 입금하면 표시된 이자율로 매주10회 인출할 수 있습니다</p>
+          <p>입금 해야할 시간시점 부터 24시간이 지나면 계약은 해지 되며 입금한 MUT은 계약에 귀속됩니다</p>
+          <p>이자율은 상황에 따라 자동변경 됩니다</p>
         </div>
-    
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-dark" type="button">Meta Tree 상태</button>
+          </div>
+        <li class="list-group-item">계약MUT잔고 :<span id="Mutbal"></span>MUT</li>
+        <li class="list-group-item">이자율 :<span id="Mrate"></span>%</li>
+        <li class="list-group-item">1회입금액 :<span id="Price"></span>MUT</li>
+        <button class="btn btn-outline-success" cursor: pointer; onclick="Init()">최초입금하기</button>
+          </div>
+
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark" type="button">나의 현황</button>
+          </div>
+          <button class="btn btn-outline-success" cursor: pointer; onclick="MemberLogin()">지갑연결</button>
+        <li class="list-group-item">최초입금하고 지갑을 연결 하면 나의현황 정보가 보입니다</li>
+        <li class="list-group-item">1회출금가능액: <span id="Mdepo">-</span>MUT</li>
+       
+        <li class="list-group-item"><div class="progress">
+        <div class="progress-bar progress-bar-striped bg-danger" id="Bar" role="progressbar" aria-valuenow="75" aria-valuemin="1" aria-valuemax="100" style="width: 1%"></li>
+          <li class="list-group-item">막대가 100% 채워지면 막대가 줄어들때까지 7일에 한번씩 출금 가능 합니다</li>    
+       
+      
+          <li class="list-group-item">입금가능 시간: <span id="Mdepot">-</span></li>
+          <button class="btn btn-outline-success" cursor: pointer; onclick="Tinput()">입금하기</button>
+        <li class="list-group-item">출금가능하면 출금하기 버튼이 표시됩니다 </li>
+           <!-- 출금 버튼 -->
+    <button id="withdrawButton" class="btn btn-outline-success" type="submit" onclick="Withdraw()" style="display: none;">출금하기</button>
+    <!-- 출금 가능 메시지 -->
+    <div id="withdrawMessage"></div>
+
+        <li class="list-group-item">"타임아웃"을 당하여 더이상 입금이 불가능할때 초기화를 실행하세요</li>
+
+        <button class="btn btn-outline-success" type="submit" onclick="Clear()">초기화하기</button>
+        <div>
         
-        <div class="alert alert-info" role="alert">
-          <P>BNB:CYA BNB를 넣으면 CYA가 교환됩니다. </P>
-          
-        
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">BNB input</span>
-          <input id="bnbInput" type="text" class="form-control" placeholder="여기에 BNB를 입력하세요(소수점 허용)...." aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-        
-        <div class="input-group mb-3">
-          <input id="bnbOutput" type="text" class="form-control" placeholder="여기에 교환되는 CYA양이 표시 됩니다" aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <span onclick="buyCya()" style="cursor: pointer;" class="input-group-text" id="basic-addon2">교환하기</span>
+      
         </div>
       </div>
-      
-      <div class="alert alert-info" role="alert">
-        <p> CYA를 넣으면 BNB가 교환됩니다.교환 수수료1% </p>
+      </div>
+
+
     
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">CYA input</span>
-          <input id="cyaInput" type="text" class="form-control" placeholder="여기에 CYA를 입력하면...."aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group mb-3">
-          
-          <input id="cyaOutput" type="text" class="form-control" placeholder="여기에 교환되는 BNB양이 표시 됩니다" aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <span onclick="sellCya()" style="cursor: pointer;" class="input-group-text" id="basic-addon2">교환하기</span>
-        </div>
-      </div> 
-
-      
-        
-
      <!--Start footer -->
 
      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
@@ -152,14 +161,18 @@
       <p>We do not collect personal information</p>
       <p><a class="nav-link" href="https://t.me/cyadaokorea">텔레그램 오픈채팅방</a></p>
  <!-- End footer -->
-   
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="text/javascript"></script>  
-    <script src="../src/topinfo.js"></script>
-    <script src="../src/cyadex.js"></script>   
-            
-  </body>
+
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+          <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+          <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+          <script type="text/javascript"></script>
+          <script src="..\src\topinfo.js"></script>
+          <script src="..\src\metatree.js"></script>
+     
+
+
+    </body>
 
 </html>

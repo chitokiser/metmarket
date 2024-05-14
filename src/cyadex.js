@@ -44,7 +44,8 @@ const bnbPrice = parseFloat(responseBinanceTicker.data.price);
        // ethers setup
        let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
        let cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, provider);
-     
+       let price = await cyadexContract.getprice();  //bnb설정가격
+       document.getElementById("BNBset").innerHTML= (price);
         };
      
      
@@ -104,6 +105,8 @@ const bnbPrice = parseFloat(responseBinanceTicker.data.price);
           await cyadexContract.sell(quantity);
         };
   
+
+
  
 
         (async () => {
@@ -141,4 +144,30 @@ const bnbPrice = parseFloat(responseBinanceTicker.data.price);
           })
           })();
 
-        
+        const Priceup = async () => {
+          const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+          await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [{
+                  chainId: "0xCC",
+                  rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+                  chainName: "opBNB",
+                  nativeCurrency: {
+                      name: "BNB",
+                      symbol: "BNB",
+                      decimals: 18
+                  },
+                  blockExplorerUrls: ["https://opbnbscan.com"]
+              }]
+          });
+          await userProvider.send("eth_requestAccounts", []);
+          const signer = userProvider.getSigner();
+  
+          const cyadexContract = new ethers.Contract(contractAddress.cyadexAddr, contractAbi.cyadex, signer);
+          try {
+            await cyadexContract.priceup(document.getElementById('BNBprice').value);
+          } catch(e) {
+            alert(e.data.message.replace('execution reverted: ',''))
+          }
+        };
+

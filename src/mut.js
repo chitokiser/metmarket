@@ -44,10 +44,10 @@
        let iprice = await cyabankContract.getprice();
        let iallow = await cyabankContract.allow();
      
-       document.getElementById("Cyabal").innerHTML = (cyabal/1e18).toFixed(4);
+       document.getElementById("Cyabal").innerHTML = (cyabal/1e21).toFixed(2);
        document.getElementById("Mutbal").innerHTML = (mutbal);
        document.getElementById("Mutcir").innerHTML = (mutcir);
-       document.getElementById("Mprice").innerHTML = (iprice/1e18).toFixed(4);
+       document.getElementById("Mprice").innerHTML = (iprice/1e18).toFixed(2);
        document.getElementById("Mallow").innerHTML = (iallow/1e18).toFixed(8);
      
      };

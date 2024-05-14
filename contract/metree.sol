@@ -1,147 +1,190 @@
 // SPDX-License-Identifier: MIT  
-// ver1.0
+// ver1.2
 pragma solidity >=0.7.0 <0.9.0;
 
+interface Imut {      
+    function balanceOf(address account) external view returns (uint256);
+    function allowance(address owner, address spender) external view returns (uint256);
+    function transfer(address recipient, uint256 amount) external returns (bool);
+    function approve(address spender, uint256 amount) external returns (bool);
+    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+    function g1() external view returns(uint256);
+    function getdepot(address user) external view returns(uint256);
+}
 
-
-    interface Imutbank{      //멋뱅크
-     function depoup(address _user, uint _depo) external;
+interface Imutbank {      // 멋뱅크
+    function depoup(address _user, uint _depo) external;
     function depodown(address _user, uint _depo) external;
     function getprice() external view returns (uint256);
     function getlevel(address user) external view returns (uint);
     function g9(address user) external view returns (uint);  // 각 depo현황
     function getagent(address user) external view returns (address);
     function getmento(address user) external view returns (address);
-    function expup(address _user,uint _exp) external;
-  
-  }  
+    function expup(address _user, uint _exp) external;
+}
 
- //한달안에 받을돈이 10%이상 안되면 확정이자 110% 
- //참가비 10cya
- //추천인 등록시 10% 수당
- //수확한 과일 삭제기능
-    contract metree {
+contract Metatree{  // 멧큐   mut을 담보로 하여 이자율이 변동되는 디파이
+    Imut mut;
+    Imutbank mutbank;
+    address public taxbank;
+    address public admin;
+    uint256 public tax; // 수익 
+    uint256 public tax2; // 지출
+    uint256 public price; // 가격
+    uint256 public rate; // 
+    mapping(address => input) public myinput; // 입금
+    mapping (address => uint) public staff;
+
   
-      Imutbank mutbank;
-      uint[12] taxnft; // for tax
-      address admin;
-      uint256 public sum;  
-      uint256 public happy; 
-      uint256 public fee;
-      uint256 public mid;
-      mapping (uint256 => my)public myinfo;
-      mapping (address => uint[])public myfruit;
-      
+    constructor(address _mut, address _mutb) { 
+        mut = Imut(_mut);
+        mutbank = Imutbank(_mutb);
+        taxbank = _mutb;
+        admin = msg.sender;
+        tax2 = 2000;
+        rate = 200 ;
+        price = 2000;
+    }
+    
+    struct input{
+ 
+        uint256 depo;   // 출금가능mut
+        uint256 depot;  // 입금해야 할 시간
+        uint256 tiket;  //  입금횟수
+        bool complete;  //입금완료
+    }
+
    
-     constructor(address _mutbank) public { 
+
+  function initing() public {  // 유동성 제공
+    require(g2(msg.sender) >= price, "not enough mut"); 
+    require(myinput[msg.sender].depo == 0, "already deposit"); 
+    require(g6(msg.sender) != address(0), "no member"); 
     
-      happy = 100; //수당
-      fee = 1500;  //
-      mutbank = Imutbank(_mutbank);
-      admin =msg.sender;
-      myinfo[msg.sender].dep = 2;
-      myinfo[msg.sender].mynum = 1;
-    
-      }
-
-    struct my {
-    uint256 mid;
-    uint256 depot; 
-    uint256 depo; 
-    uint256 dep;
-    uint256 mynum;
-    address owner ;
-    uint8 wc;  //withdraw limit
-
-    }
-
-function memberjoin( )public {   
-
-    require (mutbank.g9(msg.sender)>=fee,"no point");
-        mutbank.depodown(msg.sender,fee);
-        
-      myinfo[mid].dep = 2;
-      myinfo[mid].mynum = sum;
-      myinfo[mid].owner = msg.sender;
-      sum += 1;
-      mid += 1;
-      
-
-}
-
-
-function check(uint _mid) public { 
-    my storage tmy = myinfo[_mid]; 
-    require(tmy.dep >=1 ,"no fruit");
-    require(tmy.wc < 15,"over withdraw");  //15회 인출 가능
-    
-    if(sum - tmy.mynum >= tmy.dep){
-     tmy.wc += 1;
-    tmy.depo += happy*tmy.dep;
-    tmy.mynum = (tmy.mynum+2)*2;
-    tmy.dep = tmy.dep*2;
-    }
-}
+    mut.approve(msg.sender,price);
+    uint256 allowance = mut.allowance(msg.sender, address(this));
+    require(allowance >= price, "Check the allowance");
+    mut.transferFrom(msg.sender, address(this),price); 
+    uint pay = price * g7() *5/100;
+    mutbank.depoup(g6(msg.sender), pay);
+    tax += price;
+    uint myprice = price * rate / 100;   
+    myinput[msg.sender].depo = myprice;  //1회 인출금액
+    myinput[msg.sender].tiket += 1;
+    myinput[msg.sender].depot = block.timestamp;
    
-  function withdraw(uint _mid )public {   
-   uint256 pay = myinfo[_mid].depo;
-   require(pay > 0,"no depo");
-   myinfo[msg.sender].depo = 0; 
-   cat.transfer(msg.sender,pay);
-  }
-  
-   
-  
- function deleteFruit(address _address, uint _index) public {
-    require(_index < myfruit[_address].length, "Index out of bounds");
-    myfruit[_address][_index] = 0; // 요소를 0으로 설정하여 무효화
 }
-     
-  function happyup(uint _happy) public {
-   require(admin == msg.sender,"no admin");
-      happy = _happy;  
-   } 
 
 
-    function nftup(uint num,uint8 _nft)public  {   
-   require( admin ==  msg.sender,"no admin");
-   taxnft[num] =_nft;
-  }
+  function inputing() public {  // 유동성 제공
+    require(g2(msg.sender) >= price, "not enough mut");  
+    require(myinput[msg.sender].depot + 7 days <= block.timestamp , "not time yet"); 
+    require(myinput[msg.sender].depot + 8 days >= block.timestamp , "time out"); 
+    require(myinput[msg.sender].complete == false , "Unable to deposit"); 
+    uint pay = price * g7() *5/100;
+    mut.approve(msg.sender,price);
+    uint256 allowance = mut.allowance(msg.sender, address(this));
+    require(allowance >= price, "Check the allowance");
+    mut.transferFrom(msg.sender, address(this),price); 
+    mutbank.depoup(g6(msg.sender), pay);
+     rateup();
+    tax += price;
+    uint myprice = price * rate / 100;  
+    myinput[msg.sender].tiket += 1;
+    myinput[msg.sender].depot = block.timestamp;
+    if(myinput[msg.sender].tiket > 9){
+    myinput[msg.sender].complete = true;   
+    }else{
+    myinput[msg.sender].complete = false;   
+    }
+}
+
+
+    function withdraw() public {  // 유동성 제공한 금액 인출
+    uint pay = myinput[msg.sender].depo;
+    require(myinput[msg.sender].complete == true, "Mission not completed");  
+    require(g3() >= pay, "not enough mut");  
+    require(myinput[msg.sender].depot + 7 days <= block.timestamp , "not time yet"); 
+    require(myinput[msg.sender].tiket  >= 1 , "not enough tiket"); 
+    mut.transfer(msg.sender,pay);
+    tax2 += pay; 
+    myinput[msg.sender].tiket -= 1;
+    myinput[msg.sender].depot = block.timestamp;
+    rateup();
+    if(myinput[msg.sender].tiket == 0){
+    myinput[msg.sender].complete = false;   
+    }
+    }
+
+
+
+
+     function clear() public {  // 유동성 제공
     
-  function feeup(uint _fee) public {
-   require(admin == msg.sender,"no admin");
-      fee = _fee;  
-   }  
-
- function g1() public view virtual returns(uint256){  
-  return cat.balanceOf(address(this));
-  }
-  
- function g2() public view returns( uint256 depo,uint256 dep,uint256 mynum,uint8 wc){  
-   my storage tmy=myinfo[msg.sender];
-  return ( tmy.depo,
-           tmy.dep,
-           tmy.mynum,
-           tmy.wc);
-  }    
-  function random() public view returns(uint){  //ver 1.1
-  return uint(keccak256(abi.encodePacked(block.timestamp,msg.sender))) % 12+1; 
- }    
-
-
- function getsum( ) public view returns(uint) {
-  return sum;
-    }
-
-    function thistimepoint( ) public view returns(uint) { 
-      my memory tmy = myinfo[msg.sender]; 
-  return happy*tmy.dep;
-    }
-  function deposit()external payable{
-  }
-      function getnft(uint8 num) public view returns(uint) { //nft와 세금바가지 매칭 1번화분은 7번nft 와 매칭
-  return taxnft[num];
-  }  
-
+    require(myinput[msg.sender].depo >= 1, "No need to clear");  
+    
+    myinput[msg.sender].depo = 0;  //1회 인출금액
+    myinput[msg.sender].depot = 0;
+    myinput[msg.sender].tiket = 0;
+    myinput[msg.sender].complete = false; 
 }
+
+   function rateup() public { // 대출 이자 보조 지표
+    rate = (tax/tax2)+120;
+   }
+
+     function priceup(uint num) public { // 대출 이자 보조 지표
+        require(staff[msg.sender] >=5, "no staff"); 
+    price = num;
+   }
+
+
+    function staffup(address _staff, uint8 num) public {  
+        require(admin == msg.sender, "no admin"); 
+        staff[_staff] = num;
+    }   
+
   
+       function g2(address user) public view returns(uint) { 
+        return mut.balanceOf(user) ;
+    }  
+
+    function g3() public view returns(uint) { 
+        return mut.balanceOf(address(this)) ;
+    }  
+
+    function g4() public view returns(uint) { // 계약이 가지고 있는 mut 시가총액
+        return g3() * g7();
+    }
+
+    function g5(address user) public view returns(uint) { // 나의 mut 시가총액
+        return g8(user) * g7();
+    }
+
+    function g6(address user) public view returns (address)
+{  //멘토 가져오기
+        return mutbank.getmento(user);
+    }
+
+    function g7() public view returns(uint) { // mut 시세
+        return mutbank.getprice();
+    }
+
+    function g8(address user) public view returns(uint) { // mut 보유 현황
+        return mut.balanceOf(user);
+    }
+  
+    function g9(address user) public view returns(uint) { // 포인트 보유 현황
+        return mutbank.g9(user);
+    }
+
+ function g10() public view returns(uint) { // 인출가능비율
+        return  100*rate/100;
+    }
+   
+
+
+function g12(address user) public view returns(uint) { // 대출이자 보조지표
+        return  mutbank.getlevel(user);
+    }
+}

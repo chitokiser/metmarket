@@ -1,17 +1,17 @@
  // testnet
  let contractAddress = {
-    cyafarmAddr: "0x7CD3cC41051f6ab28af88a7b0f50B2FE4964E0f1",
-  };   
+    cyafarmAddr: "0x08F01e3c48C86FfA24A26A70Fa437B2627086E08",
+  };  
    let contractAbi = {
   
     cyafarm: [
       "function bonding(uint _pay) public",
       "function withdraw( )public",
       "function loaning(uint num) public",
-      "function payback() public",
+      "function payback( ) public",
       "function g7() public view returns(uint)",
       "function g3() public view returns(uint)",
-      "function rate() public view returns(uint)",
+      "function rate() public view returns(uint256)",
       "function tax( ) public view returns(uint256)",
       "function mybond(address user ) public view returns(uint256,uint256)",
       "function myloan(address user ) public view returns(uint256,uint256,uint256,uint256)",
@@ -38,7 +38,7 @@
            
   }  
        
-         topDataSync();
+  topDataSync();
   
   
   
@@ -66,6 +66,36 @@
   
     try {
       await cyafarmContract.withdraw();
+    } catch(e) {  
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+
+  let Payback = async () => {  
+    const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+  
+        method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+    });
+    await userProvider.send("eth_requestAccounts", []);
+    const signer = userProvider.getSigner();
+  
+    const cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr, contractAbi.cyafarm, signer);
+  
+    try {
+      await cyafarmContract.payback();
     } catch(e) {  
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -150,7 +180,7 @@
     try {
       await cyafarmContract.bonding(document.getElementById('Seed').value);
     } catch(e) {
-      alert(e.message.replace('execution reverted: ',''));
+      alert(e.data.message.replace('execution reverted: ',''))
     }
   };
   
@@ -180,3 +210,9 @@
       alert(e.message.replace('execution reverted: ',''));
     }
   };
+
+
+ 
+
+
+  

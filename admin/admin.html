@@ -12,7 +12,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
     <link rel="stylesheet" href="\css\main.css">
-    <title>Welcome to META</title>
+    <title>Welcome to MetaDAO</title>
 </head>
 
 <body>
@@ -28,28 +28,45 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../cyadex.html">교환소</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../meta5.html">MT5거래소</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="../mut.html">MUT거래소</a>
-                  </li>
+            
                     <li class="nav-item">
                         <a class="nav-link" href="../mypage.html">마이페이지</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#" onclick="addTokenCya()">CYA Token 자동추가</a>
-                  </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="addTokenMut()">MUT Token 자동추가</a>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        거래소
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a class="dropdown-item" href="../cyadex.html">CYA교환소</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../meta5.html">MT5거래소</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../mut.html">MUT거래소</a></li>
+                      </ul>
+                    </li>  
+
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Defi
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a class="dropdown-item" href="../metafarm.html">MetaFarm</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../metaq.html">MetaQ</a></li>     
+                        <li class="dropdown-item"><a class="dropdown-item" href="../metatree.html">MetaTree</a></li>   
+                      </ul>
+                    </li>  
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    토큰자동추가
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">CYA Token</a>
+                  </li>
+                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">MUT Token</a>
                 </li>
+                  </ul>
+                </li>
+
                 </ul>
        
             </div>
@@ -83,10 +100,14 @@
           </div>
             
             <!--여기까지 대쉬보드 -->
-            <div class="alert alert-dark" role="alert">
-              신규계좌등록 페이지 (발행자 전용)
-            </div>
 
+
+
+
+
+            <div class="d-grid gap-2">
+              <button class="btn btn-dark" type="button">MT5 발행하기(발행자전용)</button>
+            </div>
           <!--계좌등록 발행자 페이지-->
           <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="Master()">발행자 등록하기</span>
           <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="MemberLogin()">지갑연결하기</span>
@@ -96,7 +117,7 @@
        
           <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="Buytiket()">티켓충전하기</span>
           <!--새로운계좌입력-->
-          <h2>New Meta 생성하기</h2>
+          <h5>New Meta 생성하기</h5>
           <form onsubmit="event.preventDefault(); newMeta()">
               <label for="metanum">계좌번호:</label><br>
               <input type="number" id="metanum" name="metanum" required><br><br>
@@ -113,6 +134,23 @@
               <button type="submit">생성</button>
           </form>
 
+          
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark" type="button">staff 전용</button>
+          </div>
+          <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;">MT5 계좌상태변경하기</span>
+          <div class="input-group mb-3">
+            <input type="text" id="Mt5id" class="form-control" placeholder="MT5계좌 ID 입력" aria-label="CYA"
+              aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Approval()">판매승인하기</span>  
+          </div>
+
+          <li class="list-group-item">BNB교환비율 : <span id="BNBset"></span></li>
+          <div class="input-group mb-3">
+            <input type="text" id="BNBprice" class="form-control" placeholder="BNB 현시세입력" aria-label="CYA"
+              aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Priceup()">교환비율변경하기</span>  
+          </div>
      <!--Start footer -->
 
               <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
@@ -129,7 +167,7 @@
         <script type="text/javascript"></script>
         <script src="../src/topinfo.js"></script>
         <script src="../src/admin.js"></script>
-        
+        <script src="../src/cyadex.js"></script>
     </body>
 
 </html>

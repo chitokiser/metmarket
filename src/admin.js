@@ -7,6 +7,7 @@ let metaddr = {
   
     metmarket: [
        "function buy(uint _mid) public",
+       "function approval(uint _mid) public",
        "function buytiket()public ",
        "function getmyInfo(address _user) external view returns (uint256, uint256, uint256[] memory)",
        "function mid() public view returns (uint256)",
@@ -22,6 +23,34 @@ let metaddr = {
       ],
       
 
+  };
+
+  let Approval = async () => {   //판매승인
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+
+    let metContract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, signer);
+
+    try {
+      await metContract.approval(document.getElementById('Mt5id').value);
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
   };
 
 
