@@ -1,6 +1,6 @@
  // testnet
  let contractAddress = {
-    cyafarmAddr: "0x08F01e3c48C86FfA24A26A70Fa437B2627086E08",
+    cyafarmAddr: "0xFe854Efc07aF56c67ecC9A7E604E5e67C9663F2d",
   };  
    let contractAbi = {
   
@@ -11,7 +11,8 @@
       "function payback( ) public",
       "function g7() public view returns(uint)",
       "function g3() public view returns(uint)",
-      "function rate() public view returns(uint256)",
+      "function g10(address user) public view returns(uint)",
+      "function g11() public view returns(uint256)",
       "function tax( ) public view returns(uint256)",
       "function mybond(address user ) public view returns(uint256,uint256)",
       "function myloan(address user ) public view returns(uint256,uint256,uint256,uint256)",
@@ -25,7 +26,7 @@
     // ethers setup
     const provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
     const cyafarmContract = new ethers.Contract(contractAddress.cyafarmAddr,contractAbi.cyafarm,provider);
-    const mrate = await cyafarmContract.rate();
+    const mrate = await cyafarmContract.g11();
     const tax = await cyafarmContract.tax();
     const mutbal = await cyafarmContract.g3();
     const tprice = await cyafarmContract.g7();
@@ -33,7 +34,7 @@
     document.getElementById("Mrate2").innerHTML = (mrate-80);
     document.getElementById("Tax").innerHTML = (tax / 1e18).toFixed(2);
     document.getElementById("Mutbal").innerHTML = (mutbal);
-    document.getElementById("Tprice").innerHTML = (mutbal*tprice/1e18).toFixed(2);
+    document.getElementById("Tprice").innerHTML = (mutbal*tprice/1e18).toFixed(2); //담보시가총액
      
            
   }  
@@ -153,6 +154,9 @@
     let min2 = parseInt((left2/60)%60);
     let sec2 = left2%60;
     document.getElementById("Mdepo4").innerHTML = left2 > 0 ? `${day2}일${hour2}시간${min2}분${sec2}초` : ''; 
+  
+    let myloanable = await cyafarmContract .g10(await signer.getAddress());
+    document.getElementById("Loanable").innerHTML = parseInt(myloanable/1e18);
   };
   
   

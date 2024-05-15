@@ -130,7 +130,7 @@
           <div class="input-group mb-3">
             <input type="text" id="Seed2" class="form-control" placeholder="담보제공할 MUT개수를 입력하세요"
               aria-label="CYA" aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Loan()">대출하기</span>
+            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Loan()">포인트대출하기</span>
           </div>
          
             <div>
@@ -140,10 +140,12 @@
             <li class="list-group-item">회수할  금액: <span id="Mdepo">-</span>P</li>
             <li class="list-group-item">회수까지남은시간:<span id="Mdepot">-</span></li>
             <button class="btn btn-outline-success" type="submit" onclick="Withdraw()">회수하기</button>
+            <li class="list-group-item">대출가능금액: <span id="Loanable">-</span>P</li>
             <li class="list-group-item">내가갚을금액: <span id="Mdepo2">-</span>P</li>
             <li class="list-group-item">대출실행금액: <span id="Mdepo3">-</span>P</li>
             <li class="list-group-item">상환까지남은시간: <span id="Mdepo4">-</span></li>
             <li class="list-group-item">담보개수: <span id="Mdepo5">-</span>MUT</li>
+            
             <button class="btn btn-outline-success" type="submit" onclick="Payback()">대출상환하기</button>
           
           

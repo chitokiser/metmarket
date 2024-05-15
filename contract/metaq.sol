@@ -28,8 +28,7 @@ contract Metaq {  // 멧큐   mut을 담보로 하여 이자율이 변동되는 
     Imutbank mutbank;
     address public taxbank;
     address public admin;
-    uint256 public tax; // 수익 
-    uint256 public rate; // 
+    uint256 public tax; // 계약잔고
     mapping(address => bond) public mybond; // 나의 채권
     mapping(address => loan) public myloan; // 나의 대출
     mapping (address => uint) public staff;
@@ -41,7 +40,6 @@ contract Metaq {  // 멧큐   mut을 담보로 하여 이자율이 변동되는 
         taxbank = _mutb;
         admin = msg.sender;
         tax = 1e20;
-        rate = 105 ;
     }
     
     struct loan {
@@ -63,12 +61,11 @@ contract Metaq {  // 멧큐   mut을 담보로 하여 이자율이 변동되는 
     require(g6(msg.sender) != address(0), "no member"); 
     mutbank.depodown(msg.sender, pay);
     mutbank.depoup(g6(msg.sender), pay * 5 / 100);
-    uint fee = pay * 5 / 100;
+    uint fee = pay * 5 / 100;  //멘토수당
     tax += pay - fee;
-    uint mypay = pay * rate / 100;
+    uint mypay = pay * g11() /100;
     mybond[msg.sender].depo = mypay;
     mybond[msg.sender].depot = block.timestamp;
-    rateup();
 }
 
 
@@ -89,14 +86,13 @@ contract Metaq {  // 멧큐   mut을 담보로 하여 이자율이 변동되는 
     require(myloan[msg.sender].depo == 0, "already have a loan"); 
      require(g6(msg.sender) != address(0), "no member"); 
 
-
-    mut.approve(address(this), num);
+    mut.approve(msg.sender, num);
     uint256 allowance = mut.allowance(msg.sender, address(this));
     require(allowance >= num, "Check the allowance");
     mut.transferFrom(msg.sender, address(this), num); 
 
-    uint mypay = pay * 100 / (rate + 20);  // 대출 실행 금액  
-    mutbank.depoup(msg.sender, mypay);  // 대출 실행 금액
+    uint mypay = pay * (100 / g11());  // 대출 실행 금액  
+    mutbank.depoup(msg.sender, mypay);  
     mutbank.depoup(g6(msg.sender), mypay * 5 / 100);
 
     uint fee = mypay * 5 / 100;
@@ -105,7 +101,7 @@ contract Metaq {  // 멧큐   mut을 담보로 하여 이자율이 변동되는 
     myloan[msg.sender].depo2 = mypay;  // 실행금액
     myloan[msg.sender].depot = block.timestamp;
     myloan[msg.sender].mutdepo = num;  // 담보
-    rateup();
+ 
 }
 
 function payback() public {  // 대출 상환
@@ -119,25 +115,16 @@ function payback() public {  // 대출 상환
     mutbank.depodown(msg.sender, pay); // 대출 상환
     tax += pay; // 수익으로 반영
     myloan[msg.sender].depo = 0; // 대출 정보 초기화
+    myloan[msg.sender].depo2 = 0; // 대출 정보 초기화
     myloan[msg.sender].depot = 0; // 대출 정보 초기화
-
-   
-    uint totalPay = pay + mutpay;
+    
     myloan[msg.sender].mutdepo = 0; // 대출 정보 초기화
-    mut.transfer(msg.sender, totalPay); // mut 지급
+    mut.transfer(msg.sender, mutpay); // mut 지급
 }
 
-    
-   function rateup() public{ // 대출 이자 보조 지표
-         if (g11()<= 50) {
-        rate = 105; 
-    } else {
-        rate = g11() + 56;
-    }
-}
-    
+ 
 
-    function mutup(uint _num) public {  
+    function muttransfer(uint _num) public {  
         require(staff[msg.sender] >= 5, "no staff");
         mut.transfer(taxbank, _num);
     }   
@@ -176,12 +163,13 @@ function payback() public {  // 대출 상환
         return mutbank.g9(user);
     }
 
- function g10() public view returns(uint) { // 대출실행금액
-        return  100*100/(rate+20);
+      function g10(address user) public view returns(uint) { // 개인 대출가능금액
+        return g5(user)*100/g11();
     }
+
    
  function g11() public view returns(uint) { // 대출이자 보조지표
-        return  100*g4() / tax;
+        return  100+ (g4() / tax);
     }
 
 function g12(address user) public view returns(uint) { // 대출이자 보조지표
