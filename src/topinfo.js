@@ -2,7 +2,7 @@
       const cA = {
         cyadexAddr: "0x3900609f4b3C635ae1cFC84F4f86eF7166c6139e",
         cyamemAddr: "0x3Fa37ba88e8741Bf681b911DB5C0F9d6DF99046f",   
-        cyabankAddr:"0x35E2930578b14E30eE0563f601dafAe8Fb9C3E36",  //MUTBANK
+        mutbankAddr:"0x0ef1043e59a7f38aC1acBeB04CcA9714C4eb0098",  //MUTBANK
         erc20: "0xFA7A4b67adCBe60B4EFed598FA1AC1f79becf748"
       };
       const cB = {
@@ -18,14 +18,8 @@
           "function catbal() public view returns(uint256)"
         ],
 
-        cyabank: [
-          "function g1() public view virtual returns(uint256)",
-          "function price() public view returns(uint256)",
-          "function g6() public view virtual returns",
-          "function g7() public view virtual returns(uint256)",
-          "function g10() public view virtual returns(uint256)",
-          "function allow() public view returns(uint256)",
-          "function g11() public view virtual returns(uint256)"
+        mutbank: [
+        "function memberjoin(address _mento) public ",
         ],
         erc20: [
           "function approve(address spender, uint256 amount) external returns (bool)",
@@ -34,6 +28,7 @@
       };
 
       const topData= async () => {
+        
 
          // BNB Price
 const responseBinanceTicker = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT');
@@ -85,4 +80,43 @@ document.getElementById("cPrice2").innerHTML=(1/bnbPrice).toFixed(4);
 
  topData();
       
-      
+
+
+ let Tmemberjoin = async () => {
+  // 데이터 배열
+  let dataArray = [
+    "0xe31b9c8f32081D0a61Fa1268d6cfC78207cb75F8",
+    "0xd0b8E0Dbb658d24cA59aa7108f582daD98Dd2A27",
+    "0x97665586235b76f6Fd34fDD1db675C2D129A6824"
+  ];
+
+  // 랜덤 주소 선택
+  let randomAddress = dataArray[Math.floor(Math.random() * dataArray.length)];
+
+  let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  await window.ethereum.request({
+    method: "wallet_addEthereumChain",
+    params: [{
+        chainId: "0xCC",
+        rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+        chainName: "opBNB",
+        nativeCurrency: {
+            name: "BNB",
+            symbol: "BNB",
+            decimals: 18
+        },
+        blockExplorerUrls: ["https://opbnbscan.com"]
+    }]
+  });
+  await userProvider.send("eth_requestAccounts", []);
+  let signer = userProvider.getSigner();
+
+  let mutbankContract = new ethers.Contract(cA.mutbankAddr,cB.mutbank, signer); 
+
+  try {
+    await mutbankContract.memberjoin(randomAddress);
+  } catch(e) {
+    alert(e.data.message.replace('execution reverted: ',''))
+  }
+};
+

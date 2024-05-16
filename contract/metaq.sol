@@ -91,7 +91,7 @@ contract Metaq {  // 멧큐   mut을 담보로 하여 이자율이 변동되는 
     require(allowance >= num, "Check the allowance");
     mut.transferFrom(msg.sender, address(this), num); 
 
-    uint mypay = pay * (100 / g11());  // 대출 실행 금액  
+    uint mypay = (pay * 100) / g13();  // 대출 실행 금액  
     mutbank.depoup(msg.sender, mypay);  
     mutbank.depoup(g6(msg.sender), mypay * 5 / 100);
 
@@ -168,11 +168,19 @@ function payback() public {  // 대출 상환
     }
 
    
- function g11() public view returns(uint) { // 대출이자 보조지표
+ function g11() public view returns(uint) { // 유동성제공 이자 비율
         return  100+ (g4() / tax);
     }
 
+ 
+
 function g12(address user) public view returns(uint) { // 대출이자 보조지표
         return  mutbank.getlevel(user);
+    }
+
+
+    
+     function g13() public view returns(uint) { // 대출이자 보조지표
+        return  120+ (g4() / tax);
     }
 }

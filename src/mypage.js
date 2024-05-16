@@ -51,7 +51,6 @@ let contractAddress = {
 
   // 멘토데이타 입력
   var dataArray = [
-    "0x8D645FD760aa1A34625f835C05e43C8c64C0F00f",
     "0xe31b9c8f32081D0a61Fa1268d6cfC78207cb75F8",
     "0xd0b8E0Dbb658d24cA59aa7108f582daD98Dd2A27",
     "0x97665586235b76f6Fd34fDD1db675C2D129A6824"
@@ -134,7 +133,6 @@ let contractAddress = {
     let cyamemContract = new ethers.Contract(contractAddress.metbank, contractAbi.metbank, signer);
     let mylev = parseInt(await cyamemContract.getlevel(await signer.getAddress()));
     let mymento = (await cyamemContract.getmento(await signer.getAddress()));  
-    let myagent = (await cyamemContract.getagent(await signer.getAddress()));
     let levelexp = (2**mylev)*10000;
     let my = await cyamemContract.myinfo(await signer.getAddress());
     let myexp =  (await my[6]);
@@ -145,7 +143,7 @@ let contractAddress = {
     document.getElementById("Expneeded").innerHTML = (levelexp);
     document.getElementById("Mypoint").innerHTML =  (mybonus/1e18).toFixed(4);
     document.getElementById("Mymento").innerHTML = (mymento);
-    document.getElementById("Myagent").innerHTML = (myagent);
+    
     document.getElementById("LevelBar").style.width = `${myexp/levelexp*100}%`; // CHECK:: 소수점으로 나오는 것 같아 *100 했습니다. 
 
     let cutdefiContract = new ethers.Contract(contractAddress.cutdefiAddr, contractAbi.cutdefi, signer);

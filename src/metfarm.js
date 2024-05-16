@@ -39,7 +39,7 @@ const topDataSync = async () => {
   document.getElementById("farmtotal").innerHTML = (fsum);
   document.getElementById("farmnum").innerHTML = (creatnum);
   document.getElementById("fcyatvl").innerHTML = (fcyabal/1e18).toFixed(2);;
-  document.getElementById("Ttax").innerHTML = (ttax);
+  document.getElementById("Ttax").innerHTML = (100-ttax+1);
   
   const nftIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
