@@ -1,269 +1,190 @@
 // SPDX-License-Identifier: MIT  
-// ver1.0
+// ver1.2
 pragma solidity >=0.7.0 <0.9.0;
 
-interface Icya {     
-  function balanceOf(address account) external view returns (uint256);
-  function allowance(address owner, address spender) external view returns (uint256);
-  function transfer(address recipient, uint256 amount) external returns (bool);
-  function approve(address spender, uint256 amount) external returns (bool);
-  function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-}
-
 interface Imut {      
-  function balanceOf(address account) external view returns (uint256);
-  function allowance(address owner, address spender) external view returns (uint256);
-  function transfer(address recipient, uint256 amount) external returns (bool);
-  function approve(address spender, uint256 amount) external returns (bool);
-  function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-  function g1() external view returns(uint256);
-  function getdepot(address user) external view returns(uint256);
+    function balanceOf(address account) external view returns (uint256);
+    function allowance(address owner, address spender) external view returns (uint256);
+    function transfer(address recipient, uint256 amount) external returns (bool);
+    function approve(address spender, uint256 amount) external returns (bool);
+    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+    function g1() external view returns(uint256);
+    function getdepot(address user) external view returns(uint256);
 }
 
-contract Mutbank {
-  Icya cya;
-  Imut mut;
-  uint256 public totaltax; // 누적 세금
-  uint256 public tax;  // 시아쿱 세금
-  uint256 public allow;
-  address public bank; // 시아뱅크
-  address public admin;
-  uint256 public sum;   // 전체 참여 인원
-  uint256 public sold;  // vet 유통 수량
-  uint256 public fix;  // 토큰 가격 안정화를 위한 허수 초기값 1e6
-  address public owner; // 조합 거버넌스
-  uint256[] public chart; // 가격 챠트 구현을 위한 배열 저장
-  uint256 public price;  // mut 가격
-  mapping (address => my) public myinfo;
-  mapping (address => uint) public staff;
-  mapping (address => uint) public fa;
-  mapping (address => uint) public allowt; // 배당 시간 
-  event getdepo(uint amount);
-     
-  constructor(address _cya, address _mut, address _mutb) {
-    fix = 1e16;  
-    cya = Icya(_cya);
-    mut = Imut(_mut);
-    bank = _mutb;  // mut 뱅크
-    price = 1e16;
-    sold = 1000;
-    admin = msg.sender;
-    staff[msg.sender] = 10;
-    myinfo[msg.sender].level = 10;
-  }
-    
-  struct my {
-    uint256 totaldepo; // 누적 배당 금액
-    uint256 depo;
-    uint256 level;
-    address agent;
-    address mento; 
-    uint256 member;
-    uint256 exp;
-  }
-    
-  function staffup(address _staff, uint8 num) public {  
-    require(admin == msg.sender, "no admin"); 
-    staff[_staff] = num;
-  }   
+interface Imutbank {      // 멋뱅크
+    function depoup(address _user, uint _depo) external;
+    function depodown(address _user, uint _depo) external;
+    function getprice() external view returns (uint256);
+    function getlevel(address user) external view returns (uint);
+    function g9(address user) external view returns (uint);  // 각 depo현황
+    function getagent(address user) external view returns (address);
+    function getmento(address user) external view returns (address);
+    function expup(address _user, uint _exp) external;
+}
 
-  function faup(address _fa) public {  
-    require(admin == msg.sender, "no admin"); 
-    fa[_fa] = 5;
-  }   
+contract Metatree{  // 멧큐   mut을 담보로 하여 이자율이 변동되는 디파이
+    Imut mut;
+    Imutbank mutbank;
+    address public taxbank;
+    address public admin;
+    uint256 public tax; // 수익 
+    uint256 public tax2; // 지출
+    uint256 public price; // 가격
+    uint256 public rate; // 
+    mapping(address => input) public myinput; // 입금
+    mapping (address => uint) public staff;
+
   
-  function depoup(address _user, uint _depo) public {  
-    require(fa[msg.sender] >= 5, "no family");
-    myinfo[_user].depo += _depo;
-  }
+    constructor(address _mut, address _mutb) { 
+        mut = Imut(_mut);
+        mutbank = Imutbank(_mutb);
+        taxbank = _mutb;
+        admin = msg.sender;
+        tax2 = 2000;
+        rate = 200 ;
+        price = 2000;
+    }
+    
+    struct input{
+ 
+        uint256 depo;   // 출금가능mut
+        uint256 depot;  // 입금해야 할 시간
+        uint256 tiket;  //  입금횟수
+        bool complete;  //입금완료
+    }
 
-  function expup(address _user, uint _exp) public {  
-    require(fa[msg.sender] >= 5, "no family");
-    myinfo[_user].exp += _exp;
-  }
+   
 
-  function depodown(address _user, uint _depo) public {  
-    require(fa[msg.sender] >= 5, "no family");
-    myinfo[_user].depo -= _depo;
-  }
-
-  function agentadd(address _agent) public {   
-    require(staff[msg.sender] >= 5, "no staff");
-    myinfo[_agent].level = 10;
-    myinfo[_agent].agent = msg.sender;
-  } 
-
-  function mentoadd(address _mento) public {    // 에이젼트가 멘토 등록
-    require(myinfo[msg.sender].level >= 10, "no agent");
-    require(myinfo[_mento].agent == address(0), "already mento");
-    myinfo[_mento].level = 6;
-    myinfo[_mento].agent = msg.sender;
-    myinfo[_mento].mento = msg.sender;
-  } 
-
-  function memberjoin(address _mento) public {  
-    require(myinfo[msg.sender].level == 0, "already member"); 
-    require(myinfo[_mento].level >= 6, "no mento"); 
-    myinfo[msg.sender].level = 1;
-    myinfo[msg.sender].mento = _mento;
-    myinfo[msg.sender].agent = myinfo[_mento].agent;
-    myinfo[_mento].member += 1;
-    sum += 1;
-    taxout();
-  }
-
-  function ownerup(address _owner) public {  
-    require(staff[msg.sender] >= 5, "no staff");
-    owner = _owner;
-  }
-
-  function bankup(address _bank) public {  
-    require(staff[msg.sender] >= 5, "no staff");
-    bank = _bank;   // 초기값은 metbank에 줄 것
-  }
-
-  function buymut(uint _num) public returns(bool) {  
-    uint pay = _num * price;
-    require(g3() >= _num, "mut sold out");  
-    require(1 <= _num, "1 or more");
-    require(1 <= myinfo[msg.sender].level, "no member");
-    require(cya.balanceOf(msg.sender) >= pay, "no cya"); 
-    cya.approve(msg.sender, pay); 
-    uint256 allowance = cya.allowance(msg.sender, address(this));
-    require(allowance >= pay, "Check the token allowance");
-    cya.transferFrom(msg.sender, address(this), pay);  
-    mut.transfer(msg.sender, _num);
-    myinfo[msg.sender].exp += _num / 10;
-    myinfo[myinfo[msg.sender].mento].depo += pay * 10 / 100;
-    allowt[msg.sender] = block.timestamp;
-    priceup();
-    tax += pay * 5 / 100;
-    return true;     
-}
-
-function levelup() public {
-    uint256 mylev = myinfo[msg.sender].level;
-    uint256 myexp = myinfo[msg.sender].exp;
-    require(mylev >= 1  && myexp >= 2**mylev * 10000, "Insufficient requirements");
-    myinfo[msg.sender].exp -= 2**mylev * 10000;
-    myinfo[msg.sender].level += 1;
-    taxout();
-}
-
-function sellmut(uint num) public returns(bool) {      
-    uint256 pay = num * price;  
-    require(1 <= num, "1 or more");
-    require(5 <= getlevel(msg.sender), "Level 5 or higher"); 
-    require(g8(msg.sender) >= num, "no vet");
-    require(g1() >= pay, "no cya");
-    mut.approve(msg.sender, num);
+  function initing() public {  // 유동성 제공
+    require(g2(msg.sender) >= price, "not enough mut"); 
+    require(myinput[msg.sender].depo == 0, "already deposit"); 
+    require(g6(msg.sender) != address(0), "no member"); 
+    
+    mut.approve(msg.sender,price);
     uint256 allowance = mut.allowance(msg.sender, address(this));
-    require(allowance >= num, "Check the allowance");
-    mut.transferFrom(msg.sender, address(this), num); 
-    cya.transfer(msg.sender, pay);
-    myinfo[msg.sender].level -= 1; // 레벨 1 줄어듬
-    priceup();
-    return true;
-}
-
-function allowcation() public returns(bool) {   // depo 증가
-    require(getlevel(msg.sender) >= 1, "no member");  
-    require(g8(msg.sender) >= 5000, "More than 5000VET"); 
-    require(allowt[msg.sender] + 7 days < block.timestamp, "not time"); // 주 1회
-    require(mut.getdepot(msg.sender) + 7 days < block.timestamp, "cut not time"); // 주 1회
-    allowt[msg.sender] = block.timestamp;
-    uint256 pay = getpay(msg.sender); 
-    myinfo[msg.sender].depo += pay;
-    myinfo[msg.sender].exp += 5000;
-    emit getdepo(pay);
-    return true;
-}
-  
-function withdraw() public {    
-    uint pay = myinfo[msg.sender].depo;
-    require(pay >= 1, "no deposit"); 
-    myinfo[msg.sender].depo = 0;
-    require(pay <= g1(), "no cya");  
-    myinfo[msg.sender].totaldepo += pay;
-    cya.transfer(msg.sender, pay );
-}
-
-function taxout() public {  
-    cya.transfer(bank, tax);
-    totaltax += tax;
-    tax = 0;
-}
-  
-function fixup(uint256 _fix) public {  // 토큰 가격 균형을 위한 허수
-    require(admin == msg.sender, "no admin");
-    fix = _fix;  
-}  
-
-function priceup() public {
-    sold = g11();
-    allow = g1() / (sold); 
-    price = allow + fix;
-    chart.push(price);   
+    require(allowance >= price, "Check the allowance");
+    mut.transferFrom(msg.sender, address(this),price); 
+    uint pay = price * g7() *5/100;
+    mutbank.depoup(g6(msg.sender), pay);
+    tax += price;
+    uint myprice = price * rate / 100;   
+    myinput[msg.sender].depo = myprice;  //1회 인출금액
+    myinput[msg.sender].tiket += 1;
+    myinput[msg.sender].depot = block.timestamp;
+   
 }
 
 
-function g1() public view virtual returns(uint256) {  
-    return cya.balanceOf(address(this));
+  function inputing() public {  // 유동성 제공
+    require(g2(msg.sender) >= price, "not enough mut");  
+    require(myinput[msg.sender].depot + 7 days <= block.timestamp , "not time yet"); 
+    require(myinput[msg.sender].depot + 8 days >= block.timestamp , "time out"); 
+    require(myinput[msg.sender].complete == false , "Unable to deposit"); 
+    uint pay = price * g7() *5/100;
+    mut.approve(msg.sender,price);
+    uint256 allowance = mut.allowance(msg.sender, address(this));
+    require(allowance >= price, "Check the allowance");
+    mut.transferFrom(msg.sender, address(this),price); 
+    mutbank.depoup(g6(msg.sender), pay);
+     rateup();
+    tax += price;
+    uint myprice = price * rate / 100;  
+    myinput[msg.sender].tiket += 1;
+    myinput[msg.sender].depot = block.timestamp;
+    if(myinput[msg.sender].tiket > 9){
+    myinput[msg.sender].complete = true;   
+    }else{
+    myinput[msg.sender].complete = false;   
+    }
 }
 
-function g3() public view returns(uint) { // cut 잔고 확인
-    return mut.balanceOf(address(this));
-}  
 
-  function g4() public view virtual returns(uint){  
-  return chart.length;
-  }
-    function g5(uint _num) public view virtual returns(uint256){  
-  return chart[_num];
-  }
-function g6() public view virtual returns(uint256){  
-  return mut.balanceOf(address(this));
-  }
-function g8(address user) public view returns(uint) {  // 유저 cct 잔고 확인
-    return mut.balanceOf(user);
-}  
+    function withdraw() public {  // 유동성 제공한 금액 인출
+    uint pay = myinput[msg.sender].depo;
+    require(myinput[msg.sender].complete == true, "Mission not completed");  
+    require(g3() >= pay, "not enough mut");  
+    require(myinput[msg.sender].depot + 7 days <= block.timestamp , "not time yet"); 
+    require(myinput[msg.sender].tiket  >= 1 , "not enough tiket"); 
+    mut.transfer(msg.sender,pay);
+    tax2 += pay; 
+    myinput[msg.sender].tiket -= 1;
+    myinput[msg.sender].depot = block.timestamp;
+    rateup();
+    if(myinput[msg.sender].tiket == 0){
+    myinput[msg.sender].complete = false;   
+    }
+    }
 
-function g9(address user) public view returns(uint) {  // f
-    return myinfo[user].depo;
-}  
 
-function getlevel(address user) public view returns(uint) {  // 유저 레벨 확인
-    return myinfo[user].level;
-}  
 
-function getagent(address user) public view returns(address) {  // 유저 에이젼트
-    return myinfo[user].agent;
-}  
+
+     function clear() public {  // 유동성 제공
     
-function getmento(address user) public view returns(address) {  // 유저 멘토
-    return myinfo[user].mento;
-}  
-
-function g10() public view virtual returns(uint256) {  
-    return mut.g1();  
+    require(myinput[msg.sender].depo >= 1, "No need to clear");  
+    
+    myinput[msg.sender].depo = 0;  //1회 인출금액
+    myinput[msg.sender].depot = 0;
+    myinput[msg.sender].tiket = 0;
+    myinput[msg.sender].complete = false; 
 }
 
-function g11() public view virtual returns(uint256) {  
-    return g10() - g3();  // vet 총발행량 - 계약이 가지고 있는 met
-}
+   function rateup() public { // 대출 이자 보조 지표
+    rate = (tax/tax2)+120;
+   }
+
+     function priceup(uint num) public { // 대출 이자 보조 지표
+        require(staff[msg.sender] >=5, "no staff"); 
+    price = num;
+   }
+
+
+    function staffup(address _staff, uint8 num) public {  
+        require(admin == msg.sender, "no admin"); 
+        staff[_staff] = num;
+    }   
+
   
+       function g2(address user) public view returns(uint) { 
+        return mut.balanceOf(user) ;
+    }  
 
-function getpay(address user) public view returns (uint256) { // next dividend
-    return g8(user) * allow * getlevel(user) / 2000;
-}
+    function g3() public view returns(uint) { 
+        return mut.balanceOf(address(this)) ;
+    }  
+
+    function g4() public view returns(uint) { // 계약이 가지고 있는 mut 시가총액
+        return g3() * g7();
+    }
+
+    function g5(address user) public view returns(uint) { // 나의 mut 시가총액
+        return g8(user) * g7();
+    }
+
+    function g6(address user) public view returns (address)
+{  //멘토 가져오기
+        return mutbank.getmento(user);
+    }
+
+    function g7() public view returns(uint) { // mut 시세
+        return mutbank.getprice();
+    }
+
+    function g8(address user) public view returns(uint) { // mut 보유 현황
+        return mut.balanceOf(user);
+    }
   
-function gettime() public view returns (uint256) {  
-    return (allowt[msg.sender] + 604800) - block.timestamp;
-}
+    function g9(address user) public view returns(uint) { // 포인트 보유 현황
+        return mutbank.g9(user);
+    }
 
-function getprice() public view returns (uint256) {  
-    return price;
-}
+ function g10() public view returns(uint) { // 인출가능비율
+        return  100*rate/100;
+    }
+   
 
-function deposit() external payable {}
+
+function g12(address user) public view returns(uint) { // 대출이자 보조지표
+        return  mutbank.getlevel(user);
+    }
 }

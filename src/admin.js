@@ -1,5 +1,5 @@
 let metaddr = {  
-    metmarket: "0x58a5469af3D9F583e502d84Dca0F4dD76A9FfcA7" //metmarket2 
+    metmarket: "0xd9fC1B43BD9F37c8BAFC666CA88A74Ad8aDa2627" //metmarket2 
     
   };
 
@@ -9,7 +9,7 @@ let metaddr = {
        "function buy(uint _mid) public",
        "function approval(uint _mid) public",
        "function buytiket()public ",
-       "function getmyInfo(address _user) external view returns (uint256, uint256, uint256[] memory)",
+       "function getmyInfo(address _user) external view returns (uint256, uint256, uint256[] memory,string memory)",
        "function mid() public view returns (uint256)",
        "function tax() public view returns (uint256)",
        "function g1() public view virtual returns(uint256)",
@@ -18,8 +18,8 @@ let metaddr = {
        "function getpass(uint256 _mid) external view returns (string memory)",  //관람자패스
        "function getmetainfo(uint _num) public view returns (uint256, uint256, string memory, uint256,uint8, address,address) ",
        "function charge(uint _pay) public",
-       "function masterup() public ",
-       "function newmeta(uint _metanum,string memory _investor,uint256 _init,string memory _mainpass) public"
+       "function masterup(string memory _tel) public",
+       "function newmeta(uint _metanum,string memory _investor,uint256 _init,string memory _mainpass,uint _mid) public"
       ],
       
 
@@ -76,7 +76,7 @@ let metaddr = {
     let metContract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, signer);
 
     try {
-      await metContract.masterup();
+      await metContract.masterup(document.getElementById('Telid').value);
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -84,34 +84,7 @@ let metaddr = {
 
 
 
-  let Buytiket = async () => {
-    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [{
-          chainId: "0xCC",
-          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
-          chainName: "opBNB",
-          nativeCurrency: {
-              name: "BNB",
-              symbol: "BNB",
-              decimals: 18
-          },
-          blockExplorerUrls: ["https://opbnbscan.com"]
-      }]
-  });
-    await userProvider.send("eth_requestAccounts", []);
-    let signer = userProvider.getSigner();
-
-    let metContract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, signer);
-
-    try {
-      await metContract.buytiket();
-    } catch(e) {
-      alert(e.data.message.replace('execution reverted: ',''))
-    }
-  };
-
+  
 
 
   let MemberLogin = async () => {
@@ -126,12 +99,14 @@ let metaddr = {
 
         // 사용자 정보 가져오기
         const my = await metContract.getmyInfo(await signer.getAddress());
-        const myTiket = my[1];
+        const myid = my[1];  //내 시작 아이디 
         const myMeta = my[2];
+        const mytel = my[3];
 
         // 결과를 HTML에 업데이트
-        document.getElementById("Mytiket").innerHTML = myTiket.toString();
+        document.getElementById("Mymid").innerHTML = parseInt(myid);
         document.getElementById("Myid").innerHTML = myMeta.toString();
+        document.getElementById("Mytel").innerHTML = mytel.toString();
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
@@ -153,9 +128,10 @@ let newMeta = async () => {
       const investor = document.getElementById("investor").value;
       const init = document.getElementById("init").value;
       const mainpass = document.getElementById("mainpass").value;
+      const mainid = document.getElementById("mainid").value;
 
       // newmeta 함수 호출
-      const tx = await metContract.newmeta(metanum, investor, init, mainpass);
+      const tx = await metContract.newmeta(metanum, investor, init, mainpass,mainid);
 
       // 트랜잭션 완료까지 대기
       await tx.wait();

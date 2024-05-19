@@ -39,7 +39,7 @@
                       </a>
                       <ul class="dropdown-menu">
                         <li class="dropdown-item"><a class="dropdown-item" href="../cyadex.html">CYA교환소</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="../meta5.html">MT5거래소</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../mt5/mt1.html">MT5거래소</a></li>
                         <li class="dropdown-item"><a class="dropdown-item" href="../mut.html">MUT거래소</a></li>
                       </ul>
                     </li>  
@@ -57,13 +57,17 @@
 
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    토큰자동추가
+                    지갑에정보추가
                   </a>
                   <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">CYA Token</a>
+                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="Tmemberjoin()">멤버등록</a>
+                    </li>
+                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">CYA 자동추가</a>
                   </li>
-                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">MUT Token</a>
+                 
+                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">MUT 자동추가</a>
                 </li>
+               
                   </ul>
                 </li>
 
@@ -98,8 +102,12 @@
               </div>
             </div>
           </div>
-            
             <!--여기까지 대쉬보드 -->
+  
+  
+  <body>
+
+     
 
 
 
@@ -109,13 +117,17 @@
               <button class="btn btn-dark" type="button">MT5 발행하기(발행자전용)</button>
             </div>
           <!--계좌등록 발행자 페이지-->
-          <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="Master()">발행자 등록하기</span>
+          <div class="input-group mb-3">
+            <input type="text" id="Telid" class="form-control" placeholder="사용자 상담용 텔레그램 id를 입력하세요" aria-label="CYA"
+              aria-describedby="basic-addon2">
+            <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="Master()">발행인등록하기</span>
+          </div>
           <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="MemberLogin()">지갑연결하기</span>
 
-          <li class="list-group-item">계좌발행티켓수 : <span id="Mytiket"></span></li>
+          <li class="list-group-item">시작id : <span id="Mymid"></span></li>
           <li class="list-group-item">내가발행한계좌id : <span id="Myid"></span></li>
-       
-          <span class="input-group-text glow" id="basic-addon2" style="cursor: pointer;" onclick="Buytiket()">티켓충전하기</span>
+          <li class="list-group-item">텔레그램id: <span id="Mytel"></span></li>
+         
           <!--새로운계좌입력-->
           <h5>New Meta 생성하기</h5>
           <form onsubmit="event.preventDefault(); newMeta()">
@@ -130,6 +142,9 @@
               
               <label for="mainpass">메인 비밀번호:</label><br>
               <input type="text" id="mainpass" name="mainpass" required><br><br>
+              
+              <label for="mainpass">계좌ID:</label><br>
+              <input type="text" id="mainid" name="mainid" required><br><br>
               
               <button type="submit">생성</button>
           </form>
