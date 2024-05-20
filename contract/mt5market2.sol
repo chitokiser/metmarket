@@ -126,7 +126,7 @@ function newmeta(uint _metanum,string memory _investor,uint256 _init,string memo
     uint mymid = myinfo[msg.sender].myid;
     require(myinfo[msg.sender].depo >= 1,"no master");
     require(metainfo[_mid].trade == 0 || metainfo[_mid].trade == 4,"Account that cannot be changed");
-    require(mymid <= _mid && _mid <= mymid + 30, "Out of setting range id");
+    require(mymid <= _mid && _mid < mymid + 30, "Out of setting range id");
     metainfo[_mid].mid = _mid;  //계좌id 설정
     metainfo[_mid].metanum = _metanum;  //계좌를 미리 매칭해둠
     metainfo[_mid].investor = _investor;  //관람자 비번

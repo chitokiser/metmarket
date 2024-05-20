@@ -112,7 +112,7 @@ async function displayMetaInfo() {
                       <p class="card-text"><strong>가격:</strong> ${metaInfo.info4} p</p>
                       <p class="card-text"><strong>구매가능여부:</strong> ${isPurchasable}</p>
                       <p class="card-text"><strong>계좌주인:</strong> ${metaInfo.info6}</p>
-                      <p class="card-text"><strong>계좌발행자:</strong> ${metaInfo.info7}</p>
+                 
                       <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">구매하기</button>
                       <button type="button" class="btn btn-primary btn-sm mr-2" onclick="registerSale(this)" data-id="${i}">판매등록</button>
                       <input type="number" id="saleAmount${i}" class="form-control form-control-sm" placeholder="판매금액입력">
