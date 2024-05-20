@@ -23,7 +23,7 @@ interface Imutbank {      // 멋뱅크
     function expup(address _user, uint _exp) external;
 }
 
-contract Metatree2{  // 메타트리2     포인트를 직접  매일넣고 이자를 받는 디파
+contract Metatrain2{  // 메타트레인2     포인트를 직접  매일넣고 이자를 받는 디파이
     Imut mut;
     Imutbank mutbank;
     address public taxbank;
@@ -41,9 +41,9 @@ contract Metatree2{  // 메타트리2     포인트를 직접  매일넣고 이�
         mutbank = Imutbank(_mutb);
         taxbank = _mutb;
         admin = msg.sender;
-        tax2 = 1e19;
+        tax2 = 2e19;
         rate = 120 ;
-        price = 1e19;  //10달러
+        price = 2e19;  //10달러
     }
     
     struct input{
@@ -62,7 +62,7 @@ contract Metatree2{  // 메타트리2     포인트를 직접  매일넣고 이�
     require(myinput[msg.sender].depo == 0, "already deposit"); 
     require(g6(msg.sender) != address(0), "no member"); 
     
-    mutbank.depodown(g6(msg.sender), price);
+    mutbank.depodown(msg.sender, price);
     tax += price;
     uint myprice = price * rate / 100; 
     myinput[msg.sender].seed = price;  //1회 인출금액  
@@ -76,11 +76,11 @@ contract Metatree2{  // 메타트리2     포인트를 직접  매일넣고 이�
   function inputing() public {  // 유동성 제공
     uint pay = myinput[msg.sender].seed;
     require(g9(msg.sender) >= pay, "not enough point");  
-    require(myinput[msg.sender].depot + 1 days <= block.timestamp , "not time yet"); 
+    require(myinput[msg.sender].depot + 1 days<= block.timestamp , "not time yet"); 
     require(myinput[msg.sender].depot + 2 days >= block.timestamp , "time out"); 
     require(myinput[msg.sender].complete == false , "Unable to deposit"); 
     
-    mutbank.depodown(g6(msg.sender), pay);
+    mutbank.depodown(msg.sender, pay);  //자신의포인트 차감
     rateup();
     tax += pay;
     myinput[msg.sender].tiket += 1;
@@ -99,7 +99,7 @@ contract Metatree2{  // 메타트리2     포인트를 직접  매일넣고 이�
     require(g9(msg.sender) >= price, "not enough point");  
     require(myinput[msg.sender].depot + 1 days <= block.timestamp , "not time yet"); 
     require(myinput[msg.sender].tiket  >= 1 , "not enough tiket"); 
-    mutbank.depoup(g6(msg.sender), pay);
+    mutbank.depoup(msg.sender, pay);
     tax2 += pay; 
     myinput[msg.sender].tiket -= 1;
     myinput[msg.sender].depot = block.timestamp;
@@ -112,7 +112,7 @@ contract Metatree2{  // 메타트리2     포인트를 직접  매일넣고 이�
 
 
 
-     function clear() public {  // 유동성 제공
+   function clear() public {  // 리셋
     
     require(myinput[msg.sender].depo >= 1, "No need to clear");  
     
