@@ -51,7 +51,8 @@
                       <ul class="dropdown-menu">
                         <li class="dropdown-item"><a class="dropdown-item" href="../metafarm.html">MetaFarm</a></li>
                         <li class="dropdown-item"><a class="dropdown-item" href="../metaq.html">MetaQ</a></li>     
-                        <li class="dropdown-item"><a class="dropdown-item" href="../metatree.html">MetaTree</a></li>   
+                        <li class="dropdown-item"><a class="dropdown-item" href="../metatrain.html">MetaTree</a></li> 
+                        <li class="dropdown-item"><a class="dropdown-item" href="../metatrain2.html">MetaTree2</a></li>     
                       </ul>
                     </li>  
 
@@ -104,23 +105,23 @@
           </div>
             <!--여기까지 대쉬보드 -->
 
-    <body>
+
      
         <div class="d-grid gap-2">
-            <button class="btn btn-dark" type="button">Meta Tree</button>
+            <button class="btn btn-dark" type="button">Meta Train2</button>
           </div>
         <div class="bg-light p-5 rounded">
-          <p>MUT를 매주 10회 입금하면 표시된 이자율로 매주10회 인출할 수 있습니다</p>
-          <p>입금 해야할 시간시점 부터 24시간이 지나면 계약은 해지 되며 입금한 MUT은 계약에 귀속됩니다</p>
-          <p>이자율은 상황에 따라 자동변경 됩니다</p>
+          <p>매일 정해진 포인트를  10회 입금하면 표시된 이자율로 매일10회까지 인출할 수 있습니다</p>
+          <p>입금 해야할 시간부터 24시간이 지나면 계약은 해지(타임아웃) 되며 입금한 포인트는 계약에 귀속됩니다</p>
+          <p>이자율은 잔고현황에  따라 자동변경 됩니다</p>
         </div>
 
         <div class="d-grid gap-2">
-            <button class="btn btn-dark" type="button">Meta Tree 상태</button>
+            <button class="btn btn-dark" type="button">Meta Train2 상태</button>
           </div>
-        <li class="list-group-item">계약MUT잔고 :<span id="Mutbal"></span>MUT</li>
+       
         <li class="list-group-item">이자율 :<span id="Mrate"></span>%</li>
-        <li class="list-group-item">1회입금액 :<span id="Price"></span>MUT</li>
+        <li class="list-group-item">1회입금액 :<span id="Price"></span>P</li>
         <button class="btn btn-outline-success" cursor: pointer; onclick="Init()">최초입금하기</button>
           </div>
 
@@ -130,16 +131,17 @@
           </div>
           <button class="btn btn-outline-success" cursor: pointer; onclick="MemberLogin()">지갑연결</button>
         <li class="list-group-item">최초입금하고 지갑을 연결 하면 나의현황 정보가 보입니다</li>
-        <li class="list-group-item">1회출금가능액: <span id="Mdepo">-</span>MUT</li>
+        <li class="list-group-item">1회입금액: <span id="Mseed">-</span>P</li>
+        <li class="list-group-item">1회출금가능액: <span id="Mdepo">-</span>P</li>
        
         <li class="list-group-item"><div class="progress">
         <div class="progress-bar progress-bar-striped bg-danger" id="Bar" role="progressbar" aria-valuenow="75" aria-valuemin="1" aria-valuemax="100" style="width: 1%"></li>
-          <li class="list-group-item">막대가 100% 채워지면 막대가 줄어들때까지 7일에 한번씩 출금 가능 합니다</li>    
+          <li class="list-group-item">막대가 100% 채워지면 막대가 줄어들때까지 매일 한번씩 출금 가능 합니다</li>    
        
       
           <li class="list-group-item">입금가능 시간: <span id="Mdepot">-</span></li>
           <button class="btn btn-outline-success" cursor: pointer; onclick="Tinput()">입금하기</button>
-        <li class="list-group-item">출금가능하면 출금하기 버튼이 표시됩니다 </li>
+        <li class="list-group-item">출금이 가능하면 출금하기 버튼이 표시됩니다 </li>
            <!-- 출금 버튼 -->
     <button id="withdrawButton" class="btn btn-outline-success" type="submit" onclick="Withdraw()" style="display: none;">출금하기</button>
     <!-- 출금 가능 메시지 -->
@@ -172,7 +174,7 @@
           <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
           <script type="text/javascript"></script>
           <script src="..\src\topinfo.js"></script>
-          <script src="..\src\metatree.js"></script>
+          <script src="..\src\metatrain2.js"></script>
      
 
 
