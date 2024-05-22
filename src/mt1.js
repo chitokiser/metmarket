@@ -75,51 +75,50 @@ async function displayMetaInfo() {
           return;
       }
 
-      // 각 계좌 정보를 가져와서 HTML에 표시
       for (let i = 0; i <= 29; i++) {
-          const metaInfo = await getMetaInfoByNum(meta5Contract, i);
-          if (metaInfo) {
-              // 구매 가능 여부 텍스트 설정
-              let purchasableStatus;
-              switch (metaInfo.info5) {
-                case 0:
-                  purchasableStatus = '계좌등록하세요';
-                  break;
-                  case 1:
-                      purchasableStatus = '플레이중';
+        const metaInfo = await getMetaInfoByNum(meta5Contract, i);
+        if (metaInfo) {
+            // Set purchase availability text
+            let purchasableStatus;
+            switch (metaInfo.info5) {
+              case 0:
+                purchasableStatus = 'Register an account';
+                break;
+                case 1:
+                    purchasableStatus = 'Playing';
+                    break;
+                case 2:
+                    purchasableStatus = 'Awaiting sales approval';
+                    break;
+                case 3:
+                    purchasableStatus = 'Purchasable';
+                    break;
+                    case 4:
+                      purchasableStatus = 'Re-register account';
                       break;
-                  case 2:
-                      purchasableStatus = '판매승인대기중';
-                      break;
-                  case 3:
-                      purchasableStatus = '거래가능';
-                      break;
-                      case 4:
-                        purchasableStatus = '계좌다시등록하세요';
-                        break;
-                  default:
-                      purchasableStatus = '알 수 없음';
-              }
+                default:
+                    purchasableStatus = 'Unknown';
+            }
               const isPurchasable = purchasableStatus;
 
-              // HTML 카드 추가
+          
               const infoHtml = `
               <div class="card mb-3">
-                  <div class="card-body">
-                      <h5 class="card-title">계좌정보${i}</h5>
-                      <p class="card-text"><strong>계좌:</strong> ${metaInfo.info2}</p>
-                      <p class="card-text"><strong>관람자비번:</strong> ${metaInfo.info3}</p>
-                      <p class="card-text"><strong>가격:</strong> ${metaInfo.info4} p</p>
-                      <p class="card-text"><strong>구매가능여부:</strong> ${isPurchasable}</p>
-                      <p class="card-text"><strong>계좌주인:</strong> ${metaInfo.info6}</p>
-                 
-                      <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">구매하기</button>
-                      <button type="button" class="btn btn-primary btn-sm mr-2" onclick="registerSale(this)" data-id="${i}">판매등록</button>
-                      <input type="number" id="saleAmount${i}" class="form-control form-control-sm" placeholder="판매금액입력">
-                      <button type="button" class="btn btn-dark btn-sm mt-2" onclick="getMainPass(this)" data-id="${i}">메인 패스 가져오기</button>
-                      <p id="mainPass${i}" class="mt-2"></p>
-                  </div>
-              </div>`;
+              <div class="card-body">
+                  <h5 class="card-title">Account Information${i}</h5>
+                  <p class="card-text"><strong>Account:</strong> ${metaInfo.info2}</p>
+                  <p class="card-text"><strong>Viewer Password:</strong> ${metaInfo.info3}</p>
+                  <p class="card-text"><strong>Price:</strong> ${metaInfo.info4} p</p>
+                  <p class="card-text"><strong>Purchasable:</strong> ${isPurchasable}</p>
+                  <p class="card-text"><strong>Account Holder:</strong> ${metaInfo.info6}</p>
+            
+                  <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">Purchase</button>
+                  <button type="button" class="btn btn-primary btn-sm mr-2" onclick="registerSale(this)" data-id="${i}">Register for sale</button>
+                  <input type="number" id="saleAmount${i}" class="form-control form-control-sm" placeholder="Enter sales amount">
+                  <button type="button" class="btn btn-dark btn-sm mt-2" onclick="getMainPass(this)" data-id="${i}">Get Main Pass</button>
+                  <p id="mainPass${i}" class="mt-2"></p>
+              </div>
+          </div>`;
               infoContainer.innerHTML += infoHtml;
           }
       }

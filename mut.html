@@ -30,17 +30,17 @@
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
             
                     <li class="nav-item">
-                        <a class="nav-link" href="../mypage.html">마이페이지</a>
+                        <a class="nav-link" href="../mypage.html">My page</a>
                     </li>
 
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        거래소
+                        Exchange
                       </a>
                       <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a class="dropdown-item" href="../cyadex.html">CYA교환소</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="../mt5/mt1.html">MT5거래소</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="../mut.html">MUT거래소</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../cyadex.html">CYA Exchange</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../mt5/mt1.html">MT5 Exchange</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../mut.html">MUT Exchange</a></li>
                       </ul>
                     </li>  
 
@@ -58,15 +58,15 @@
 
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    지갑에정보추가
+                    Add information to wallet
                   </a>
                   <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="Tmemberjoin()">멤버등록</a>
+                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="Tmemberjoin()">Member registration</a>
                     </li>
-                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">CYA 자동추가</a>
+                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">Add CYA token</a>
                   </li>
                  
-                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">MUT 자동추가</a>
+                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">Add MUT</a>
                 </li>
                
                   </ul>
@@ -78,7 +78,7 @@
         </div>
     </nav>
     
-  <!--여기까지 헤드 -->
+  <!--Head up to here -->
   
   
   <body>
@@ -103,97 +103,96 @@
               </div>
             </div>
           </div>
-            <!--여기까지 대쉬보드 -->
+            <!--This is the dashboard -->
 
-               
-        <div class="d-grid gap-2">
-          <button class="btn btn-dark" type="button">MUT(Meta Utility Token)</button>
-        </div>
-      
-       
-        <li class="list-group-item">MUT소유량과 비례하여 매주 1회 CYA와 교환할 수 있는 포인트를 받을 수 있습니다</li>
-        <li class="list-group-item">레벨5이상만 MUT을 판매할 수 있습니다</li>
-      
-       
-          <link href="../css/dashboard.css" rel="stylesheet">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h3 class="h3">MUT가격 변화</h3>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                <span id="calD">-</span>
-              </button>
+            <div class="d-grid gap-2">
+              <button class="btn btn-dark" type="button">MUT(Meta Utility Token)</button>
             </div>
-          </div>
-          <div class="my-4 w-100" id="myChart" style="width: 900px; height: 380px;"></div>
-          <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-          <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-          <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-            integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
-            crossorigin="anonymous"></script>
-          <script src="../src/dashboard.js"></script>
-
-     
-      <div class="panel panel-default">
-  
-
-                 
-        <div class="d-grid gap-2">
-          <button class="btn btn-dark" type="button">MUT정보</button>
-        </div>
-          
-          <li class="list-group-item">계약CYA잔고 : <span id="Cyabal">-</span>CYA</li>
-          <li class="list-group-item">계약MUT잔고 : <span id="Mutbal">-</span>MUT</li>
-          <li class="list-group-item">MUT총유통량 : <span id="Mutcir">-</span>MUT</li>
-          <li class="list-group-item">1MUT가격 : <span id="Mprice">-</span>CYA</li>
-          <li class="list-group-item">1MUT배당액(레벨10기준) : <span id="Mallow">-</span>CYA</li>
-          <li class="list-group-item">MUT소유자 이면서 회원이어야 배당받을 수 있습니다<a class="btn btn-light" href="./mypage.html"
-              role="button">Mypage &raquo;</a> </li>
-
-          <!-- List group -->
-          <button class="btn btn-outline-success" type="submit" onclick="cutmemberLogin()">
-          나의 현황보기(지갑연결)
-          </button>
-          
-          <ul class="list-group">
-            <li class="list-group-item">나의 MUT : <span id="myCut">-</span>MUT</li>
-            <li class="list-group-item">나의 MUT 시가 총액 : <span id="myCutvalue">-</span>CYA</li>
-            <li class="list-group-item">이번 배당 금액 : <span id="myAllow">-</span>CYA</li>
-            <li class="list-group-item">다음 배당까지 남은 시간 <span id="epsLeftTime">-</span></li>
-
-          </ul>
-
-          
-            <button class="btn btn-outline-success" type="submit" onclick="Allow()">배당받기</button>
-          
-
-                    
-        <div class="d-grid gap-2">
-          <button class="btn btn-dark" type="button">MUT거래소</button>
-        </div>
-          <div class="input-group mb-3">
-            <input type="text" id="buyAmount" class="form-control" placeholder="구매할 MUT 개수입력(소수점허용안됨)" aria-label="CYA"
-              aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buymut()">MUT 사기</span>
-          </div>
-          <div><span style="color:red">MUT을 매도하기 위해서는 레벨5이상이어야 합니다</span></div>
-
          
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" id="sellAmount" placeholder="레벨5이상이면 MUT 개수 입력(소수점허용안됨)" aria-label="CYA"
-              aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Sellmut()">MUT 팔기</span>
-          </div>
+          
+            <li class="list-group-item">You can receive points that can be exchanged for CYA once a week in proportion to the amount of MUT you own</li>
+            <li class="list-group-item">Only level 5 and above can sell MUT</li>
+         
+          
+              <link href="../css/dashboard.css" rel="stylesheet">
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h3 class="h3">MUT price change</h3>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                  <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                    <span data-feather="calendar"></span>
+                    <span id="calD">-</span>
+                  </button>
+                </div>
+              </div>
+              <div class="my-4 w-100" id="myChart" style="width: 900px; height: 380px;"></div>
+              <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+              <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+              <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+                integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+                crossorigin="anonymous"></script>
+              <script src="../src/dashboard.js"></script>
+   
+        
+          <div class="panel panel-default">
+     
+   
+                    
+            <div class="d-grid gap-2">
+              <button class="btn btn-dark" type="button">MUT information</button>
+            </div>
+             
+              <li class="list-group-item">Contract CYA balance: <span id="Cyabal">-</span>CYA</li>
+              <li class="list-group-item">Contract MUT balance: <span id="Mutbal">-</span>MUT</li>
+              <li class="list-group-item">MUT total circulation: <span id="Mutcir">-</span>MUT</li>
+              <li class="list-group-item">1MUT price: <span id="Mprice">-</span>CYA</li>
+              <li class="list-group-item">1MUT dividend (based on level 10): <span id="Mallow">-</span>CYA</li>
+              <li class="list-group-item">You must be a MUT owner and member to receive dividends<a class="btn btn-light" href="./mypage.html"
+                  role="button">Mypage &raquo;</a> </li>
+   
+              <!-- List group -->
+              <button class="btn btn-outline-success" type="submit" onclick="cutmemberLogin()">
+              View my status (connect wallet)
+              </button>
+             
+              <ul class="list-group">
+                <li class="list-group-item">My MUT: <span id="myCut">-</span>MUT</li>
+                <li class="list-group-item">My MUT market cap: <span id="myCutvalue">-</span>CYA</li>
+                <li class="list-group-item">This dividend amount: <span id="myAllow">-</span>CYA</li>
+                <li class="list-group-item">Time remaining until next dividend <span id="epsLeftTime">-</span></li>
+   
+              </ul>
+   
+             
+                <button class="btn btn-outline-success" type="submit" onclick="Allow()">Receive dividends</button>
+             
+   
+                       
+            <div class="d-grid gap-2">
+              <button class="btn btn-dark" type="button">MUT Exchange</button>
+            </div>
+              <div class="input-group mb-3">
+                <input type="text" id="buyAmount" class="form-control" placeholder="Enter the number of MUTs to purchase (decimal points not allowed)" aria-label="CYA"
+                  aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Buymut()">MUT Buy</span>
+              </div>
+              <div><span style="color:red">To sell MUT, you must be level 5 or higher</span></div>
+   
+            
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="sellAmount" placeholder="If level 5 or higher, enter the number of MUTs (decimal points not allowed)" aria-label="CYA"
+                  aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Sellmut()">Sell MUT</span>
+              </div>
 
       
  
-     <!--Start footer -->
+      <!--Start footer -->
 
-     <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-      <p><a class="nav-link" href="https://twitter.com/choecheolung8">MET소식</a></p>
-      <p>We do not collect personal information</p>
-      <p><a class="nav-link" href="https://t.me/cyadaokorea">텔레그램 오픈채팅방</a></p>
- <!-- End footer -->
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+        <p><a class="nav-link" href="https://twitter.com/choecheolung8">MetaDAO X</a></p>
+        <p>We do not collect personal information</p>
+        <p><a class="nav-link" href="https://t.me/cyadaokorea">Telegram</a></p>
+   <!-- End footer -->
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

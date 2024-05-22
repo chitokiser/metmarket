@@ -75,7 +75,7 @@ try {
         return;
     }
 
-    for (let i = 30; i <= 59; i++) {
+    for (let i = 60; i <= 89; i++) {
       const metaInfo = await getMetaInfoByNum(meta5Contract, i);
       if (metaInfo) {
           // Set purchase availability text

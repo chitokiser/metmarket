@@ -30,17 +30,17 @@
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
             
                     <li class="nav-item">
-                        <a class="nav-link" href="../mypage.html">마이페이지</a>
+                        <a class="nav-link" href="../mypage.html">My page</a>
                     </li>
 
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        거래소
+                        Exchange
                       </a>
                       <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a class="dropdown-item" href="../cyadex.html">CYA교환소</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="../mt5/mt1.html">MT5거래소</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="../mut.html">MUT거래소</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../cyadex.html">CYA Exchange</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../mt5/mt1.html">MT5 Exchange</a></li>
+                        <li class="dropdown-item"><a class="dropdown-item" href="../mut.html">MUT Exchange</a></li>
                       </ul>
                     </li>  
 
@@ -58,15 +58,15 @@
 
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    지갑에정보추가
+                    Add information to wallet
                   </a>
                   <ul class="dropdown-menu">
-                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="Tmemberjoin()">멤버등록</a>
+                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="Tmemberjoin()">Member registration</a>
                     </li>
-                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">CYA 자동추가</a>
+                    <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenCya()">Add CYA token</a>
                   </li>
                  
-                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">MUT 자동추가</a>
+                  <li class="dropdown-item"><a class="dropdown-item" href="#" onclick="addTokenMut()">Add MUT</a>
                 </li>
                
                   </ul>
@@ -78,7 +78,7 @@
         </div>
     </nav>
     
-  <!--여기까지 헤드 -->
+  <!--Head up to here -->
   
   
   <body>
@@ -103,68 +103,67 @@
               </div>
             </div>
           </div>
-            <!--여기까지 대쉬보드 -->
+            <!--This is the dashboard -->
 
 
      
-        <div class="d-grid gap-2">
-            <button class="btn btn-dark" type="button">Meta Train2</button>
+            <div class="d-grid gap-2">
+              <button class="btn btn-dark" type="button">Meta Train2</button>
+            </div>
+          <div class="bg-light p-5 rounded">
+            <p>If you deposit a set number of points 10 times a day, you can withdraw them up to 10 times a day at the displayed interest rate.</p>
+            <p>After 24 hours from the time the deposit is due, the contract will be terminated (timeout) and the deposited points will belong to the contract</p>
+            <p>Interest rate changes automatically depending on balance status</p>
           </div>
-        <div class="bg-light p-5 rounded">
-          <p>매일 정해진 포인트를  10회 입금하면 표시된 이자율로 매일10회까지 인출할 수 있습니다</p>
-          <p>입금 해야할 시간부터 24시간이 지나면 계약은 해지(타임아웃) 되며 입금한 포인트는 계약에 귀속됩니다</p>
-          <p>이자율은 잔고현황에  따라 자동변경 됩니다</p>
-        </div>
-
-        <div class="d-grid gap-2">
-            <button class="btn btn-dark" type="button">Meta Train2 상태</button>
-          </div>
-       
-        <li class="list-group-item">이자율 :<span id="Mrate"></span>%</li>
-        <li class="list-group-item">1회입금액 :<span id="Price"></span>P</li>
-        <button class="btn btn-outline-success" cursor: pointer; onclick="Init()">최초입금하기</button>
-          </div>
-
-
+ 
           <div class="d-grid gap-2">
-            <button class="btn btn-dark" type="button">나의 현황</button>
-          </div>
-          <button class="btn btn-outline-success" cursor: pointer; onclick="MemberLogin()">지갑연결</button>
-        <li class="list-group-item">최초입금하고 지갑을 연결 하면 나의현황 정보가 보입니다</li>
-        <li class="list-group-item">1회입금액: <span id="Mseed">-</span>P</li>
-        <li class="list-group-item">1회출금가능액: <span id="Mdepo">-</span>P</li>
-       
-        <li class="list-group-item"><div class="progress">
-        <div class="progress-bar progress-bar-striped bg-danger" id="Bar" role="progressbar" aria-valuenow="75" aria-valuemin="1" aria-valuemax="100" style="width: 1%"></li>
-          <li class="list-group-item">막대가 100% 채워지면 막대가 줄어들때까지 매일 한번씩 출금 가능 합니다</li>    
-       
-      
-          <li class="list-group-item">입금가능 시간: <span id="Mdepot">-</span></li>
-          <button class="btn btn-outline-success" cursor: pointer; onclick="Tinput()">입금하기</button>
-        <li class="list-group-item">출금이 가능하면 출금하기 버튼이 표시됩니다 </li>
-           <!-- 출금 버튼 -->
-    <button id="withdrawButton" class="btn btn-outline-success" type="submit" onclick="Withdraw()" style="display: none;">출금하기</button>
-    <!-- 출금 가능 메시지 -->
-    <div id="withdrawMessage"></div>
-
-        <li class="list-group-item">"타임아웃"을 당하여 더이상 입금이 불가능할때 초기화를 실행하세요</li>
-
-        <button class="btn btn-outline-success" type="submit" onclick="Clear()">초기화하기</button>
-        <div>
+              <button class="btn btn-dark" type="button">Meta Train2 status</button>
+            </div>
         
-      
+          <li class="list-group-item">Interest rate:<span id="Mrate"></span>%</li>
+          <li class="list-group-item">One-time deposit amount:<span id="Price"></span>P</li>
+          <button class="btn btn-outline-success" cursor: pointer; onclick="Init()">Make your first deposit</button>
+            </div>
+ 
+ 
+            <div class="d-grid gap-2">
+              <button class="btn btn-dark" type="button">My status</button>
+            </div>
+            <button class="btn btn-outline-success" cursor: pointer; onclick="MemberLogin()">Connect wallet</button>
+          <li class="list-group-item">When you make your first deposit and connect your wallet, you will see your status information</li>
+          <li class="list-group-item">One-time deposit amount: <span id="Mseed">-</span>P</li>
+          <li class="list-group-item">One-time withdrawal amount: <span id="Mdepo">-</span>P</li>
+        
+          <li class="list-group-item"><div class="progress">
+          <div class="progress-bar progress-bar-striped bg-danger" id="Bar" role="progressbar" aria-valuenow="75" aria-valuemin="1" aria-valuemax="100" style= "width: 1%"></li>
+            <li class="list-group-item">Once the bar is 100% filled, you can withdraw money once a day until the bar decreases</li>
+        
+       
+            <li class="list-group-item">Deposit available time: <span id="Mdepot">-</span></li>
+            <button class="btn btn-outline-success" cursor: pointer; onclick="Tinput()">Deposit</button>
+          <li class="list-group-item">If withdrawal is possible, a withdrawal button will be displayed </li>
+             <!-- Withdrawal button -->
+      <button id="withdrawButton" class="btn btn-outline-success" type="submit" onclick="Withdraw()" style="display: none;">Withdraw</button>
+      <!-- Withdrawal possible message -->
+      <div id="withdrawMessage"></div>
+ 
+          <li class="list-group-item">Perform a reset when a "timeout" occurs and deposits are no longer possible</li>
+ 
+          <button class="btn btn-outline-success" type="submit" onclick="Clear()">Reset</button>
+          <div>
+         
+       
+          </div>
         </div>
-      </div>
-      </div>
-
+        </div>
 
     
-     <!--Start footer -->
+    <!--Start footer -->
 
-     <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-      <p><a class="nav-link" href="https://twitter.com/choecheolung8">MET소식</a></p>
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p><a class="nav-link" href="https://twitter.com/choecheolung8">MetaDAO X</a></p>
       <p>We do not collect personal information</p>
-      <p><a class="nav-link" href="https://t.me/cyadaokorea">텔레그램 오픈채팅방</a></p>
+      <p><a class="nav-link" href="https://t.me/cyadaokorea">Telegram</a></p>
  <!-- End footer -->
 
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
