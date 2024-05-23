@@ -112,7 +112,7 @@ async function displayMetaInfo() {
                   <p class="card-text"><strong>Purchasable:</strong> ${isPurchasable}</p>
                   <p class="card-text"><strong>Account Holder:</strong> ${metaInfo.info6}</p>
             
-                  <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">Purchase</button>
+                  <button type="button" class="btn btn-primary btn-sm mr-2" onclick="purchase(this)" data-id="${i}">Buy it</button>
                   <button type="button" class="btn btn-primary btn-sm mr-2" onclick="registerSale(this)" data-id="${i}">Register for sale</button>
                   <input type="number" id="saleAmount${i}" class="form-control form-control-sm" placeholder="Enter sales amount">
                   <button type="button" class="btn btn-dark btn-sm mt-2" onclick="getMainPass(this)" data-id="${i}">Get Main Pass</button>
