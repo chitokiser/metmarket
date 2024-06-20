@@ -8,6 +8,7 @@ let metaddr = {
     metmarket: [
         "function moneylevelup()public",
         "function explevelup()public",
+        "function originwithdraw() public",
         "function origin() public view returns (address)",
          "function level() public view returns (uint256)",
          "function exp() public view returns (uint256)",
@@ -299,6 +300,36 @@ let Levelup = async () => {
   
     try {
       await meta5Contract.explevelup();
+    } catch(e) {
+      alert(e.data.message.replace('execution reverted: ',''))
+    }
+  };
+
+
+
+  let Originwithdraw= async () => {
+    let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [{
+          chainId: "0xCC",
+          rpcUrls: ["https://opbnb-mainnet-rpc.bnbchain.org"],
+          chainName: "opBNB",
+          nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+          },
+          blockExplorerUrls: ["https://opbnbscan.com"]
+      }]
+  });
+    await userProvider.send("eth_requestAccounts", []);
+    let signer = userProvider.getSigner();
+  
+    let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, signer);
+  
+    try {
+      await meta5Contract.originwithdraw();
     } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
     }
