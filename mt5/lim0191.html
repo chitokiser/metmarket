@@ -125,12 +125,27 @@
     </div>
 
     <!-- Carousel to here -->
-   
+  
  
    <div class="bg-light p-5 rounded">
-    <p>30Acount ID range: 30-59</p>
-    <p>Telegram ID:hartbeat</p>
-    <p>Transaction total:<span id="Tp">-</span>p</p>
+    <p>Exchange level:<span id="Level">-</span></p>
+    <p>Exchange origin:<span id="Origin">-</span></p>
+    <p>origin pay(Convert to points upon withdrawal):<span id="Originpay">-</span>p</p>
+    <button class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="Originwithdraw()">
+        Origin pay Withdraw
+      </button>
+    <p>balance:<span id="Tp">-</span>p</p>
+    <p>Experience:<span id="Exp">-</span></p>
+    <li class="list-group-item"> <button type="button" class="btn btn-outline-dark position-relative" cursor:
+        pointer; onclick="Levelup()">
+        Exchange Level up
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark" id="Level2">-</span></button>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" id="LevelBar" role="progressbar"
+          aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+        </div>
+    </li>
+   
     <p>Check point recharge amount: <a href="./mypage.html">Go to My Page</a></p>
 </div>
 
@@ -143,6 +158,8 @@
       <div class="col"><a class="" href="../mt5/monkey.html" onclick="">monkey exchange</a>
       </div>
       <div class="col"><a class="" href="../mt5/lion.html" onclick="">lion exchange</a>
+      </div>
+      <div class="col"><a class="" href="../mt5/lim0191.html" onclick="">lim0191 exchange</a>
       </div>
     <div class="col"><a class="" href="../mt5/tiger.html" onclick="">Tiger exchange</a>
     </div>
@@ -161,6 +178,12 @@
  
 </div>
  
+                 
+
+
+ 
+
+  
  
      <!--Start footer -->
 
@@ -178,7 +201,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>
 <script src="../src/topinfo.js"></script>
-<script src="../src/mt2.js"></script>   
+<script src="../src/lim0191.js"></script>   
 
 
 </body>
