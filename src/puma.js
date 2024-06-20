@@ -1,8 +1,8 @@
 let metaddr = {  
-    metmarket: "0xD442Eb5B7DA2AA54e72A72A28c591001416aAc08" //monkey
-
+    metmarket: "0x0da08C20fEC7c732E6FCe54A6C2AAA92302a4dbC" //lion
+  
   };
-
+  
   let metabi = {
   
     metmarket: [
@@ -21,20 +21,18 @@ let metaddr = {
        "function getmainpass(uint _mid) external view returns (string memory)",  //메인패스
        "function getpass(uint256 _mid) external view returns (string memory)",  //관람자패스
        "function charge(uint _pay) public",
-       "function metainfo(uint _num) public view returns (uint256, uint256,uint256, string memory, uint256,uint8,address) "
+       "function metainfo(uint _num) public view returns (uint256, uint256,uint256, string memory, uint256,uint8,address) ",
       ],
       
- 
-
   };
-
+  
   let topSync = async () => {
-
+  
     let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
     let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, provider);
   
     
-
+  
     let itax = await meta5Contract.total();  //세금
     let iorigin = await meta5Contract.origin();
     let ioriginfee = await meta5Contract.originfee();
@@ -50,9 +48,9 @@ let metaddr = {
     document.getElementById("LevelBar").style.width = `${iexp/levelexp*100}%`;
     }
   
- 
-// ABI 함수 호출하여 정보 가져오는 함수
-async function getMetaInfoByNum(contract, _num) {
+  
+  // ABI 함수 호출하여 정보 가져오는 함수
+  async function getMetaInfoByNum(contract, _num) {
   try {
       const metaInfo = await contract.metainfo(_num);
       // 가져온 정보를 반환합니다.
@@ -71,26 +69,26 @@ async function getMetaInfoByNum(contract, _num) {
       console.error("Error fetching meta info:", error);
       return null;
   }
-}
-
-async function displayMetaInfo() {
+  }
+  
+  async function displayMetaInfo() {
   try {
       // JSON-RPC 프로바이더 설정
       let provider = new ethers.providers.JsonRpcProvider('https://opbnb-mainnet-rpc.bnbchain.org');
-
+  
       // 메타데이터 컨트랙트 인스턴스 생성
       let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, provider);
-
+  
       // 전체 발행 계좌 수 가져오기
       let imid = await meta5Contract.mid();
-    
+  
       // HTML 컨테이너 가져오기
       const infoContainer = document.getElementById("metaInfoContainer");
       if (!infoContainer) {
           console.error("HTML element 'metaInfoContainer' not found.");
           return;
       }
-
+  
       for (let i = 0; i <= imid; i++) {
         const metaInfo = await getMetaInfoByNum(meta5Contract, i);
         if (metaInfo) {
@@ -116,7 +114,7 @@ async function displayMetaInfo() {
                     purchasableStatus = 'Unknown';
             }
               const isPurchasable = purchasableStatus;
-
+  
           
               const infoHtml = `
               <div class="card mb-3">
@@ -124,7 +122,7 @@ async function displayMetaInfo() {
                   <h5 class="card-title">Account Information${i}</h5>
                   <p class="card-text"><strong>Account:</strong> ${metaInfo.info2}</p>
                   <p class="card-text"><strong>Viewer Password:</strong> ${metaInfo.info3}</p>
-                  <p class="card-text"><strong>Price:</strong> ${metaInfo.info4} p</p>
+                  <p class="card-text"><strong>Price:</strong> ${metaInfo.info4/1e18} p</p>
                   <p class="card-text"><strong>Purchasable:</strong> ${isPurchasable}</p>
                   <p class="card-text"><strong>Account Holder:</strong> ${metaInfo.info6}</p>
             
@@ -141,22 +139,22 @@ async function displayMetaInfo() {
   } catch (error) {
       console.error("Error displaying meta info:", error);
   }
-}
-
-
-
-
-// 페이지 로드 시 정보 표시 함수 호출
-window.onload = displayMetaInfo;
-
-
-
- // 호출 코드
- topSync();
+  }
   
-
-// JavaScript에서 해당 ID 값을 가져와서 구매 함수 호출
-const purchase = async (button) => {
+  
+  
+  
+  // 페이지 로드 시 정보 표시 함수 호출
+  window.onload = displayMetaInfo;
+  
+  
+  
+  // 호출 코드
+  topSync();
+  
+  
+  // JavaScript에서 해당 ID 값을 가져와서 구매 함수 호출
+  const purchase = async (button) => {
   try {
     const accountId = button.getAttribute("data-id"); // 버튼의 data-id 속성 값 가져오기
     const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -176,23 +174,23 @@ const purchase = async (button) => {
     });
     await userProvider.send("eth_requestAccounts", []);
     const signer = userProvider.getSigner();
-
+  
     let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, signer);
     await meta5Contract.buy(accountId); // 해당 ID를 buy 함수에 전달하여 구매
   } catch(e) {
     alert(e.data.message.replace('execution reverted: ',''))
   }
-};
-
-
-
-// 판매등록 함수 구현
-const registerSale = async (button) => {
+  };
+  
+  
+  
+  // 판매등록 함수 구현
+  const registerSale = async (button) => {
   try {
     const accountId = button.getAttribute("data-id"); // 버튼의 data-id 속성 값 가져오기
     const saleAmountInput = document.getElementById(`saleAmount${accountId}`); // 해당 ID의 판매금액 입력란 가져오기
     const saleAmount = parseInt(saleAmountInput.value); // 판매금액 입력란의 값 가져와서 정수형으로 변환
-
+  
     const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
       method: "wallet_addEthereumChain",
@@ -210,15 +208,15 @@ const registerSale = async (button) => {
     });
     await userProvider.send("eth_requestAccounts", []);
     const signer = userProvider.getSigner();
-
+  
     let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, signer);
     await meta5Contract.selladd(accountId, saleAmount);
   } catch(e) {
     alert(e.data.message.replace('execution reverted: ',''))
   }
-};
-
-let Charge = async () => {
+  };
+  
+  let Charge = async () => {
   let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
   await window.ethereum.request({
     method: "wallet_addEthereumChain",
@@ -233,21 +231,21 @@ let Charge = async () => {
         },
         blockExplorerUrls: ["https://opbnbscan.com"]
     }]
-});
+  });
   await userProvider.send("eth_requestAccounts", []);
   let signer = userProvider.getSigner();
-
+  
   let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, signer);
-
+  
   try {
     await meta5Contract.charge(document.getElementById('chargeAmount').value);
   } catch(e) {
     alert(e.data.message.replace('execution reverted: ',''))
   }
-};
-
-
-const getMainPass = async (button) => {
+  };
+  
+  
+  const getMainPass = async (button) => {
   try {
       const accountId = button.getAttribute("data-id");
       const userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -267,17 +265,17 @@ const getMainPass = async (button) => {
       });
       await userProvider.send("eth_requestAccounts", []);
       const signer = userProvider.getSigner();
-
+  
       let meta5Contract = new ethers.Contract(metaddr.metmarket, metabi.metmarket, signer);
       const mainPass = await meta5Contract.getmainpass(accountId);
       document.getElementById(`mainPass${accountId}`).innerText = `main password: ${mainPass}`;
   } catch(e) {
       alert(e.data.message.replace('execution reverted: ',''))
   }
-};
-
-
-let Levelup = async () => {
+  };
+  
+  
+  let Levelup = async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
       method: "wallet_addEthereumChain",
@@ -304,9 +302,9 @@ let Levelup = async () => {
       alert(e.data.message.replace('execution reverted: ',''))
     }
   };
-
-
-
+  
+  
+  
   let Originwithdraw= async () => {
     let userProvider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await window.ethereum.request({
