@@ -95,7 +95,7 @@
         <div class="carousel-item active" data-bs-interval="10000">
           <img src="..\images\logo\meta5\meta2.png" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <span style="color:rgb(17, 16, 16)">High success probability</span>
+            <span style="color:rgb(255, 255, 255)">High success probability</span>
             <p>Free indigate and automated trading, etc., with announcement of global economic indicators</p>
           </div>
         </div>
@@ -126,14 +126,14 @@
     </div>
 
     <!-- Carousel to here -->
-
-    <div class="bg-light p-5 rounded">
-        <h5>MetaTrade5 demo account p2p first exchange</h5>
-        <p>An amount equivalent to 1/10 of the account balance must be raised as the transaction amount</p>
-        <p>You can sell when you realize a profit of 20% or more than the initial purchase price</p>
-        <p>You can purchase after recharging points using CYA</p>
-        <p>Use the viewer password to check if the selling price is more than 1/10 of your account balance</p>
-    </div>
+    <div class="bg-light p-5 round">
+      <h5>MetaTrade5 Exchange</h5>
+    
+      <p>Exchange application fee: <span id="Fee">-</span>CYA</p>
+      <p>Total Exchange : <span id="Eid">-</span></p>
+      <p>Transaction possible after charging points with CYA</p>
+      <p>When transacting on your account, please use your viewer password to ensure the selling price is at least 1/10th of your account balance</p>
+      </div>
 
    
     <div class="alert alert-light" role="alert">
@@ -192,41 +192,67 @@
             </table>
    </div>
  
-   <div class="bg-light p-5 rounded">
-    <p>Account ID range: 0-29</p>
-    <p>Telegram ID:hartbeat</p>
-    <p>Transaction total:<span id="Tp">-</span>p</p>
-    <p>Check point recharge amount: <a href="./mypage.html">Go to My Page</a></p>
-</div>
+
 
   <!-- exchange from here -->
 
-  <div class="container text-center">
-    <div class="row">
-      <div class="col"><a class="" href="../mt5/mt1.html" onclick="">1st exchange</a>
-      </div>
-      <div class="col"><a class="" href="../mt5/monkey.html" onclick="">monkey exchange</a>
-      </div>
-      <div class="col"><a class="" href="../mt5/lion.html" onclick="">lion exchange</a>
-      </div>
-      <div class="col"><a class="" href="../mt5/lim0191.html" onclick="">lim0191 exchange</a>
-      </div>
-    <div class="col"><a class="" href="../mt5/tiger.html" onclick="">Tiger exchange</a>
-    </div>
+
+  <div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Go to exchange
+    </a>
+  
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="../mt5/mt1.html">exchange home</a></li>
+      <li><a class="dropdown-item" href="../mt5/monkey.html">monkey</a></li>
+      <li><a class="dropdown-item" href="../mt5/lion.html">lion</a></li>
+      <li><a class="dropdown-item" href="../mt5/lim0191.html">lim0191</a></li>
+      <li><a class="dropdown-item" href="../mt5/tiger.html">tiger</a></li>
+    </ul>
   </div>
+  
   <!-- exchange to here -->
 
+  <p></p>
 
+  <div class="d-grid gap-2">
+    <button class="btn btn-dark" type="button">Point recharge</button>
+  </div>
 <div class="input-group mb-3">
   <input type="text" id="chargeAmount" class="form-control" placeholder="Enter the points to recharge (1CYA=1P)" aria-label="CYA"
     aria-describedby="basic-addon2">
   <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Charge()">Charge points</span>
 </div>
-<div id="metaInfoContainer">
-
+<div class="d-grid gap-2">
+  <button class="btn btn-dark" type="button">Apply to open an exchange<button>
 </div>
 
+<p>1. Please register as a mentor first.</p>
+<div class="input-group mb-3">
  
+ <input type="text" id="mentoaddress" class="form-control" placeholder="Please enter your mentor address" aria-label="CYA"
+    aria-describedby="basic-addon2">
+  <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="exMemberjoin()">Mentor Registration</span>
+</div>
+
+<p>2. Enter the name of the exchange you wish to open</p>
+<div class="input-group mb-3">
+ 
+ <input type="text" id="exname" class="form-control" placeholder="Please enter the exchange name" aria-label="CYA"
+    aria-describedby="basic-addon2">
+  <span class="input-group-text" id="basic-addon2" style="cursor: pointer;" onclick="Oper()">Exchange opening application</span>
+</div>
+ 
+
+<button class="btn btn-outline-success" id="basic-addon2" type="submit" onclick="exLogin()">
+  View my status [Connect wallet]
+</button>
+
+
+<li class="list-group-item">My Mentor = <span id="Mymento">-</span></li>
+<li class="list-group-item">Points can be converted = <span id="Mypoint">-</span>p</li>
+<button type="button" class="btn btn-primary btn-sm mr-2" onclick="Getmymenty()" data-id="">View my mentees</button>
+<button type="button" class="btn btn-primary btn-sm mr-2" onclick="Withdraw()" data-id="">Point conversion</button>
 </div>
  
                  
@@ -252,7 +278,9 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript"></script>
 <script src="../src/topinfo.js"></script>
-<script src="../src/mt1.js"></script>   
+<script src="../src/mt1.js"></script>
+<script src="../src/exchangRegist.js"></script>
+
 
 
 </body>
