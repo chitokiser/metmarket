@@ -124,7 +124,7 @@ async function displayMetaInfo() {
                   <h5 class="card-title">Account Information${i}</h5>
                   <p class="card-text"><strong>Account:</strong> ${metaInfo.info2}</p>
                   <p class="card-text"><strong>Viewer Password:</strong> ${metaInfo.info3}</p>
-                  <p class="card-text"><strong>Price:</strong> ${metaInfo.info4} p</p>
+                  <p class="card-text"><strong>Price:</strong> ${metaInfo.info4/1e18} p</p>
                   <p class="card-text"><strong>Purchasable:</strong> ${isPurchasable}</p>
                   <p class="card-text"><strong>Account Holder:</strong> ${metaInfo.info6}</p>
             
